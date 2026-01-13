@@ -88,7 +88,7 @@ export class MotionRail {
     this.element.style.userSelect = '';
     
     // Calculate momentum-based target scroll
-    const momentum = -this.lastMovementX * 20; // Amplify the momentum
+    const momentum = -this.lastMovementX * 16; // Amplify the momentum
     const targetScroll = this.element.scrollLeft + momentum;
     
     // Cancel any ongoing scroll animation
