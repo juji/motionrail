@@ -148,26 +148,21 @@ export class MotionRail {
       this.cancelScroll();
     }
 
-    // Re-enable snap and resume autoplay callback
-    const enableSnap = () => {
-      const snapPoint = this.findNearestSnapPoint(this.element.scrollLeft);
-      
-      const onScrollEnd = () => {
-        this.element.style.scrollSnapType = 'x mandatory';
-        this.cancelScroll = null;
-        if(this.autoplay) {
-          this.autoPlayTimeoutId = window.setTimeout(() => {
-            this.play();
-            this.autoPlayTimeoutId = null;
-          }, this.resume);
-        }
+    // Animate momentum then snap to nearest point in one flow
+    const snapPoint = this.findNearestSnapPoint(targetScroll);
+    
+    const onScrollEnd = () => {
+      this.element.style.scrollSnapType = 'x mandatory';
+      this.cancelScroll = null;
+      if(this.autoplay) {
+        this.autoPlayTimeoutId = window.setTimeout(() => {
+          this.play();
+          this.autoPlayTimeoutId = null;
+        }, this.resume);
       }
-      
-      this.cancelScroll = animateScroll(this.element, snapPoint, 210, onScrollEnd);
     };
 
-    // Animate scroll with momentum to target, then snap
-    this.cancelScroll = animateScroll(this.element, targetScroll, 360, enableSnap);
+    this.cancelScroll = animateScroll(this.element, snapPoint, momentumTime, onScrollEnd);
     this.velocity = 0;
   }
 
