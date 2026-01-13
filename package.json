@@ -3,12 +3,27 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "./dist/motionrail.umd.cjs",
+  "module": "./dist/motionrail.js",
+  "types": "./dist/motionrail.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/motionrail.js",
+      "require": "./dist/motionrail.umd.cjs",
+      "types": "./dist/motionrail.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev/index.html",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "@types/node": "^25.0.8",
     "typescript": "~5.9.3",
     "vite": "npm:rolldown-vite@7.2.5"
   },

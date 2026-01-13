@@ -27,7 +27,6 @@ export class MotionRail {
     setBreakPoints({
       container: this.element,
       breakpoints: this.breakpoints,
-      rtl: this.rtl,
       length: this.element.querySelectorAll('.motion-rail-item').length
     });
 
