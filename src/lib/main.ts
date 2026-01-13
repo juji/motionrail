@@ -15,8 +15,12 @@ export class MotionRail {
   private startX: number = 0;
   private scrollLeft: number = 0;
   private cancelScroll: (() => void) | null = null;
-  private lastMovementX: number = 0;
+  private lastPointerX: number = 0;
+  private lastPointerTime: number = 0;
+  private velocity: number = 0;
   private pointerId: number | null = null;
+  private snapPoints: number[] = [];
+  private resizeObserver: ResizeObserver | null = null;
 
   constructor(element: HTMLElement, options: MotioRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -34,7 +38,39 @@ export class MotionRail {
 
     this.init();
     this.attachPointerEvents();
+    this.cacheSnapPoints();
+    this.observeResize();
     if (this.autoplay) this.play();
+  }
+
+  private observeResize() {
+    if (typeof ResizeObserver === 'undefined') return;
+    
+    this.resizeObserver = new ResizeObserver(() => {
+      this.cacheSnapPoints();
+    });
+    
+    this.resizeObserver.observe(this.element);
+  }
+
+  private cacheSnapPoints() {
+    const items = this.element.querySelectorAll('.motion-rail-item') as NodeListOf<HTMLElement>;
+    this.snapPoints = Array.from(items).map(item => item.offsetLeft);
+  }
+
+  private findNearestSnapPoint(scrollPosition: number): number {
+    let nearestPoint = 0;
+    let minDistance = Infinity;
+    
+    for (const point of this.snapPoints) {
+      const distance = Math.abs(point - scrollPosition);
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestPoint = point;
+      }
+    }
+    
+    return nearestPoint;
   }
 
   private init() {
@@ -59,6 +95,9 @@ export class MotionRail {
     this.isDragging = true;
     this.startX = e.clientX;
     this.scrollLeft = this.element.scrollLeft;
+    this.lastPointerX = e.clientX;
+    this.lastPointerTime = e.timeStamp;
+    this.velocity = 0;
     this.element.style.cursor = 'grabbing';
     this.element.style.userSelect = 'none';
     this.element.style.scrollSnapType = 'none';
@@ -75,7 +114,15 @@ export class MotionRail {
     const x = e.clientX;
     const walk = x - this.startX;
     this.element.scrollLeft = this.scrollLeft - walk;
-    this.lastMovementX = e.movementX;
+    
+    // Calculate velocity (pixels per millisecond)
+    const deltaTime = e.timeStamp - this.lastPointerTime;
+    if (deltaTime > 0) {
+      const deltaX = e.clientX - this.lastPointerX;
+      this.velocity = deltaX / deltaTime;
+      this.lastPointerX = e.clientX;
+      this.lastPointerTime = e.timeStamp;
+    }
   }
 
   private handlePointerUp = (e: PointerEvent) => {
@@ -87,8 +134,13 @@ export class MotionRail {
     this.element.style.cursor = 'grab';
     this.element.style.userSelect = '';
     
-    // Calculate momentum-based target scroll
-    const momentum = -this.lastMovementX * 16; // Amplify the momentum
+    // Calculate momentum using velocity (pixels/ms * time = distance)
+    // Adaptive time based on velocity magnitude - faster flicks travel further
+    const velocityMagnitude = Math.abs(this.velocity);
+    const baseTime = 300;
+    const maxTime = 700;
+    const momentumTime = Math.min(baseTime + velocityMagnitude, maxTime);
+    const momentum = -this.velocity * momentumTime;
     const targetScroll = this.element.scrollLeft + momentum;
     
     // Cancel any ongoing scroll animation
@@ -98,20 +150,7 @@ export class MotionRail {
 
     // Re-enable snap and resume autoplay callback
     const enableSnap = () => {
-      
-      // Find nearest snap point based on item positions (matches scroll-snap behavior)
-      const items = Array.from(this.element.querySelectorAll('.motion-rail-item')) as HTMLElement[];
-      const currentScroll = this.element.scrollLeft;
-      let snapPoint = 0;
-      let minDistance = Infinity;
-      
-      items.forEach(item => {
-        const distance = Math.abs(item.offsetLeft - currentScroll);
-        if (distance < minDistance) {
-          minDistance = distance;
-          snapPoint = item.offsetLeft;
-        }
-      });
+      const snapPoint = this.findNearestSnapPoint(this.element.scrollLeft);
       
       const onScrollEnd = () => {
         this.element.style.scrollSnapType = 'x mandatory';
@@ -124,14 +163,12 @@ export class MotionRail {
         }
       }
       
-      // Listen for scroll end
       this.cancelScroll = animateScroll(this.element, snapPoint, 210, onScrollEnd);
-
     };
 
     // Animate scroll with momentum to target, then snap
     this.cancelScroll = animateScroll(this.element, targetScroll, 360, enableSnap);
-    this.lastMovementX = 0;
+    this.velocity = 0;
   }
 
   private isAtStart() {
@@ -200,20 +237,29 @@ export class MotionRail {
     }
   }
 
+  getCurrentIndex() {
+    return this.currentIndex;
+  }
+
   destroy() {
     if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;
     }
-if (this.cancelScroll) {
+
+    if (this.cancelScroll) {
       this.cancelScroll();
       this.cancelScroll = null;
     }
-
     
     if (this.autoPlayTimeoutId) {
       clearTimeout(this.autoPlayTimeoutId);
       this.autoPlayTimeoutId = null;
+    }
+
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = null;
     }
 
     this.element.removeEventListener('pointerdown', this.handlePointerDown);
