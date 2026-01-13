@@ -16,6 +16,7 @@ export class MotionRail {
   private scrollLeft: number = 0;
   private cancelScroll: (() => void) | null = null;
   private lastMovementX: number = 0;
+  private pointerId: number | null = null;
 
   constructor(element: HTMLElement, options: MotioRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -51,10 +52,15 @@ export class MotionRail {
   }
 
   private handlePointerDown = (e: PointerEvent) => {
+    if (this.pointerId !== null) return; // Already dragging
+    
+    this.pointerId = e.pointerId;
+    this.element.setPointerCapture(e.pointerId);
     this.isDragging = true;
     this.startX = e.clientX;
     this.scrollLeft = this.element.scrollLeft;
     this.element.style.cursor = 'grabbing';
+    this.element.style.userSelect = 'none';
     this.element.style.scrollSnapType = 'none';
     this.pause();
     if (this.cancelScroll) {
@@ -64,7 +70,7 @@ export class MotionRail {
   }
 
   private handlePointerMove = (e: PointerEvent) => {
-    if (!this.isDragging) return;
+    if (!this.isDragging || e.pointerId !== this.pointerId) return;
     e.preventDefault();
     const x = e.clientX;
     const walk = x - this.startX;
@@ -72,10 +78,14 @@ export class MotionRail {
     this.lastMovementX = e.movementX;
   }
 
-  private handlePointerUp = () => {
-    if (!this.isDragging) return;
+  private handlePointerUp = (e: PointerEvent) => {
+    if (!this.isDragging || e.pointerId !== this.pointerId) return;
+    
+    this.element.releasePointerCapture(e.pointerId);
+    this.pointerId = null;
     this.isDragging = false;
     this.element.style.cursor = 'grab';
+    this.element.style.userSelect = '';
     
     // Calculate momentum-based target scroll
     const momentum = -this.lastMovementX * 20; // Amplify the momentum
@@ -88,14 +98,35 @@ export class MotionRail {
 
     // Re-enable snap and resume autoplay callback
     const enableSnap = () => {
-      this.element.style.scrollSnapType = 'x mandatory';
-      this.cancelScroll = null;
-      if(this.autoplay) {
-        this.autoPlayTimeoutId = window.setTimeout(() => {
-          this.play();
-          this.autoPlayTimeoutId = null;
-        }, this.resume);
+      
+      // Find nearest snap point based on item positions (matches scroll-snap behavior)
+      const items = Array.from(this.element.querySelectorAll('.motion-rail-item')) as HTMLElement[];
+      const currentScroll = this.element.scrollLeft;
+      let snapPoint = 0;
+      let minDistance = Infinity;
+      
+      items.forEach(item => {
+        const distance = Math.abs(item.offsetLeft - currentScroll);
+        if (distance < minDistance) {
+          minDistance = distance;
+          snapPoint = item.offsetLeft;
+        }
+      });
+      
+      const onScrollEnd = () => {
+        this.element.style.scrollSnapType = 'x mandatory';
+        this.cancelScroll = null;
+        if(this.autoplay) {
+          this.autoPlayTimeoutId = window.setTimeout(() => {
+            this.play();
+            this.autoPlayTimeoutId = null;
+          }, this.resume);
+        }
       }
+      
+      // Listen for scroll end
+      this.cancelScroll = animateScroll(this.element, snapPoint, 200, onScrollEnd);
+
     };
 
     // Animate scroll with momentum to target, then snap
