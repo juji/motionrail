@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "dev": "vite dev/index.html",
-    "build": "tsc && vite build",
+    "build": "vite build && tsc",
     "preview": "vite preview"
   },
   "devDependencies": {
