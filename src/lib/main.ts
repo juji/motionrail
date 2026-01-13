@@ -2,7 +2,6 @@ import type { MotionRailBreakpoint, MotioRailOptions } from "./types";
 import { setBreakPoints } from "./utils";
 
 export class MotionRail {
-
   private rtl: boolean = false
   private autoplay: boolean = false
   private breakpoints: MotionRailBreakpoint[] = [];
@@ -13,10 +12,7 @@ export class MotionRail {
   private autoPlayTimeoutId: number | null = null;
   private currentIndex: number = 0;
 
-  constructor(
-    element: HTMLElement,
-    options: MotioRailOptions
-  ) {
+  constructor(element: HTMLElement, options: MotioRailOptions) {
     this.autoplay = options.autoplay || false;
     this.rtl = options.rtl || false;
     this.breakpoints = options.breakpoints;
@@ -31,95 +27,61 @@ export class MotionRail {
     });
 
     this.init();
-
-    if(this.autoplay) this.play()
+    if (this.autoplay) this.play();
   }
 
   private init() {
-    // Initialization logic here
-    if(this.rtl){
-      this.currentIndex = -1;
-      this.element.scrollTo({ left: this.element.scrollWidth, behavior: 'instant' });
-    }else{
-      this.currentIndex = 0;
-      this.element.scrollTo({ left: 0, behavior: 'instant' });
+    const targetScroll = this.rtl ? this.element.scrollWidth : 0;
+    this.currentIndex = this.rtl ? -1 : 0;
+    this.element.scrollTo({ left: targetScroll, behavior: 'instant' });
+  }
+
+  private isAtStart() {
+    return this.element.scrollLeft <= 0;
+  }
+
+  private isAtEnd() {
+    return this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth;
+  }
+
+  private scrollByPage(direction: 1 | -1) {
+    const atBoundary = direction > 0 ? this.isAtEnd() : this.isAtStart();
+    
+    if (atBoundary) {
+      const targetScroll = direction > 0 ? 0 : this.element.scrollWidth;
+      this.currentIndex = direction > 0 ? 0 : -1;
+      this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
+    } else {
+      this.currentIndex += direction;
+      this.element.scrollBy({ left: direction * this.element.clientWidth, behavior: 'smooth' });
     }
   }
 
-  play(){
+  play() {
     this.autoPlayIntervalId = window.setInterval(() => {
-      if(this.rtl){
-        if(this.element.scrollLeft <= 0){
-          this.currentIndex = -1;
-          this.element.scrollTo({ left: this.element.scrollWidth, behavior: 'smooth' });
-        }else{
-          this.currentIndex--;
-          this.element.scrollBy({ left: -this.element.clientWidth, behavior: 'smooth' });
-        }
-      }else{
-        if(this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth){
-          this.currentIndex = 0;
-          this.element.scrollTo({ left: 0, behavior: 'smooth' });
-        }else{
-          this.currentIndex++;
-          this.element.scrollBy({ left: this.element.clientWidth,  behavior: 'smooth' });
-        }
-      }
+      this.scrollByPage(this.rtl ? -1 : 1);
     }, this.delay);
   }
 
-  next(){
+  next() {
     this.pause();
-    if(this.rtl){
-      if(this.element.scrollLeft <= 0){
-        this.currentIndex = -1;
-        this.element.scrollTo({ left: this.element.scrollWidth, behavior: 'smooth' });
-      }else{
-        this.currentIndex--;
-        this.element.scrollBy({ left: -this.element.clientWidth, behavior: 'smooth' });
-      }
-    }else{
-      if(this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth){
-        this.currentIndex = 0;
-        this.element.scrollTo({ left: 0, behavior: 'smooth' });
-      }else{
-        this.currentIndex++;
-        this.element.scrollBy({ left: this.element.clientWidth,  behavior: 'smooth' });
-      }
-    }
+    this.scrollByPage(this.rtl ? -1 : 1);
   }
 
-  prev(){
+  prev() {
     this.pause();
-    if(this.rtl){
-      if(this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth){
-        this.currentIndex = 0;
-        this.element.scrollTo({ left: 0, behavior: 'smooth' });
-      }else{
-        this.currentIndex++;
-        this.element.scrollBy({ left: this.element.clientWidth, behavior: 'smooth' });
-      }
-    }else{
-      if(this.element.scrollLeft <= 0){
-        this.currentIndex = -1;
-        this.element.scrollTo({ left: this.element.scrollWidth, behavior: 'smooth' });
-      }else{
-        this.currentIndex--;
-        this.element.scrollBy({ left: -this.element.clientWidth, behavior: 'smooth' });
-      }
-    }
+    this.scrollByPage(this.rtl ? 1 : -1);
   }
 
-  pause(){
+  pause() {
+    if (!this.autoplay) return;
 
-    if(!this.autoplay) return;
-
-    if(this.autoPlayIntervalId){
+    if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;
     }
 
-    if(this.autoPlayTimeoutId){
+    if (this.autoPlayTimeoutId) {
       clearTimeout(this.autoPlayTimeoutId);
       this.autoPlayTimeoutId = null;
     }
@@ -128,29 +90,26 @@ export class MotionRail {
       this.play();
       this.autoPlayTimeoutId = null;
     }, this.resume);
-
   }
 
-  scrollToIndex(index: number){
+  scrollToIndex(index: number) {
     this.pause();
     const item = this.element.querySelectorAll('.motion-rail-item')[index] as HTMLElement;
-    if(item){
-      const offsetLeft = item.offsetLeft;
-      this.element.scrollTo({ left: offsetLeft, behavior: 'smooth' });
+    if (item) {
+      this.element.scrollTo({ left: item.offsetLeft, behavior: 'smooth' });
       this.currentIndex = index;
     }
   }
 
   destroy() {
-    if(this.autoPlayIntervalId){
+    if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;
     }
 
-    if(this.autoPlayTimeoutId){
+    if (this.autoPlayTimeoutId) {
       clearTimeout(this.autoPlayTimeoutId);
       this.autoPlayTimeoutId = null;
     }
   }
-
 }
