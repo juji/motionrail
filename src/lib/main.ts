@@ -135,13 +135,18 @@ export class MotionRail {
     this.element.style.userSelect = '';
     
     // Calculate momentum using velocity (pixels/ms * time = distance)
-    // Adaptive time based on velocity magnitude - faster flicks travel further
+    // Non-linear time scaling - diminishing returns at high velocities
     const velocityMagnitude = Math.abs(this.velocity);
-    const baseTime = 300;
-    const maxTime = 700;
-    const momentumTime = Math.min(baseTime + velocityMagnitude, maxTime);
+    const baseTime = 100;
+    const maxTime = 200;
+    const momentumTime = Math.min(baseTime + Math.sqrt(velocityMagnitude) * 50, maxTime);
     const momentum = -this.velocity * momentumTime;
-    const targetScroll = this.element.scrollLeft + momentum;
+    let targetScroll = this.element.scrollLeft + momentum;
+    
+    // Clamp targetScroll to valid scroll bounds
+    const firstSnapPoint = this.snapPoints[0] || 0;
+    const lastSnapPoint = this.snapPoints[this.snapPoints.length - 1] || 0;
+    targetScroll = Math.max(firstSnapPoint, Math.min(targetScroll, lastSnapPoint));
     
     // Cancel any ongoing scroll animation
     if (this.cancelScroll) {
