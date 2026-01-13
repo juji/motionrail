@@ -112,7 +112,7 @@
     </div>
 
     <!-- RTL Carousel -->
-    <div class="carousel-wrapper">
+    <div class="carousel-wrapper" dir="rtl">
       <h2>RTL Carousel with Autoplay</h2>
       <div class="motion-rail" id="carousel2">
         <div class="motion-rail-container">
@@ -132,7 +132,7 @@
     </div>
 
     <!-- Variable Columns -->
-    <div class="carousel-wrapper">
+    <div class="carousel-wrapper" dir="rtl">
       <h2>Variable Columns (4 → 3 → 2 → 1)</h2>
       <div class="motion-rail" id="carousel3">
         <div class="motion-rail-container">
@@ -185,6 +185,7 @@
           { width: 1024, columns: 3, gap: '20px' }
         ],
         autoplay: false,
+        // rtl: true,
         delay: 3000
       }
     );
@@ -214,7 +215,8 @@
           { width: 768, columns: 3, gap: '20px' },
           { width: 1024, columns: 4, gap: '24px' }
         ],
-        autoplay: false
+        autoplay: false,
+        rtl: true
       }
     );
 
@@ -225,7 +227,8 @@
         breakpoints: [
           { columns: 2, gap: '20px' }
         ],
-        autoplay: false
+        autoplay: false,
+        // rtl: true
       }
     );
   </script>

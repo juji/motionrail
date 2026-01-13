@@ -74,8 +74,9 @@ export class MotionRail {
   }
 
   private init() {
-    const targetScroll = this.rtl ? this.element.scrollWidth : 0;
-    this.currentIndex = this.rtl ? -1 : 0;
+    // In RTL, scrollLeft = 0 is the visual start (right side)
+    const targetScroll = this.rtl ? 0 : 0;
+    this.currentIndex = 0;
     this.element.scrollTo({ left: targetScroll, behavior: 'instant' });
     this.element.style.cursor = 'grab';
   }
@@ -113,13 +114,13 @@ export class MotionRail {
     e.preventDefault();
     const x = e.clientX;
     const walk = x - this.startX;
-    this.element.scrollLeft = this.scrollLeft - walk;
+    this.element.scrollLeft = this.scrollLeft - (this.rtl ? -walk : walk);
     
     // Calculate velocity (pixels per millisecond)
     const deltaTime = e.timeStamp - this.lastPointerTime;
     if (deltaTime > 0) {
       const deltaX = e.clientX - this.lastPointerX;
-      this.velocity = deltaX / deltaTime;
+      this.velocity = (this.rtl ? -deltaX : deltaX) / deltaTime;
       this.lastPointerX = e.clientX;
       this.lastPointerTime = e.timeStamp;
     }
@@ -155,6 +156,7 @@ export class MotionRail {
 
     // Animate momentum then snap to nearest point in one flow
     const snapPoint = this.findNearestSnapPoint(targetScroll);
+    this.currentIndex = this.snapPoints.indexOf(snapPoint);
     
     const onScrollEnd = () => {
       this.element.style.scrollSnapType = 'x mandatory';
@@ -172,40 +174,57 @@ export class MotionRail {
   }
 
   private isAtStart() {
-    return this.element.scrollLeft <= 0;
+    if (this.rtl) {
+      return Math.abs(this.element.scrollLeft) < 1;
+    }
+    return this.element.scrollLeft <= 1;
   }
 
   private isAtEnd() {
-    return this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth;
+    if (this.rtl) {
+      const maxScroll = -(this.element.scrollWidth - this.element.clientWidth);
+      return this.element.scrollLeft <= maxScroll + 1;
+    }
+    return this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth - 1;
   }
 
   private scrollByPage(direction: 1 | -1) {
     const atBoundary = direction > 0 ? this.isAtEnd() : this.isAtStart();
     
     if (atBoundary) {
-      const targetScroll = direction > 0 ? 0 : this.element.scrollWidth;
-      this.currentIndex = direction > 0 ? 0 : -1;
-      this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      // Wrap around
+      if (this.rtl) {
+        const targetScroll = direction > 0 ? 0 : -(this.element.scrollWidth - this.element.clientWidth);
+        this.currentIndex = direction > 0 ? 0 : this.snapPoints.length - 1;
+        this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      } else {
+        const targetScroll = direction > 0 ? 0 : this.element.scrollWidth;
+        this.currentIndex = direction > 0 ? 0 : this.snapPoints.length - 1;
+        this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
+      }
     } else {
       this.currentIndex += direction;
-      this.element.scrollBy({ left: direction * this.element.clientWidth, behavior: 'smooth' });
+      // In RTL with dir="rtl", scrollBy positive goes right (backwards)
+      // So invert the direction for RTL to scroll left (forward)
+      const scrollAmount = this.rtl ? -direction : direction;
+      this.element.scrollBy({ left: scrollAmount * this.element.clientWidth, behavior: 'smooth' });
     }
   }
 
   play() {
     this.autoPlayIntervalId = window.setInterval(() => {
-      this.scrollByPage(this.rtl ? -1 : 1);
+      this.scrollByPage(1);
     }, this.delay);
   }
 
   next() {
     this.pause();
-    this.scrollByPage(this.rtl ? -1 : 1);
+    this.scrollByPage(1);
   }
 
   prev() {
     this.pause();
-    this.scrollByPage(this.rtl ? 1 : -1);
+    this.scrollByPage(-1);
   }
 
   pause() {
