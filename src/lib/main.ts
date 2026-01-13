@@ -1,5 +1,5 @@
 import type { MotionRailBreakpoint, MotioRailOptions } from "./types";
-import { setBreakPoints } from "./utils";
+import { setBreakPoints, animateScroll } from "./utils";
 
 export class MotionRail {
   private rtl: boolean = false
@@ -11,6 +11,10 @@ export class MotionRail {
   private autoPlayIntervalId: number | null = null;
   private autoPlayTimeoutId: number | null = null;
   private currentIndex: number = 0;
+  private isDragging: boolean = false;
+  private startX: number = 0;
+  private scrollLeft: number = 0;
+  private cancelScroll: (() => void) | null = null;
 
   constructor(element: HTMLElement, options: MotioRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -27,6 +31,7 @@ export class MotionRail {
     });
 
     this.init();
+    this.attachPointerEvents();
     if (this.autoplay) this.play();
   }
 
@@ -34,6 +39,73 @@ export class MotionRail {
     const targetScroll = this.rtl ? this.element.scrollWidth : 0;
     this.currentIndex = this.rtl ? -1 : 0;
     this.element.scrollTo({ left: targetScroll, behavior: 'instant' });
+    this.element.style.cursor = 'grab';
+  }
+
+  private attachPointerEvents() {
+    this.element.addEventListener('pointerdown', this.handlePointerDown);
+    this.element.addEventListener('pointermove', this.handlePointerMove);
+    this.element.addEventListener('pointerup', this.handlePointerUp);
+    this.element.addEventListener('pointerleave', this.handlePointerUp);
+  }
+
+  private handlePointerDown = (e: PointerEvent) => {
+    this.isDragging = true;
+    this.startX = e.clientX;
+    this.scrollLeft = this.element.scrollLeft;
+    this.element.style.cursor = 'grabbing';
+    this.element.style.scrollSnapType = 'none';
+    this.pause();
+    if(this.autoPlayTimeoutId) clearTimeout(this.autoPlayTimeoutId);
+  }
+
+  private handlePointerMove = (e: PointerEvent) => {
+    if (!this.isDragging) return;
+    e.preventDefault();
+    const x = e.clientX;
+    const walk = x - this.startX;
+    this.element.scrollLeft = this.scrollLeft - walk;
+  }
+
+  private handlePointerUp = () => {
+    if (!this.isDragging) return;
+    this.isDragging = false;
+    this.element.style.cursor = 'grab';
+    
+    // Get the first item to calculate actual item dimensions including gap
+    const items = this.element.querySelectorAll('.motion-rail-item');
+    if (items.length < 2) return;
+    
+    const firstItem = items[0] as HTMLElement;
+    const secondItem = items[1] as HTMLElement;
+    
+    // Calculate the distance between items (includes width + gap)
+    const itemDistance = secondItem.offsetLeft - firstItem.offsetLeft;
+    
+    // Find nearest snap point
+    const currentScroll = this.element.scrollLeft;
+    const nearestIndex = Math.round(currentScroll / itemDistance);
+    const targetScroll = nearestIndex * itemDistance;
+    
+    // Cancel any ongoing scroll animation
+    if (this.cancelScroll) {
+      this.cancelScroll();
+    }
+
+    // Re-enable snap and resume autoplay callback
+    const enableSnap = () => {
+      this.element.style.scrollSnapType = 'x mandatory';
+      this.cancelScroll = null;
+      if(this.autoplay) {
+        this.autoPlayTimeoutId = window.setTimeout(() => {
+          this.play();
+          this.autoPlayTimeoutId = null;
+        }, this.resume);
+      }
+    };
+
+    // Animate scroll to snap point
+    this.cancelScroll = animateScroll(this.element, targetScroll, 300, enableSnap);
   }
 
   private isAtStart() {
@@ -86,6 +158,7 @@ export class MotionRail {
       this.autoPlayTimeoutId = null;
     }
     
+    if(this.isDragging) return;
     this.autoPlayTimeoutId = window.setTimeout(() => {
       this.play();
       this.autoPlayTimeoutId = null;
@@ -106,10 +179,20 @@ export class MotionRail {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;
     }
+if (this.cancelScroll) {
+      this.cancelScroll();
+      this.cancelScroll = null;
+    }
 
+    
     if (this.autoPlayTimeoutId) {
       clearTimeout(this.autoPlayTimeoutId);
       this.autoPlayTimeoutId = null;
     }
+
+    this.element.removeEventListener('pointerdown', this.handlePointerDown);
+    this.element.removeEventListener('pointermove', this.handlePointerMove);
+    this.element.removeEventListener('pointerup', this.handlePointerUp);
+    this.element.removeEventListener('pointerleave', this.handlePointerUp);
   }
 }
