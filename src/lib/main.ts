@@ -125,12 +125,12 @@ export class MotionRail {
       }
       
       // Listen for scroll end
-      this.cancelScroll = animateScroll(this.element, snapPoint, 200, onScrollEnd);
+      this.cancelScroll = animateScroll(this.element, snapPoint, 210, onScrollEnd);
 
     };
 
     // Animate scroll with momentum to target, then snap
-    this.cancelScroll = animateScroll(this.element, targetScroll, 500, enableSnap);
+    this.cancelScroll = animateScroll(this.element, targetScroll, 360, enableSnap);
     this.lastMovementX = 0;
   }
 
