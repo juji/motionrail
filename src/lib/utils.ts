@@ -105,8 +105,6 @@ export function animateScroll(
       if (animationId) {
         cancelAnimationFrame(animationId);
       }
-      // Call onComplete even when cancelled
-      if (onComplete) onComplete();
     }
   };
 }

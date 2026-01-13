@@ -15,6 +15,7 @@ export class MotionRail {
   private startX: number = 0;
   private scrollLeft: number = 0;
   private cancelScroll: (() => void) | null = null;
+  private lastMovementX: number = 0;
 
   constructor(element: HTMLElement, options: MotioRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -56,6 +57,9 @@ export class MotionRail {
     this.element.style.cursor = 'grabbing';
     this.element.style.scrollSnapType = 'none';
     this.pause();
+    if (this.cancelScroll) {
+      this.cancelScroll();
+    }
     if(this.autoPlayTimeoutId) clearTimeout(this.autoPlayTimeoutId);
   }
 
@@ -65,6 +69,7 @@ export class MotionRail {
     const x = e.clientX;
     const walk = x - this.startX;
     this.element.scrollLeft = this.scrollLeft - walk;
+    this.lastMovementX = e.movementX;
   }
 
   private handlePointerUp = () => {
@@ -72,20 +77,9 @@ export class MotionRail {
     this.isDragging = false;
     this.element.style.cursor = 'grab';
     
-    // Get the first item to calculate actual item dimensions including gap
-    const items = this.element.querySelectorAll('.motion-rail-item');
-    if (items.length < 2) return;
-    
-    const firstItem = items[0] as HTMLElement;
-    const secondItem = items[1] as HTMLElement;
-    
-    // Calculate the distance between items (includes width + gap)
-    const itemDistance = secondItem.offsetLeft - firstItem.offsetLeft;
-    
-    // Find nearest snap point
-    const currentScroll = this.element.scrollLeft;
-    const nearestIndex = Math.round(currentScroll / itemDistance);
-    const targetScroll = nearestIndex * itemDistance;
+    // Calculate momentum-based target scroll
+    const momentum = -this.lastMovementX * 20; // Amplify the momentum
+    const targetScroll = this.element.scrollLeft + momentum;
     
     // Cancel any ongoing scroll animation
     if (this.cancelScroll) {
@@ -104,8 +98,9 @@ export class MotionRail {
       }
     };
 
-    // Animate scroll to snap point
-    this.cancelScroll = animateScroll(this.element, targetScroll, 300, enableSnap);
+    // Animate scroll with momentum to target, then snap
+    this.cancelScroll = animateScroll(this.element, targetScroll, 500, enableSnap);
+    this.lastMovementX = 0;
   }
 
   private isAtStart() {
