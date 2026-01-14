@@ -1,5 +1,7 @@
 # MotionRail
 
+> ⚠️ **Not Ready for Production** - This library is currently in development and not yet ready for production use.
+
 A lightweight, smooth carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints.
 
 ## Features
