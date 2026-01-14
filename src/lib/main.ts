@@ -1,9 +1,12 @@
 import type { MotionRailBreakpoint, MotioRailOptions } from "./types";
 import { setBreakPoints, animateScroll } from "./utils";
 
+type RTLScrollType = 'default' | 'negative' | 'reverse';
+
 export class MotionRail {
-  private rtl: boolean = false
-  private autoplay: boolean = false
+  private rtl: boolean = false;
+  private rtlScrollType: RTLScrollType = 'default';
+  private autoplay: boolean = false;
   private breakpoints: MotionRailBreakpoint[] = [];
   private element: HTMLElement;
   private delay: number = 3000;
@@ -13,7 +16,7 @@ export class MotionRail {
   private currentIndex: number = 0;
   private isDragging: boolean = false;
   private startX: number = 0;
-  private scrollLeft: number = 0;
+  private startLogicalScroll: number = 0;
   private cancelScroll: (() => void) | null = null;
   private lastPointerX: number = 0;
   private lastPointerTime: number = 0;
@@ -30,6 +33,10 @@ export class MotionRail {
     this.delay = options.delay || 3000;
     this.resume = options.resume || 4000;
 
+    if (this.rtl) {
+      this.rtlScrollType = this.detectRTLScrollType();
+    }
+
     setBreakPoints({
       container: this.element,
       breakpoints: this.breakpoints,
@@ -43,6 +50,116 @@ export class MotionRail {
     if (this.autoplay) this.play();
   }
 
+  // ============================================================================
+  // NORMALIZATION LAYER: Convert between physical scrollLeft and logical space
+  // ============================================================================
+
+  private detectRTLScrollType(): RTLScrollType {
+    const test = document.createElement('div');
+    test.dir = 'rtl';
+    test.style.width = '1px';
+    test.style.height = '1px';
+    test.style.position = 'absolute';
+    test.style.top = '-1000px';
+    test.style.overflow = 'scroll';
+    
+    const content = document.createElement('div');
+    content.style.width = '2px';
+    content.style.height = '1px';
+    test.appendChild(content);
+    
+    document.body.appendChild(test);
+    
+    let type: RTLScrollType = 'default';
+    const initialScroll = test.scrollLeft;
+    
+    if (initialScroll > 0) {
+      type = 'reverse'; // Firefox: starts at max, decreases to 0
+    } else {
+      test.scrollLeft = 1;
+      if (test.scrollLeft < 0) {
+        type = 'negative'; // Chrome: starts at 0, goes negative
+      }
+      // else: Safari uses default (0 to positive)
+    }
+    
+    document.body.removeChild(test);
+    return type;
+  }
+
+  private getLogicalScroll(): number {
+    if (!this.rtl) {
+      return this.element.scrollLeft;
+    }
+
+    const scrollLeft = this.element.scrollLeft;
+    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+
+    switch (this.rtlScrollType) {
+      case 'negative':
+        // Chrome: 0 → -maxScroll, convert to 0 → maxScroll
+        return -scrollLeft;
+      case 'reverse':
+        // Firefox: maxScroll → 0, convert to 0 → maxScroll
+        return maxScroll - scrollLeft;
+      default:
+        // Safari: 0 → maxScroll (already logical)
+        return scrollLeft;
+    }
+  }
+
+  private setLogicalScroll(logicalScroll: number): void {
+    if (!this.rtl) {
+      this.element.scrollLeft = logicalScroll;
+      return;
+    }
+
+    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+
+    switch (this.rtlScrollType) {
+      case 'negative':
+        // Convert logical 0 → maxScroll to physical 0 → -maxScroll
+        this.element.scrollLeft = -logicalScroll;
+        break;
+      case 'reverse':
+        // Convert logical 0 → maxScroll to physical maxScroll → 0
+        this.element.scrollLeft = maxScroll - logicalScroll;
+        break;
+      default:
+        // Safari: logical === physical
+        this.element.scrollLeft = logicalScroll;
+        break;
+    }
+  }
+
+  private scrollToLogical(logicalScroll: number, behavior: ScrollBehavior = 'auto'): void {
+    if (!this.rtl) {
+      this.element.scrollTo({ left: logicalScroll, behavior });
+      return;
+    }
+
+    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+    let physicalScroll: number;
+
+    switch (this.rtlScrollType) {
+      case 'negative':
+        physicalScroll = -logicalScroll;
+        break;
+      case 'reverse':
+        physicalScroll = maxScroll - logicalScroll;
+        break;
+      default:
+        physicalScroll = logicalScroll;
+        break;
+    }
+
+    this.element.scrollTo({ left: physicalScroll, behavior });
+  }
+
+  // ============================================================================
+  // CORE LOGIC: All operations in logical space
+  // ============================================================================
+
   private observeResize() {
     if (typeof ResizeObserver === 'undefined') return;
     
@@ -55,15 +172,20 @@ export class MotionRail {
 
   private cacheSnapPoints() {
     const items = this.element.querySelectorAll('.motion-rail-item') as NodeListOf<HTMLElement>;
-    this.snapPoints = Array.from(items).map(item => item.offsetLeft);
+    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+    
+    this.snapPoints = Array.from(items).map(item => {
+      // Snap points are stored in logical space (0-based, increasing forward)
+      return Math.min(item.offsetLeft, maxScroll);
+    });
   }
 
-  private findNearestSnapPoint(scrollPosition: number): number {
+  private findNearestSnapPoint(logicalScroll: number): number {
     let nearestPoint = 0;
     let minDistance = Infinity;
     
     for (const point of this.snapPoints) {
-      const distance = Math.abs(point - scrollPosition);
+      const distance = Math.abs(point - logicalScroll);
       if (distance < minDistance) {
         minDistance = distance;
         nearestPoint = point;
@@ -74,10 +196,8 @@ export class MotionRail {
   }
 
   private init() {
-    // In RTL, scrollLeft = 0 is the visual start (right side)
-    const targetScroll = this.rtl ? 0 : 0;
+    this.setLogicalScroll(0);
     this.currentIndex = 0;
-    this.element.scrollTo({ left: targetScroll, behavior: 'instant' });
     this.element.style.cursor = 'grab';
   }
 
@@ -89,13 +209,13 @@ export class MotionRail {
   }
 
   private handlePointerDown = (e: PointerEvent) => {
-    if (this.pointerId !== null) return; // Already dragging
+    if (this.pointerId !== null) return;
     
     this.pointerId = e.pointerId;
     this.element.setPointerCapture(e.pointerId);
     this.isDragging = true;
     this.startX = e.clientX;
-    this.scrollLeft = this.element.scrollLeft;
+    this.startLogicalScroll = this.getLogicalScroll();
     this.lastPointerX = e.clientX;
     this.lastPointerTime = e.timeStamp;
     this.velocity = 0;
@@ -106,21 +226,21 @@ export class MotionRail {
     if (this.cancelScroll) {
       this.cancelScroll();
     }
-    if(this.autoPlayTimeoutId) clearTimeout(this.autoPlayTimeoutId);
+    if (this.autoPlayTimeoutId) clearTimeout(this.autoPlayTimeoutId);
   }
 
   private handlePointerMove = (e: PointerEvent) => {
     if (!this.isDragging || e.pointerId !== this.pointerId) return;
     e.preventDefault();
-    const x = e.clientX;
-    const walk = x - this.startX;
-    this.element.scrollLeft = this.scrollLeft - (this.rtl ? -walk : walk);
     
-    // Calculate velocity (pixels per millisecond)
+    const deltaX = e.clientX - this.startX;
+    const logicalScroll = this.startLogicalScroll - deltaX;
+    this.setLogicalScroll(logicalScroll);
+    
     const deltaTime = e.timeStamp - this.lastPointerTime;
     if (deltaTime > 0) {
-      const deltaX = e.clientX - this.lastPointerX;
-      this.velocity = (this.rtl ? -deltaX : deltaX) / deltaTime;
+      const pointerDelta = e.clientX - this.lastPointerX;
+      this.velocity = pointerDelta / deltaTime;
       this.lastPointerX = e.clientX;
       this.lastPointerTime = e.timeStamp;
     }
@@ -135,33 +255,26 @@ export class MotionRail {
     this.element.style.cursor = 'grab';
     this.element.style.userSelect = '';
     
-    // Calculate momentum using velocity (pixels/ms * time = distance)
-    // Non-linear time scaling - diminishing returns at high velocities
     const velocityMagnitude = Math.abs(this.velocity);
     const baseTime = 100;
     const maxTime = 200;
     const momentumTime = Math.min(baseTime + Math.sqrt(velocityMagnitude) * 50, maxTime);
     const momentum = -this.velocity * momentumTime;
-    let targetScroll = this.element.scrollLeft + momentum;
     
-    // Clamp targetScroll to valid scroll bounds
-    const firstSnapPoint = this.snapPoints[0] || 0;
-    const lastSnapPoint = this.snapPoints[this.snapPoints.length - 1] || 0;
-    targetScroll = Math.max(firstSnapPoint, Math.min(targetScroll, lastSnapPoint));
+    const currentLogicalScroll = this.getLogicalScroll();
+    const targetLogicalScroll = currentLogicalScroll + momentum;
     
-    // Cancel any ongoing scroll animation
     if (this.cancelScroll) {
       this.cancelScroll();
     }
 
-    // Animate momentum then snap to nearest point in one flow
-    const snapPoint = this.findNearestSnapPoint(targetScroll);
+    const snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
     this.currentIndex = this.snapPoints.indexOf(snapPoint);
     
     const onScrollEnd = () => {
       this.element.style.scrollSnapType = 'x mandatory';
       this.cancelScroll = null;
-      if(this.autoplay) {
+      if (this.autoplay) {
         this.autoPlayTimeoutId = window.setTimeout(() => {
           this.play();
           this.autoPlayTimeoutId = null;
@@ -169,45 +282,60 @@ export class MotionRail {
       }
     };
 
-    this.cancelScroll = animateScroll(this.element, snapPoint, momentumTime, onScrollEnd);
+    // Create a wrapper that animates in logical space
+    this.cancelScroll = this.animateLogicalScroll(snapPoint, momentumTime, onScrollEnd);
     this.velocity = 0;
   }
 
-  private isAtStart() {
-    if (this.rtl) {
-      return Math.abs(this.element.scrollLeft) < 1;
-    }
-    return this.element.scrollLeft <= 1;
+  private animateLogicalScroll(targetLogical: number, duration: number, onComplete: () => void): () => void {
+    const startLogical = this.getLogicalScroll();
+    const startTime = performance.now();
+    let cancelled = false;
+
+    const animate = (currentTime: number) => {
+      if (cancelled) return;
+
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const currentLogical = startLogical + (targetLogical - startLogical) * eased;
+
+      this.setLogicalScroll(currentLogical);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        onComplete();
+      }
+    };
+
+    requestAnimationFrame(animate);
+    return () => { cancelled = true; };
   }
 
-  private isAtEnd() {
-    if (this.rtl) {
-      const maxScroll = -(this.element.scrollWidth - this.element.clientWidth);
-      return this.element.scrollLeft <= maxScroll + 1;
-    }
-    return this.element.scrollLeft + this.element.clientWidth >= this.element.scrollWidth - 1;
+  private isAtStart(): boolean {
+    return this.getLogicalScroll() <= 1;
+  }
+
+  private isAtEnd(): boolean {
+    const logicalScroll = this.getLogicalScroll();
+    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+    return logicalScroll >= maxScroll - 1;
   }
 
   private scrollByPage(direction: 1 | -1) {
-    const atBoundary = direction > 0 ? this.isAtEnd() : this.isAtStart();
+    const nextIndex = this.currentIndex + direction;
     
-    if (atBoundary) {
-      // Wrap around
-      if (this.rtl) {
-        const targetScroll = direction > 0 ? 0 : -(this.element.scrollWidth - this.element.clientWidth);
-        this.currentIndex = direction > 0 ? 0 : this.snapPoints.length - 1;
-        this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
-      } else {
-        const targetScroll = direction > 0 ? 0 : this.element.scrollWidth;
-        this.currentIndex = direction > 0 ? 0 : this.snapPoints.length - 1;
-        this.element.scrollTo({ left: targetScroll, behavior: 'smooth' });
-      }
+    // Check if we need to wrap around
+    if (nextIndex >= this.snapPoints.length) {
+      this.currentIndex = 0;
+      this.scrollToLogical(this.snapPoints[0], 'smooth');
+    } else if (nextIndex < 0) {
+      this.currentIndex = this.snapPoints.length - 1;
+      this.scrollToLogical(this.snapPoints[this.currentIndex], 'smooth');
     } else {
-      this.currentIndex += direction;
-      // In RTL with dir="rtl", scrollBy positive goes right (backwards)
-      // So invert the direction for RTL to scroll left (forward)
-      const scrollAmount = this.rtl ? -direction : direction;
-      this.element.scrollBy({ left: scrollAmount * this.element.clientWidth, behavior: 'smooth' });
+      this.currentIndex = nextIndex;
+      this.scrollToLogical(this.snapPoints[nextIndex], 'smooth');
     }
   }
 
@@ -240,7 +368,7 @@ export class MotionRail {
       this.autoPlayTimeoutId = null;
     }
     
-    if(this.isDragging) return;
+    if (this.isDragging) return;
     this.autoPlayTimeoutId = window.setTimeout(() => {
       this.play();
       this.autoPlayTimeoutId = null;
@@ -249,9 +377,8 @@ export class MotionRail {
 
   scrollToIndex(index: number) {
     this.pause();
-    const item = this.element.querySelectorAll('.motion-rail-item')[index] as HTMLElement;
-    if (item) {
-      this.element.scrollTo({ left: item.offsetLeft, behavior: 'smooth' });
+    if (index >= 0 && index < this.snapPoints.length) {
+      this.scrollToLogical(this.snapPoints[index], 'smooth');
       this.currentIndex = index;
     }
   }
