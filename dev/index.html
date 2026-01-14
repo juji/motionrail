@@ -111,9 +111,30 @@
       </div>
     </div>
 
-    <!-- RTL Carousel -->
+    <!-- Basic Carousel RTL -->
     <div class="carousel-wrapper" dir="rtl">
-      <h2>RTL Carousel with Autoplay</h2>
+      <h2>Basic Carousel RTL (3 columns on desktop, 2 on tablet, 1 on mobile)</h2>
+      <div class="motion-rail" id="carousel1rtl">
+        <div class="motion-rail-container">
+          <div class="motion-rail-item">1</div>
+          <div class="motion-rail-item">2</div>
+          <div class="motion-rail-item">3</div>
+          <div class="motion-rail-item">4</div>
+          <div class="motion-rail-item">5</div>
+          <div class="motion-rail-item">6</div>
+          <div class="motion-rail-item">7</div>
+          <div class="motion-rail-item">8</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="carousel1rtl.prev()">Previous</button>
+        <button onclick="carousel1rtl.next()">Next</button>
+        <button onclick="carousel1rtl.pause()">Pause</button>
+      </div>
+    </div>
+
+    <div class="carousel-wrapper">
+      <h2>Carousel with Autoplay</h2>
       <div class="motion-rail" id="carousel2">
         <div class="motion-rail-container">
           <div class="motion-rail-item">1</div>
@@ -131,8 +152,28 @@
       </div>
     </div>
 
-    <!-- Variable Columns -->
+    <!-- Carousel with Autoplay RTL -->
     <div class="carousel-wrapper" dir="rtl">
+      <h2>Carousel with Autoplay RTL</h2>
+      <div class="motion-rail" id="carousel2rtl">
+        <div class="motion-rail-container">
+          <div class="motion-rail-item">1</div>
+          <div class="motion-rail-item">2</div>
+          <div class="motion-rail-item">3</div>
+          <div class="motion-rail-item">4</div>
+          <div class="motion-rail-item">5</div>
+          <div class="motion-rail-item">6</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="carousel2rtl.prev()">Previous</button>
+        <button onclick="carousel2rtl.next()">Next</button>
+        <button onclick="carousel2rtl.play()">Play</button>
+      </div>
+    </div>
+
+    <!-- Variable Columns -->
+    <div class="carousel-wrapper">
       <h2>Variable Columns (4 → 3 → 2 → 1)</h2>
       <div class="motion-rail" id="carousel3">
         <div class="motion-rail-container">
@@ -149,6 +190,27 @@
       <div class="controls">
         <button onclick="carousel3.prev()">Previous</button>
         <button onclick="carousel3.next()">Next</button>
+      </div>
+    </div>
+
+    <!-- Variable Columns RTL -->
+    <div class="carousel-wrapper" dir="rtl">
+      <h2>Variable Columns RTL (4 → 3 → 2 → 1)</h2>
+      <div class="motion-rail" id="carousel3rtl">
+        <div class="motion-rail-container">
+          <div class="motion-rail-item">1</div>
+          <div class="motion-rail-item">2</div>
+          <div class="motion-rail-item">3</div>
+          <div class="motion-rail-item">4</div>
+          <div class="motion-rail-item">5</div>
+          <div class="motion-rail-item">6</div>
+          <div class="motion-rail-item">7</div>
+          <div class="motion-rail-item">8</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="carousel3rtl.prev()">Previous</button>
+        <button onclick="carousel3rtl.next()">Next</button>
       </div>
     </div>
 
@@ -170,6 +232,25 @@
         <button onclick="carousel4.next()">Next</button>
       </div>
     </div>
+
+    <!-- Single Breakpoint RTL -->
+    <div class="carousel-wrapper" dir="rtl">
+      <h2>Fixed 2 Columns RTL (No Responsiveness)</h2>
+      <div class="motion-rail" id="carousel4rtl">
+        <div class="motion-rail-container">
+          <div class="motion-rail-item">1</div>
+          <div class="motion-rail-item">2</div>
+          <div class="motion-rail-item">3</div>
+          <div class="motion-rail-item">4</div>
+          <div class="motion-rail-item">5</div>
+          <div class="motion-rail-item">6</div>
+        </div>
+      </div>
+      <div class="controls">
+        <button onclick="carousel4rtl.prev()">Previous</button>
+        <button onclick="carousel4rtl.next()">Next</button>
+      </div>
+    </div>
   </div>
 
   <script type="module">
@@ -185,7 +266,21 @@
           { width: 1024, columns: 3, gap: '20px' }
         ],
         autoplay: false,
-        // rtl: true,
+        delay: 3000
+      }
+    );
+
+    // Carousel 1 RTL: Basic RTL
+    window.carousel1rtl = new MotionRail(
+      document.getElementById('carousel1rtl'),
+      {
+        breakpoints: [
+          { columns: 1, gap: '16px' },
+          { width: 768, columns: 2, gap: '16px' },
+          { width: 1024, columns: 3, gap: '20px' }
+        ],
+        autoplay: false,
+        rtl: true,
         delay: 3000
       }
     );
@@ -193,6 +288,20 @@
     // Carousel 2: RTL with autoplay
     window.carousel2 = new MotionRail(
       document.getElementById('carousel2'),
+      {
+        breakpoints: [
+          { columns: 1, gap: '16px' },
+          { width: 768, columns: 2, gap: '16px' },
+          { width: 1024, columns: 3, gap: '20px' }
+        ],
+        autoplay: true,
+        delay: 2500
+      }
+    );
+
+    // Carousel 2 RTL: Autoplay RTL
+    window.carousel2rtl = new MotionRail(
+      document.getElementById('carousel2rtl'),
       {
         breakpoints: [
           { columns: 1, gap: '16px' },
@@ -215,6 +324,20 @@
           { width: 768, columns: 3, gap: '20px' },
           { width: 1024, columns: 4, gap: '24px' }
         ],
+        autoplay: false
+      }
+    );
+
+    // Carousel 3 RTL: Variable columns RTL
+    window.carousel3rtl = new MotionRail(
+      document.getElementById('carousel3rtl'),
+      {
+        breakpoints: [
+          { columns: 1, gap: '12px' },
+          { width: 480, columns: 2, gap: '16px' },
+          { width: 768, columns: 3, gap: '20px' },
+          { width: 1024, columns: 4, gap: '24px' }
+        ],
         autoplay: false,
         rtl: true
       }
@@ -227,8 +350,19 @@
         breakpoints: [
           { columns: 2, gap: '20px' }
         ],
+        autoplay: false
+      }
+    );
+
+    // Carousel 4 RTL: Single breakpoint RTL
+    window.carousel4rtl = new MotionRail(
+      document.getElementById('carousel4rtl'),
+      {
+        breakpoints: [
+          { columns: 2, gap: '20px' }
+        ],
         autoplay: false,
-        // rtl: true
+        rtl: true
       }
     );
   </script>
