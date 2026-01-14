@@ -51,7 +51,7 @@ const carousel = new MotionRail(element, {
   autoplay: false,
   rtl: false,
   delay: 3000,      // Time between auto-scrolls (ms)
-  resume: 4000,     // Time to resume after interaction (ms)
+  resumeDelay: 4000,     // Time to resume after interaction (ms)
   breakpoints: [
     { columns: 1, gap: '16px' },                    // Mobile (default)
     { width: 768, columns: 2, gap: '16px' },        // Tablet
@@ -67,7 +67,7 @@ const carousel = new MotionRail(element, {
 | `autoplay` | `boolean` | `false` | Enable automatic scrolling |
 | `rtl` | `boolean` | `false` | Enable right-to-left layout |
 | `delay` | `number` | `3000` | Delay between auto-scrolls (milliseconds) |
-| `resume` | `number` | `4000` | Time to resume autoplay after user interaction (milliseconds) |
+| `resumeDelay` | `number` | `4000` | Time to resume autoplay after user interaction (milliseconds) |
 | `breakpoints` | `MotionRailBreakpoint[]` | `[]` | Array of responsive breakpoint configurations |
 
 ### Breakpoint Configuration
@@ -161,7 +161,7 @@ const carousel = new MotionRail(
     autoplay: true,
     rtl: true,
     delay: 2500,      // Auto-scroll every 2.5 seconds
-    resume: 4000,     // Resume after 4 seconds of inactivity
+    resumeDelay: 4000,     // Resume after 4 seconds of inactivity
     breakpoints: [
       { columns: 1, gap: '16px' },
       { width: 768, columns: 2, gap: '16px' },
