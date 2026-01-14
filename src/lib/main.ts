@@ -12,7 +12,7 @@ export class MotionRail {
   private breakpoints: MotionRailBreakpoint[] = [];
   private element: HTMLElement;
   private delay: number = 3000;
-  private resume: number = 4000;
+  private resumeDelay: number = 4000;
   private autoPlayIntervalId: number | null = null;
   private autoPlayTimeoutId: number | null = null;
   private currentIndex: number = 0;
@@ -33,7 +33,7 @@ export class MotionRail {
     this.breakpoints = options.breakpoints;
     this.element = element;
     this.delay = options.delay || 3000;
-    this.resume = options.resume || 4000;
+    this.resumeDelay = options.resumeDelay || 4000;
 
     if (this.rtl) {
       this.rtlScrollType = this.detectRTLScrollType();
@@ -280,7 +280,7 @@ export class MotionRail {
         this.autoPlayTimeoutId = window.setTimeout(() => {
           this.play();
           this.autoPlayTimeoutId = null;
-        }, this.resume);
+        }, this.resumeDelay);
       }
     };
 
@@ -374,7 +374,7 @@ export class MotionRail {
     this.autoPlayTimeoutId = window.setTimeout(() => {
       this.play();
       this.autoPlayTimeoutId = null;
-    }, this.resume);
+    }, this.resumeDelay);
   }
 
   scrollToIndex(index: number) {

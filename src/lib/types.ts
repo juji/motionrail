@@ -7,7 +7,7 @@ export type MotionRailBreakpoint = {
 
 export type MotioRailOptions = {
   autoplay?: boolean;
-  resume?: number;
+  resumeDelay?: number;
   delay?: number;
   rtl?: boolean;
   breakpoints: MotionRailBreakpoint[];
