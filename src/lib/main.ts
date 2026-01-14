@@ -1,5 +1,7 @@
 import type { MotionRailBreakpoint, MotioRailOptions } from "./types";
-import { setBreakPoints, animateScroll } from "./utils";
+import { setBreakPoints, 
+  // animateScroll 
+} from "./utils";
 
 type RTLScrollType = 'default' | 'negative' | 'reverse';
 
@@ -313,15 +315,15 @@ export class MotionRail {
     return () => { cancelled = true; };
   }
 
-  private isAtStart(): boolean {
-    return this.getLogicalScroll() <= 1;
-  }
+  // private isAtStart(): boolean {
+  //   return this.getLogicalScroll() <= 1;
+  // }
 
-  private isAtEnd(): boolean {
-    const logicalScroll = this.getLogicalScroll();
-    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
-    return logicalScroll >= maxScroll - 1;
-  }
+  // private isAtEnd(): boolean {
+  //   const logicalScroll = this.getLogicalScroll();
+  //   const maxScroll = this.element.scrollWidth - this.element.clientWidth;
+  //   return logicalScroll >= maxScroll - 1;
+  // }
 
   private scrollByPage(direction: 1 | -1) {
     const nextIndex = this.currentIndex + direction;
