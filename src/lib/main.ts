@@ -4,11 +4,8 @@ import {
   // animateScroll
 } from "./utils";
 
-type RTLScrollType = "default" | "negative" | "reverse";
-
 export class MotionRail {
   private rtl: boolean = false;
-  private rtlScrollType: RTLScrollType = "default";
   private autoplay: boolean = false;
   private breakpoints: MotionRailBreakpoint[] = [];
   private element: HTMLElement;
@@ -16,7 +13,7 @@ export class MotionRail {
   private resumeDelay: number = 4000;
   private autoPlayIntervalId: number | null = null;
   private autoPlayTimeoutId: number | null = null;
-  private currentIndex: number = 0;
+  private currentVisible: number[] = [];
   private isDragging: boolean = false;
   private startX: number = 0;
   private startLogicalScroll: number = 0;
@@ -27,6 +24,9 @@ export class MotionRail {
   private pointerId: number | null = null;
   private snapPoints: number[] = [];
   private resizeObserver: ResizeObserver | null = null;
+  private intersectionObserver: IntersectionObserver | null = null;
+  private isFirstVisible: boolean = false;
+  private isLastVisible: boolean = false;
 
   constructor(element: HTMLElement, options: MotionRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -35,10 +35,6 @@ export class MotionRail {
     this.element = element;
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
-
-    if (this.rtl) {
-      this.rtlScrollType = this.detectRTLScrollType();
-    }
 
     setBreakPoints({
       container: this.element,
@@ -50,121 +46,28 @@ export class MotionRail {
     this.attachPointerEvents();
     this.cacheSnapPoints();
     this.observeResize();
+    this.observeEdgeItems();
     if (this.autoplay) this.play();
   }
 
   // ============================================================================
-  // NORMALIZATION LAYER: Convert between physical scrollLeft and logical space
+  // CORE LOGIC: All operations in logical space
   // ============================================================================
 
-  private detectRTLScrollType(): RTLScrollType {
-    const test = document.createElement("div");
-    test.dir = "rtl";
-    test.style.width = "1px";
-    test.style.height = "1px";
-    test.style.position = "absolute";
-    test.style.top = "-1000px";
-    test.style.overflow = "scroll";
-
-    const content = document.createElement("div");
-    content.style.width = "2px";
-    content.style.height = "1px";
-    test.appendChild(content);
-
-    document.body.appendChild(test);
-
-    let type: RTLScrollType = "default";
-    const initialScroll = test.scrollLeft;
-
-    if (initialScroll > 0) {
-      type = "reverse"; // Firefox: starts at max, decreases to 0
-    } else {
-      test.scrollLeft = 1;
-      if (test.scrollLeft < 0) {
-        type = "negative"; // Chrome: starts at 0, goes negative
-      }
-      // else: Safari uses default (0 to positive)
-    }
-
-    document.body.removeChild(test);
-    return type;
-  }
-
   private getLogicalScroll(): number {
-    if (!this.rtl) {
-      return this.element.scrollLeft;
-    }
-
-    const scrollLeft = this.element.scrollLeft;
-    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
-
-    switch (this.rtlScrollType) {
-      case "negative":
-        // Chrome: 0 → -maxScroll, convert to 0 → maxScroll
-        return -scrollLeft;
-      case "reverse":
-        // Firefox: maxScroll → 0, convert to 0 → maxScroll
-        return maxScroll - scrollLeft;
-      default:
-        // Safari: 0 → maxScroll (already logical)
-        return scrollLeft;
-    }
+    return this.element.scrollLeft;
   }
 
   private setLogicalScroll(logicalScroll: number): void {
-    if (!this.rtl) {
-      this.element.scrollLeft = logicalScroll;
-      return;
-    }
-
-    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
-
-    switch (this.rtlScrollType) {
-      case "negative":
-        // Convert logical 0 → maxScroll to physical 0 → -maxScroll
-        this.element.scrollLeft = -logicalScroll;
-        break;
-      case "reverse":
-        // Convert logical 0 → maxScroll to physical maxScroll → 0
-        this.element.scrollLeft = maxScroll - logicalScroll;
-        break;
-      default:
-        // Safari: logical === physical
-        this.element.scrollLeft = logicalScroll;
-        break;
-    }
+    this.element.scrollLeft = logicalScroll;
   }
 
   private scrollToLogical(
     logicalScroll: number,
     behavior: ScrollBehavior = "auto",
   ): void {
-    if (!this.rtl) {
-      this.element.scrollTo({ left: logicalScroll, behavior });
-      return;
-    }
-
-    const maxScroll = this.element.scrollWidth - this.element.clientWidth;
-    let physicalScroll: number;
-
-    switch (this.rtlScrollType) {
-      case "negative":
-        physicalScroll = -logicalScroll;
-        break;
-      case "reverse":
-        physicalScroll = maxScroll - logicalScroll;
-        break;
-      default:
-        physicalScroll = logicalScroll;
-        break;
-    }
-
-    this.element.scrollTo({ left: physicalScroll, behavior });
+    this.element.scrollTo({ left: logicalScroll, behavior });
   }
-
-  // ============================================================================
-  // CORE LOGIC: All operations in logical space
-  // ============================================================================
 
   private observeResize() {
     if (typeof ResizeObserver === "undefined") return;
@@ -174,6 +77,49 @@ export class MotionRail {
     });
 
     this.resizeObserver.observe(this.element);
+  }
+
+  private observeEdgeItems() {
+    if (typeof IntersectionObserver === "undefined") return;
+
+    const items = this.element.querySelectorAll(".motion-rail-item");
+    if (items.length === 0) return;
+
+    const firstItem = items[0];
+    const lastItem = items[items.length - 1];
+
+    this.intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = Array.from(items).indexOf(entry.target as Element);
+          if (index === -1) return;
+
+          if (entry.isIntersecting) {
+            if (!this.currentVisible.includes(index)) {
+              this.currentVisible.push(index);
+              this.currentVisible.sort((a, b) => a - b);
+            }
+          } else {
+            this.currentVisible = this.currentVisible.filter(
+              (i) => i !== index,
+            );
+          }
+
+          // Update edge visibility flags
+          if (entry.target === firstItem) {
+            this.isFirstVisible = entry.isIntersecting;
+          } else if (entry.target === lastItem) {
+            this.isLastVisible = entry.isIntersecting;
+          }
+        });
+      },
+      {
+        root: this.element,
+        threshold: 0.5,
+      },
+    );
+
+    items.forEach((item) => this.intersectionObserver!.observe(item));
   }
 
   private cacheSnapPoints() {
@@ -205,7 +151,6 @@ export class MotionRail {
 
   private init() {
     this.setLogicalScroll(0);
-    this.currentIndex = 0;
     this.element.style.cursor = "grab";
   }
 
@@ -280,7 +225,6 @@ export class MotionRail {
     }
 
     const snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
-    this.currentIndex = this.snapPoints.indexOf(snapPoint);
 
     const onScrollEnd = () => {
       this.element.style.scrollSnapType = "x mandatory";
@@ -335,30 +279,45 @@ export class MotionRail {
     };
   }
 
-  // private isAtStart(): boolean {
-  //   return this.getLogicalScroll() <= 1;
-  // }
-
-  // private isAtEnd(): boolean {
-  //   const logicalScroll = this.getLogicalScroll();
-  //   const maxScroll = this.element.scrollWidth - this.element.clientWidth;
-  //   return logicalScroll >= maxScroll - 1;
-  // }
-
   private scrollByPage(direction: 1 | -1) {
-    const nextIndex = this.currentIndex + direction;
+    if (this.currentVisible.length === 0) return;
 
-    // Check if we need to wrap around
-    if (nextIndex >= this.snapPoints.length) {
-      this.currentIndex = 0;
-      this.scrollToLogical(this.snapPoints[0], "smooth");
-    } else if (nextIndex < 0) {
-      this.currentIndex = this.snapPoints.length - 1;
-      this.scrollToLogical(this.snapPoints[this.currentIndex], "smooth");
+    let targetIndex: number;
+    const firstVisibleIndex = this.currentVisible[0];
+    const lastVisibleIndex =
+      this.currentVisible[this.currentVisible.length - 1];
+    const visibleCount = this.currentVisible.length;
+
+    if (direction === 1) {
+      // Going forward: skip all visible items, go to the next one
+      targetIndex = lastVisibleIndex + 1;
+      if (this.rtl) {
+        targetIndex = lastVisibleIndex + visibleCount;
+      }
+
+      if (targetIndex >= this.snapPoints.length - 1 && this.isLastVisible) {
+        targetIndex = 0;
+      } else if (
+        targetIndex >= this.snapPoints.length - 1 &&
+        !this.isLastVisible
+      ) {
+        targetIndex = this.snapPoints.length - 1;
+      }
     } else {
-      this.currentIndex = nextIndex;
-      this.scrollToLogical(this.snapPoints[nextIndex], "smooth");
+      // Going backward: skip all visible items, go to the previous one
+      targetIndex = firstVisibleIndex - visibleCount;
+      if (this.rtl) {
+        targetIndex = lastVisibleIndex - visibleCount;
+      }
+
+      if (targetIndex <= 0 && this.isFirstVisible) {
+        targetIndex = this.snapPoints.length - 1;
+      } else if (targetIndex <= 0 && !this.isFirstVisible) {
+        targetIndex = 0;
+      }
     }
+
+    this.scrollToLogical(this.snapPoints[targetIndex], "smooth");
   }
 
   play() {
@@ -401,12 +360,19 @@ export class MotionRail {
     this.pause();
     if (index >= 0 && index < this.snapPoints.length) {
       this.scrollToLogical(this.snapPoints[index], "smooth");
-      this.currentIndex = index;
     }
   }
 
-  getCurrentIndex() {
-    return this.currentIndex;
+  getVisibleIndices() {
+    return [...this.currentVisible];
+  }
+
+  isAtStart() {
+    return this.isFirstVisible;
+  }
+
+  isAtEnd() {
+    return this.isLastVisible;
   }
 
   destroy() {
@@ -428,6 +394,11 @@ export class MotionRail {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
       this.resizeObserver = null;
+    }
+
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = null;
     }
 
     this.element.removeEventListener("pointerdown", this.handlePointerDown);
