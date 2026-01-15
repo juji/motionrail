@@ -298,6 +298,258 @@
           <button onclick="carousel4rtl.next()">Next</button>
         </div>
       </div>
+
+      <!-- Edge Case: Single Item -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Single Item</h2>
+        <div class="motion-rail" id="carousel5">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel5.prev()">Previous</button>
+          <button onclick="carousel5.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- Edge Case: Two Items -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Two Items</h2>
+        <div class="motion-rail" id="carousel6">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel6.prev()">Previous</button>
+          <button onclick="carousel6.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- Edge Case: Fewer Items Than Columns -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: 3 Items, 4 Columns (Fewer Items Than Columns)</h2>
+        <div class="motion-rail" id="carousel7">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel7.prev()">Previous</button>
+          <button onclick="carousel7.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- Edge Case: No Breakpoints (Default) -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: No Breakpoints (Uses Default)</h2>
+        <div class="motion-rail" id="carousel8">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel8.prev()">Previous</button>
+          <button onclick="carousel8.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- Edge Case: Many Items (20+) -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Many Items (20 Items)</h2>
+        <div class="motion-rail" id="carousel9">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+              <div class="motion-rail-item">9</div>
+              <div class="motion-rail-item">10</div>
+              <div class="motion-rail-item">11</div>
+              <div class="motion-rail-item">12</div>
+              <div class="motion-rail-item">13</div>
+              <div class="motion-rail-item">14</div>
+              <div class="motion-rail-item">15</div>
+              <div class="motion-rail-item">16</div>
+              <div class="motion-rail-item">17</div>
+              <div class="motion-rail-item">18</div>
+              <div class="motion-rail-item">19</div>
+              <div class="motion-rail-item">20</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel9.prev()">Previous</button>
+          <button onclick="carousel9.next()">Next</button>
+          <button onclick="carousel9.scrollToIndex(10)">Jump to 11</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Empty Carousel -->
+      <div class="carousel-wrapper">
+        <h2>💥 BREAKING: Empty Carousel (No Items)</h2>
+        <div class="motion-rail" id="carousel10">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <!-- No items -->
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel10.prev()">Previous</button>
+          <button onclick="carousel10.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Extremely Narrow Container -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Extremely Narrow Container (NOT BREAKING)</h2>
+        <div class="motion-rail" id="carousel11" style="width: 50px">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel11.prev()">Previous</button>
+          <button onclick="carousel11.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Massive Gap Value -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Massive Gap Value (NOT BREAKING, JUST WEIRD LOOKING)</h2>
+        <div class="motion-rail" id="carousel12">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel12.prev()">Previous</button>
+          <button onclick="carousel12.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Dynamic Content -->
+      <div class="carousel-wrapper">
+        <h2>💥 BREAKING: Dynamic Content (Add/Remove Items)</h2>
+        <div class="motion-rail" id="carousel13">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid" id="carousel13-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel13.prev()">Previous</button>
+          <button onclick="carousel13.next()">Next</button>
+          <button onclick="addItemToCarousel13()">Add Item</button>
+          <button onclick="removeItemFromCarousel13()">Remove Item</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Initially Hidden -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Initially Hidden (NOT BREAKING)</h2>
+        <div class="motion-rail" id="carousel14" style="display: none">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button
+            onclick="
+              document.getElementById('carousel14').style.display = 'block'
+            "
+          >
+            Show Carousel
+          </button>
+          <button onclick="carousel14.prev()">Previous</button>
+          <button onclick="carousel14.next()">Next</button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Rapid Clicking -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Rapid Navigation Test (NOT BREAKING)</h2>
+        <div class="motion-rail" id="carousel15">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel15.prev()">Previous</button>
+          <button onclick="carousel15.next()">Next</button>
+          <button onclick="rapidClickTest()">
+            Rapid Click Test (10x Next)
+          </button>
+        </div>
+      </div>
+
+      <!-- BREAKING: Extreme Column Count -->
+      <div class="carousel-wrapper">
+        <h2>
+          Edge Case: Extreme Column Count (NOT BREAKING, JUST WEIRD LOOKING)
+        </h2>
+        <div class="motion-rail" id="carousel16">
+          <div class="motion-rail-scrollable">
+            <div class="motion-rail-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button onclick="carousel16.prev()">Previous</button>
+          <button onclick="carousel16.next()">Next</button>
+        </div>
+      </div>
     </div>
 
     <script type="module">
@@ -397,6 +649,149 @@
           breakpoints: [{ columns: 2, gap: "20px" }],
           autoplay: false,
           rtl: true,
+        },
+      );
+
+      // Carousel 5: Single item
+      window.carousel5 = new MotionRail(document.getElementById("carousel5"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+      });
+
+      // Carousel 6: Two items
+      window.carousel6 = new MotionRail(document.getElementById("carousel6"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+      });
+
+      // Carousel 7: Fewer items than columns
+      window.carousel7 = new MotionRail(document.getElementById("carousel7"), {
+        breakpoints: [
+          { columns: 1, gap: "12px" },
+          { width: 480, columns: 2, gap: "16px" },
+          { width: 768, columns: 3, gap: "20px" },
+          { width: 1024, columns: 4, gap: "24px" },
+        ],
+        autoplay: false,
+      });
+
+      // Carousel 8: No breakpoints (uses default)
+      window.carousel8 = new MotionRail(document.getElementById("carousel8"), {
+        autoplay: false,
+      });
+
+      // Carousel 9: Many items
+      window.carousel9 = new MotionRail(document.getElementById("carousel9"), {
+        breakpoints: [
+          { columns: 2, gap: "16px" },
+          { width: 768, columns: 3, gap: "16px" },
+          { width: 1024, columns: 4, gap: "20px" },
+        ],
+        autoplay: false,
+        onChange: (state) => {
+          console.log("Carousel 9 state:", state);
+        },
+      });
+
+      // Carousel 10: Empty carousel
+      window.carousel10 = new MotionRail(
+        document.getElementById("carousel10"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+          ],
+          autoplay: false,
+        },
+      );
+
+      // Carousel 11: Extremely narrow
+      window.carousel11 = new MotionRail(
+        document.getElementById("carousel11"),
+        {
+          breakpoints: [{ columns: 1, gap: "8px" }],
+          autoplay: false,
+        },
+      );
+
+      // Carousel 12: Massive gap
+      window.carousel12 = new MotionRail(
+        document.getElementById("carousel12"),
+        {
+          breakpoints: [{ columns: 2, gap: "500px" }],
+          autoplay: false,
+        },
+      );
+
+      // Carousel 13: Dynamic content
+      window.carousel13 = new MotionRail(
+        document.getElementById("carousel13"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+          ],
+          autoplay: false,
+        },
+      );
+
+      let itemCounter = 4;
+      window.addItemToCarousel13 = function addItemToCarousel13() {
+        const grid = document.getElementById("carousel13-grid");
+        const newItem = document.createElement("div");
+        newItem.className = "motion-rail-item";
+        newItem.textContent = itemCounter++;
+        grid.appendChild(newItem);
+        console.log("Added item. Total items:", grid.children.length);
+      };
+
+      window.removeItemFromCarousel13 = function removeItemFromCarousel13() {
+        const grid = document.getElementById("carousel13-grid");
+        if (grid.children.length > 0) {
+          grid.removeChild(grid.lastChild);
+          console.log("Removed item. Total items:", grid.children.length);
+        }
+      };
+
+      // Carousel 14: Initially hidden
+      window.carousel14 = new MotionRail(
+        document.getElementById("carousel14"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+          ],
+          autoplay: false,
+        },
+      );
+
+      // Carousel 15: Rapid clicking
+      window.carousel15 = new MotionRail(
+        document.getElementById("carousel15"),
+        {
+          breakpoints: [{ columns: 2, gap: "16px" }],
+          autoplay: false,
+        },
+      );
+
+      window.rapidClickTest = function rapidClickTest() {
+        for (let i = 0; i < 10; i++) {
+          setTimeout(() => carousel15.next(), i * 50);
+        }
+      };
+
+      // Carousel 16: Extreme column count
+      window.carousel16 = new MotionRail(
+        document.getElementById("carousel16"),
+        {
+          breakpoints: [{ columns: 20, gap: "10px" }],
+          autoplay: false,
         },
       );
     </script>
