@@ -3,7 +3,6 @@ import type {
   MotionRailOptions,
   MotionRailState,
 } from "./types";
-import { setBreakPoints } from "./utils";
 
 export class MotionRail {
   element: HTMLElement;
@@ -60,12 +59,7 @@ export class MotionRail {
       "[data-motion-rail-grid] > *",
     ).length;
 
-    setBreakPoints({
-      container: this.element,
-      breakpoints: this.breakpoints,
-      length: this.element.querySelectorAll("[data-motion-rail-grid] > *")
-        .length,
-    });
+    this.setBreakPoints();
 
     this.setLogicalScroll(0);
     this.container.style.cursor = "grab";
@@ -74,6 +68,70 @@ export class MotionRail {
     this.observeResize();
     this.observeEdgeItems();
     if (this.autoplay) this.play();
+  }
+
+  // ============================================================================
+  // UTILITY METHODS
+  // ============================================================================
+
+  private randomContainerName(): string {
+    return `motion-rail-${Math.random().toString(36).substring(2, 11)}`;
+  }
+
+  private setBreakPoints() {
+    const motionRailContainer = this.element.querySelector(
+      "[data-motion-rail-scrollable]",
+    ) as HTMLElement;
+    if (!motionRailContainer) return;
+
+    // give random css-safe container-name
+    let randomName = "";
+    if (!motionRailContainer.style.containerName) {
+      randomName = this.randomContainerName();
+      motionRailContainer.style.containerName = randomName;
+    } else {
+      randomName = motionRailContainer.style.containerName;
+    }
+
+    // setup container query
+    const styleElement = document.createElement("style");
+    let containerQueries = "";
+
+    // Find the smallest width for base case max-width
+    const withWidth = this.breakpoints.filter((bp) => bp.width);
+    const smallestWidth =
+      withWidth.length > 0
+        ? Math.min(...withWidth.map((bp) => bp.width!))
+        : null;
+
+    this.breakpoints.forEach((bp) => {
+      const columns = bp.columns || 1;
+      const gapValue = bp.gap || "0px";
+      const itemWidth = `calc((100cqw - (${columns - 1} * ${gapValue})) / ${columns})`;
+
+      let condition = "";
+      if (bp.width) {
+        condition = `(min-width: ${bp.width}px)`;
+      } else if (smallestWidth) {
+        condition = `(max-width: ${smallestWidth - 1}px)`;
+      } else {
+        // Single breakpoint with no width
+        condition = `(min-width: 0px)`;
+      }
+
+      containerQueries += `
+      @container ${randomName} ${condition} {
+        [data-motion-rail-grid] {
+          grid-template-columns: repeat(${this.state.totalItems}, ${itemWidth});
+          gap: ${gapValue};
+        }
+      }
+    `;
+    });
+    styleElement.textContent = containerQueries;
+    document.head.appendChild(styleElement);
+
+    return styleElement;
   }
 
   // ============================================================================
@@ -435,11 +493,7 @@ export class MotionRail {
     this.state.isLastItemVisible = false;
 
     // Re-apply breakpoints with new item count
-    setBreakPoints({
-      container: this.element,
-      breakpoints: this.breakpoints,
-      length: this.state.totalItems,
-    });
+    this.setBreakPoints();
 
     // Recache snap points with new items
     this.cacheSnapPoints();
