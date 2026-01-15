@@ -7,7 +7,7 @@ import type {
 
 export class MotionRail {
   element: HTMLElement;
-  container: HTMLElement;
+  scrollable: HTMLElement;
 
   private rtl: boolean = false;
   private autoplay: boolean = false;
@@ -67,7 +67,7 @@ export class MotionRail {
         "MotionRail: [data-motion-rail-scrollable] element not found",
       );
     }
-    this.container = container;
+    this.scrollable = container;
 
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
@@ -163,18 +163,18 @@ export class MotionRail {
   // ============================================================================
 
   private getLogicalScroll(): number {
-    return this.container.scrollLeft;
+    return this.scrollable.scrollLeft;
   }
 
   private setLogicalScroll(logicalScroll: number): void {
-    this.container.scrollLeft = logicalScroll;
+    this.scrollable.scrollLeft = logicalScroll;
   }
 
   private scrollToLogical(
     logicalScroll: number,
     behavior: ScrollBehavior = "auto",
   ): void {
-    this.container.scrollTo({ left: logicalScroll, behavior });
+    this.scrollable.scrollTo({ left: logicalScroll, behavior });
   }
 
   private observeResize() {
@@ -184,7 +184,7 @@ export class MotionRail {
       this.cacheSnapPoints();
     });
 
-    this.resizeObserver.observe(this.container);
+    this.resizeObserver.observe(this.scrollable);
   }
 
   private observeEdgeItems() {
@@ -239,7 +239,7 @@ export class MotionRail {
         }
       },
       {
-        root: this.container,
+        root: this.scrollable,
         threshold: 0.5,
       },
     );
@@ -251,7 +251,7 @@ export class MotionRail {
     const items = this.element.querySelectorAll(
       "[data-motion-rail-grid] > *",
     ) as NodeListOf<HTMLElement>;
-    const maxScroll = this.container.scrollWidth - this.container.clientWidth;
+    const maxScroll = this.scrollable.scrollWidth - this.scrollable.clientWidth;
 
     this.snapPoints = Array.from(items).map((item) => {
       // Snap points are stored in logical space (0-based, increasing forward)
@@ -275,17 +275,17 @@ export class MotionRail {
   }
 
   private attachPointerEvents() {
-    this.container.addEventListener("pointerdown", this.handlePointerDown);
-    this.container.addEventListener("pointermove", this.handlePointerMove);
-    this.container.addEventListener("pointerup", this.handlePointerUp);
-    this.container.addEventListener("pointerleave", this.handlePointerUp);
+    this.scrollable.addEventListener("pointerdown", this.handlePointerDown);
+    this.scrollable.addEventListener("pointermove", this.handlePointerMove);
+    this.scrollable.addEventListener("pointerup", this.handlePointerUp);
+    this.scrollable.addEventListener("pointerleave", this.handlePointerUp);
   }
 
   private handlePointerDown = (e: PointerEvent) => {
     if (this.pointerId !== null) return;
 
     this.pointerId = e.pointerId;
-    this.container.setPointerCapture(e.pointerId);
+    this.scrollable.setPointerCapture(e.pointerId);
     this.isDragging = true;
     this.startX = e.clientX;
     this.startLogicalScroll = this.getLogicalScroll();
@@ -293,8 +293,8 @@ export class MotionRail {
     this.lastPointerTime = e.timeStamp;
     this.velocity = 0;
 
-    this.container.style.userSelect = "none";
-    this.container.style.scrollSnapType = "none";
+    this.scrollable.style.userSelect = "none";
+    this.scrollable.style.scrollSnapType = "none";
     this.pause();
     if (this.cancelScroll) {
       this.cancelScroll();
@@ -322,11 +322,11 @@ export class MotionRail {
   private handlePointerUp = (e: PointerEvent) => {
     if (!this.isDragging || e.pointerId !== this.pointerId) return;
 
-    this.container.releasePointerCapture(e.pointerId);
+    this.scrollable.releasePointerCapture(e.pointerId);
     this.pointerId = null;
     this.isDragging = false;
 
-    this.container.style.userSelect = "";
+    this.scrollable.style.userSelect = "";
 
     const velocityMagnitude = Math.abs(this.velocity);
     const baseTime = 100;
@@ -347,7 +347,7 @@ export class MotionRail {
     const snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
 
     const onScrollEnd = () => {
-      this.container.style.scrollSnapType = "x mandatory";
+      this.scrollable.style.scrollSnapType = "x mandatory";
       this.cancelScroll = null;
       if (this.autoplay) {
         this.autoPlayTimeoutId = window.setTimeout(() => {
@@ -565,9 +565,9 @@ export class MotionRail {
       this.intersectionObserver = null;
     }
 
-    this.container.removeEventListener("pointerdown", this.handlePointerDown);
-    this.container.removeEventListener("pointermove", this.handlePointerMove);
-    this.container.removeEventListener("pointerup", this.handlePointerUp);
-    this.container.removeEventListener("pointerleave", this.handlePointerUp);
+    this.scrollable.removeEventListener("pointerdown", this.handlePointerDown);
+    this.scrollable.removeEventListener("pointermove", this.handlePointerMove);
+    this.scrollable.removeEventListener("pointerup", this.handlePointerUp);
+    this.scrollable.removeEventListener("pointerleave", this.handlePointerUp);
   }
 }
