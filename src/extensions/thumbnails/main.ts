@@ -2,12 +2,13 @@ import { MotionRail } from "../../motionrail";
 import type { MotionRailExtension, MotionRailState } from "../../motionrail";
 
 export function Thumbnails(par?: {
-  thumbnailSize?: number;
+  thumbnailWidth?: number;
+  thumbnailHeight?: number;
   log?: boolean;
 }): MotionRailExtension {
   const thumbnailsContainer = document.createElement("div");
   const thumbnails: HTMLButtonElement[] = [];
-  const { thumbnailSize = 80, log = false } = par || {};
+  const { thumbnailWidth = 80, thumbnailHeight = 80, log = false } = par || {};
 
   return {
     name: "ThumbnailsExtension",
@@ -20,8 +21,12 @@ export function Thumbnails(par?: {
 
       thumbnailsContainer.className = "motionrail-thumbnails";
       thumbnailsContainer.style.setProperty(
-        "--thumbnail-size",
-        `${thumbnailSize}px`,
+        "--thumbnail-width",
+        `${thumbnailWidth}px`,
+      );
+      thumbnailsContainer.style.setProperty(
+        "--thumbnail-height",
+        `${thumbnailHeight}px`,
       );
 
       // Get all carousel items
