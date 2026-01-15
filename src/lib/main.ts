@@ -79,7 +79,7 @@ export class MotionRail {
     this.setBreakPoints();
 
     this.setLogicalScroll(0);
-    this.container.style.cursor = "grab";
+
     this.attachPointerEvents();
     this.cacheSnapPoints();
     this.observeResize();
@@ -292,7 +292,7 @@ export class MotionRail {
     this.lastPointerX = e.clientX;
     this.lastPointerTime = e.timeStamp;
     this.velocity = 0;
-    this.container.style.cursor = "grabbing";
+
     this.container.style.userSelect = "none";
     this.container.style.scrollSnapType = "none";
     this.pause();
@@ -325,7 +325,7 @@ export class MotionRail {
     this.container.releasePointerCapture(e.pointerId);
     this.pointerId = null;
     this.isDragging = false;
-    this.container.style.cursor = "grab";
+
     this.container.style.userSelect = "";
 
     const velocityMagnitude = Math.abs(this.velocity);

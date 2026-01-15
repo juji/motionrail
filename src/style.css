@@ -13,6 +13,11 @@
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
 
     [data-motion-rail-grid] {
       display: grid;
