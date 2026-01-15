@@ -2,7 +2,7 @@
 
 > ⚠️ **Not Ready for Production** - This library is currently in development and not yet ready for production use.
 
-A lightweight, smooth carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints.
+A lightweight, smooth carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints. Works with vanilla JavaScript or your favorite framework.
 
 ## Features
 
@@ -14,7 +14,8 @@ A lightweight, smooth carousel library with momentum-based scrolling, snap align
 - 🎨 **CSS Grid based** - Modern layout with customizable styling
 - 🪶 **Lightweight** - Zero dependencies, minimal bundle size
 - 🎮 **Full control API** - Programmatic navigation and playback control
-- 🧩 **Extension system** - Modular architecture with built-in extensions (Arrows, Logger)
+- 🧩 **Extension system** - Modular architecture with built-in extensions
+- ⚛️ **Framework integrations** - React, Solid, Vue, Svelte components
 
 ## Installation
 
@@ -23,6 +24,8 @@ npm install motionrail
 ```
 
 ## Quick Start
+
+### Vanilla JavaScript
 
 ```js
 import { MotionRail } from 'motionrail';
@@ -35,6 +38,93 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
     { width: 1024, columns: 3, gap: '20px' }
   ]
 });
+```
+
+### React
+
+```jsx
+import { MotionRail } from 'motionrail/react';
+import 'motionrail/style.css';
+
+function App() {
+  return (
+    <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </MotionRail>
+  );
+}
+```
+
+### Solid.js
+
+```jsx
+import { MotionRail } from 'motionrail/solid';
+import 'motionrail/style.css';
+
+function App() {
+  return (
+    <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </MotionRail>
+  );
+}
+```
+
+### Vue
+
+```vue
+<script setup>
+import { MotionRail } from 'motionrail/vue';
+import 'motionrail/style.css';
+
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+</script>
+
+<template>
+  <MotionRail :options="options">
+    <div>Item 1</div>
+    <div>Item 2</div>
+    <div>Item 3</div>
+  </MotionRail>
+</template>
+```
+
+### Svelte
+
+```svelte
+<script>
+  import { MotionRail } from 'motionrail/svelte';
+  import 'motionrail/style.css';
+
+  const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+</script>
+
+<MotionRail {options}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</MotionRail>
+```
+
+### Svelte 5 (with Runes)
+
+```svelte
+<script>
+  import { MotionRail } from 'motionrail/svelte5';
+  import 'motionrail/style.css';
+
+  const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+</script>
+
+<MotionRail {options}>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</MotionRail>
 ```
 
 ## Usage
@@ -66,7 +156,7 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 import 'motionrail/style.css';
 ```
 
-### JavaScript
+### Vanilla JavaScript
 
 ```js
 import { MotionRail } from 'motionrail';
@@ -87,6 +177,235 @@ const carousel = new MotionRail(element, {
   ]
 });
 ```
+
+## Framework Integrations
+
+MotionRail provides first-class framework integrations for React, Solid.js, Vue, and Svelte. All integrations are lightweight and use the same API.
+
+### Bundle Sizes
+
+- **React**: 0.87 kB (gzipped: 0.42 kB)
+- **Solid.js**: 0.89 kB (gzipped: 0.48 kB)
+- **Vue**: 1.22 kB (gzipped: 0.62 kB)
+- **Svelte**: 2.21 kB (gzipped: 0.94 kB)
+- **Svelte 5**: 1.80 kB (gzipped: 0.82 kB)
+
+### React Integration
+
+```jsx
+import { MotionRail } from 'motionrail/react';
+import 'motionrail/style.css';
+
+function MyCarousel() {
+  const carouselRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const handleNext = () => {
+    carouselRef.current?.next();
+  };
+
+  return (
+    <>
+      <MotionRail
+        ref={carouselRef}
+        divRef={containerRef}
+        options={{
+          autoplay: true,
+          delay: 3000,
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' }
+          ],
+          onChange: (state) => console.log(state)
+        }}
+      >
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </MotionRail>
+      <button onClick={handleNext}>Next</button>
+    </>
+  );
+}
+```
+
+**Props:**
+- `options`: MotionRailOptions object
+- `ref`: Receives the MotionRail instance
+- `divRef`: Receives the container HTMLDivElement
+- `children`: Carousel items
+
+### Solid.js Integration
+
+```jsx
+import { MotionRail } from 'motionrail/solid';
+import 'motionrail/style.css';
+
+function MyCarousel() {
+  let carousel;
+  let container;
+
+  const handleNext = () => {
+    carousel?.next();
+  };
+
+  return (
+    <>
+      <MotionRail
+        ref={(instance) => carousel = instance}
+        divRef={(el) => container = el}
+        options={{
+          autoplay: true,
+          delay: 3000,
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' }
+          ],
+          onChange: (state) => console.log(state)
+        }}
+      >
+        <div>Item 1</div>
+        <div>Item 2</div>
+        <div>Item 3</div>
+      </MotionRail>
+      <button onClick={handleNext}>Next</button>
+    </>
+  );
+}
+```
+
+**Props:**
+- `options`: MotionRailOptions object
+- `ref`: Callback that receives the MotionRail instance
+- `divRef`: Callback that receives the container HTMLDivElement
+- `children`: Carousel items
+
+### Vue Integration
+
+```vue
+<script setup>
+import { ref } from 'vue';
+import { MotionRail } from 'motionrail/vue';
+import 'motionrail/style.css';
+
+const carouselRef = ref(null);
+
+const options = {
+  autoplay: true,
+  delay: 3000,
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' },
+    { width: 1024, columns: 3, gap: '20px' }
+  ],
+  onChange: (state) => console.log(state)
+};
+
+const handleNext = () => {
+  carouselRef.value?.instance?.next();
+};
+</script>
+
+<template>
+  <div>
+    <MotionRail ref="carouselRef" :options="options">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </MotionRail>
+    <button @click="handleNext">Next</button>
+  </div>
+</template>
+```
+
+**Props:**
+- `options`: MotionRailOptions object
+
+**Template Ref Access:**
+- `instance`: MotionRail instance
+- `container`: Container HTMLDivElement
+
+### Svelte Integration
+
+```svelte
+<script>
+  import { MotionRail } from 'motionrail/svelte';
+  import 'motionrail/style.css';
+
+  let instance;
+  let container;
+
+  const options = {
+    autoplay: true,
+    delay: 3000,
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' }
+    ],
+    onChange: (state) => console.log(state)
+  };
+
+  function handleNext() {
+    instance?.next();
+  }
+</script>
+
+<MotionRail {options} bind:instance bind:container>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</MotionRail>
+<button on:click={handleNext}>Next</button>
+```
+
+**Props:**
+- `options`: MotionRailOptions object
+- `bind:instance`: Binds the MotionRail instance
+- `bind:container`: Binds the container HTMLDivElement
+
+### Svelte 5 Integration (Runes)
+
+```svelte
+<script>
+  import { MotionRail } from 'motionrail/svelte5';
+  import 'motionrail/style.css';
+
+  let instance = $state();
+  let container = $state();
+
+  const options = {
+    autoplay: true,
+    delay: 3000,
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' }
+    ],
+    onChange: (state) => console.log(state)
+  };
+
+  function handleNext() {
+    instance?.next();
+  }
+</script>
+
+<MotionRail {options} bind:instance bind:container>
+  <div>Item 1</div>
+  <div>Item 2</div>
+  <div>Item 3</div>
+</MotionRail>
+<button onclick={handleNext}>Next</button>
+```
+
+**Props:**
+- `options`: MotionRailOptions object
+- `bind:instance`: Binds the MotionRail instance (using $bindable)
+- `bind:container`: Binds the container HTMLDivElement (using $bindable)
+
+**Note:** All framework integrations automatically handle dynamic children updates using the `update()` method. No manual reinitialization needed when items change.
 
 ## Configuration Options
 
