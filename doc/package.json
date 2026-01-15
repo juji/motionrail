@@ -13,10 +13,10 @@
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.14.0",
-  "dependencies": {
-    "motionrail": "file:.."
-  },
   "devDependencies": {
     "vitepress": "2.0.0-alpha.15"
+  },
+  "dependencies": {
+    "motionrail": "^0.1.3"
   }
 }
