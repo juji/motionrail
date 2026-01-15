@@ -7,6 +7,7 @@
 
   let containerRef: HTMLDivElement;
   let motionRailInstance: MotionRailClass | null = null;
+  let slotObserver: MutationObserver | null = null;
 
   export function getInstance(): MotionRailClass | null {
     return motionRailInstance;
@@ -20,9 +21,35 @@
     if (!containerRef) return;
 
     motionRailInstance = new MotionRailClass(containerRef, options);
+
+    // Watch for slot content changes
+    const gridElement = containerRef.querySelector('[data-motion-rail-grid]');
+    if (gridElement) {
+      slotObserver = new MutationObserver(() => {
+        if (motionRailInstance) {
+          motionRailInstance.update();
+        }
+      });
+      slotObserver.observe(gridElement, {
+        childList: true,
+        subtree: true,
+      });
+    }
   });
 
+  $: if (motionRailInstance && options) {
+    // Recreate instance when options change
+    if (containerRef) {
+      motionRailInstance.destroy();
+      motionRailInstance = new MotionRailClass(containerRef, options);
+    }
+  }
+
   onDestroy(() => {
+    if (slotObserver) {
+      slotObserver.disconnect();
+      slotObserver = null;
+    }
     if (motionRailInstance) {
       motionRailInstance.destroy();
       motionRailInstance = null;

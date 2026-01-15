@@ -36,7 +36,13 @@ function MotionRailReact({
         motionRailRef.current = null;
       }
     };
-  }, [options, children]);
+  }, [options]);
+
+  useEffect(() => {
+    if (motionRailRef.current) {
+      motionRailRef.current.update();
+    }
+  }, [children]);
 
   return (
     <div
@@ -49,28 +55,6 @@ function MotionRailReact({
       </div>
     </div>
   );
-}
-
-export function useMotionRail(
-  ref: RefObject<HTMLElement>,
-  options: MotionRailOptions = {},
-) {
-  const motionRailRef = useRef<MotionRailClass | null>(null);
-
-  useEffect(() => {
-    if (!ref.current) return;
-
-    motionRailRef.current = new MotionRailClass(ref.current, options);
-
-    return () => {
-      if (motionRailRef.current) {
-        motionRailRef.current.destroy();
-        motionRailRef.current = null;
-      }
-    };
-  }, [ref, options]);
-
-  return motionRailRef.current;
 }
 
 export { MotionRailReact as MotionRail };

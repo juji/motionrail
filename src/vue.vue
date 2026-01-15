@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from "vue";
+import { onMounted, onBeforeUnmount, ref, watch, useSlots } from "vue";
 import { MotionRail as MotionRailClass } from "./motionrail";
 import type { MotionRailOptions } from "./lib/types";
 
@@ -15,18 +15,24 @@ const emit = defineEmits<{
   mounted: [instance: MotionRailClass, container: HTMLDivElement];
 }>();
 
+const slots = useSlots();
 const containerRef = ref<HTMLDivElement | null>(null);
 const motionRailInstance = ref<MotionRailClass | null>(null);
 
 onMounted(() => {
   if (!containerRef.value) return;
 
-  motionRailInstance.value = new MotionRailClass(
-    containerRef.value,
-    props.options,
-  );
-  emit("mounted", motionRailInstance.value, containerRef.value);
+  const instance = new MotionRailClass(containerRef.value, props.options);
+  motionRailInstance.value = instance;
+  emit("mounted", instance, containerRef.value);
 });
+
+// Watch for slot content changes
+watch(() => slots.default?.(), () => {
+  if (motionRailInstance.value) {
+    motionRailInstance.value.update();
+  }
+}, { flush: 'post' });
 
 onBeforeUnmount(() => {
   if (motionRailInstance.value) {

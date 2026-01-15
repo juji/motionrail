@@ -1,5 +1,5 @@
 /** @jsxImportSource solid-js */
-import { onMount, onCleanup, type JSX, splitProps } from "solid-js";
+import { onMount, onCleanup, createEffect, type JSX, splitProps } from "solid-js";
 import { MotionRail as MotionRailClass } from "./motionrail";
 import type { MotionRailOptions } from "./lib/types";
 
@@ -28,6 +28,16 @@ function MotionRailSolid(props: MotionRailProps) {
     }
   });
 
+  createEffect(() => {
+    // Track children changes
+    // @ts-ignore - intentionally unused to track reactivity
+    const _ = local.children;
+    
+    if (motionRailInstance) {
+      motionRailInstance.update();
+    }
+  });
+
   onCleanup(() => {
     if (motionRailInstance) {
       motionRailInstance.destroy();
@@ -46,29 +56,6 @@ function MotionRailSolid(props: MotionRailProps) {
       </div>
     </div>
   );
-}
-
-export function createMotionRail(
-  ref: () => HTMLElement | undefined,
-  options: MotionRailOptions = {},
-): MotionRailClass | null {
-  let motionRailInstance: MotionRailClass | null = null;
-
-  onMount(() => {
-    const element = ref();
-    if (!element) return;
-
-    motionRailInstance = new MotionRailClass(element, options);
-  });
-
-  onCleanup(() => {
-    if (motionRailInstance) {
-      motionRailInstance.destroy();
-      motionRailInstance = null;
-    }
-  });
-
-  return motionRailInstance;
 }
 
 export { MotionRailSolid as MotionRail };

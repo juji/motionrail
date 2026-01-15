@@ -23,10 +23,6 @@ export default defineConfig({
       include: /svelte\.svelte$/,
     }),
   ],
-  esbuild: {
-    jsx: "automatic",
-    jsxImportSource: undefined,
-  },
   build: {
     emptyOutDir: false,
     lib: isUMD
