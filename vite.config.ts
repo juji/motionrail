@@ -20,7 +20,7 @@ export default defineConfig({
       include: /vue\.vue$/,
     }),
     sveltePlugin({
-      include: /svelte\.svelte$/,
+      include: /svelte5?\.svelte$/,
     }),
   ],
   build: {
@@ -41,6 +41,7 @@ export default defineConfig({
             solid: resolve(__dirname, "src/solid.tsx"),
             vue: resolve(__dirname, "src/vue.vue"),
             svelte: resolve(__dirname, "src/svelte.svelte"),
+            svelte5: resolve(__dirname, "src/svelte5.svelte"),
             "extensions/arrows": resolve(
               __dirname,
               "src/extensions/arrows/main.ts",

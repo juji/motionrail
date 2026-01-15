@@ -4,10 +4,16 @@
   import type { MotionRailOptions } from "./lib/types";
 
   export let options: MotionRailOptions = {};
+  export let instance: MotionRailClass | null = null;
+  export let container: HTMLDivElement | undefined = undefined;
 
   let containerRef: HTMLDivElement;
   let motionRailInstance: MotionRailClass | null = null;
   let slotObserver: MutationObserver | null = null;
+
+  // Sync exported props
+  $: instance = motionRailInstance;
+  $: container = containerRef;
 
   export function getInstance(): MotionRailClass | null {
     return motionRailInstance;

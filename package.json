@@ -49,6 +49,10 @@
       "import": "./dist/svelte.js",
       "types": "./dist/svelte.d.ts"
     },
+    "./svelte5": {
+      "import": "./dist/svelte5.js",
+      "types": "./dist/svelte5.d.ts"
+    },
     "./style.css": "./dist/style.css"
   },
   "files": [
