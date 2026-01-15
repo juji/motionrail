@@ -1,5 +1,6 @@
 import type {
   MotionRailBreakpoint,
+  MotionRailExtension,
   MotionRailOptions,
   MotionRailState,
 } from "./types";
@@ -13,6 +14,20 @@ export class MotionRail {
   private delay: number = 3000;
   private resumeDelay: number = 4000;
   private onChange?: (state: MotionRailState) => void;
+
+  private onChangeSystem = () => {
+    this.extensions.forEach((ext) => {
+      if (ext.onUpdate) {
+        ext.onUpdate(this);
+      }
+    });
+
+    if (this.onChange) {
+      this.onChange({ ...this.state });
+    }
+  };
+
+  private extensions: MotionRailExtension[] = [];
 
   private breakpoints: MotionRailBreakpoint[] = [];
   private autoPlayIntervalId: number | null = null;
@@ -41,6 +56,7 @@ export class MotionRail {
     this.rtl = options.rtl || false;
     this.breakpoints = options.breakpoints || [{ columns: 1, gap: "0px" }];
     this.element = element;
+    this.extensions = options.extensions || [];
 
     const container = this.element.querySelector(
       "[data-motion-rail-scrollable]",
@@ -68,6 +84,12 @@ export class MotionRail {
     this.observeResize();
     this.observeEdgeItems();
     if (this.autoplay) this.play();
+
+    this.extensions.forEach((ext) => {
+      if (ext.onInit) {
+        ext.onInit(this);
+      }
+    });
   }
 
   // ============================================================================
@@ -210,8 +232,8 @@ export class MotionRail {
           }
         });
 
-        if (stateChanged && this.onChange) {
-          this.onChange({ ...this.state });
+        if (stateChanged) {
+          this.onChangeSystem();
         }
       },
       {
@@ -502,9 +524,7 @@ export class MotionRail {
     this.observeEdgeItems();
 
     // Notify state change
-    if (this.onChange) {
-      this.onChange({ ...this.state });
-    }
+    this.onChangeSystem();
   }
 
   destroy() {
