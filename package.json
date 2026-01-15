@@ -16,6 +16,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juji/motionrail"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc",
