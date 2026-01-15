@@ -9,6 +9,7 @@
     overflow: hidden;
     position: relative;
     container-type: inline-size;
+    anchor-name: --motionrail-container;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Firefox */

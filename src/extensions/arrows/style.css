@@ -19,25 +19,28 @@
   transition: all 0.2s;
   z-index: 10;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  position-anchor: --motionrail-container;
+  top: anchor(center);
+  translate: 0 -50%;
 }
 
 .motionrail-arrow-left {
-  left: 10px;
+  left: anchor(left);
+  margin-left: 10px;
 }
 
 .motionrail-arrow-right {
-  right: 10px;
+  right: anchor(right);
+  margin-right: 10px;
 }
 
 .motionrail-arrow-left:hover,
 .motionrail-arrow-right:hover {
   background: rgba(0, 0, 0, 0.8);
-  transform: translateY(-50%) scale(1.1);
+  scale: 1.1;
 }
 
 .motionrail-arrow-left:active,
 .motionrail-arrow-right:active {
-  transform: translateY(-50%) scale(0.95);
+  scale: 0.95;
 }
