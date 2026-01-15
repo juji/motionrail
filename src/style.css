@@ -1,11 +1,11 @@
-.motion-rail-scrollable::-webkit-scrollbar {
+[data-motion-rail-scrollable]::-webkit-scrollbar {
   display: none;
 }
 
-.motion-rail {
+[data-motion-rail] {
   position: relative;
 
-  .motion-rail-scrollable {
+  [data-motion-rail-scrollable] {
     overflow: hidden;
     position: relative;
     container-type: inline-size;
@@ -14,7 +14,7 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 
-    .motion-rail-grid {
+    [data-motion-rail-grid] {
       display: grid;
       grid-auto-flow: column;
       height: 100%;

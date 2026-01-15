@@ -44,10 +44,12 @@ export class MotionRail {
     this.element = element;
 
     const container = this.element.querySelector(
-      ".motion-rail-scrollable",
+      "[data-motion-rail-scrollable]",
     ) as HTMLElement;
     if (!container) {
-      throw new Error("MotionRail: .motion-rail-scrollable element not found");
+      throw new Error(
+        "MotionRail: [data-motion-rail-scrollable] element not found",
+      );
     }
     this.container = container;
 
@@ -55,13 +57,14 @@ export class MotionRail {
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
     this.state.totalItems = this.element.querySelectorAll(
-      ".motion-rail-grid > *",
+      "[data-motion-rail-grid] > *",
     ).length;
 
     setBreakPoints({
       container: this.element,
       breakpoints: this.breakpoints,
-      length: this.element.querySelectorAll(".motion-rail-grid > *").length,
+      length: this.element.querySelectorAll("[data-motion-rail-grid] > *")
+        .length,
     });
 
     this.setLogicalScroll(0);
@@ -105,7 +108,7 @@ export class MotionRail {
   private observeEdgeItems() {
     if (typeof IntersectionObserver === "undefined") return;
 
-    const items = this.element.querySelectorAll(".motion-rail-grid > *");
+    const items = this.element.querySelectorAll("[data-motion-rail-grid] > *");
     if (items.length === 0) return;
 
     const firstItem = items[0];
@@ -164,7 +167,7 @@ export class MotionRail {
 
   private cacheSnapPoints() {
     const items = this.element.querySelectorAll(
-      ".motion-rail-grid > *",
+      "[data-motion-rail-grid] > *",
     ) as NodeListOf<HTMLElement>;
     const maxScroll = this.container.scrollWidth - this.container.clientWidth;
 
@@ -423,7 +426,7 @@ export class MotionRail {
 
     // Update total items count
     this.state.totalItems = this.element.querySelectorAll(
-      ".motion-rail-grid > *",
+      "[data-motion-rail-grid] > *",
     ).length;
 
     // Reset visible items state

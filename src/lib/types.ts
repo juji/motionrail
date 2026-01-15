@@ -1,3 +1,5 @@
+import type { MotionRail } from "./main";
+
 export type MotionRailBreakpoint = {
   width?: number;
   columns?: number;
@@ -18,4 +20,12 @@ export type MotionRailOptions = {
   rtl?: boolean;
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
+  extensions?: MotionRailExtension[];
+};
+
+export type MotionRailExtension = {
+  name: string;
+  onInit?: (motionRail: MotionRail) => void;
+  onUpdate?: (motionRail: MotionRail) => void;
+  onDestroy?: (motionRail: MotionRail) => void;
 };

@@ -26,9 +26,9 @@ npm install motionrail
 ### HTML Structure
 
 ```html
-<div class="motion-rail" id="carousel">
-  <div class="motion-rail-scrollable">
-    <div class="motion-rail-grid">
+<div data-motion-rail id="carousel">
+  <div data-motion-rail-scrollable>
+    <div data-motion-rail-grid>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -39,10 +39,10 @@ npm install motionrail
 ```
 
 **Structure layers:**
-- `.motion-rail` - Wrapper element (receives the ID)
-- `.motion-rail-scrollable` - Scrollable container with overflow and snap behavior
-- `.motion-rail-grid` - Grid layout container
-- Direct children - Carousel items (no specific class required)
+- `[data-motion-rail]` - Wrapper element (receives the ID)
+- `[data-motion-rail-scrollable]` - Scrollable container with overflow and snap behavior
+- `[data-motion-rail-grid]` - Grid layout container
+- Direct children - Carousel items (no specific class or attribute required)
 
 ### CSS Import
 
@@ -198,7 +198,7 @@ Refresh the carousel after dynamically adding or removing items from the DOM. Th
 
 ```js
 // Add items to the DOM
-const grid = document.querySelector('.motion-rail-grid');
+const grid = document.querySelector('[data-motion-rail-grid]');
 const newItem = document.createElement('div');
 newItem.textContent = 'New Item';
 grid.appendChild(newItem);
@@ -282,9 +282,9 @@ const carousel = new MotionRail(
 ### With Navigation Controls
 
 ```html
-<div class="motion-rail" id="carousel">
-  <div class="motion-rail-scrollable">
-    <div class="motion-rail-grid">
+<div data-motion-rail id="carousel">
+  <div data-motion-rail-scrollable>
+    <div data-motion-rail-grid>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -322,9 +322,9 @@ document.getElementById('pause').addEventListener('click', () => carousel.pause(
 ### Dynamic Content
 
 ```html
-<div class="motion-rail" id="carousel">
-  <div class="motion-rail-scrollable">
-    <div class="motion-rail-grid" id="carousel-grid">
+<div data-motion-rail id="carousel">
+  <div data-motion-rail-scrollable>
+    <div data-motion-rail-grid id="carousel-grid">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -370,11 +370,11 @@ document.getElementById('remove-item').addEventListener('click', () => {
 The library includes base styles via `motionrail/style.css`. You can customize the appearance of items with your own CSS:
 
 ```css
-.motion-rail {
+[data-motion-rail] {
   height: 400px; /* Set carousel height */
 }
 
-.motion-rail-grid > * {
+[data-motion-rail-grid] > * {
   /* Style your carousel items */
   background: #f0f0f0;
   border-radius: 8px;
@@ -383,11 +383,11 @@ The library includes base styles via `motionrail/style.css`. You can customize t
 }
 ```
 
-**Key CSS classes:**
-- `.motion-rail` - Wrapper element
-- `.motion-rail-scrollable` - Scrollable container (has overflow and snap type)
-- `.motion-rail-grid` - Grid layout container
-- `.motion-rail-grid > *` - Direct children (carousel items)
+**Key selectors:**
+- `[data-motion-rail]` - Wrapper element
+- `[data-motion-rail-scrollable]` - Scrollable container (has overflow and snap type)
+- `[data-motion-rail-grid]` - Grid layout container
+- `[data-motion-rail-grid] > *` - Direct children (carousel items)
 
 ## Browser Support
 

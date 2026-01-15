@@ -36,13 +36,13 @@
         /* color: #333; */
       }
 
-      .motion-rail {
+      [data-motion-rail] {
         width: 100%;
         height: 300px;
         /* background: white; */
       }
 
-      .motion-rail-scrollable {
+      [data-motion-rail-scrollable] {
         width: 100%;
         height: 100%;
       }
@@ -117,9 +117,9 @@
       <!-- Basic Carousel -->
       <div class="carousel-wrapper">
         <h2>Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)</h2>
-        <div class="motion-rail" id="carousel1">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel1">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -143,9 +143,9 @@
         <h2>
           Basic Carousel RTL (3 columns on desktop, 2 on tablet, 1 on mobile)
         </h2>
-        <div class="motion-rail" id="carousel1rtl">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel1rtl">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -166,9 +166,9 @@
 
       <div class="carousel-wrapper">
         <h2>Carousel with Autoplay</h2>
-        <div class="motion-rail" id="carousel2">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel2">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -190,9 +190,9 @@
       <!-- Carousel with Autoplay RTL -->
       <div class="carousel-wrapper" dir="rtl">
         <h2>Carousel with Autoplay RTL</h2>
-        <div class="motion-rail" id="carousel2rtl">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel2rtl">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -214,9 +214,9 @@
       <!-- Variable Columns -->
       <div class="carousel-wrapper">
         <h2>Variable Columns (4 → 3 → 2 → 1)</h2>
-        <div class="motion-rail" id="carousel3">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel3">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -237,9 +237,9 @@
       <!-- Variable Columns RTL -->
       <div class="carousel-wrapper" dir="rtl">
         <h2>Variable Columns RTL (4 → 3 → 2 → 1)</h2>
-        <div class="motion-rail" id="carousel3rtl">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel3rtl">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -260,9 +260,9 @@
       <!-- Single Breakpoint (No Responsiveness) -->
       <div class="carousel-wrapper">
         <h2>Fixed 2 Columns (No Responsiveness)</h2>
-        <div class="motion-rail" id="carousel4">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel4">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -281,9 +281,9 @@
       <!-- Single Breakpoint RTL -->
       <div class="carousel-wrapper" dir="rtl">
         <h2>Fixed 2 Columns RTL (No Responsiveness)</h2>
-        <div class="motion-rail" id="carousel4rtl">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel4rtl">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -302,9 +302,9 @@
       <!-- Edge Case: Single Item -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Single Item</h2>
-        <div class="motion-rail" id="carousel5">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel5">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
             </div>
           </div>
@@ -318,9 +318,9 @@
       <!-- Edge Case: Two Items -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Two Items</h2>
-        <div class="motion-rail" id="carousel6">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel6">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
             </div>
@@ -335,9 +335,9 @@
       <!-- Edge Case: Fewer Items Than Columns -->
       <div class="carousel-wrapper">
         <h2>Edge Case: 3 Items, 4 Columns (Fewer Items Than Columns)</h2>
-        <div class="motion-rail" id="carousel7">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel7">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -353,9 +353,9 @@
       <!-- Edge Case: No Breakpoints (Default) -->
       <div class="carousel-wrapper">
         <h2>Edge Case: No Breakpoints (Uses Default)</h2>
-        <div class="motion-rail" id="carousel8">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel8">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -373,9 +373,9 @@
       <!-- Edge Case: Many Items (20+) -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Many Items (20 Items)</h2>
-        <div class="motion-rail" id="carousel9">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel9">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -409,9 +409,9 @@
       <!-- Edge Case: Empty Carousel -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Empty Carousel (NOT BREAKING)</h2>
-        <div class="motion-rail" id="carousel10">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel10">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <!-- No items -->
             </div>
           </div>
@@ -425,9 +425,9 @@
       <!-- BREAKING: Extremely Narrow Container -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Extremely Narrow Container (NOT BREAKING)</h2>
-        <div class="motion-rail" id="carousel11" style="width: 50px">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel11" style="width: 50px">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -443,9 +443,9 @@
       <!-- BREAKING: Massive Gap Value -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Massive Gap Value (NOT BREAKING, JUST WEIRD LOOKING)</h2>
-        <div class="motion-rail" id="carousel12">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel12">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -462,9 +462,9 @@
       <!-- Edge Case: Dynamic Content -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Dynamic Content (Add/Remove Items - calls update())</h2>
-        <div class="motion-rail" id="carousel13">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid" id="carousel13-grid">
+        <div data-motion-rail id="carousel13">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid id="carousel13-grid">
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -482,9 +482,9 @@
       <!-- BREAKING: Initially Hidden -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Initially Hidden (NOT BREAKING)</h2>
-        <div class="motion-rail" id="carousel14" style="display: none">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel14" style="display: none">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -508,9 +508,9 @@
       <!-- BREAKING: Rapid Clicking -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Rapid Navigation Test (NOT BREAKING)</h2>
-        <div class="motion-rail" id="carousel15">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel15">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -534,9 +534,9 @@
         <h2>
           Edge Case: Extreme Column Count (NOT BREAKING, JUST WEIRD LOOKING)
         </h2>
-        <div class="motion-rail" id="carousel16">
-          <div class="motion-rail-scrollable">
-            <div class="motion-rail-grid">
+        <div data-motion-rail id="carousel16">
+          <div data-motion-rail-scrollable>
+            <div data-motion-rail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>

@@ -11,7 +11,7 @@ export function setBreakPoints(par: {
 }) {
   const { container, breakpoints, length } = par;
   const motionRailContainer = container.querySelector(
-    ".motion-rail-scrollable",
+    "[data-motion-rail-scrollable]",
   ) as HTMLElement;
   if (!motionRailContainer) return;
 
@@ -50,7 +50,7 @@ export function setBreakPoints(par: {
 
     containerQueries += `
       @container ${randomName} ${condition} {
-        .motion-rail-grid {
+        [data-motion-rail-grid] {
           grid-template-columns: repeat(${length}, ${itemWidth});
           gap: ${gapValue};
         }
