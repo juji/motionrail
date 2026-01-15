@@ -14,7 +14,7 @@
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
 
-    .motion-rail-elements {
+    .motion-rail-grid {
       display: grid;
       grid-auto-flow: column;
       height: 100%;

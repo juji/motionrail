@@ -50,7 +50,7 @@ export function setBreakPoints(par: {
 
     containerQueries += `
       @container ${randomName} ${condition} {
-        .motion-rail-elements {
+        .motion-rail-grid {
           grid-template-columns: repeat(${length}, ${itemWidth});
           gap: ${gapValue};
         }
