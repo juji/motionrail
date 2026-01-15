@@ -36,7 +36,7 @@ export class MotionRail {
   constructor(element: HTMLElement, options: MotionRailOptions) {
     this.autoplay = options.autoplay || false;
     this.rtl = options.rtl || false;
-    this.breakpoints = options.breakpoints;
+    this.breakpoints = options.breakpoints || [{ columns: 1, gap: "0px" }];
     this.element = element;
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
