@@ -1,8 +1,9 @@
-import type { MotionRailBreakpoint, MotionRailOptions } from "./types";
-import {
-  setBreakPoints,
-  // animateScroll
-} from "./utils";
+import type {
+  MotionRailBreakpoint,
+  MotionRailOptions,
+  MotionRailState,
+} from "./types";
+import { setBreakPoints } from "./utils";
 
 export class MotionRail {
   private rtl: boolean = false;
@@ -13,7 +14,6 @@ export class MotionRail {
   private resumeDelay: number = 4000;
   private autoPlayIntervalId: number | null = null;
   private autoPlayTimeoutId: number | null = null;
-  private currentVisible: number[] = [];
   private isDragging: boolean = false;
   private startX: number = 0;
   private startLogicalScroll: number = 0;
@@ -25,8 +25,13 @@ export class MotionRail {
   private snapPoints: number[] = [];
   private resizeObserver: ResizeObserver | null = null;
   private intersectionObserver: IntersectionObserver | null = null;
-  private isFirstVisible: boolean = false;
-  private isLastVisible: boolean = false;
+  private state: MotionRailState = {
+    totalItems: 0,
+    visibleItemIndexes: [],
+    isFirstItemVisible: false,
+    isLastItemVisible: false,
+  };
+  private onChange?: (state: MotionRailState) => void;
 
   constructor(element: HTMLElement, options: MotionRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -35,6 +40,9 @@ export class MotionRail {
     this.element = element;
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
+    this.onChange = options.onChange;
+    this.state.totalItems =
+      this.element.querySelectorAll(".motion-rail-item").length;
 
     setBreakPoints({
       container: this.element,
@@ -42,7 +50,8 @@ export class MotionRail {
       length: this.element.querySelectorAll(".motion-rail-item").length,
     });
 
-    this.init();
+    this.setLogicalScroll(0);
+    this.element.style.cursor = "grab";
     this.attachPointerEvents();
     this.cacheSnapPoints();
     this.observeResize();
@@ -90,28 +99,45 @@ export class MotionRail {
 
     this.intersectionObserver = new IntersectionObserver(
       (entries) => {
+        let stateChanged = false;
         entries.forEach((entry) => {
           const index = Array.from(items).indexOf(entry.target as Element);
           if (index === -1) return;
 
           if (entry.isIntersecting) {
-            if (!this.currentVisible.includes(index)) {
-              this.currentVisible.push(index);
-              this.currentVisible.sort((a, b) => a - b);
+            if (!this.state.visibleItemIndexes.includes(index)) {
+              this.state.visibleItemIndexes.push(index);
+              this.state.visibleItemIndexes.sort((a, b) => a - b);
+              stateChanged = true;
             }
           } else {
-            this.currentVisible = this.currentVisible.filter(
-              (i) => i !== index,
-            );
+            const prevLength = this.state.visibleItemIndexes.length;
+            this.state.visibleItemIndexes =
+              this.state.visibleItemIndexes.filter((i) => i !== index);
+            if (this.state.visibleItemIndexes.length !== prevLength) {
+              stateChanged = true;
+            }
           }
 
           // Update edge visibility flags
           if (entry.target === firstItem) {
-            this.isFirstVisible = entry.isIntersecting;
+            const newValue = entry.isIntersecting;
+            if (this.state.isFirstItemVisible !== newValue) {
+              this.state.isFirstItemVisible = newValue;
+              stateChanged = true;
+            }
           } else if (entry.target === lastItem) {
-            this.isLastVisible = entry.isIntersecting;
+            const newValue = entry.isIntersecting;
+            if (this.state.isLastItemVisible !== newValue) {
+              this.state.isLastItemVisible = newValue;
+              stateChanged = true;
+            }
           }
         });
+
+        if (stateChanged && this.onChange) {
+          this.onChange({ ...this.state });
+        }
       },
       {
         root: this.element,
@@ -147,11 +173,6 @@ export class MotionRail {
     }
 
     return nearestPoint;
-  }
-
-  private init() {
-    this.setLogicalScroll(0);
-    this.element.style.cursor = "grab";
   }
 
   private attachPointerEvents() {
@@ -280,13 +301,13 @@ export class MotionRail {
   }
 
   private scrollByPage(direction: 1 | -1) {
-    if (this.currentVisible.length === 0) return;
+    if (this.state.visibleItemIndexes.length === 0) return;
 
     let targetIndex: number;
-    const firstVisibleIndex = this.currentVisible[0];
+    const firstVisibleIndex = this.state.visibleItemIndexes[0];
     const lastVisibleIndex =
-      this.currentVisible[this.currentVisible.length - 1];
-    const visibleCount = this.currentVisible.length;
+      this.state.visibleItemIndexes[this.state.visibleItemIndexes.length - 1];
+    const visibleCount = this.state.visibleItemIndexes.length;
 
     if (direction === 1) {
       // Going forward: skip all visible items, go to the next one
@@ -295,11 +316,14 @@ export class MotionRail {
         targetIndex = lastVisibleIndex + visibleCount;
       }
 
-      if (targetIndex >= this.snapPoints.length - 1 && this.isLastVisible) {
+      if (
+        targetIndex >= this.snapPoints.length - 1 &&
+        this.state.isLastItemVisible
+      ) {
         targetIndex = 0;
       } else if (
         targetIndex >= this.snapPoints.length - 1 &&
-        !this.isLastVisible
+        !this.state.isLastItemVisible
       ) {
         targetIndex = this.snapPoints.length - 1;
       }
@@ -310,9 +334,9 @@ export class MotionRail {
         targetIndex = lastVisibleIndex - visibleCount;
       }
 
-      if (targetIndex <= 0 && this.isFirstVisible) {
+      if (targetIndex <= 0 && this.state.isFirstItemVisible) {
         targetIndex = this.snapPoints.length - 1;
-      } else if (targetIndex <= 0 && !this.isFirstVisible) {
+      } else if (targetIndex <= 0 && !this.state.isFirstItemVisible) {
         targetIndex = 0;
       }
     }
@@ -363,16 +387,8 @@ export class MotionRail {
     }
   }
 
-  getVisibleIndices() {
-    return [...this.currentVisible];
-  }
-
-  isAtStart() {
-    return this.isFirstVisible;
-  }
-
-  isAtEnd() {
-    return this.isLastVisible;
+  getState() {
+    return { ...this.state };
   }
 
   destroy() {
