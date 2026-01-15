@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Thumbnails Extension Demo</title>
-    <link rel="stylesheet" href="../../dist/style.css" />
-    <link rel="stylesheet" href="../../dist/extensions/thumbnails/style.css" />
+    <link rel="stylesheet" href="../../src/style.css" />
+    <link rel="stylesheet" href="../../src/extensions/thumbnails/style.css" />
     <style>
       body {
         font-family:
@@ -16,13 +16,13 @@
         background: #0f172a;
         color: white;
       }
-      .demo {
+      .carousel-wrapper {
         margin-bottom: 60px;
       }
       h2 {
         margin-bottom: 20px;
       }
-      .carousel-item {
+      .motion-rail-item {
         height: 400px;
         display: flex;
         align-items: center;
@@ -32,228 +32,133 @@
         color: white;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 8px;
+        overflow: hidden;
       }
-      .carousel-item:nth-child(2n) {
+      .motion-rail-item:nth-child(2n) {
         background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
       }
-      .carousel-item:nth-child(3n) {
+      .motion-rail-item:nth-child(3n) {
         background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       }
-      .carousel-item:nth-child(4n) {
+      .motion-rail-item:nth-child(4n) {
         background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
       }
-      .carousel-item:nth-child(5n) {
+      .motion-rail-item:nth-child(5n) {
         background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
       }
-
-      .image-item {
-        height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        background-size: cover;
-        background-position: center;
-        border-radius: 8px;
-        position: relative;
-      }
-      .image-item::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.3);
-        border-radius: 8px;
-      }
-      .image-item span {
-        position: relative;
-        z-index: 1;
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-      }
-
-      button {
-        margin: 10px 5px;
-        padding: 10px 20px;
-        font-size: 14px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        background: #667eea;
-        color: white;
-      }
-      button:hover {
-        background: #764ba2;
+      .motion-rail-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     </style>
   </head>
   <body>
     <h1>Thumbnails Extension Demo</h1>
 
-    <div class="demo">
+    <div class="carousel-wrapper">
       <h2>1. Basic Thumbnails</h2>
-      <div id="carousel1"></div>
+      <div data-motion-rail id="carousel1">
+        <div data-motion-rail-scrollable>
+          <div data-motion-rail-grid>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/800/400?random=1" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/800/400?random=2" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/800/400?random=3" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/800/400?random=4" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/800/400?random=5" />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="demo">
+    <div class="carousel-wrapper">
       <h2>2. Large Thumbnails (120px)</h2>
-      <div id="carousel2"></div>
+      <div data-motion-rail id="carousel2">
+        <div data-motion-rail-scrollable>
+          <div data-motion-rail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="demo">
+    <div class="carousel-wrapper">
       <h2>3. Small Thumbnails (60px)</h2>
-      <div id="carousel3"></div>
+      <div data-motion-rail id="carousel3">
+        <div data-motion-rail-scrollable>
+          <div data-motion-rail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="demo">
-      <h2>4. Many Items (15 items)</h2>
-      <div id="carousel4"></div>
-    </div>
-
-    <div class="demo">
-      <h2>5. Image Thumbnails</h2>
-      <div id="carousel5"></div>
-    </div>
-
-    <div class="demo">
-      <h2>6. Two Items</h2>
-      <div id="carousel6"></div>
-    </div>
-
-    <div class="demo">
-      <h2>7. Single Item</h2>
-      <div id="carousel7"></div>
-    </div>
-
-    <div class="demo">
-      <h2>8. Empty Carousel</h2>
-      <div id="carousel8"></div>
-    </div>
-
-    <div class="demo">
-      <h2>9. RTL Direction</h2>
-      <div id="carousel9" dir="rtl"></div>
-    </div>
-
-    <div class="demo">
-      <h2>10. Dynamic Add/Remove</h2>
-      <div id="carousel10"></div>
-      <button id="addItem">Add Item</button>
-      <button id="removeItem">Remove Last Item</button>
+    <div class="carousel-wrapper">
+      <h2>4. Many Items (20 items)</h2>
+      <div data-motion-rail id="carousel4">
+        <div data-motion-rail-scrollable>
+          <div data-motion-rail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+            <div class="motion-rail-item">6</div>
+            <div class="motion-rail-item">7</div>
+            <div class="motion-rail-item">8</div>
+            <div class="motion-rail-item">9</div>
+            <div class="motion-rail-item">10</div>
+            <div class="motion-rail-item">11</div>
+            <div class="motion-rail-item">12</div>
+            <div class="motion-rail-item">13</div>
+            <div class="motion-rail-item">14</div>
+            <div class="motion-rail-item">15</div>
+            <div class="motion-rail-item">16</div>
+            <div class="motion-rail-item">17</div>
+            <div class="motion-rail-item">18</div>
+            <div class="motion-rail-item">19</div>
+            <div class="motion-rail-item">20</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script type="module">
-      import { MotionRail } from "../../dist/motionrail.js";
-      import { Thumbnails } from "../../dist/extensions/thumbnails.js";
+      import { MotionRail } from "../../src/motionrail.ts";
+      import { Thumbnails } from "../../src/extensions/thumbnails/main.ts";
 
-      // 1. Basic Thumbnails
-      const carousel1 = new MotionRail("#carousel1", {
-        gap: 16,
+      window.carousel1 = new MotionRail(document.getElementById("carousel1"), {
         extensions: [Thumbnails()],
       });
-      for (let i = 1; i <= 5; i++) {
-        carousel1.addItem(`<div class="carousel-item">${i}</div>`);
-      }
 
-      // 2. Large Thumbnails
-      const carousel2 = new MotionRail("#carousel2", {
-        gap: 16,
+      window.carousel2 = new MotionRail(document.getElementById("carousel2"), {
         extensions: [Thumbnails({ thumbnailSize: 120 })],
       });
-      for (let i = 1; i <= 5; i++) {
-        carousel2.addItem(`<div class="carousel-item">${i}</div>`);
-      }
 
-      // 3. Small Thumbnails
-      const carousel3 = new MotionRail("#carousel3", {
-        gap: 16,
+      window.carousel3 = new MotionRail(document.getElementById("carousel3"), {
         extensions: [Thumbnails({ thumbnailSize: 60 })],
       });
-      for (let i = 1; i <= 5; i++) {
-        carousel3.addItem(`<div class="carousel-item">${i}</div>`);
-      }
 
-      // 4. Many Items
-      const carousel4 = new MotionRail("#carousel4", {
-        gap: 16,
+      window.carousel4 = new MotionRail(document.getElementById("carousel4"), {
         extensions: [Thumbnails()],
-      });
-      for (let i = 1; i <= 15; i++) {
-        carousel4.addItem(`<div class="carousel-item">${i}</div>`);
-      }
-
-      // 5. Image Thumbnails
-      const carousel5 = new MotionRail("#carousel5", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-      const images = [
-        "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
-        "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
-        "https://images.unsplash.com/photo-1501594907352-04cda38ebc29",
-        "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05",
-        "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
-      ];
-      images.forEach((url, i) => {
-        carousel5.addItem(
-          `<div class="image-item" style="background-image: url('${url}?w=800')"><span>Photo ${i + 1}</span></div>`,
-        );
-      });
-
-      // 6. Two Items
-      const carousel6 = new MotionRail("#carousel6", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-      for (let i = 1; i <= 2; i++) {
-        carousel6.addItem(`<div class="carousel-item">${i}</div>`);
-      }
-
-      // 7. Single Item
-      const carousel7 = new MotionRail("#carousel7", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-      carousel7.addItem(`<div class="carousel-item">1</div>`);
-
-      // 8. Empty Carousel
-      const carousel8 = new MotionRail("#carousel8", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-
-      // 9. RTL Direction
-      const carousel9 = new MotionRail("#carousel9", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-      for (let i = 1; i <= 5; i++) {
-        carousel9.addItem(`<div class="carousel-item">${i}</div>`);
-      }
-
-      // 10. Dynamic Add/Remove
-      const carousel10 = new MotionRail("#carousel10", {
-        gap: 16,
-        extensions: [Thumbnails()],
-      });
-      let count = 0;
-      for (let i = 1; i <= 3; i++) {
-        carousel10.addItem(`<div class="carousel-item">${i}</div>`);
-        count = i;
-      }
-
-      document.getElementById("addItem").addEventListener("click", () => {
-        count++;
-        carousel10.addItem(`<div class="carousel-item">${count}</div>`);
-      });
-
-      document.getElementById("removeItem").addEventListener("click", () => {
-        const items = carousel10.element.querySelectorAll(
-          "[data-motion-rail-grid] > *",
-        );
-        if (items.length > 0) {
-          carousel10.removeItem(items.length - 1);
-        }
       });
     </script>
   </body>
