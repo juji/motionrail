@@ -1,3 +1,3 @@
 export { MotionRail } from "./lib/main";
-export type { MotionRailBreakpoint, MotionRailOptions } from "./lib/types";
+export type * from "./lib/types";
 import "./style.css";

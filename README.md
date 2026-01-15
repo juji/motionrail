@@ -27,14 +27,22 @@ npm install motionrail
 
 ```html
 <div class="motion-rail" id="carousel">
-  <div class="motion-rail-container">
-    <div class="motion-rail-item">Item 1</div>
-    <div class="motion-rail-item">Item 2</div>
-    <div class="motion-rail-item">Item 3</div>
-    <!-- Add more items -->
+  <div class="motion-rail-scrollable">
+    <div class="motion-rail-grid">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+      <!-- Add more items -->
+    </div>
   </div>
 </div>
 ```
+
+**Structure layers:**
+- `.motion-rail` - Wrapper element (receives the ID)
+- `.motion-rail-scrollable` - Scrollable container with overflow and snap behavior
+- `.motion-rail-grid` - Grid layout container
+- Direct children - Carousel items (no specific class required)
 
 ### CSS Import
 
@@ -46,6 +54,8 @@ import 'motionrail/style.css';
 
 ```js
 import { MotionRail } from 'motionrail';
+// Import types if using TypeScript
+import type { MotionRailOptions, MotionRailState, MotionRailBreakpoint } from 'motionrail';
 
 const element = document.getElementById('carousel');
 
@@ -70,7 +80,8 @@ const carousel = new MotionRail(element, {
 | `rtl` | `boolean` | `false` | Enable right-to-left layout |
 | `delay` | `number` | `3000` | Delay between auto-scrolls (milliseconds) |
 | `resumeDelay` | `number` | `4000` | Time to resume autoplay after user interaction (milliseconds) |
-| `breakpoints` | `MotionRailBreakpoint[]` | `[]` | Array of responsive breakpoint configurations |
+| `breakpoints` | `MotionRailBreakpoint[]` | `[{ columns: 1, gap: "0px" }]` | Array of responsive breakpoint configurations (optional) |
+| `onChange` | `(state: MotionRailState) => void` | `undefined` | Callback fired when carousel state changes (optional) |
 
 ### Breakpoint Configuration
 
@@ -91,6 +102,36 @@ breakpoints: [
   { width: 768, columns: 2, gap: '16px' },        // Tablets
   { width: 1024, columns: 3, gap: '20px' }        // Desktop
 ]
+```
+
+**Note:** Breakpoints are optional. If omitted, a default single-column layout with no gap is used.
+
+### State Management
+
+The `onChange` callback receives a `MotionRailState` object whenever the carousel state changes:
+
+```typescript
+interface MotionRailState {
+  totalItems: number;              // Total number of items in carousel
+  visibleItemIndexes: number[];    // Array of currently visible item indexes
+  isFirstItemVisible: boolean;     // Whether the first item is visible
+  isLastItemVisible: boolean;      // Whether the last item is visible
+}
+```
+
+**Example:**
+```js
+const carousel = new MotionRail(element, {
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' }
+  ],
+  onChange: (state) => {
+    console.log('Visible items:', state.visibleItemIndexes);
+    console.log('At start:', state.isFirstItemVisible);
+    console.log('At end:', state.isLastItemVisible);
+  }
+});
 ```
 
 ## API Methods
@@ -128,6 +169,14 @@ Scroll to a specific item by index. Pauses autoplay.
 
 ```js
 carousel.scrollToIndex(2); // Scroll to the third item
+```
+
+### `getState()`
+Get the current carousel state.
+
+```js
+const state = carousel.getState();
+console.log(state.visibleItemIndexes); // [0, 1, 2]
 ```
 
 ### `destroy()`
@@ -206,10 +255,12 @@ const carousel = new MotionRail(
 
 ```html
 <div class="motion-rail" id="carousel">
-  <div class="motion-rail-container">
-    <div class="motion-rail-item">Item 1</div>
-    <div class="motion-rail-item">Item 2</div>
-    <div class="motion-rail-item">Item 3</div>
+  <div class="motion-rail-scrollable">
+    <div class="motion-rail-grid">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
   </div>
 </div>
 
@@ -249,13 +300,20 @@ The library includes base styles via `motionrail/style.css`. You can customize t
   height: 400px; /* Set carousel height */
 }
 
-.motion-rail-item {
+.motion-rail-grid > * {
   /* Style your carousel items */
   background: #f0f0f0;
   border-radius: 8px;
   padding: 20px;
+  scroll-snap-align: start; /* Enable snap behavior */
 }
 ```
+
+**Key CSS classes:**
+- `.motion-rail` - Wrapper element
+- `.motion-rail-scrollable` - Scrollable container (has overflow and snap type)
+- `.motion-rail-grid` - Grid layout container
+- `.motion-rail-grid > *` - Direct children (carousel items)
 
 ## Browser Support
 
@@ -269,6 +327,8 @@ Requires support for:
 - Pointer Events API
 - Container Queries
 - Scroll Snap
+- IntersectionObserver API
+- ResizeObserver API
 
 ## License
 
