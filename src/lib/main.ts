@@ -51,13 +51,14 @@ export class MotionRail {
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
-    this.state.totalItems =
-      this.element.querySelectorAll(".motion-rail-item").length;
+    this.state.totalItems = this.element.querySelectorAll(
+      ".motion-rail-grid > *",
+    ).length;
 
     setBreakPoints({
       container: this.element,
       breakpoints: this.breakpoints,
-      length: this.element.querySelectorAll(".motion-rail-item").length,
+      length: this.element.querySelectorAll(".motion-rail-grid > *").length,
     });
 
     this.setLogicalScroll(0);
@@ -101,7 +102,7 @@ export class MotionRail {
   private observeEdgeItems() {
     if (typeof IntersectionObserver === "undefined") return;
 
-    const items = this.element.querySelectorAll(".motion-rail-item");
+    const items = this.element.querySelectorAll(".motion-rail-grid > *");
     if (items.length === 0) return;
 
     const firstItem = items[0];
@@ -160,7 +161,7 @@ export class MotionRail {
 
   private cacheSnapPoints() {
     const items = this.element.querySelectorAll(
-      ".motion-rail-item",
+      ".motion-rail-grid > *",
     ) as NodeListOf<HTMLElement>;
     const maxScroll = this.container.scrollWidth - this.container.clientWidth;
 

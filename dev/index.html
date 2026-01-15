@@ -175,6 +175,8 @@
               <div class="motion-rail-item">4</div>
               <div class="motion-rail-item">5</div>
               <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
             </div>
           </div>
         </div>
@@ -197,6 +199,8 @@
               <div class="motion-rail-item">4</div>
               <div class="motion-rail-item">5</div>
               <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
             </div>
           </div>
         </div>
@@ -328,34 +332,31 @@
         },
       );
 
-      // // Carousel 2: RTL with autoplay
-      // window.carousel2 = new MotionRail(
-      //   document.getElementById('carousel2'),
-      //   {
-      //     breakpoints: [
-      //       { columns: 1, gap: '16px' },
-      //       { width: 768, columns: 2, gap: '16px' },
-      //       { width: 1024, columns: 3, gap: '20px' }
-      //     ],
-      //     autoplay: true,
-      //     delay: 2500
-      //   }
-      // );
+      // Carousel 2: with autoplay
+      window.carousel2 = new MotionRail(document.getElementById("carousel2"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+          { width: 1024, columns: 3, gap: "20px" },
+        ],
+        autoplay: true,
+        delay: 2500,
+      });
 
-      // // Carousel 2 RTL: Autoplay RTL
-      // window.carousel2rtl = new MotionRail(
-      //   document.getElementById('carousel2rtl'),
-      //   {
-      //     breakpoints: [
-      //       { columns: 1, gap: '16px' },
-      //       { width: 768, columns: 2, gap: '16px' },
-      //       { width: 1024, columns: 3, gap: '20px' }
-      //     ],
-      //     autoplay: true,
-      //     rtl: true,
-      //     delay: 2500
-      //   }
-      // );
+      // Carousel 2 RTL: Autoplay RTL
+      window.carousel2rtl = new MotionRail(
+        document.getElementById("carousel2rtl"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          autoplay: true,
+          rtl: true,
+          delay: 2500,
+        },
+      );
 
       // Carousel 3: Variable columns
       window.carousel3 = new MotionRail(document.getElementById("carousel3"), {
