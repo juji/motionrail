@@ -372,8 +372,6 @@ export class MotionRail {
   }
 
   pause() {
-    if (!this.autoplay) return;
-
     if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;
@@ -385,6 +383,7 @@ export class MotionRail {
     }
 
     if (this.isDragging) return;
+    if (!this.autoplay) return;
     this.autoPlayTimeoutId = window.setTimeout(() => {
       this.play();
       this.autoPlayTimeoutId = null;
