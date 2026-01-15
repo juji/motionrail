@@ -179,6 +179,34 @@ const state = carousel.getState();
 console.log(state.visibleItemIndexes); // [0, 1, 2]
 ```
 
+### `getOptions()`
+Get the current carousel configuration options. Returns a copy to prevent external modifications.
+
+```js
+const options = carousel.getOptions();
+console.log(options.autoplay); // false
+console.log(options.breakpoints); // [{ columns: 1, gap: '16px' }, ...]
+```
+
+### `update()`
+Refresh the carousel after dynamically adding or removing items from the DOM. This method:
+- Recounts total items
+- Recaches snap points
+- Re-observes edge items with IntersectionObserver
+- Reapplies breakpoints
+- Triggers onChange callback with updated state
+
+```js
+// Add items to the DOM
+const grid = document.querySelector('.motion-rail-grid');
+const newItem = document.createElement('div');
+newItem.textContent = 'New Item';
+grid.appendChild(newItem);
+
+// Update carousel to recognize new items
+carousel.update();
+```
+
 ### `destroy()`
 Clean up event listeners and timers.
 
@@ -289,6 +317,52 @@ document.getElementById('prev').addEventListener('click', () => carousel.prev())
 document.getElementById('next').addEventListener('click', () => carousel.next());
 document.getElementById('play').addEventListener('click', () => carousel.play());
 document.getElementById('pause').addEventListener('click', () => carousel.pause());
+```
+
+### Dynamic Content
+
+```html
+<div class="motion-rail" id="carousel">
+  <div class="motion-rail-scrollable">
+    <div class="motion-rail-grid" id="carousel-grid">
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+  </div>
+</div>
+
+<button id="add-item">Add Item</button>
+<button id="remove-item">Remove Item</button>
+```
+
+```js
+const carousel = new MotionRail(
+  document.getElementById('carousel'),
+  {
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' }
+    ]
+  }
+);
+
+let itemCounter = 4;
+document.getElementById('add-item').addEventListener('click', () => {
+  const grid = document.getElementById('carousel-grid');
+  const newItem = document.createElement('div');
+  newItem.textContent = `Item ${itemCounter++}`;
+  grid.appendChild(newItem);
+  carousel.update(); // Refresh carousel after adding items
+});
+
+document.getElementById('remove-item').addEventListener('click', () => {
+  const grid = document.getElementById('carousel-grid');
+  if (grid.children.length > 0) {
+    grid.removeChild(grid.lastChild);
+    carousel.update(); // Refresh carousel after removing items
+  }
+});
 ```
 
 ## Styling

@@ -6,13 +6,16 @@ import type {
 import { setBreakPoints } from "./utils";
 
 export class MotionRail {
+  element: HTMLElement;
+  container: HTMLElement;
+
   private rtl: boolean = false;
   private autoplay: boolean = false;
-  private breakpoints: MotionRailBreakpoint[] = [];
-  private element: HTMLElement;
-  private container: HTMLElement;
   private delay: number = 3000;
   private resumeDelay: number = 4000;
+  private onChange?: (state: MotionRailState) => void;
+
+  private breakpoints: MotionRailBreakpoint[] = [];
   private autoPlayIntervalId: number | null = null;
   private autoPlayTimeoutId: number | null = null;
   private isDragging: boolean = false;
@@ -26,13 +29,13 @@ export class MotionRail {
   private snapPoints: number[] = [];
   private resizeObserver: ResizeObserver | null = null;
   private intersectionObserver: IntersectionObserver | null = null;
+
   private state: MotionRailState = {
     totalItems: 0,
     visibleItemIndexes: [],
     isFirstItemVisible: false,
     isLastItemVisible: false,
   };
-  private onChange?: (state: MotionRailState) => void;
 
   constructor(element: HTMLElement, options: MotionRailOptions) {
     this.autoplay = options.autoplay || false;
@@ -399,6 +402,16 @@ export class MotionRail {
 
   getState() {
     return { ...this.state };
+  }
+
+  getOptions() {
+    return {
+      autoplay: this.autoplay,
+      rtl: this.rtl,
+      delay: this.delay,
+      resumeDelay: this.resumeDelay,
+      breakpoints: this.breakpoints.map((bp) => ({ ...bp })),
+    };
   }
 
   update() {
