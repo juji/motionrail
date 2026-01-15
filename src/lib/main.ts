@@ -60,11 +60,11 @@ export class MotionRail {
     this.extensions = options.extensions || [];
 
     const container = this.element.querySelector(
-      "[data-motion-rail-scrollable]",
+      "[data-motionrail-scrollable]",
     ) as HTMLElement;
     if (!container) {
       throw new Error(
-        "MotionRail: [data-motion-rail-scrollable] element not found",
+        "MotionRail: [data-motionrail-scrollable] element not found",
       );
     }
     this.scrollable = container;
@@ -73,7 +73,7 @@ export class MotionRail {
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
     this.state.totalItems = this.element.querySelectorAll(
-      "[data-motion-rail-grid] > *",
+      "[data-motionrail-grid] > *",
     ).length;
 
     this.setBreakPoints();
@@ -104,7 +104,7 @@ export class MotionRail {
 
   private setBreakPoints() {
     const motionRailContainer = this.element.querySelector(
-      "[data-motion-rail-scrollable]",
+      "[data-motionrail-scrollable]",
     ) as HTMLElement;
     if (!motionRailContainer) return;
 
@@ -145,7 +145,7 @@ export class MotionRail {
 
       containerQueries += `
       @container ${randomName} ${condition} {
-        [data-motion-rail-grid] {
+        [data-motionrail-grid] {
           grid-template-columns: repeat(${this.state.totalItems}, ${itemWidth});
           gap: ${gapValue};
         }
@@ -190,7 +190,7 @@ export class MotionRail {
   private observeEdgeItems() {
     if (typeof IntersectionObserver === "undefined") return;
 
-    const items = this.element.querySelectorAll("[data-motion-rail-grid] > *");
+    const items = this.element.querySelectorAll("[data-motionrail-grid] > *");
     if (items.length === 0) return;
 
     const firstItem = items[0];
@@ -249,7 +249,7 @@ export class MotionRail {
 
   private cacheSnapPoints() {
     const items = this.element.querySelectorAll(
-      "[data-motion-rail-grid] > *",
+      "[data-motionrail-grid] > *",
     ) as NodeListOf<HTMLElement>;
     const maxScroll = this.scrollable.scrollWidth - this.scrollable.clientWidth;
 
@@ -513,7 +513,7 @@ export class MotionRail {
 
     // Update total items count
     this.state.totalItems = this.element.querySelectorAll(
-      "[data-motion-rail-grid] > *",
+      "[data-motionrail-grid] > *",
     ).length;
 
     // Reset visible items state

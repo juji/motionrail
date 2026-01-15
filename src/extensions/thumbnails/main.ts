@@ -31,7 +31,7 @@ export function Thumbnails(par?: {
 
       // Get all carousel items
       const items = motionRail.element.querySelectorAll(
-        "[data-motion-rail-grid] > *",
+        "[data-motionrail-grid] > *",
       );
 
       // Create a thumbnail for each item
@@ -42,7 +42,7 @@ export function Thumbnails(par?: {
 
         // Clone the item content
         const clone = item.cloneNode(true) as HTMLElement;
-        clone.removeAttribute("data-motion-rail-item");
+        clone.removeAttribute("data-motionrail-item");
         thumbnail.appendChild(clone);
 
         thumbnail.addEventListener("click", () => {

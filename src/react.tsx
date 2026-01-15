@@ -47,11 +47,11 @@ function MotionRailReact({
   return (
     <div
       ref={containerRef}
-      data-motion-rail
+      data-motionrail
       {...restDivProps}
     >
-      <div data-motion-rail-scrollable>
-        <div data-motion-rail-grid>{children}</div>
+      <div data-motionrail-scrollable>
+        <div data-motionrail-grid>{children}</div>
       </div>
     </div>
   );

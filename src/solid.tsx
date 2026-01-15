@@ -48,11 +48,11 @@ function MotionRailSolid(props: MotionRailProps) {
   return (
     <div
       ref={containerRef}
-      data-motion-rail
+      data-motionrail
       {...others}
     >
-      <div data-motion-rail-scrollable>
-        <div data-motion-rail-grid>{local.children}</div>
+      <div data-motionrail-scrollable>
+        <div data-motionrail-grid>{local.children}</div>
       </div>
     </div>
   );

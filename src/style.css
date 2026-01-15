@@ -1,11 +1,11 @@
-[data-motion-rail-scrollable]::-webkit-scrollbar {
+[data-motionrail-scrollable]::-webkit-scrollbar {
   display: none;
 }
 
-[data-motion-rail] {
+[data-motionrail] {
   position: relative;
 
-  [data-motion-rail-scrollable] {
+  [data-motionrail-scrollable] {
     overflow: hidden;
     position: relative;
     container-type: inline-size;
@@ -20,7 +20,7 @@
       cursor: grabbing;
     }
 
-    [data-motion-rail-grid] {
+    [data-motionrail-grid] {
       display: grid;
       grid-auto-flow: column;
       height: 100%;

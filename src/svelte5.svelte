@@ -46,7 +46,7 @@
     motionRailInstance = new MotionRailClass(containerRef, options);
 
     // Watch for slot content changes
-    const gridElement = containerRef.querySelector('[data-motion-rail-grid]');
+    const gridElement = containerRef.querySelector('[data-motionrail-grid]');
     if (gridElement) {
       slotObserver = new MutationObserver(() => {
         if (motionRailInstance) {
@@ -80,9 +80,9 @@
   });
 </script>
 
-<div bind:this={containerRef} data-motion-rail {...restProps}>
-  <div data-motion-rail-scrollable>
-    <div data-motion-rail-grid>
+<div bind:this={containerRef} data-motionrail {...restProps}>
+  <div data-motionrail-scrollable>
+    <div data-motionrail-grid>
       {@render children?.()}
     </div>
   </div>

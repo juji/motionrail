@@ -48,9 +48,9 @@ defineExpose({
 </script>
 
 <template>
-  <div ref="containerRef" data-motion-rail v-bind="$attrs">
-    <div data-motion-rail-scrollable>
-      <div data-motion-rail-grid>
+  <div ref="containerRef" data-motionrail v-bind="$attrs">
+    <div data-motionrail-scrollable>
+      <div data-motionrail-grid>
         <slot />
       </div>
     </div>

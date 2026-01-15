@@ -42,12 +42,12 @@
         font-size: 18px;
       }
 
-      [data-motion-rail] {
+      [data-motionrail] {
         width: 100%;
         position: relative;
       }
 
-      [data-motion-rail-scrollable] {
+      [data-motionrail-scrollable] {
         width: 100%;
         height: 300px;
       }
@@ -122,9 +122,9 @@
       <!-- Basic Carousel -->
       <div class="carousel-wrapper">
         <h2>1. Basic Carousel (5 items, 3 columns)</h2>
-        <div data-motion-rail id="carousel-1">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-1">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -142,9 +142,9 @@
       <!-- With Index Numbers -->
       <div class="carousel-wrapper">
         <h2>2. Dots with Index Numbers</h2>
-        <div data-motion-rail id="carousel-2">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-2">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -162,9 +162,9 @@
       <!-- Many Items (Scrollable Dots) -->
       <div class="carousel-wrapper">
         <h2>3. Many Items (20 items, 2 columns) - Scrollable Dots</h2>
-        <div data-motion-rail id="carousel-3">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-3">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -197,9 +197,9 @@
       <!-- Single Item -->
       <div class="carousel-wrapper">
         <h2>4. Single Item</h2>
-        <div data-motion-rail id="carousel-4">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-4">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
             </div>
           </div>
@@ -210,9 +210,9 @@
       <!-- Two Items -->
       <div class="carousel-wrapper">
         <h2>5. Two Items (1 column)</h2>
-        <div data-motion-rail id="carousel-5">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-5">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
             </div>
@@ -224,9 +224,9 @@
       <!-- RTL Mode -->
       <div class="carousel-wrapper">
         <h2>6. RTL Mode (4 items, 2 columns)</h2>
-        <div data-motion-rail id="carousel-6">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-6">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -240,9 +240,9 @@
       <!-- Responsive Columns -->
       <div class="carousel-wrapper">
         <h2>7. Responsive Columns (6 items)</h2>
-        <div data-motion-rail id="carousel-7">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-7">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -261,9 +261,9 @@
       <!-- Autoplay -->
       <div class="carousel-wrapper">
         <h2>8. Autoplay with Dots (5 items, 2 columns)</h2>
-        <div data-motion-rail id="carousel-8">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-8">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -280,9 +280,9 @@
       <!-- Empty Carousel -->
       <div class="carousel-wrapper">
         <h2>9. Empty Carousel</h2>
-        <div data-motion-rail id="carousel-9">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid></div>
+        <div data-motionrail id="carousel-9">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid></div>
           </div>
         </div>
         <div class="note">
@@ -293,9 +293,9 @@
       <!-- Dynamic Content -->
       <div class="carousel-wrapper">
         <h2>10. Dynamic Content (Add/Remove Items)</h2>
-        <div data-motion-rail id="carousel-10">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel-10">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -415,7 +415,7 @@
       let itemCounter = 4;
       document.getElementById("add-item").addEventListener("click", () => {
         const grid = document.querySelector(
-          "#carousel-10 [data-motion-rail-grid]",
+          "#carousel-10 [data-motionrail-grid]",
         );
         const newItem = document.createElement("div");
         newItem.className = "motion-rail-item";
@@ -426,7 +426,7 @@
 
       document.getElementById("remove-item").addEventListener("click", () => {
         const grid = document.querySelector(
-          "#carousel-10 [data-motion-rail-grid]",
+          "#carousel-10 [data-motionrail-grid]",
         );
         if (grid.children.length > 0) {
           grid.removeChild(grid.lastChild);

@@ -42,13 +42,13 @@
         font-size: 18px;
       }
 
-      [data-motion-rail] {
+      [data-motionrail] {
         width: 100%;
         height: 300px;
         position: relative;
       }
 
-      [data-motion-rail-scrollable] {
+      [data-motionrail-scrollable] {
         width: 100%;
         height: 100%;
       }
@@ -120,9 +120,9 @@
       <!-- Basic Carousel with Arrows -->
       <div class="carousel-wrapper">
         <h2>Basic Carousel with Arrow Navigation</h2>
-        <div data-motion-rail id="carousel1">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel1">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -139,9 +139,9 @@
       <!-- RTL Carousel with Arrows -->
       <div class="carousel-wrapper" dir="rtl">
         <h2>RTL Carousel (Direction Reversed)</h2>
-        <div data-motion-rail id="carousel2">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel2">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -158,9 +158,9 @@
       <!-- Autoplay Carousel with Arrows -->
       <div class="carousel-wrapper">
         <h2>Autoplay with Arrows (Arrows pause autoplay)</h2>
-        <div data-motion-rail id="carousel3">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel3">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -175,9 +175,9 @@
       <!-- Variable Columns with Arrows -->
       <div class="carousel-wrapper">
         <h2>Responsive Columns (4 → 3 → 2 → 1)</h2>
-        <div data-motion-rail id="carousel4">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel4">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -198,9 +198,9 @@
         <h2>
           Edge Case: Single Item (Arrows should be visible but may not navigate)
         </h2>
-        <div data-motion-rail id="carousel5">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel5">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
             </div>
           </div>
@@ -210,9 +210,9 @@
       <!-- Edge Case: Two Items -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Two Items</h2>
-        <div data-motion-rail id="carousel6">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel6">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
             </div>
@@ -223,9 +223,9 @@
       <!-- Edge Case: Empty Carousel -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Empty Carousel (Arrows visible but non-functional)</h2>
-        <div data-motion-rail id="carousel7">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel7">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <!-- No items -->
             </div>
           </div>
@@ -235,9 +235,9 @@
       <!-- Edge Case: Many Items -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Many Items (20 Items)</h2>
-        <div data-motion-rail id="carousel8">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel8">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -266,9 +266,9 @@
       <!-- Edge Case: Dynamic Content -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Dynamic Content (Add/Remove Items)</h2>
-        <div data-motion-rail id="carousel9">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid id="carousel9-grid">
+        <div data-motionrail id="carousel9">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid id="carousel9-grid">
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -311,9 +311,9 @@
       <!-- Edge Case: Initially Hidden -->
       <div class="carousel-wrapper">
         <h2>Edge Case: Initially Hidden (Show to test)</h2>
-        <div data-motion-rail id="carousel10" style="display: none">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel10" style="display: none">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -341,9 +341,9 @@
       <!-- Edge Case: Fewer Items Than Columns -->
       <div class="carousel-wrapper">
         <h2>Edge Case: 3 Items, 4 Columns (Fewer Items Than Columns)</h2>
-        <div data-motion-rail id="carousel11">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel11">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -355,9 +355,9 @@
       <!-- Edge Case: No Loop (Arrows Disabled at Edges) -->
       <div class="carousel-wrapper">
         <h2>No Loop Mode (Arrows disabled at start/end)</h2>
-        <div data-motion-rail id="carousel12">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel12">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
@@ -378,9 +378,9 @@
       <!-- Edge Case: Custom Arrow Icons -->
       <div class="carousel-wrapper">
         <h2>Custom Arrow Icons (Text-based)</h2>
-        <div data-motion-rail id="carousel13">
-          <div data-motion-rail-scrollable>
-            <div data-motion-rail-grid>
+        <div data-motionrail id="carousel13">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
               <div class="motion-rail-item">1</div>
               <div class="motion-rail-item">2</div>
               <div class="motion-rail-item">3</div>
