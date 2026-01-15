@@ -2,14 +2,21 @@
   "name": "motionrail",
   "version": "0.0.3",
   "type": "module",
-  "main": "./dist/motionrail.umd.cjs",
   "module": "./dist/motionrail.js",
   "types": "./dist/motionrail.d.ts",
   "exports": {
     ".": {
       "import": "./dist/motionrail.js",
-      "require": "./dist/motionrail.umd.cjs",
       "types": "./dist/motionrail.d.ts"
+    },
+    "./extensions/arrows": {
+      "import": "./dist/extensions/arrows.js",
+      "types": "./dist/extensions/arrows/main.d.ts"
+    },
+    "./extensions/arrows/style.css": "./dist/extensions/arrows/style.css",
+    "./extensions/logger": {
+      "import": "./dist/extensions/logger.js",
+      "types": "./dist/extensions/logger.d.ts"
     },
     "./style.css": "./dist/style.css"
   },
