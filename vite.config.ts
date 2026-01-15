@@ -6,35 +6,61 @@ import { dirname } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const isUMD = process.env.BUILD_UMD === "true";
+
 export default defineConfig({
   build: {
-    lib: {
-      entry: {
-        motionrail: resolve(__dirname, "src/motionrail.ts"),
-        "extensions/arrows": resolve(
-          __dirname,
-          "src/extensions/arrows/main.ts",
-        ),
-        "extensions/logger": resolve(__dirname, "src/extensions/logger.ts"),
-      },
-      formats: ["es"],
-    },
+    emptyOutDir: false,
+    lib: isUMD
+      ? {
+          entry: resolve(
+            __dirname,
+            process.env.ENTRY_PATH || "src/motionrail.ts",
+          ),
+          name: process.env.LIB_NAME || "MotionRail",
+          formats: ["umd"],
+        }
+      : {
+          entry: {
+            motionrail: resolve(__dirname, "src/motionrail.ts"),
+            "extensions/arrows": resolve(
+              __dirname,
+              "src/extensions/arrows/main.ts",
+            ),
+            "extensions/arrows/style": resolve(
+              __dirname,
+              "src/extensions/arrows/style.css",
+            ),
+            "extensions/logger": resolve(__dirname, "src/extensions/logger.ts"),
+          },
+          formats: ["es"],
+        },
     cssCodeSplit: true,
     rollupOptions: {
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+          const name = assetInfo.name || "";
+          if (name.endsWith(".css")) {
             const source = assetInfo.source?.toString() || "";
-            // Arrows extension CSS
+            // Route CSS based on content
             if (source.includes("motionrail-arrow")) {
               return "extensions/arrows/style.css";
             }
-            // Main library CSS
             return "style.css";
           }
           return "[name][extname]";
         },
-        entryFileNames: "[name].js",
+        entryFileNames: (chunkInfo) => {
+          if (isUMD) {
+            // UMD builds
+            return process.env.FILE_NAME + ".cjs";
+          }
+          // ES builds - skip JS output for CSS-only entries
+          if (chunkInfo.name.includes("style")) {
+            return "skip-[name].js";
+          }
+          return "[name].js";
+        },
       },
     },
   },

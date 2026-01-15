@@ -1,6 +1,5 @@
 import { MotionRail } from "../../motionrail";
 import type { MotionRailExtension, MotionRailState } from "../../motionrail";
-import "./style.css";
 
 export function Arrows(par?: {
   leftIcon: string;

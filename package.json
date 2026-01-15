@@ -7,15 +7,18 @@
   "exports": {
     ".": {
       "import": "./dist/motionrail.js",
+      "require": "./dist/motionrail.umd.cjs",
       "types": "./dist/motionrail.d.ts"
     },
     "./extensions/arrows": {
       "import": "./dist/extensions/arrows.js",
+      "require": "./dist/extensions/arrows.umd.cjs",
       "types": "./dist/extensions/arrows/main.d.ts"
     },
     "./extensions/arrows/style.css": "./dist/extensions/arrows/style.css",
     "./extensions/logger": {
       "import": "./dist/extensions/logger.js",
+      "require": "./dist/extensions/logger.umd.cjs",
       "types": "./dist/extensions/logger.d.ts"
     },
     "./style.css": "./dist/style.css"
@@ -29,7 +32,13 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && tsc",
+    "build": "npm run build:es && npm run build:umd && npm run build:cleanup",
+    "build:es": "vite build && tsc",
+    "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:logger",
+    "build:umd:main": "BUILD_UMD=true ENTRY_PATH=src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
+    "build:umd:arrows": "BUILD_UMD=true ENTRY_PATH=src/extensions/arrows/main.ts LIB_NAME=MotionRailArrows FILE_NAME=extensions/arrows.umd vite build",
+    "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
+    "build:cleanup": "rm -f dist/skip-*.js",
     "preview": "vite preview",
     "prepare": "husky"
   },
