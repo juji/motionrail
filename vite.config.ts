@@ -39,6 +39,14 @@ export default defineConfig({
               __dirname,
               "src/extensions/dots/style.css",
             ),
+            "extensions/thumbnails": resolve(
+              __dirname,
+              "src/extensions/thumbnails/main.ts",
+            ),
+            "extensions/thumbnails/style": resolve(
+              __dirname,
+              "src/extensions/thumbnails/style.css",
+            ),
             "extensions/logger": resolve(__dirname, "src/extensions/logger.ts"),
           },
           formats: ["es"],
@@ -56,6 +64,9 @@ export default defineConfig({
             }
             if (source.includes("motionrail-dot")) {
               return "extensions/dots/style.css";
+            }
+            if (source.includes("motionrail-thumbnail")) {
+              return "extensions/thumbnails/style.css";
             }
             return "style.css";
           }
