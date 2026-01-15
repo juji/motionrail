@@ -1,11 +1,11 @@
-.motion-rail-container::-webkit-scrollbar {
+.motion-rail-scrollable::-webkit-scrollbar {
   display: none;
 }
 
 .motion-rail {
   position: relative;
 
-  .motion-rail-container {
+  .motion-rail-scrollable {
     overflow: hidden;
     position: relative;
     container-type: inline-size;

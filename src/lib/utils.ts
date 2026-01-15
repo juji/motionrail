@@ -11,7 +11,7 @@ export function setBreakPoints(par: {
 }) {
   const { container, breakpoints, length } = par;
   const motionRailContainer = container.querySelector(
-    ".motion-rail-container",
+    ".motion-rail-scrollable",
   ) as HTMLElement;
   if (!motionRailContainer) return;
 

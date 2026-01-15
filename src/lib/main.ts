@@ -41,10 +41,10 @@ export class MotionRail {
     this.element = element;
 
     const container = this.element.querySelector(
-      ".motion-rail-container",
+      ".motion-rail-scrollable",
     ) as HTMLElement;
     if (!container) {
-      throw new Error("MotionRail: .motion-rail-container element not found");
+      throw new Error("MotionRail: .motion-rail-scrollable element not found");
     }
     this.container = container;
 
