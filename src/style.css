@@ -1,21 +1,23 @@
-.motion-rail::-webkit-scrollbar {
+.motion-rail-container::-webkit-scrollbar {
   display: none;
 }
 
-.motion-rail{
-  overflow: hidden;
+.motion-rail {
   position: relative;
-  container-type: inline-size;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 
-  .motion-rail-container{
-    display: grid;
-    grid-auto-flow: column;
-    height: 100%;
+  .motion-rail-container {
+    overflow: hidden;
+    position: relative;
+    container-type: inline-size;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+
+    .motion-rail-elements {
+      display: grid;
+      grid-auto-flow: column;
+      height: 100%;
+    }
   }
-
-
 }

@@ -1,26 +1,27 @@
 import type { MotionRailBreakpoint } from "./types";
 
-export function randomContainerName() : string {
+export function randomContainerName(): string {
   return `motion-rail-${Math.random().toString(36).substring(2, 11)}`;
 }
 
-export function setBreakPoints( par :{
-  container: HTMLElement,
-  breakpoints: MotionRailBreakpoint[],
-  length: number,
+export function setBreakPoints(par: {
+  container: HTMLElement;
+  breakpoints: MotionRailBreakpoint[];
+  length: number;
 }) {
-
   const { container, breakpoints, length } = par;
-  const motionRailContainer = container.querySelector('.motion-rail-container') as HTMLElement;
-  if(!motionRailContainer) return;
+  const motionRailContainer = container.querySelector(
+    ".motion-rail-container",
+  ) as HTMLElement;
+  if (!motionRailContainer) return;
 
-  // give random css-safe container-name  
+  // give random css-safe container-name
   let randomName = "";
-  if(!container.style.containerName){
+  if (!motionRailContainer.style.containerName) {
     randomName = randomContainerName();
-    container.style.containerName = randomName;
-  }else{
-    randomName = container.style.containerName;
+    motionRailContainer.style.containerName = randomName;
+  } else {
+    randomName = motionRailContainer.style.containerName;
   }
 
   // setup container query
@@ -28,14 +29,15 @@ export function setBreakPoints( par :{
   let containerQueries = "";
 
   // Find the smallest width for base case max-width
-  const withWidth = breakpoints.filter(bp => bp.width);
-  const smallestWidth = withWidth.length > 0 ? Math.min(...withWidth.map(bp => bp.width!)) : null;
+  const withWidth = breakpoints.filter((bp) => bp.width);
+  const smallestWidth =
+    withWidth.length > 0 ? Math.min(...withWidth.map((bp) => bp.width!)) : null;
 
   breakpoints.forEach((bp) => {
     const columns = bp.columns || 1;
     const gapValue = bp.gap || "0px";
     const itemWidth = `calc((100cqw - (${columns - 1} * ${gapValue})) / ${columns})`;
-    
+
     let condition = "";
     if (bp.width) {
       condition = `(min-width: ${bp.width}px)`;
@@ -45,10 +47,10 @@ export function setBreakPoints( par :{
       // Single breakpoint with no width
       condition = `(min-width: 0px)`;
     }
-    
+
     containerQueries += `
       @container ${randomName} ${condition} {
-        .motion-rail-container {
+        .motion-rail-elements {
           grid-template-columns: repeat(${length}, ${itemWidth});
           gap: ${gapValue};
         }
@@ -57,7 +59,6 @@ export function setBreakPoints( par :{
   });
   styleElement.textContent = containerQueries;
   document.head.appendChild(styleElement);
-  
+
   return styleElement;
-  
 }
