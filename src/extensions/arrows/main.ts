@@ -2,8 +2,8 @@ import { MotionRail } from "../../motionrail";
 import type { MotionRailExtension, MotionRailState } from "../../motionrail";
 
 export function Arrows(par?: {
-  leftIcon: string;
-  rightIcon: string;
+  leftIcon?: string;
+  rightIcon?: string;
   loop?: boolean;
   log?: boolean;
 }): MotionRailExtension {
