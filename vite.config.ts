@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import solidPlugin from "vite-plugin-solid";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -9,6 +10,15 @@ const __dirname = dirname(__filename);
 const isUMD = process.env.BUILD_UMD === "true";
 
 export default defineConfig({
+  plugins: [
+    solidPlugin({
+      include: /solid\.tsx$/,
+    }),
+  ],
+  esbuild: {
+    jsx: "automatic",
+    jsxImportSource: undefined,
+  },
   build: {
     emptyOutDir: false,
     lib: isUMD
@@ -23,6 +33,8 @@ export default defineConfig({
       : {
           entry: {
             motionrail: resolve(__dirname, "src/motionrail.ts"),
+            react: resolve(__dirname, "src/react.tsx"),
+            solid: resolve(__dirname, "src/solid.tsx"),
             "extensions/arrows": resolve(
               __dirname,
               "src/extensions/arrows/main.ts",
@@ -53,6 +65,13 @@ export default defineConfig({
         },
     cssCodeSplit: true,
     rollupOptions: {
+      external: [
+        "react",
+        "react/jsx-runtime",
+        "solid-js",
+        "solid-js/web",
+        "solid-js/store",
+      ],
       output: {
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name || "";

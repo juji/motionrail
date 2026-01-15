@@ -1,27 +1,27 @@
 import { useEffect, useRef, type RefObject } from "react";
-import { MotionRail } from "./motionrail";
+import { MotionRail as MotionRailClass } from "./motionrail";
 import type { MotionRailOptions } from "./lib/types";
 
-export interface MotionRailReactProps extends React.HTMLAttributes<HTMLDivElement> {
-  ref?: RefObject<MotionRail>;
+export interface MotionRailProps extends React.HTMLAttributes<HTMLDivElement> {
+  ref?: RefObject<MotionRailClass>;
   divRef?: RefObject<HTMLDivElement>;
   options?: MotionRailOptions;
 }
 
-export function MotionRailReact({
+function MotionRailReact({
   options,
   ref,
   divRef,
   ...divProps
-}: MotionRailReactProps) {
+}: MotionRailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const motionRailRef = useRef<MotionRail | null>(null);
+  const motionRailRef = useRef<MotionRailClass | null>(null);
   const { children, ...restDivProps } = divProps || {};
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    motionRailRef.current = new MotionRail(containerRef.current, options || {});
+    motionRailRef.current = new MotionRailClass(containerRef.current, options || {});
     if (ref) {
       ref.current = motionRailRef.current;
     }
@@ -55,12 +55,12 @@ export function useMotionRail(
   ref: RefObject<HTMLElement>,
   options: MotionRailOptions = {},
 ) {
-  const motionRailRef = useRef<MotionRail | null>(null);
+  const motionRailRef = useRef<MotionRailClass | null>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
-    motionRailRef.current = new MotionRail(ref.current, options);
+    motionRailRef.current = new MotionRailClass(ref.current, options);
 
     return () => {
       if (motionRailRef.current) {
@@ -72,3 +72,5 @@ export function useMotionRail(
 
   return motionRailRef.current;
 }
+
+export { MotionRailReact as MotionRail };
