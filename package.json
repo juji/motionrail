@@ -1,6 +1,6 @@
 {
   "name": "motionrail",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "module": "./dist/motionrail.js",
   "types": "./dist/motionrail.d.ts",
