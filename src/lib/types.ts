@@ -1,11 +1,10 @@
-
 export type MotionRailBreakpoint = {
   width?: number;
   columns?: number;
   gap?: string;
 };
 
-export type MotioRailOptions = {
+export type MotionRailOptions = {
   autoplay?: boolean;
   resumeDelay?: number;
   delay?: number;
