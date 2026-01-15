@@ -406,9 +406,9 @@
         </div>
       </div>
 
-      <!-- BREAKING: Empty Carousel -->
+      <!-- Edge Case: Empty Carousel -->
       <div class="carousel-wrapper">
-        <h2>💥 BREAKING: Empty Carousel (No Items)</h2>
+        <h2>Edge Case: Empty Carousel (NOT BREAKING)</h2>
         <div class="motion-rail" id="carousel10">
           <div class="motion-rail-scrollable">
             <div class="motion-rail-grid">
@@ -459,9 +459,9 @@
         </div>
       </div>
 
-      <!-- BREAKING: Dynamic Content -->
+      <!-- Edge Case: Dynamic Content -->
       <div class="carousel-wrapper">
-        <h2>💥 BREAKING: Dynamic Content (Add/Remove Items)</h2>
+        <h2>Edge Case: Dynamic Content (Add/Remove Items - calls update())</h2>
         <div class="motion-rail" id="carousel13">
           <div class="motion-rail-scrollable">
             <div class="motion-rail-grid" id="carousel13-grid">
@@ -748,6 +748,7 @@
         newItem.className = "motion-rail-item";
         newItem.textContent = itemCounter++;
         grid.appendChild(newItem);
+        carousel13.update();
         console.log("Added item. Total items:", grid.children.length);
       };
 
@@ -755,6 +756,7 @@
         const grid = document.getElementById("carousel13-grid");
         if (grid.children.length > 0) {
           grid.removeChild(grid.lastChild);
+          carousel13.update();
           console.log("Removed item. Total items:", grid.children.length);
         }
       };

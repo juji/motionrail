@@ -401,6 +401,42 @@ export class MotionRail {
     return { ...this.state };
   }
 
+  update() {
+    // Disconnect existing intersection observer
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = null;
+    }
+
+    // Update total items count
+    this.state.totalItems = this.element.querySelectorAll(
+      ".motion-rail-grid > *",
+    ).length;
+
+    // Reset visible items state
+    this.state.visibleItemIndexes = [];
+    this.state.isFirstItemVisible = false;
+    this.state.isLastItemVisible = false;
+
+    // Re-apply breakpoints with new item count
+    setBreakPoints({
+      container: this.element,
+      breakpoints: this.breakpoints,
+      length: this.state.totalItems,
+    });
+
+    // Recache snap points with new items
+    this.cacheSnapPoints();
+
+    // Re-observe edge items
+    this.observeEdgeItems();
+
+    // Notify state change
+    if (this.onChange) {
+      this.onChange({ ...this.state });
+    }
+  }
+
   destroy() {
     if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
