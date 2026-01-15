@@ -275,6 +275,8 @@ export class MotionRail {
   }
 
   private attachPointerEvents() {
+    // only on pointer: fine
+    if (!window.matchMedia("(pointer: fine)").matches) return;
     this.scrollable.addEventListener("pointerdown", this.handlePointerDown);
     this.scrollable.addEventListener("pointermove", this.handlePointerMove);
     this.scrollable.addEventListener("pointerup", this.handlePointerUp);
