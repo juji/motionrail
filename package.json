@@ -16,6 +16,12 @@
       "types": "./dist/extensions/arrows/main.d.ts"
     },
     "./extensions/arrows/style.css": "./dist/extensions/arrows/style.css",
+    "./extensions/dots": {
+      "import": "./dist/extensions/dots.js",
+      "require": "./dist/extensions/dots.umd.cjs",
+      "types": "./dist/extensions/dots/main.d.ts"
+    },
+    "./extensions/dots/style.css": "./dist/extensions/dots/style.css",
     "./extensions/logger": {
       "import": "./dist/extensions/logger.js",
       "require": "./dist/extensions/logger.umd.cjs",
@@ -34,9 +40,10 @@
     "dev": "vite",
     "build": "npm run build:es && npm run build:umd",
     "build:es": "vite build && tsc",
-    "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:logger",
+    "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:dots && npm run build:umd:logger",
     "build:umd:main": "BUILD_UMD=true ENTRY_PATH=src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
     "build:umd:arrows": "BUILD_UMD=true ENTRY_PATH=src/extensions/arrows/main.ts LIB_NAME=MotionRailArrows FILE_NAME=extensions/arrows.umd vite build",
+    "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",
     "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
     "preview": "vite preview",
     "prepare": "husky"

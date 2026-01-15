@@ -31,6 +31,14 @@ export default defineConfig({
               __dirname,
               "src/extensions/arrows/style.css",
             ),
+            "extensions/dots": resolve(
+              __dirname,
+              "src/extensions/dots/main.ts",
+            ),
+            "extensions/dots/style": resolve(
+              __dirname,
+              "src/extensions/dots/style.css",
+            ),
             "extensions/logger": resolve(__dirname, "src/extensions/logger.ts"),
           },
           formats: ["es"],
@@ -45,6 +53,9 @@ export default defineConfig({
             // Route CSS based on content
             if (source.includes("motionrail-arrow")) {
               return "extensions/arrows/style.css";
+            }
+            if (source.includes("motionrail-dot")) {
+              return "extensions/dots/style.css";
             }
             return "style.css";
           }
