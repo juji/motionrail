@@ -15,7 +15,7 @@ export class MotionRail {
   private resumeDelay: number = 4000;
   private onChange?: (state: MotionRailState) => void;
 
-  private onChangeSystem = () => {
+  private handleStateChange = () => {
     this.extensions.forEach((ext) => {
       if (ext.onUpdate) {
         ext.onUpdate(this);
@@ -233,7 +233,7 @@ export class MotionRail {
         });
 
         if (stateChanged) {
-          this.onChangeSystem();
+          this.handleStateChange();
         }
       },
       {
@@ -524,7 +524,7 @@ export class MotionRail {
     this.observeEdgeItems();
 
     // Notify state change
-    this.onChangeSystem();
+    this.handleStateChange();
   }
 
   destroy() {
