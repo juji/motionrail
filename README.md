@@ -14,11 +14,27 @@ A lightweight, smooth carousel library with momentum-based scrolling, snap align
 - 🎨 **CSS Grid based** - Modern layout with customizable styling
 - 🪶 **Lightweight** - Zero dependencies, minimal bundle size
 - 🎮 **Full control API** - Programmatic navigation and playback control
+- 🧩 **Extension system** - Modular architecture with built-in extensions (Arrows, Logger)
 
 ## Installation
 
 ```bash
 npm install motionrail
+```
+
+## Quick Start
+
+```js
+import { MotionRail } from 'motionrail';
+import 'motionrail/style.css';
+
+const carousel = new MotionRail(document.getElementById('carousel'), {
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' },
+    { width: 1024, columns: 3, gap: '20px' }
+  ]
+});
 ```
 
 ## Usage
@@ -82,6 +98,7 @@ const carousel = new MotionRail(element, {
 | `resumeDelay` | `number` | `4000` | Time to resume autoplay after user interaction (milliseconds) |
 | `breakpoints` | `MotionRailBreakpoint[]` | `[{ columns: 1, gap: "0px" }]` | Array of responsive breakpoint configurations (optional) |
 | `onChange` | `(state: MotionRailState) => void` | `undefined` | Callback fired when carousel state changes (optional) |
+| `extensions` | `MotionRailExtension[]` | `[]` | Array of extension instances (optional) |
 
 ### Breakpoint Configuration
 
@@ -211,7 +228,160 @@ carousel.update();
 Clean up event listeners and timers.
 
 ```js
-carousel.destroy();
+car
+
+## Extensions
+
+MotionRail supports a modular extension system that allows you to add functionality without bloating the core library.
+
+### Built-in Extensions
+
+#### Arrow Navigation
+
+Add previous/next navigation arrows to your carousel.
+
+```js
+import { MotionRail } from 'motionrail';
+import { Arrows } from 'motionrail/extensions/arrows';
+import 'motionrail/style.css';
+import 'motionrail/extensions/arrows/style.css';
+
+const carousel = new MotionRail(element, {
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' }
+  ],
+  extensions: [
+    Arrows({
+      loop: true,              // Enable/disable arrows at edges (default: true)
+      leftIcon: '<svg>...</svg>',   // Custom left arrow HTML (optional)
+      rightIcon: '<svg>...</svg>',  // Custom right arrow HTML (optional)
+      log: false               // Enable console logging (default: false)
+    })
+  ]
+});
+```
+
+**Arrow Options:**
+- `loop` (boolean, default: `true`) - When `false`, arrows are disabled at carousel edges
+- `leftIcon` (string, optional) - HTML string for left arrow icon
+- `rightIcon` (string, optional) - HTML string for right arrow icon
+- `log` (boolean, default: `false`) - Enable debug logging
+
+**Features:**
+- Automatically hides when all items are visible
+- RTL-aware (swaps navigation direction)
+- Customizable icons (SVG or text)
+- Disabled state styling when `loop: false`
+
+#### Logger Extension
+
+Debug extension that logs lifecycle events to console.
+
+```js
+import { MotionRail } from 'motionrail';
+import { Logger } from 'motionrail/extensions/logger';
+
+const carousel = new MotionRail(element, {
+  extensions: [Logger()]
+});
+```
+
+Logs:
+- Initialization with initial state
+- State updates on scroll/resize
+- Destruction cleanup
+
+### Creating Custom Extensions
+
+Extensions follow a simple lifecycle API:
+
+```typescript
+interface MotionRailExtension {
+  name: string;
+  onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
+}
+```
+
+**Example - Custom Page Indicator:**
+
+```js
+function PageIndicator() {
+  let indicators;
+  
+  return {
+    name: "PageIndicator",
+    
+    onInit(motionRail, state) {
+      // Create indicator dots
+      indicators = document.createElement('div');
+      indicators.className = 'carousel-indicators';
+      
+      for (let i = 0; i < state.totalItems; i++) {
+        const dot = document.createElement('button');
+        dot.addEventListener('click', () => motionRail.scrollToIndex(i));
+        indicators.appendChild(dot);
+      }
+      
+      motionRail.element.appendChild(indicators);
+    },
+    
+    onUpdate(motionRail, state) {
+      // Update active indicator
+      const dots = indicators.querySelectorAll('button');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', state.visibleItemIndexes.includes(i));
+      });
+    },
+    
+    onDestroy() {
+      // Clean up
+      indicators.remove();
+    }
+  };
+}
+
+// Use it
+const carousel = new MotionRail(element, {
+  extensions: [PageIndicator()]
+});
+```
+
+**Lifecycle Hooks:**
+- `onInit(motionRail, state)` - Called once when carousel initializes
+- `onUpdate(motionRail, state)` - Called whenever carousel state changes
+- `onDestroy(motionRail, state)` - Called when carousel is destroyed
+
+**Extension State Access:**
+Both hooks receive:
+- `motionRail` - Full API access (methods, element, getOptions())
+- `state` - Current carousel state (totalItems, visibleItemIndexes, etc.)
+
+## UMD/CommonJS Usage
+
+For non-module environments or CommonJS:
+
+```html
+<script src="node_modules/motionrail/dist/motionrail.umd.cjs"></script>
+<script src="node_modules/motionrail/dist/extensions/arrows.umd.cjs"></script>
+<link rel="stylesheet" href="node_modules/motionrail/dist/style.css">
+<link rel="stylesheet" href="node_modules/motionrail/dist/extensions/arrows/style.css">
+
+<script>
+  const carousel = new MotionRail.MotionRail(element, {
+    extensions: [MotionRailArrows.Arrows()]
+  });
+</script>
+```
+
+Or with CommonJS:
+
+```js
+const { MotionRail } = require('motionrail');
+const { Arrows } = require('motionrail/extensions/arrows');
+```ousel.destroy();
 ```
 
 ## Examples
