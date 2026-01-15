@@ -16,14 +16,15 @@ export class MotionRail {
   private onChange?: (state: MotionRailState) => void;
 
   private handleStateChange = () => {
+    const state = this.getState();
     this.extensions.forEach((ext) => {
       if (ext.onUpdate) {
-        ext.onUpdate(this);
+        ext.onUpdate(this, state);
       }
     });
 
     if (this.onChange) {
-      this.onChange({ ...this.state });
+      this.onChange(state);
     }
   };
 
@@ -85,9 +86,10 @@ export class MotionRail {
     this.observeEdgeItems();
     if (this.autoplay) this.play();
 
+    const state = this.getState();
     this.extensions.forEach((ext) => {
       if (ext.onInit) {
-        ext.onInit(this);
+        ext.onInit(this, state);
       }
     });
   }
@@ -484,7 +486,10 @@ export class MotionRail {
   }
 
   getState() {
-    return { ...this.state };
+    return {
+      ...this.state,
+      visibleItemIndexes: [...this.state.visibleItemIndexes],
+    };
   }
 
   getOptions() {
@@ -528,6 +533,13 @@ export class MotionRail {
   }
 
   destroy() {
+    const state = this.getState();
+    this.extensions.forEach((ext) => {
+      if (ext.onDestroy) {
+        ext.onDestroy(this, state);
+      }
+    });
+
     if (this.autoPlayIntervalId) {
       clearInterval(this.autoPlayIntervalId);
       this.autoPlayIntervalId = null;

@@ -25,7 +25,7 @@ export type MotionRailOptions = {
 
 export type MotionRailExtension = {
   name: string;
-  onInit?: (motionRail: MotionRail) => void;
-  onUpdate?: (motionRail: MotionRail) => void;
-  onDestroy?: (motionRail: MotionRail) => void;
+  onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
 };
