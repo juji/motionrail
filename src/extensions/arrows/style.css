@@ -1,3 +1,8 @@
+.motionrail-arrow[disabled] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .motionrail-arrow-left,
 .motionrail-arrow-right {
   background: rgba(0, 0, 0, 0.5);
