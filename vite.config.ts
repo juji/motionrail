@@ -52,12 +52,7 @@ export default defineConfig({
         },
         entryFileNames: (chunkInfo) => {
           if (isUMD) {
-            // UMD builds
             return process.env.FILE_NAME + ".cjs";
-          }
-          // ES builds - skip JS output for CSS-only entries
-          if (chunkInfo.name.includes("style")) {
-            return "skip-[name].js";
           }
           return "[name].js";
         },
