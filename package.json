@@ -41,6 +41,14 @@
       "import": "./dist/solid.js",
       "types": "./dist/solid.d.ts"
     },
+    "./vue": {
+      "import": "./dist/vue.js",
+      "types": "./dist/vue.d.ts"
+    },
+    "./svelte": {
+      "import": "./dist/svelte.js",
+      "types": "./dist/svelte.d.ts"
+    },
     "./style.css": "./dist/style.css"
   },
   "files": [
@@ -69,8 +77,10 @@
     ]
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@types/node": "^25.0.8",
     "@types/react": "^19.2.8",
+    "@vitejs/plugin-vue": "^6.0.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
@@ -83,6 +93,8 @@
   },
   "peerDependencies": {
     "react": "^19.2.3",
-    "solid-js": "^1.9.10"
+    "solid-js": "^1.9.10",
+    "vue": "^3.5.13",
+    "svelte": "^5.19.2"
   }
 }

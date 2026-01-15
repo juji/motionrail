@@ -3,6 +3,8 @@ import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import solidPlugin from "vite-plugin-solid";
+import vuePlugin from "@vitejs/plugin-vue";
+import { svelte as sveltePlugin } from "@sveltejs/vite-plugin-svelte";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -13,6 +15,12 @@ export default defineConfig({
   plugins: [
     solidPlugin({
       include: /solid\.tsx$/,
+    }),
+    vuePlugin({
+      include: /vue\.vue$/,
+    }),
+    sveltePlugin({
+      include: /svelte\.svelte$/,
     }),
   ],
   esbuild: {
@@ -35,6 +43,8 @@ export default defineConfig({
             motionrail: resolve(__dirname, "src/motionrail.ts"),
             react: resolve(__dirname, "src/react.tsx"),
             solid: resolve(__dirname, "src/solid.tsx"),
+            vue: resolve(__dirname, "src/vue.vue"),
+            svelte: resolve(__dirname, "src/svelte.svelte"),
             "extensions/arrows": resolve(
               __dirname,
               "src/extensions/arrows/main.ts",
@@ -71,6 +81,9 @@ export default defineConfig({
         "solid-js",
         "solid-js/web",
         "solid-js/store",
+        "vue",
+        "svelte",
+        "svelte/internal",
       ],
       output: {
         assetFileNames: (assetInfo) => {
