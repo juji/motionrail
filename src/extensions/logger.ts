@@ -1,7 +1,7 @@
 import { MotionRail } from "../motionrail";
 import type { MotionRailExtension, MotionRailState } from "../motionrail";
 
-export function LoggerExtension(): MotionRailExtension {
+export function Logger(): MotionRailExtension {
   return {
     name: "LoggerExtension",
     onInit(motionRail: MotionRail, state: MotionRailState) {

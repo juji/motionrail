@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { copyFileSync, mkdirSync } from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,25 +19,23 @@ export default defineConfig({
       },
       formats: ["es"],
     },
+    cssCodeSplit: true,
     rollupOptions: {
       output: {
-        assetFileNames: "style.css",
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name && assetInfo.name.endsWith(".css")) {
+            const source = assetInfo.source?.toString() || "";
+            // Arrows extension CSS
+            if (source.includes("motionrail-arrow")) {
+              return "extensions/arrows/style.css";
+            }
+            // Main library CSS
+            return "style.css";
+          }
+          return "[name][extname]";
+        },
         entryFileNames: "[name].js",
       },
     },
   },
-  plugins: [
-    {
-      name: "copy-extension-styles",
-      closeBundle() {
-        mkdirSync(resolve(__dirname, "dist/extensions/arrows"), {
-          recursive: true,
-        });
-        copyFileSync(
-          resolve(__dirname, "src/extensions/arrows/style.css"),
-          resolve(__dirname, "dist/extensions/arrows/style.css"),
-        );
-      },
-    },
-  ],
 });
