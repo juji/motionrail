@@ -7,7 +7,7 @@ MotionRail provides a first-class Vue 3 component (SFC) with full TypeScript sup
 
 ```vue
 <script setup>
-import { MotionRail } from 'motionrail/vue';
+import MotionRail from 'motionrail/vue';
 import 'motionrail/style.css';
 
 const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
@@ -58,7 +58,7 @@ Use template refs to access the MotionRail instance and container:
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import MotionRail from 'motionrail/vue';
 
 const carouselRef = ref(null);
 
@@ -118,7 +118,7 @@ onMounted(() => {
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import MotionRail from 'motionrail/vue';
 import 'motionrail/style.css';
 
 const carouselRef = ref(null);
@@ -190,7 +190,7 @@ The Vue component automatically calls `update()` when slot content changes:
 ```vue
 <script setup>
 import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import MotionRail from 'motionrail/vue';
 
 const items = ref(['Item 1', 'Item 2', 'Item 3']);
 // Define options in script setup to avoid inline object creation
@@ -226,7 +226,7 @@ Full TypeScript support with `<script setup lang="ts">`:
 ```vue
 <script setup lang="ts">
 import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import MotionRail from 'motionrail/vue';
 import type { MotionRailOptions, MotionRailState } from 'motionrail';
 
 const carouselRef = ref<{ instance: any; container: HTMLDivElement } | null>(null);

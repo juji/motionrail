@@ -1,25 +1,18 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
-import { MotionRail } from 'motionrail';
+import MotionRail from 'motionrail/vue';
 import { Arrows } from 'motionrail/extensions/arrows';
 import { Thumbnails } from 'motionrail/extensions/thumbnails';
 import 'motionrail/style.css';
 import 'motionrail/extensions/arrows/style.css';
 import 'motionrail/extensions/thumbnails/style.css';
 
-const heroDemo = ref<HTMLDivElement>();
-
-onMounted(() => {
-  if (heroDemo.value) {
-    new MotionRail(heroDemo.value, {
-      autoplay: true,
-      extensions: [
-        Arrows(),
-        Thumbnails({ thumbnailHeight: 60 }),
-      ],
-    });
-  }
-});
+const options = {
+  autoplay: true,
+  extensions: [
+    Arrows(),
+    Thumbnails({ thumbnailHeight: 60 }),
+  ],
+};
 </script>
 
 <template>
@@ -37,21 +30,17 @@ onMounted(() => {
           </div>
         </div>
         <div class="hero-demo">
-          <div data-motionrail ref="heroDemo">
-            <div data-motionrail-scrollable>
-              <div data-motionrail-grid>
-                <div class="demo-slide">
-                  <img src="https://picsum.photos/seed/motionrail1/600/400" alt="Demo 1">
-                </div>
-                <div class="demo-slide">
-                  <img src="https://picsum.photos/seed/motionrail2/600/400" alt="Demo 2">
-                </div>
-                <div class="demo-slide">
-                  <img src="https://picsum.photos/seed/motionrail3/600/400" alt="Demo 3">
-                </div>
-              </div>
+          <MotionRail :options="options">
+            <div class="demo-slide">
+              <img src="https://picsum.photos/seed/motionrail1/600/400" alt="Demo 1">
             </div>
-          </div>
+            <div class="demo-slide">
+              <img src="https://picsum.photos/seed/motionrail2/600/400" alt="Demo 2">
+            </div>
+            <div class="demo-slide">
+              <img src="https://picsum.photos/seed/motionrail3/600/400" alt="Demo 3">
+            </div>
+          </MotionRail>
         </div>
       </div>
     </div>
