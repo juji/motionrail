@@ -2,12 +2,6 @@
 
 Add previous/next navigation arrows to your carousel.
 
-## Installation
-
-```bash
-npm install motionrail
-```
-
 ## Usage
 
 ```js

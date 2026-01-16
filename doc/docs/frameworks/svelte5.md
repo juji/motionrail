@@ -2,12 +2,6 @@
 
 MotionRail provides a Svelte 5 component optimized for the modern runes syntax.
 
-## Installation
-
-```bash
-npm install motionrail
-```
-
 ## Basic Usage
 
 ```svelte

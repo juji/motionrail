@@ -2,12 +2,6 @@
 
 Debug extension for logging carousel state and events.
 
-## Installation
-
-```bash
-npm install motionrail
-```
-
 ## Usage
 
 ```js

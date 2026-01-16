@@ -2,12 +2,6 @@
 
 Add pagination dots indicator to your carousel.
 
-## Installation
-
-```bash
-npm install motionrail
-```
-
 ## Usage
 
 ```js
