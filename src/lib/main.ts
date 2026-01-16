@@ -6,8 +6,8 @@ import type {
 } from "./types";
 
 export class MotionRail {
-  element: HTMLElement;
-  scrollable: HTMLElement;
+  readonly element: HTMLElement;
+  readonly scrollable: HTMLElement;
 
   private rtl: boolean = false;
   private autoplay: boolean = false;

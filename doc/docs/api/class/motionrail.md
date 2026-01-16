@@ -32,20 +32,44 @@ const carousel = new MotionRail(
 );
 ```
 
-**Destructured Usage:**
+## Properties
+
+### `element`
+
+The root HTML element that wraps the carousel.
+
+- **Type:** `HTMLElement`
+- **Readonly:** Yes (enforced in TypeScript only)
+
 ```ts
-const {
-  play,
-  pause,
-  next,
-  prev,
-  scrollToIndex,
-  getState,
-  getOptions,
-  update,
-  destroy
-} = new MotionRail(element, options)
+const carousel = new MotionRail(document.getElementById('carousel'));
+console.log(carousel.element);  // <div id="carousel">...</div>
 ```
+
+::: warning
+Do not modify this property directly. It is managed internally by the carousel.
+:::
+
+---
+
+### `scrollable`
+
+The scrollable container element (the element with `data-motionrail-scrollable` attribute).
+
+- **Type:** `HTMLElement`
+- **Readonly:** Yes (enforced in TypeScript only)
+
+```ts
+const carousel = new MotionRail(document.getElementById('carousel'));
+console.log(carousel.scrollable);  // <div data-motionrail-scrollable>...</div>
+
+// You can read scroll position
+console.log(carousel.scrollable.scrollLeft);
+```
+
+::: warning
+Do not modify this property directly. It is managed internally by the carousel.
+:::
 
 ## Methods
 

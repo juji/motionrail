@@ -6,6 +6,8 @@ export default defineConfig({
   description: "A lightweight carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    outline: [2, 4],  // Show h2, h3, and h4 in "On this page" navigation
+    
     nav: [
       { text: 'Home', link: '/' },
       { text: 'Docs', link: '/docs/' }
