@@ -18,6 +18,20 @@ Create the carousel HTML structure with the required data attributes:
     </div>
   </div>
 </div>
+<style>
+#carousel [data-motionrail-grid] > div {
+  background: #f0f0f0;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  height: 200px; /* YOU set the height, however you want */
+}
+</style>
 ```
 
 **Structure layers:**
@@ -38,13 +52,27 @@ import 'motionrail/style.css';
 import { MotionRail } from 'motionrail';
 
 const carousel = new MotionRail(document.getElementById('carousel'), {
+  autoplay: true,
   breakpoints: [
-    { columns: 1, gap: '16px' },                    // Mobile (default)
-    { width: 768, columns: 2, gap: '16px' },        // Tablet
-    { width: 1024, columns: 3, gap: '20px' }        // Desktop
+    { columns: 1, gap: '16px' },
+    { width: 400, columns: 2, gap: '16px' },
+    { width: 600, columns: 3, gap: '20px' }
   ]
 });
 ```
+
+<script setup>
+  import BasicExample from '../.vitepress/components/BasicExample.vue'
+import ResizableContainer from '../.vitepress/components/ResizableContainer.vue'
+</script>
+
+### Result
+
+**Try it yourself:** Drag the left or right edge to resize the container and see how the carousel responds to different breakpoints.
+
+<ResizableContainer>
+  <BasicExample />
+</ResizableContainer>
 
 ## With Autoplay
 
