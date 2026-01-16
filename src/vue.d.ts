@@ -5,9 +5,9 @@ export interface VueProps {
   options?: MotionRailOptions;
 }
 
-export interface VueEmits {
-  (e: "mounted", instance: any, container: HTMLElement): void;
-}
+export type VueEmits = {
+  mounted: (instance: any, container: HTMLElement) => void;
+};
 
 declare const Vue: DefineComponent<VueProps, {}, {}, {}, {}, {}, {}, VueEmits>;
 export default Vue;
