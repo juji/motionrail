@@ -10,7 +10,10 @@ interface Props {
 }
 declare const Svelte5: import("svelte").Component<
   Props,
-  {},
+  {
+    getInstance: () => MotionRailClass | null;
+    getContainer: () => HTMLDivElement | undefined;
+  },
   "instance" | "container"
 >;
 type Svelte5 = ReturnType<typeof Svelte5>;

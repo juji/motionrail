@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref, watch, useSlots } from "vue";
-import { MotionRail as MotionRailClass } from "./motionrail";
-import type { MotionRailOptions } from "./lib/types";
+import { MotionRail as MotionRailClass } from "../motionrail";
+import type { MotionRailOptions } from "../lib/types";
 
 interface Props {
   options?: MotionRailOptions;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
-  import { MotionRail as MotionRailClass } from "./motionrail";
-  import type { MotionRailOptions } from "./lib/types";
+  import { MotionRail as MotionRailClass } from "../motionrail";
+  import type { MotionRailOptions } from "../lib/types";
 
   interface Props {
     options?: MotionRailOptions;

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
-  import { MotionRail as MotionRailClass } from "./motionrail";
-  import type { MotionRailOptions } from "./lib/types";
+  import { MotionRail as MotionRailClass } from "../motionrail";
+  import type { MotionRailOptions } from "../lib/types";
 
   export let options: MotionRailOptions = {};
   export let instance: MotionRailClass | null = null;

@@ -5,6 +5,7 @@ import { dirname } from "path";
 import solidPlugin from "vite-plugin-solid";
 import vuePlugin from "@vitejs/plugin-vue";
 import { svelte as sveltePlugin } from "@sveltejs/vite-plugin-svelte";
+import dts from "vite-plugin-dts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -19,9 +20,13 @@ export default defineConfig({
     vuePlugin({
       include: /vue\.vue$/,
     }),
-    sveltePlugin({
-      include: /svelte5?\.svelte$/,
-    }),
+    sveltePlugin(),
+    !isUMD &&
+      dts({
+        include: ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+        exclude: ["src/**/*.svelte"],
+        rollupTypes: true,
+      }),
   ],
   build: {
     emptyOutDir: !isUMD,
@@ -39,9 +44,9 @@ export default defineConfig({
             motionrail: resolve(__dirname, "src/motionrail.ts"),
             react: resolve(__dirname, "src/react.tsx"),
             solid: resolve(__dirname, "src/solid.tsx"),
-            vue: resolve(__dirname, "src/vue.vue"),
-            svelte: resolve(__dirname, "src/svelte.svelte"),
-            svelte5: resolve(__dirname, "src/svelte5.svelte"),
+            vue: resolve(__dirname, "src/vue/index.ts"),
+            // svelte: resolve(__dirname, "src/svelte.svelte"),
+            // svelte5: resolve(__dirname, "src/svelte5.svelte"),
             "extensions/arrows": resolve(
               __dirname,
               "src/extensions/arrows/main.ts",
@@ -81,14 +86,14 @@ export default defineConfig({
         "solid-js/store",
         "vue",
         "svelte",
-        "svelte/internal",
-        "svelte/internal/client",
-        "svelte/internal/server",
-        "svelte/store",
-        "svelte/motion",
-        "svelte/transition",
-        "svelte/animate",
-        "svelte/easing",
+        // "svelte/internal",
+        // "svelte/internal/client",
+        // "svelte/internal/server",
+        // "svelte/store",
+        // "svelte/motion",
+        // "svelte/transition",
+        // "svelte/animate",
+        // "svelte/easing",
       ],
       output: {
         manualChunks: (id) => {

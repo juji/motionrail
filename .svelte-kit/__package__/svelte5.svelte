@@ -32,6 +32,14 @@
     container = containerRef;
   });
 
+  export function getInstance(): MotionRailClass | null {
+    return motionRailInstance;
+  }
+
+  export function getContainer(): HTMLDivElement | undefined {
+    return containerRef;
+  }
+
   onMount(() => {
     if (!containerRef) return;
 

@@ -86,15 +86,17 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:es && npm run build:umd && npm run copy:types",
-    "build:es": "vite build && tsc",
+    "build": "npm run build:es && npm run build:svelte && npm run build:svelte5 && npm run build:umd",
+    "build:es": "vite build",
+    "build:svelte": "svelte-package -i src/svelte -o dist/svelte",
+    "build:svelte5": "svelte-package -i src/svelte5 -o dist/svelte5",
     "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:dots && npm run build:umd:thumbnails && npm run build:umd:logger",
     "build:umd:main": "BUILD_UMD=true ENTRY_PATH=src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
     "build:umd:arrows": "BUILD_UMD=true ENTRY_PATH=src/extensions/arrows/main.ts LIB_NAME=MotionRailArrows FILE_NAME=extensions/arrows.umd vite build",
     "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",
     "build:umd:thumbnails": "BUILD_UMD=true ENTRY_PATH=src/extensions/thumbnails/main.ts LIB_NAME=MotionRailThumbnails FILE_NAME=extensions/thumbnails.umd vite build",
     "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
-    "copy:types": "cpr src/svelte.d.ts dist/svelte.d.ts -o && cpr src/svelte5.d.ts dist/svelte5.d.ts -o && cpr src/vue.d.ts dist/vue.d.ts -o",
+    "copy:types": "cpr src/svelte/svelte.d.ts dist/svelte.d.ts -o && cpr src/svelte5/svelte5.d.ts dist/svelte5.d.ts -o",
     "preview": "vite preview",
     "prepare": "husky"
   },
@@ -104,6 +106,7 @@
     ]
   },
   "devDependencies": {
+    "@sveltejs/package": "^2.5.7",
     "@sveltejs/vite-plugin-svelte": "^6.2.4",
     "@types/node": "^25.0.8",
     "@types/react": "^19.2.8",
@@ -114,6 +117,7 @@
     "prettier": "^3.7.4",
     "typescript": "~5.9.3",
     "vite": "npm:rolldown-vite@7.2.5",
+    "vite-plugin-dts": "^4.5.4",
     "vite-plugin-solid": "^2.11.10"
   },
   "overrides": {
