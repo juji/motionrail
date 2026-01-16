@@ -34,6 +34,17 @@ Show item index numbers inside each dot.
 Dots({ showIndex: true })
 ```
 
+### `dotSize`
+
+- **Type**: `number`
+- **Default**: `44`
+
+Size of each dot in pixels (controls the clickable area).
+
+```js
+Dots({ dotSize: 36 })
+```
+
 ### `log`
 
 - **Type**: `boolean`
