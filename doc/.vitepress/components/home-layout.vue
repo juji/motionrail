@@ -1,18 +1,5 @@
 <script setup lang="ts">
-import MotionRail from 'motionrail/vue';
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Thumbnails } from 'motionrail/extensions/thumbnails';
-import 'motionrail/style.css';
-import 'motionrail/extensions/arrows/style.css';
-import 'motionrail/extensions/thumbnails/style.css';
-
-const options = {
-  autoplay: true,
-  extensions: [
-    Arrows(),
-    Thumbnails({ thumbnailHeight: 60 }),
-  ],
-};
+import HeroMotionRail from './hero-motionrail.vue';
 </script>
 
 <template>
@@ -30,17 +17,7 @@ const options = {
           </div>
         </div>
         <div class="hero-demo">
-          <MotionRail :options="options">
-            <div class="demo-slide">
-              <img src="https://picsum.photos/seed/motionrail1/600/400" alt="Demo 1">
-            </div>
-            <div class="demo-slide">
-              <img src="https://picsum.photos/seed/motionrail2/600/400" alt="Demo 2">
-            </div>
-            <div class="demo-slide">
-              <img src="https://picsum.photos/seed/motionrail3/600/400" alt="Demo 3">
-            </div>
-          </MotionRail>
+          <HeroMotionRail />
         </div>
       </div>
     </div>
@@ -83,29 +60,6 @@ const options = {
   width: 100%;
   /* max-width: 500px; */
   margin: 0 auto;
-}
-
-.demo-slide {
-  width: 100%;
-  height: 300px;
-  background: var(--vp-c-bg-soft);
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.demo-slide.centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 32px;
-  font-weight: 600;
-  color: var(--vp-c-text-1);
-}
-
-.demo-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 @media screen and (min-width: 1024px) {
