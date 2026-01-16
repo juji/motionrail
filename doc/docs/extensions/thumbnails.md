@@ -152,6 +152,17 @@ The extension applies the following default styles:
     black calc(100% - 12px),
     transparent 100%
   );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 12px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+}
+
+.motionrail-thumbnails::-webkit-scrollbar {
+  display: none;
 }
 
 .motionrail-thumbnail {

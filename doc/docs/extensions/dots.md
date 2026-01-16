@@ -31,7 +31,7 @@ Dots({ showIndex: true })
 ### `dotSize`
 
 - **Type**: `number`
-- **Default**: `44`
+- **Default**: `34`
 
 Size of each dot in pixels (controls the clickable area).
 
@@ -42,7 +42,7 @@ Dots({ dotSize: 36 })
 ### `fontSize`
 
 - **Type**: `number`
-- **Default**: `14`
+- **Default**: `12`
 
 Font size in pixels for the index numbers (when `showIndex: true`).
 
@@ -119,6 +119,8 @@ The extension applies the following default styles:
 
 ```css
 .motionrail-dots {
+  --dot-size: 34px;
+  --dot-font-size: 12px;
   display: flex;
   gap: 8px;
   padding: 8px 12px;
@@ -139,11 +141,20 @@ The extension applies the following default styles:
     black calc(100% - 12px),
     transparent 100%
   );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 12px,
+    black calc(100% - 12px),
+    transparent 100%
+  );
+}
+
+.motionrail-dots::-webkit-scrollbar {
+  display: none;
 }
 
 .motionrail-dot {
-  --dot-size: 44px;
-  --dot-font-size: 14px;
   min-width: var(--dot-size);
   min-height: var(--dot-size);
   width: var(--dot-size);
@@ -184,8 +195,6 @@ The extension applies the following default styles:
 ```
 
 **Customization Tips:**
-- Override `--dot-size` CSS variable to change dot dimensions
-- Override `--dot-font-size` CSS variable to change index number size
 - Modify `background`, `border`, and `color` for different themes
 - Adjust `gap` and `padding` on `.motionrail-dots` for spacing
 - Change `mask-image` gradient values to adjust edge fade effect
