@@ -51,7 +51,8 @@ Create the carousel HTML structure with the required data attributes:
 import { MotionRail } from 'motionrail';
 import 'motionrail/style.css';
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const element = document.getElementById('carousel')
+const carousel = new MotionRail(element, {
 
   // set autoplay true for this example
   autoplay: true,
