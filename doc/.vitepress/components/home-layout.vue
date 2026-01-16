@@ -12,6 +12,7 @@ const heroDemo = ref<HTMLDivElement>();
 onMounted(() => {
   if (heroDemo.value) {
     new MotionRail(heroDemo.value, {
+      autoplay: true,
       extensions: [
         Arrows(),
         Thumbnails({ thumbnailHeight: 60 }),
