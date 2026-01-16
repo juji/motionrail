@@ -1,7 +1,7 @@
 {
   "name": "motionrail",
   "version": "0.2.0",
-  "description": "A lightweight carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints",
+  "description": "A lightweight carousel library for modern web applications",
   "type": "module",
   "module": "./dist/motionrail.js",
   "types": "./dist/motionrail.d.ts",

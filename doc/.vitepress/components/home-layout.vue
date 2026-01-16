@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeroSection from './hero-section.vue';
+import HomeExtensionsSection from './home-extensions-section.vue';
 import HomeRtlSection from './home-rtl-section.vue';
 import HomeBreakpointsSection from './home-breakpoints-section.vue';
 </script>
@@ -7,6 +8,7 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
 <template>
   <div class="home-layout">
     <HeroSection />
+    <HomeExtensionsSection />
     <HomeRtlSection />
     <HomeBreakpointsSection />
   </div>
