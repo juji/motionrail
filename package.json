@@ -65,7 +65,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:es && npm run build:umd",
+    "build": "npm run build:es && npm run build:umd && npm run copy:types",
     "build:es": "vite build && tsc",
     "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:dots && npm run build:umd:thumbnails && npm run build:umd:logger",
     "build:umd:main": "BUILD_UMD=true ENTRY_PATH=src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
@@ -73,6 +73,7 @@
     "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",
     "build:umd:thumbnails": "BUILD_UMD=true ENTRY_PATH=src/extensions/thumbnails/main.ts LIB_NAME=MotionRailThumbnails FILE_NAME=extensions/thumbnails.umd vite build",
     "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
+    "copy:types": "node scripts/copy-types.js",
     "preview": "vite preview",
     "prepare": "husky"
   },
