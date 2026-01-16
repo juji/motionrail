@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HeroMotionRail from './hero-motionrail.vue';
+import HomeRtlSection from './home-rtl-section.vue';
 </script>
 
 <template>
@@ -21,6 +22,8 @@ import HeroMotionRail from './hero-motionrail.vue';
         </div>
       </div>
     </div>
+
+    <HomeRtlSection />
   </div>
 </template>
 
