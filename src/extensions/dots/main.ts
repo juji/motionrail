@@ -11,8 +11,8 @@ export function Dots(par?: {
   const dots: HTMLButtonElement[] = [];
   const {
     showIndex = false,
-    dotSize = 44,
-    fontSize = 14,
+    dotSize = 34,
+    fontSize = 12,
     log = false,
   } = par || {};
 

@@ -1,4 +1,6 @@
 .motionrail-dots {
+  --dot-size: 34px;
+  --dot-font-size: 12px;
   display: flex;
   gap: 8px;
   padding: 8px 12px;
@@ -33,8 +35,6 @@
 }
 
 .motionrail-dot {
-  --dot-size: 44px;
-  --dot-font-size: 14px;
   min-width: var(--dot-size);
   min-height: var(--dot-size);
   width: var(--dot-size);

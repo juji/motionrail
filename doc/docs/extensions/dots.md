@@ -31,7 +31,7 @@ Dots({ showIndex: true })
 ### `dotSize`
 
 - **Type**: `number`
-- **Default**: `44`
+- **Default**: `34`
 
 Size of each dot in pixels (controls the clickable area).
 
@@ -42,7 +42,7 @@ Dots({ dotSize: 36 })
 ### `fontSize`
 
 - **Type**: `number`
-- **Default**: `14`
+- **Default**: `12`
 
 Font size in pixels for the index numbers (when `showIndex: true`).
 
@@ -80,6 +80,31 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 });
 ```
 
+### UMD (CDN)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/dots/style.css">
+
+<div data-motionrail id="carousel">
+  <!-- carousel items -->
+</div>
+
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/dist/extensions/dots.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' }
+    ],
+    extensions: [
+      MotionRailDots({ showIndex: true })
+    ]
+  });
+</script>
+```
+
 ## Features
 
 - **Clickable**: Click any dot to jump to that item
@@ -90,81 +115,7 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 
 ## Styling
 
-The extension applies the following default styles:
-
-```css
-.motionrail-dots {
-  display: flex;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.3);
-  border-radius: 24px;
-  z-index: 10;
-  max-width: calc(100% - 32px);
-  margin: 16px auto 0;
-  width: fit-content;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  position: relative;
-  mask-image: linear-gradient(
-    to right,
-    transparent 0,
-    black 12px,
-    black calc(100% - 12px),
-    transparent 100%
-  );
-}
-
-.motionrail-dot {
-  --dot-size: 44px;
-  --dot-font-size: 14px;
-  min-width: var(--dot-size);
-  min-height: var(--dot-size);
-  width: var(--dot-size);
-  height: var(--dot-size);
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
-  cursor: pointer;
-  font-size: var(--dot-font-size);
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  flex-shrink: 0;
-}
-
-.motionrail-dot:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.8);
-  scale: 1.1;
-}
-
-.motionrail-dot:active {
-  scale: 0.95;
-}
-
-.motionrail-dot-active {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: white;
-  color: #000;
-}
-
-.motionrail-dot-active:hover {
-  background: white;
-}
-```
-
-**Customization Tips:**
-- Override `--dot-size` CSS variable to change dot dimensions
-- Override `--dot-font-size` CSS variable to change index number size
-- Modify `background`, `border`, and `color` for different themes
-- Adjust `gap` and `padding` on `.motionrail-dots` for spacing
-- Change `mask-image` gradient values to adjust edge fade effect
-- Update `transition` and hover `scale` for different animation effects
+View the default styles: [/src/extensions/dots/style.css](https://github.com/juji/motionrail/blob/main/src/extensions/dots/style.css)
 
 ## Behavior
 

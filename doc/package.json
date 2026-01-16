@@ -17,6 +17,6 @@
     "vitepress": "2.0.0-alpha.15"
   },
   "dependencies": {
-    "motionrail": "^0.1.3"
+    "motionrail": "^0.3.0"
   }
 }

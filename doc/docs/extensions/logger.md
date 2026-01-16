@@ -85,6 +85,30 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 });
 ```
 
+### UMD (CDN)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+
+<div data-motionrail id="carousel">
+  <!-- carousel items -->
+</div>
+
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/dist/extensions/logger.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    autoplay: true,
+    delay: 3000,
+    breakpoints: [
+      { minWidth: '0px', columns: 1 },
+      { minWidth: '768px', columns: 2 }
+    ],
+    extensions: [MotionRailLogger()]
+  });
+</script>
+```
+
 ## When to Use
 
 ### Development
