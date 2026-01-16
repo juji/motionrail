@@ -198,6 +198,8 @@ import { ref } from 'vue';
 import { MotionRail } from 'motionrail/vue';
 
 const items = ref(['Item 1', 'Item 2', 'Item 3']);
+// Define options in script setup to avoid inline object creation
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
 
 const addItem = () => {
   items.value.push(`Item ${items.value.length + 1}`);
@@ -210,7 +212,7 @@ const removeItem = () => {
 
 <template>
   <div>
-    <MotionRail :options="{ breakpoints: [{ columns: 3, gap: '20px' }] }">
+    <MotionRail :options="options">
       <div v-for="(item, index) in items" :key="index">
         {{ item }}
       </div>
