@@ -304,7 +304,8 @@ new MotionRail(element, {
 Full type definitions:
 
 ```ts
-import type { MotionRail, MotionRailState, MotionRailExtension } from 'motionrail';
+import { MotionRail } from 'motionrail';
+import type { MotionRailState, MotionRailExtension } from 'motionrail';
 
 function MyExtension(): MotionRailExtension {
   let element: HTMLElement | null = null;

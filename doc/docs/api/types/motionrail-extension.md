@@ -280,7 +280,8 @@ const stateSync: MotionRailExtension = {
 Full TypeScript support with type checking:
 
 ```ts
-import type { MotionRailExtension, MotionRail, MotionRailState } from 'motionrail';
+import { MotionRail } from 'motionrail';
+import type { MotionRailExtension, MotionRailState } from 'motionrail';
 
 const typedExtension: MotionRailExtension = {
   name: 'typed-extension',
