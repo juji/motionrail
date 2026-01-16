@@ -44,7 +44,7 @@ const carousel = new MotionRail(element, {
 
 ## Common Patterns
 
-### Variable Columns (4 → 3 → 2 → 1)
+### Variable Columns (1 → 2 → 3 → 4)
 
 ```js
 breakpoints: [
