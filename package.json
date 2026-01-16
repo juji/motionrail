@@ -26,7 +26,7 @@
     "./extensions/thumbnails": {
       "import": "./dist/extensions/thumbnails.js",
       "require": "./dist/extensions/thumbnails.umd.cjs",
-      "types": "./dist/extensions/thumbnails.d.ts"
+      "types": "./dist/extensions/thumbnails/main.d.ts"
     },
     "./extensions/thumbnails/style.css": "./dist/extensions/thumbnails/style.css",
     "./extensions/logger": {

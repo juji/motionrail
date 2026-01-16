@@ -69,6 +69,10 @@ import HomeRtl from './home-rtl.vue';
     margin-bottom: 0;
   }
 
+  .section-description {
+    margin: 0;
+  }
+
   .section-demo {
     margin: 0;
   }

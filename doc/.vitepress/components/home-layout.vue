@@ -48,7 +48,7 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
 }
 
 .hero-content {
-  text-align: left;
+  text-align: center;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -65,16 +65,6 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
   width: 100%;
   /* max-width: 500px; */
   margin: 0 auto;
-}
-
-@media screen and (min-width: 1024px) {
-  .hero-content {
-    order: 1;
-  }
-
-  .hero-demo {
-    order: 2;
-  }
 }
 
 .name {
@@ -100,6 +90,9 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
   font-weight: 500;
   line-height: 1.42;
   color: var(--vp-c-text-2);
+  max-width: 300px;
+  margin: 0 auto;
+  align-self: center;
 }
 
 .actions {
@@ -107,7 +100,7 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 24px;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .action-button {
@@ -163,6 +156,35 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
 
   .tagline {
     font-size: 24px;
+    max-width: 400px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-content {
+    order: 1;
+  }
+
+  .hero-demo {
+    order: 2;
+  }
+
+  .name {
+    text-align: left;
+  }
+
+  .text {
+    text-align: left;
+  }
+
+  .tagline {
+    max-width: 400px;
+    align-self: flex-start;
+    text-align: left;
+  }
+
+  .actions {
+    justify-content: flex-start;
   }
 }
 </style>
