@@ -1,6 +1,6 @@
 # API Methods
 
-MotionRail provides a comprehensive API for programmatic control of the carousel.
+[MotionRail](/docs/api/class/motionrail) provides a comprehensive API for programmatic control of the carousel.
 
 ```js
 const carousel = new MotionRail(element, options)
@@ -103,7 +103,7 @@ dots.forEach((dot, index) => {
 
 Get the current carousel state.
 
-**Returns:** `MotionRailState`
+**Returns:** [`MotionRailState`](/docs/api/types/motionrail-state)
 
 ```js
 const state = carousel.getState();
@@ -127,7 +127,7 @@ interface MotionRailState {
 
 Get the current carousel configuration options. Returns a copy to prevent external modifications.
 
-**Returns:** `MotionRailOptions`
+**Returns:** [`MotionRailOptions`](/docs/api/types/motionrail-options)
 
 ```js
 const options = carousel.getOptions();
@@ -288,6 +288,7 @@ carousel.play();
 
 ## Next Steps
 
+- [MotionRail Class](/docs/api/class/motionrail) - Class documentation with properties
 - [Configuration](/docs/configuration) - All configuration options
 - [Extensions](/docs/extensions/) - Extend functionality
 - [Framework Integrations](/docs/frameworks/react) - Use with frameworks

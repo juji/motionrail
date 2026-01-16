@@ -10,7 +10,7 @@ new MotionRail(element: HTMLElement, options?: MotionRailOptions)
 
 **Parameters:**
 - `element` - The HTML element that wraps the carousel
-- `options` - Optional configuration options
+- `options` - Optional [`MotionRailOptions`](/docs/api/types/motionrail-options) configuration
 
 **Returns:** MotionRail instance with all public methods
 
@@ -165,7 +165,7 @@ Get the current carousel state.
 getState(): MotionRailState
 ```
 
-**Returns:** Current carousel state object
+**Returns:** [`MotionRailState`](/docs/api/types/motionrail-state) object
 
 **Example:**
 ```ts
@@ -186,7 +186,7 @@ Get the current carousel configuration options. Returns a copy to prevent extern
 getOptions(): MotionRailOptions
 ```
 
-**Returns:** Copy of current options
+**Returns:** [`MotionRailOptions`](/docs/api/types/motionrail-options) object
 
 **Example:**
 ```ts
@@ -326,6 +326,7 @@ carousel.play();
 
 ## Next Steps
 
-- [Types](/docs/types) - TypeScript type definitions
+- [MotionRailOptions](/docs/api/types/motionrail-options) - Configuration options type
+- [MotionRailState](/docs/api/types/motionrail-state) - State object type
 - [Configuration](/docs/configuration) - All configuration options
 - [Extensions](/docs/extensions/) - Extend functionality

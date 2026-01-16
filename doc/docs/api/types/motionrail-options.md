@@ -10,9 +10,9 @@ type MotionRailOptions = {
   resumeDelay?: number;
   delay?: number;
   rtl?: boolean;
-  onChange?: (state: MotionRailState) => void;
-  breakpoints?: MotionRailBreakpoint[];
-  extensions?: MotionRailExtension[];
+  onChange?: (state: [`MotionRailState`](/docs/api/types/motionrail-state)) => void;
+  breakpoints?: [`MotionRailBreakpoint`](/docs/api/types/motionrail-breakpoint)[];
+  extensions?: [`MotionRailExtension`](/docs/api/types/motionrail-extension)[];
 }
 ```
 
@@ -84,7 +84,7 @@ const carousel = new MotionRail(element, {
 
 Callback function triggered when carousel state changes.
 
-- **Type:** `(state: MotionRailState) => void`
+- **Type:** `(state: `[`MotionRailState`](/docs/api/types/motionrail-state)`) => void`
 - **Default:** `undefined`
 
 ```ts
@@ -104,7 +104,7 @@ const carousel = new MotionRail(element, {
 
 Responsive breakpoint configurations.
 
-- **Type:** `MotionRailBreakpoint[]`
+- **Type:** [`MotionRailBreakpoint`](/docs/api/types/motionrail-breakpoint)`[]`
 - **Default:** `undefined`
 
 ```ts
@@ -125,7 +125,7 @@ See [MotionRailBreakpoint](/docs/api/types/motionrail-breakpoint) and [Breakpoin
 
 Extension plugins to add functionality.
 
-- **Type:** `MotionRailExtension[]`
+- **Type:** [`MotionRailExtension`](/docs/api/types/motionrail-extension)`[]`
 - **Default:** `undefined`
 
 ```ts

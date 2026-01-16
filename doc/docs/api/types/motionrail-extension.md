@@ -7,9 +7,9 @@ Extension plugin interface.
 ```ts
 type MotionRailExtension = {
   name: string;
-  onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
-  onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
-  onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onInit?: (motionRail: [`MotionRail`](/docs/api/class/motionrail), state: [`MotionRailState`](/docs/api/types/motionrail-state)) => void;
+  onUpdate?: (motionRail: [`MotionRail`](/docs/api/class/motionrail), state: [`MotionRailState`](/docs/api/types/motionrail-state)) => void;
+  onDestroy?: (motionRail: [`MotionRail`](/docs/api/class/motionrail), state: [`MotionRailState`](/docs/api/types/motionrail-state)) => void;
 }
 ```
 
@@ -34,11 +34,11 @@ const customExtension: MotionRailExtension = {
 
 Called once when the carousel is initialized.
 
-- **Type:** `(motionRail: MotionRail, state: MotionRailState) => void`
+- **Type:** `(motionRail: `[`MotionRail`](/docs/api/class/motionrail)`, state: `[`MotionRailState`](/docs/api/types/motionrail-state)`) => void`
 - **Optional:** Yes
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
+- `motionRail` - The [`MotionRail`](/docs/api/class/motionrail) instance
 - `state` - Current carousel state
 
 ```ts
@@ -56,11 +56,11 @@ const customExtension: MotionRailExtension = {
 
 Called whenever the carousel state updates (scroll, resize, content changes).
 
-- **Type:** `(motionRail: MotionRail, state: MotionRailState) => void`
+- **Type:** `(motionRail: `[`MotionRail`](/docs/api/class/motionrail)`, state: `[`MotionRailState`](/docs/api/types/motionrail-state)`) => void`
 - **Optional:** Yes
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
+- `motionRail` - The [`MotionRail`](/docs/api/class/motionrail) instance
 - `state` - Updated carousel state
 
 ```ts
@@ -78,11 +78,11 @@ const customExtension: MotionRailExtension = {
 
 Called when the carousel is destroyed for cleanup.
 
-- **Type:** `(motionRail: MotionRail, state: MotionRailState) => void`
+- **Type:** `(motionRail: `[`MotionRail`](/docs/api/class/motionrail)`, state: `[`MotionRailState`](/docs/api/types/motionrail-state)`) => void`
 - **Optional:** Yes
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
+- `motionRail` - The [`MotionRail`](/docs/api/class/motionrail) instance
 - `state` - Final carousel state
 
 ```ts
