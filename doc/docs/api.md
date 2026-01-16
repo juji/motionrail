@@ -2,6 +2,20 @@
 
 MotionRail provides a comprehensive API for programmatic control of the carousel.
 
+```js
+const {
+  play,
+  pause,
+  next,
+  prev,
+  scrollToIndex,
+  getState,
+  getOptions,
+  update,
+  destroy
+} = new MotionRail( element, options )
+```
+
 ## Playback Control
 
 ### `play()`
