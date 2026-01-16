@@ -73,7 +73,7 @@
     "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",
     "build:umd:thumbnails": "BUILD_UMD=true ENTRY_PATH=src/extensions/thumbnails/main.ts LIB_NAME=MotionRailThumbnails FILE_NAME=extensions/thumbnails.umd vite build",
     "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
-    "copy:types": "node scripts/copy-types.js",
+    "copy:types": "cpr src/svelte.d.ts dist/svelte.d.ts -o && cpr src/svelte5.d.ts dist/svelte5.d.ts -o && cpr src/vue.d.ts dist/vue.d.ts -o",
     "preview": "vite preview",
     "prepare": "husky"
   },
@@ -87,6 +87,7 @@
     "@types/node": "^25.0.8",
     "@types/react": "^19.2.8",
     "@vitejs/plugin-vue": "^6.0.3",
+    "cpr": "^3.0.1",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
     "prettier": "^3.7.4",
@@ -100,7 +101,7 @@
   "peerDependencies": {
     "react": "^19.2.3",
     "solid-js": "^1.9.10",
-    "vue": "^3.5.13",
-    "svelte": "^5.19.2"
+    "svelte": "^5.19.2",
+    "vue": "^3.5.13"
   }
 }
