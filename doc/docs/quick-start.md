@@ -34,22 +34,21 @@ Create the carousel HTML structure with the required data attributes:
 </style>
 ```
 
+::: tip INFO
+**The carousel height is not set by default**, giving you full control over your layout. You can set the height on the carousel container itself, on individual items, or use any CSS approach that fits your design.
+:::
+
 **Structure layers:**
 - `[data-motionrail]` - Wrapper element (receives the ID)
 - `[data-motionrail-scrollable]` - Scrollable container with overflow and snap behavior
 - `[data-motionrail-grid]` - Grid layout container
 - Direct children - Carousel items (no specific class or attribute required)
 
-### 2. Import Styles
-
-```js
-import 'motionrail/style.css';
-```
-
-### 3. Initialize the Carousel
+### 2. Import Styles & Initialize the Carousel
 
 ```js
 import { MotionRail } from 'motionrail';
+import 'motionrail/style.css';
 
 const carousel = new MotionRail(document.getElementById('carousel'), {
   autoplay: true,

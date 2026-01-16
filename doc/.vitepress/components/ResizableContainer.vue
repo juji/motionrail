@@ -28,6 +28,7 @@ const onDrag = (e) => {
   if (!isDragging.value || !containerRef.value) return;
   
   const rect = containerRef.value.getBoundingClientRect();
+  const paddingTotal = 42; // 21px left + 21px right
   let newWidth;
   
   if (dragSide.value === 'right') {
@@ -47,7 +48,7 @@ const onDrag = (e) => {
   }
   
   width.value = `${newWidth}px`;
-  displayWidth.value = `${Math.round(newWidth)}px`;
+  displayWidth.value = `${Math.round(newWidth - paddingTotal)}px`;
 };
 
 const stopDrag = () => {
@@ -62,7 +63,8 @@ onMounted(() => {
   // Get initial pixel width
   if (containerRef.value) {
     const rect = containerRef.value.getBoundingClientRect();
-    displayWidth.value = `${Math.round(rect.width)}px`;
+    const paddingTotal = 42; // 21px left + 21px right
+    displayWidth.value = `${Math.round(rect.width - paddingTotal)}px`;
   }
 });
 
