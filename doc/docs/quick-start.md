@@ -18,19 +18,20 @@ Create the carousel HTML structure with the required data attributes:
     </div>
   </div>
 </div>
+
 <style>
-#carousel [data-motionrail-grid] > div {
-  background: #f0f0f0;
-  border-radius: 8px;
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  font-weight: 500;
-  color: #333;
-  height: 200px; /* YOU set the height, however you want */
-}
+  #carousel [data-motionrail-grid] > div {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    height: 200px; /* YOU set the height, however you want */
+  }
 </style>
 ```
 
