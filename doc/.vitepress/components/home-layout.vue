@@ -7,8 +7,8 @@
       <div class="container">
         <div class="hero-content">
           <h1 class="name">MotionRail</h1>
-          <p class="text">Smooth Carousel Library</p>
-          <p class="tagline">A lightweight carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints</p>
+          <p class="text">Carousel Library</p>
+          <p class="tagline">A lightweight carousel library for modern web applications</p>
           
           <div class="actions">
             <a class="action-button brand" href="/docs">Read The Docs</a>
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="hero-demo">
-          <!-- Empty for now -->
+          hero demo
         </div>
       </div>
     </div>
@@ -32,9 +32,13 @@
 .container {
   max-width: 1152px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 48px;
   align-items: center;
+
+  @media screen and (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .hero-content {
@@ -42,6 +46,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  order: 2;
 
   p, h1 {
     margin: 0;
@@ -50,6 +55,17 @@
 
 .hero-demo {
   display: block;
+  order: 1;
+}
+
+@media screen and (min-width: 1024px) {
+  .hero-content {
+    order: 1;
+  }
+
+  .hero-demo {
+    order: 2;
+  }
 }
 
 .name {
@@ -63,7 +79,7 @@
 }
 
 .text {
-  font-size: 320;
+  font-size: 32px;
   line-height: 1;
   padding-bottom: 21px;
   font-weight: 600;
@@ -143,12 +159,3 @@
 </style>
 
 
-@media (max-width: 767px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-demo {
-    display: none;
-  }
-}
