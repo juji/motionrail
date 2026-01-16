@@ -21,6 +21,14 @@ export default defineConfig({
         ]
       },
       {
+        text: 'Core Concepts',
+        items: [
+          { text: 'Configuration', link: '/docs/configuration' },
+          { text: 'Breakpoints', link: '/docs/breakpoints' },
+          { text: 'API Methods', link: '/docs/api' }
+        ]
+      },
+      {
         text: 'Framework Integrations',
         items: [
           { text: 'React', link: '/docs/frameworks/react' },
@@ -28,14 +36,6 @@ export default defineConfig({
           { text: 'Vue', link: '/docs/frameworks/vue' },
           { text: 'Svelte', link: '/docs/frameworks/svelte' },
           { text: 'Svelte 5', link: '/docs/frameworks/svelte5' }
-        ]
-      },
-      {
-        text: 'Core Concepts',
-        items: [
-          { text: 'Configuration', link: '/docs/configuration' },
-          { text: 'Breakpoints', link: '/docs/breakpoints' },
-          { text: 'API Methods', link: '/docs/api' }
         ]
       },
       {
