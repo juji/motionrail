@@ -39,32 +39,6 @@ You can also use MotionRail via CDN:
 <link rel="stylesheet" href="https://unpkg.com/motionrail/dist/style.css">
 ```
 
-## Framework-specific Installation
-
-### React
-
-```bash
-npm install motionrail react
-```
-
-### Solid.js
-
-```bash
-npm install motionrail solid-js
-```
-
-### Vue
-
-```bash
-npm install motionrail vue
-```
-
-### Svelte
-
-```bash
-npm install motionrail svelte
-```
-
 ## Next Steps
 
 - [Quick Start](/docs/quick-start) - Get started with a basic example
