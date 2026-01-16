@@ -26,6 +26,7 @@ export default defineConfig({
         text: 'Core Concepts',
         items: [
           { text: 'Configuration', link: '/docs/configuration' },
+          { text: 'RTL Support', link: '/docs/rtl' },
           { text: 'Breakpoints', link: '/docs/breakpoints' },
           { text: 'API Methods', link: '/docs/api' }
         ]

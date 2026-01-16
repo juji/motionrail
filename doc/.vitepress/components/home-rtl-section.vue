@@ -7,7 +7,7 @@ import HomeRtl from './home-rtl.vue';
     <div class="container">
       <div class="section-content">
         <h2 class="section-title">RTL Support</h2>
-        <p class="section-description">Built-in <a href="/docs/configuration#rtl">right-to-left language support</a> for Arabic, Hebrew, and other RTL languages.</p>
+        <p class="section-description">Built-in <a href="/docs/rtl">right-to-left language support</a> for Arabic, Hebrew, and other RTL languages.</p>
       </div>
       <div class="section-demo" dir="rtl">
         <HomeRtl />
