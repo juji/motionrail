@@ -19,7 +19,7 @@ See [MotionRailExtension](/docs/api/types/motionrail-extension) for complete typ
 
 ## State Object
 
-The state object passed to `onInit`, `onUpdate`, and `onDestroy`:
+The [MotionRailState](/docs/api/types/motionrail-state) object passed to `onInit`, `onUpdate`, and `onDestroy`:
 
 ```ts
 interface MotionRailState {
@@ -32,13 +32,15 @@ interface MotionRailState {
 
 ## Lifecycle Hooks
 
+Extensions can interact with the carousel through the [MotionRail](/docs/api/class/motionrail) instance methods like `prev()`, `next()`, `scrollToIndex()`, and more.
+
 ### `onInit(motionRail, state)`
 
 Called once when the carousel is initialized.
 
 **Parameters:**
-- `motionRail`: MotionRail instance with API methods
-- `state`: Initial carousel state
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
+- `state`: Initial [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Creating DOM elements
@@ -58,8 +60,8 @@ onInit(motionRail, state) {
 Called whenever the carousel state changes (navigation, resize, etc).
 
 **Parameters:**
-- `motionRail`: MotionRail instance with API methods
-- `state`: Updated carousel state
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
+- `state`: Updated [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Updating UI based on state
@@ -79,8 +81,8 @@ onUpdate(motionRail, state) {
 Called when the carousel is destroyed.
 
 **Parameters:**
-- `motionRail`: MotionRail instance
-- `state`: Final carousel state
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance
+- `state`: Final [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Cleanup event listeners
@@ -144,11 +146,11 @@ function CustomControls() {
 
       prevBtn = document.createElement('button');
       prevBtn.textContent = 'Previous';
-      prevBtn.onclick = () => motionRail.prev();
+      prevBtn.onclick = () => motionRail.prev(); // See MotionRail.prev()
 
       nextBtn = document.createElement('button');
       nextBtn.textContent = 'Next';
-      nextBtn.onclick = () => motionRail.next();
+      nextBtn.onclick = () => motionRail.next(); // See MotionRail.next()
 
       container.append(prevBtn, nextBtn);
       motionRail.container.appendChild(container);
@@ -270,7 +272,7 @@ function ExternalSync(config) {
       for (let i = 0; i < state.totalItems; i++) {
         const btn = document.createElement('button');
         btn.textContent = i + 1;
-        btn.onclick = () => motionRail.scrollToIndex(i);
+        btn.onclick = () => motionRail.scrollToIndex(i); // See MotionRail.scrollToIndex()
         thumbnailContainer.appendChild(btn);
       }
     },
