@@ -49,7 +49,7 @@
 }
 
 .hero-demo {
-  /* Empty for now */;
+  display: block;
 }
 
 .name {
@@ -64,13 +64,16 @@
 
 .text {
   font-size: 320;
-  line-height: 1.4;
+  line-height: 1;
+  padding-bottom: 21px;
+  font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
 .tagline {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 500;
+  line-height: 1.42;
   color: var(--vp-c-text-2);
 }
 
