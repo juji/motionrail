@@ -14,17 +14,8 @@ const options = {
 
 <template>
   <MotionRail :options="options">
-    <div class="demo-slide">
-      <img src="https://picsum.photos/seed/extensions1/600/400" alt="Extensions Demo 1">
-    </div>
-    <div class="demo-slide">
-      <img src="https://picsum.photos/seed/extensions2/600/400" alt="Extensions Demo 2">
-    </div>
-    <div class="demo-slide">
-      <img src="https://picsum.photos/seed/extensions3/600/400" alt="Extensions Demo 3">
-    </div>
-    <div class="demo-slide">
-      <img src="https://picsum.photos/seed/extensions4/600/400" alt="Extensions Demo 4">
+    <div class="demo-slide" v-for="i in 99" :key="i">
+      <img :src="`https://picsum.photos/seed/extensions${i}/600/400`" :alt="`Extensions Demo ${i}`" loading="lazy">
     </div>
   </MotionRail>
 </template>
