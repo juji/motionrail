@@ -7,8 +7,8 @@ export function Arrows(par?: {
   loop?: boolean;
   log?: boolean;
 }): MotionRailExtension {
-  const leftArrow = document.createElement("button");
-  const rightArrow = document.createElement("button");
+  let leftArrow: HTMLButtonElement | null = null;
+  let rightArrow: HTMLButtonElement | null = null;
   const {
     leftIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-left-icon lucide-chevron-left"><path d="m15 18-6-6 6-6"/></svg>',
     rightIcon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right"><path d="m9 18 6-6-6-6"/></svg>',
@@ -26,12 +26,14 @@ export function Arrows(par?: {
       }
 
       const { rtl } = motionRail.getOptions();
+      leftArrow = document.createElement("button");
       leftArrow.innerHTML = leftIcon;
       leftArrow.className = "motionrail-arrow motionrail-arrow-left";
       leftArrow.addEventListener("click", () => {
         rtl ? motionRail.next() : motionRail.prev();
       });
 
+      rightArrow = document.createElement("button");
       rightArrow.innerHTML = rightIcon;
       rightArrow.className = "motionrail-arrow motionrail-arrow-right";
       rightArrow.addEventListener("click", () => {
@@ -42,6 +44,7 @@ export function Arrows(par?: {
       motionRail.element.appendChild(rightArrow);
     },
     onUpdate(_motionRail: MotionRail, state: MotionRailState) {
+      if (!leftArrow || !rightArrow) return;
       const {
         isFirstItemVisible,
         isLastItemVisible,
@@ -71,8 +74,8 @@ export function Arrows(par?: {
       }
     },
     onDestroy(_motionRail: MotionRail, _state: MotionRailState) {
-      leftArrow.remove();
-      rightArrow.remove();
+      leftArrow?.remove();
+      rightArrow?.remove();
     },
   };
 }

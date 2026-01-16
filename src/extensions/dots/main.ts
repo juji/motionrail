@@ -7,7 +7,7 @@ export function Dots(par?: {
   fontSize?: number;
   log?: boolean;
 }): MotionRailExtension {
-  const dotsContainer = document.createElement("div");
+  let dotsContainer: HTMLDivElement | null = null;
   const dots: HTMLButtonElement[] = [];
   const {
     showIndex = false,
@@ -24,6 +24,8 @@ export function Dots(par?: {
       if (totalItems === 0) {
         return;
       }
+
+      dotsContainer = document.createElement("div");
 
       dotsContainer.className = "motionrail-dots";
       dotsContainer.style.setProperty("--dot-size", `${dotSize}px`);
@@ -51,6 +53,7 @@ export function Dots(par?: {
     },
     onUpdate(_motionRail: MotionRail, state: MotionRailState) {
       const { visibleItemIndexes, totalItems } = state;
+      if (!dotsContainer) return;
 
       if (!totalItems) {
         dotsContainer.style.display = "none";
@@ -89,7 +92,7 @@ export function Dots(par?: {
       }
     },
     onDestroy(_motionRail: MotionRail, _state: MotionRailState) {
-      dotsContainer.remove();
+      dotsContainer?.remove();
       dots.length = 0;
     },
   };

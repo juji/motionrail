@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, type RefObject } from "react";
 import { MotionRail as MotionRailClass } from "./motionrail";
 import type { MotionRailOptions } from "./lib/types";

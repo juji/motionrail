@@ -6,7 +6,7 @@ export function Thumbnails(par?: {
   thumbnailHeight?: number;
   log?: boolean;
 }): MotionRailExtension {
-  const thumbnailsContainer = document.createElement("div");
+  let thumbnailsContainer: HTMLDivElement | null = null;
   const thumbnails: HTMLButtonElement[] = [];
   const { thumbnailWidth = 80, thumbnailHeight = 80, log = false } = par || {};
 
@@ -18,6 +18,8 @@ export function Thumbnails(par?: {
       if (totalItems === 0) {
         return;
       }
+
+      thumbnailsContainer = document.createElement("div");
 
       thumbnailsContainer.className = "motionrail-thumbnails";
       thumbnailsContainer.style.setProperty(
@@ -50,13 +52,14 @@ export function Thumbnails(par?: {
         });
 
         thumbnails.push(thumbnail);
-        thumbnailsContainer.appendChild(thumbnail);
+        thumbnailsContainer!.appendChild(thumbnail);
       });
 
       motionRail.element.appendChild(thumbnailsContainer);
     },
     onUpdate(_motionRail: MotionRail, state: MotionRailState) {
       const { visibleItemIndexes, totalItems } = state;
+      if (!thumbnailsContainer) return;
 
       if (!totalItems) {
         thumbnailsContainer.style.display = "none";
@@ -64,7 +67,6 @@ export function Thumbnails(par?: {
       }
 
       thumbnailsContainer.style.removeProperty("display");
-
       // Update active state for each thumbnail
       thumbnails.forEach((thumbnail, index) => {
         if (visibleItemIndexes.includes(index)) {
@@ -96,7 +98,7 @@ export function Thumbnails(par?: {
       }
     },
     onDestroy(_motionRail: MotionRail, _state: MotionRailState) {
-      thumbnailsContainer.remove();
+      thumbnailsContainer?.remove();
       thumbnails.length = 0;
     },
   };
