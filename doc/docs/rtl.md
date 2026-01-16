@@ -36,7 +36,7 @@ import HomeRtl from '../.vitepress/components/home-rtl.vue';
 
 ### Code (Simplified)
 
-```vue
+```vue {7,14}
 <script setup lang="ts">
 // ... other imports
 import MotionRail from 'motionrail/vue';
@@ -72,7 +72,7 @@ Don't forget to add the `dir="rtl"` attribute to the container element (or a par
 
 ### React
 
-```tsx
+```tsx {7,14}
 import { MotionRail } from 'motionrail/react';
 import { Arrows } from 'motionrail/extensions/arrows';
 import 'motionrail/style.css';
@@ -99,7 +99,7 @@ function RTLCarousel() {
 
 ### Vanilla JavaScript
 
-```js
+```js {9}
 import { MotionRail } from 'motionrail';
 import { Arrows } from 'motionrail/extensions/arrows';
 import 'motionrail/style.css';
@@ -111,6 +111,17 @@ const carousel = new MotionRail(container, {
   rtl: true,
   extensions: [Arrows()]
 });
+```
+```html {1}
+<div data-motionrail class="carousel-container" dir="rtl">
+  <div data-motionrail-scrollable>
+    <div data-motionrail-grid>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </div>
+  </div>
+</div>
 ```
 
 ## See Also
