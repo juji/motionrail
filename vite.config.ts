@@ -24,7 +24,7 @@ export default defineConfig({
     }),
   ],
   build: {
-    emptyOutDir: false,
+    emptyOutDir: !isUMD,
     lib: isUMD
       ? {
           entry: resolve(
@@ -72,6 +72,7 @@ export default defineConfig({
         },
     cssCodeSplit: true,
     rollupOptions: {
+      preserveEntrySignatures: "strict",
       external: [
         "react",
         "react/jsx-runtime",
@@ -90,6 +91,10 @@ export default defineConfig({
         "svelte/easing",
       ],
       output: {
+        manualChunks: (id) => {
+          // Prevent automatic chunk splitting - keep all code in entry files
+          return undefined;
+        },
         assetFileNames: (assetInfo) => {
           const name = assetInfo.name || "";
           if (name.endsWith(".css")) {
