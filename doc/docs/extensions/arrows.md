@@ -129,63 +129,7 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 
 ## Styling
 
-The extension applies the following default styles:
-
-```css
-.motionrail-arrow[disabled] {
-  opacity: 0.3;
-  pointer-events: none;
-}
-
-.motionrail-arrow-left,
-.motionrail-arrow-right {
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  z-index: 10;
-  position: absolute;
-  position-anchor: --motionrail-scrollable;
-  top: anchor(center);
-  translate: 0 -50%;
-}
-
-.motionrail-arrow-left {
-  left: anchor(left);
-  margin-left: 10px;
-}
-
-.motionrail-arrow-right {
-  right: anchor(right);
-  margin-right: 10px;
-}
-
-.motionrail-arrow-left:hover,
-.motionrail-arrow-right:hover {
-  background: rgba(0, 0, 0, 0.8);
-  scale: 1.1;
-}
-
-.motionrail-arrow-left:active,
-.motionrail-arrow-right:active {
-  scale: 0.95;
-}
-```
-
-**Customization Tips:**
-- Override `background` and `color` to match your theme
-- Adjust `width`, `height`, and `border-radius` for different sizes/shapes  
-- Modify `font-size` or use custom `leftIcon`/`rightIcon` options for custom icons
-- Change `margin-left`/`margin-right` for positioning
-- Update `transition` and hover `scale` for different animation effects
+View the default styles: [/src/extensions/arrows/style.css](https://github.com/juji/motionrail/blob/main/src/extensions/arrows/style.css)
 
 **Custom Icons:**
 
