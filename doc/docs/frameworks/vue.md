@@ -5,7 +5,7 @@ MotionRail provides a first-class Vue 3 component (SFC) with full TypeScript sup
 ## Installation
 
 ```bash
-npm install motionrail vue
+npm install motionrail
 ```
 
 ## Basic Usage

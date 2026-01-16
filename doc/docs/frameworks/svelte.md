@@ -5,7 +5,7 @@ MotionRail provides a Svelte component compatible with both Svelte 4 and Svelte 
 ## Installation
 
 ```bash
-npm install motionrail svelte
+npm install motionrail
 ```
 
 ## Basic Usage

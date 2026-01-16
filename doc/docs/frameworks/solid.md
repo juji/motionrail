@@ -5,7 +5,7 @@ MotionRail provides a first-class Solid.js component with full TypeScript suppor
 ## Installation
 
 ```bash
-npm install motionrail solid-js
+npm install motionrail
 ```
 
 ## Basic Usage

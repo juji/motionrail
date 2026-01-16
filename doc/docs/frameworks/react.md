@@ -5,7 +5,7 @@ MotionRail provides a first-class React component with full TypeScript support.
 ## Installation
 
 ```bash
-npm install motionrail react
+npm install motionrail
 ```
 
 ## Basic Usage
