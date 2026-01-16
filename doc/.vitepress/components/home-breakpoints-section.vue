@@ -24,6 +24,7 @@ import ResizableContainer from './ResizableContainer.vue';
 <style scoped>
 .breakpoints-section {
   padding: 96px 48px;
+  padding-top: 0px;
 }
 
 .container {
