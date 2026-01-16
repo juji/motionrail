@@ -4,11 +4,17 @@ import type { MotionRailExtension, MotionRailState } from "../../motionrail";
 export function Dots(par?: {
   showIndex?: boolean;
   dotSize?: number;
+  fontSize?: number;
   log?: boolean;
 }): MotionRailExtension {
   const dotsContainer = document.createElement("div");
   const dots: HTMLButtonElement[] = [];
-  const { showIndex = false, dotSize = 44, log = false } = par || {};
+  const {
+    showIndex = false,
+    dotSize = 44,
+    fontSize = 14,
+    log = false,
+  } = par || {};
 
   return {
     name: "DotsExtension",
@@ -21,6 +27,7 @@ export function Dots(par?: {
 
       dotsContainer.className = "motionrail-dots";
       dotsContainer.style.setProperty("--dot-size", `${dotSize}px`);
+      dotsContainer.style.setProperty("--dot-font-size", `${fontSize}px`);
 
       // Create a dot for each item
       for (let i = 0; i < totalItems; i++) {

@@ -39,6 +39,17 @@ Size of each dot in pixels (controls the clickable area).
 Dots({ dotSize: 36 })
 ```
 
+### `fontSize`
+
+- **Type**: `number`
+- **Default**: `14`
+
+Font size in pixels for the index numbers (when `showIndex: true`).
+
+```js
+Dots({ showIndex: true, fontSize: 16 })
+```
+
 ### `log`
 
 - **Type**: `boolean`
@@ -107,6 +118,7 @@ The extension applies the following default styles:
 
 .motionrail-dot {
   --dot-size: 44px;
+  --dot-font-size: 14px;
   min-width: var(--dot-size);
   min-height: var(--dot-size);
   width: var(--dot-size);
@@ -116,7 +128,7 @@ The extension applies the following default styles:
   background: rgba(255, 255, 255, 0.3);
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--dot-font-size);
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -148,6 +160,7 @@ The extension applies the following default styles:
 
 **Customization Tips:**
 - Override `--dot-size` CSS variable to change dot dimensions
+- Override `--dot-font-size` CSS variable to change index number size
 - Modify `background`, `border`, and `color` for different themes
 - Adjust `gap` and `padding` on `.motionrail-dots` for spacing
 - Change `mask-image` gradient values to adjust edge fade effect
