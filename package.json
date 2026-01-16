@@ -1,6 +1,6 @@
 {
   "name": "motionrail",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A lightweight carousel library for modern web applications",
   "type": "module",
   "module": "./dist/motionrail.js",
