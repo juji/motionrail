@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MotionRail } from 'motionrail/svelte';
+  import MotionRail from 'motionrail/svelte';
   import { Dots } from 'motionrail/extensions/dots';
   import 'motionrail/style.css';
   import 'motionrail/extensions/dots/style.css';

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import MotionRail from 'motionrail/svelte';
+  import MotionRail from 'motionrail/svelte5';
   import type { MotionRail as MotionRailClass } from 'motionrail';
   import { Arrows } from 'motionrail/extensions/arrows';
   import 'motionrail/style.css';

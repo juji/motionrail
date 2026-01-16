@@ -1,68 +1,30 @@
 <script lang="ts">
-  import MotionRail from 'motionrail/svelte';
-  import type { MotionRail as MotionRailClass } from 'motionrail';
-  import { Arrows } from 'motionrail/extensions/arrows';
+  import MotionRail from 'motionrail/svelte5';
+  import { Logger } from 'motionrail/extensions/logger';
   import 'motionrail/style.css';
-  import 'motionrail/extensions/arrows/style.css';
-
-  let carousel1: MotionRailClass | null = null;
-  let carousel2: MotionRailClass | null = null;
-  let carousel3: MotionRailClass | null = null;
 </script>
 
 <div class="container">
-  <h1>Arrows Extension</h1>
+  <h1>Logger Extension</h1>
 
   <nav class="nav">
     <a href="/">← Back to Home</a>
   </nav>
 
   <section class="section">
-    <h2>Basic Arrows</h2>
+    <h2>Logger Extension (Check Console)</h2>
+    <p>Open the browser console to see the logger output.</p>
     <MotionRail
-      bind:instance={carousel1}
       options={{
-        breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [Arrows()]
+        breakpoints: [
+          { columns: 1, gap: '16px' },
+          { width: 768, columns: 2, gap: '16px' },
+          { width: 1024, columns: 3, gap: '20px' }
+        ],
+        extensions: [Logger()]
       }}
     >
-      {#each [1, 2, 3, 4, 5, 6] as num}
-        <div class="item item{num}">{num}</div>
-      {/each}
-    </MotionRail>
-  </section>
-
-  <section class="section">
-    <h2>Arrows with Loop</h2>
-    <MotionRail
-      bind:instance={carousel2}
-      options={{
-        breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [Arrows({ loop: true })]
-      }}
-    >
-      {#each [1, 2, 3, 4, 5, 6] as num}
-        <div class="item item{num}">{num}</div>
-      {/each}
-    </MotionRail>
-  </section>
-
-  <section class="section">
-    <h2>Custom Arrow Icons</h2>
-    <MotionRail
-      bind:instance={carousel3}
-      options={{
-        breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [
-          Arrows({
-            loop: true,
-            leftIcon: '←',
-            rightIcon: '→'
-          })
-        ]
-      }}
-    >
-      {#each [1, 2, 3, 4, 5, 6] as num}
+      {#each [1, 2, 3, 4, 5, 6, 7, 8] as num}
         <div class="item item{num}">{num}</div>
       {/each}
     </MotionRail>
@@ -106,6 +68,11 @@
     margin-bottom: 20px;
     font-size: 20px;
     font-weight: 500;
+  }
+
+  .section p {
+    margin-bottom: 20px;
+    color: #666;
   }
 
   .item {

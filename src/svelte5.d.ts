@@ -1,10 +1,11 @@
 import type { Component } from "svelte";
 import type { MotionRailOptions } from "./lib/types";
+import { MotionRail } from "./motionrail";
 
 export interface Svelte5Props {
   options?: MotionRailOptions;
-  getInstance?: () => any;
-  getContainer?: () => HTMLElement | undefined;
+  instance?: MotionRail | null;
+  container?: HTMLDivElement | undefined;
   children?: any;
 }
 

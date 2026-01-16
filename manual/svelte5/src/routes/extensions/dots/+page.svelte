@@ -1,29 +1,23 @@
 <script lang="ts">
-  import MotionRail from 'motionrail/svelte';
-  import type { MotionRail as MotionRailClass } from 'motionrail';
-  import { Arrows } from 'motionrail/extensions/arrows';
+  import MotionRail from 'motionrail/svelte5';
+  import { Dots } from 'motionrail/extensions/dots';
   import 'motionrail/style.css';
-  import 'motionrail/extensions/arrows/style.css';
-
-  let carousel1: MotionRailClass | null = null;
-  let carousel2: MotionRailClass | null = null;
-  let carousel3: MotionRailClass | null = null;
+  import 'motionrail/extensions/dots/style.css';
 </script>
 
 <div class="container">
-  <h1>Arrows Extension</h1>
+  <h1>Dots Extension</h1>
 
   <nav class="nav">
     <a href="/">← Back to Home</a>
   </nav>
 
   <section class="section">
-    <h2>Basic Arrows</h2>
+    <h2>Basic Dots</h2>
     <MotionRail
-      bind:instance={carousel1}
       options={{
         breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [Arrows()]
+        extensions: [Dots()]
       }}
     >
       {#each [1, 2, 3, 4, 5, 6] as num}
@@ -33,12 +27,25 @@
   </section>
 
   <section class="section">
-    <h2>Arrows with Loop</h2>
+    <h2>Dots with Index</h2>
     <MotionRail
-      bind:instance={carousel2}
       options={{
         breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [Arrows({ loop: true })]
+        extensions: [Dots({ showIndex: true })]
+      }}
+    >
+      {#each [1, 2, 3, 4, 5, 6, 7, 8] as num}
+        <div class="item item{num}">{num}</div>
+      {/each}
+    </MotionRail>
+  </section>
+
+  <section class="section">
+    <h2>Custom Dot Size</h2>
+    <MotionRail
+      options={{
+        breakpoints: [{ columns: 1, gap: '16px' }],
+        extensions: [Dots({ dotSize: 50, showIndex: true, fontSize: 16 })]
       }}
     >
       {#each [1, 2, 3, 4, 5, 6] as num}
@@ -48,22 +55,18 @@
   </section>
 
   <section class="section">
-    <h2>Custom Arrow Icons</h2>
+    <h2>Multiple Columns with Dots</h2>
     <MotionRail
-      bind:instance={carousel3}
       options={{
-        breakpoints: [{ columns: 1, gap: '16px' }],
-        extensions: [
-          Arrows({
-            loop: true,
-            leftIcon: '←',
-            rightIcon: '→'
-          })
-        ]
+        breakpoints: [
+          { columns: 2, gap: '16px' },
+          { width: 768, columns: 3, gap: '20px' }
+        ],
+        extensions: [Dots({ showIndex: true })]
       }}
     >
-      {#each [1, 2, 3, 4, 5, 6] as num}
-        <div class="item item{num}">{num}</div>
+      {#each [1, 2, 3, 4, 5, 6, 7, 8, 9] as num}
+        <div class="item item{((num - 1) % 8) + 1}">{num}</div>
       {/each}
     </MotionRail>
   </section>
