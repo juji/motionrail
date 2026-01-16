@@ -71,6 +71,33 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 });
 ```
 
+### UMD (CDN)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails/style.css">
+
+<div data-motionrail id="carousel">
+  <!-- carousel items -->
+</div>
+
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    breakpoints: [
+      { columns: 1, gap: '16px' }
+    ],
+    extensions: [
+      MotionRailThumbnails({
+        thumbnailWidth: 100,
+        thumbnailHeight: 100
+      })
+    ]
+  });
+</script>
+```
+
 ## Features
 
 - **Cloned content**: Automatically clones carousel item content for thumbnails

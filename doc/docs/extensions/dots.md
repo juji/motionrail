@@ -80,6 +80,31 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 });
 ```
 
+### UMD (CDN)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/dots/style.css">
+
+<div data-motionrail id="carousel">
+  <!-- carousel items -->
+</div>
+
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/dist/extensions/dots.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' }
+    ],
+    extensions: [
+      MotionRailDots({ showIndex: true })
+    ]
+  });
+</script>
+```
+
 ## Features
 
 - **Clickable**: Click any dot to jump to that item

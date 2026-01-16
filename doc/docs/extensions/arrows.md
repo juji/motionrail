@@ -89,6 +89,36 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 });
 ```
 
+### UMD (CDN)
+
+```html
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/arrows/style.css">
+
+<div data-motionrail id="carousel">
+  <!-- carousel items -->
+</div>
+
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/dist/extensions/arrows.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' }
+    ],
+    extensions: [
+      MotionRailArrows({
+        loop: true,
+        leftIcon: '←',
+        rightIcon: '→'
+      })
+    ]
+  });
+</script>
+```
+
 ## Features
 
 - **Auto-hide**: Arrows automatically hide when all items are visible
