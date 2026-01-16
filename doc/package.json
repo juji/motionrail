@@ -14,7 +14,7 @@
   "license": "ISC",
   "packageManager": "pnpm@10.14.0",
   "dependencies": {
-    "motionrail": "file:.."
+    "motionrail": "link:.."
   },
   "devDependencies": {
     "vitepress": "2.0.0-alpha.15"

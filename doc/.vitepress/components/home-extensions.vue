@@ -7,7 +7,7 @@ import 'motionrail/extensions/dots/style.css';
 const options = {
   autoplay: true,
   extensions: [
-    Dots({ showIndex: true, dotSize: 16, fontSize: 8 }),
+    Dots({ showIndex: true, dotSize: 34, fontSize: 12 }),
   ],
 };
 </script>

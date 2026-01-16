@@ -7,7 +7,7 @@ import HomeRtl from './home-rtl.vue';
     <div class="container">
       <div class="section-content">
         <h2 class="section-title">RTL Support</h2>
-        <p class="section-description">Built-in right-to-left language support for Arabic, Hebrew, and other RTL languages.</p>
+        <p class="section-description">Built-in <a href="/docs/configuration#rtl">right-to-left language support</a> for Arabic, Hebrew, and other RTL languages.</p>
       </div>
       <div class="section-demo" dir="rtl">
         <HomeRtl />
@@ -50,6 +50,17 @@ import HomeRtl from './home-rtl.vue';
   color: var(--vp-c-text-2);
   margin: 0 auto;
   max-width: 420px;
+}
+
+.section-description a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.section-description a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
 }
 
 .section-demo {
