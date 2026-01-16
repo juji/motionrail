@@ -38,6 +38,8 @@ const carousel = new MotionRail(element, {
 
 Enable right-to-left layout support for RTL languages.
 
+See [RTL Support](/docs/rtl) for detailed documentation and examples.
+
 ```js
 const carousel = new MotionRail(element, {
   rtl: true
