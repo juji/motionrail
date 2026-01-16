@@ -29,7 +29,7 @@ npm install motionrail
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 - **Default**: `{}`
 

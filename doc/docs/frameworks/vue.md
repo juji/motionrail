@@ -31,7 +31,7 @@ const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 - **Default**: `{}`
 

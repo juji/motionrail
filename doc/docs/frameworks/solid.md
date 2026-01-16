@@ -32,7 +32,7 @@ function App() {
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 
 Configuration options for the carousel. See [Configuration](/docs/configuration) for all available options.
