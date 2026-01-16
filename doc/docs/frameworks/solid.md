@@ -2,11 +2,6 @@
 
 MotionRail provides a first-class Solid.js component with full TypeScript support.
 
-## Installation
-
-```bash
-npm install motionrail solid-js
-```
 
 ## Basic Usage
 
@@ -14,9 +9,12 @@ npm install motionrail solid-js
 import { MotionRail } from 'motionrail/solid';
 import 'motionrail/style.css';
 
+// Define options outside to prevent re-renders
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+
 function App() {
   return (
-    <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+    <MotionRail options={options}>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -29,22 +27,22 @@ function App() {
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 
 Configuration options for the carousel. See [Configuration](/docs/configuration) for all available options.
 
 ```jsx
-<MotionRail
-  options={{
-    autoplay: true,
-    delay: 3000,
-    breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '16px' }
-    ]
-  }}
->
+const options = {
+  autoplay: true,
+  delay: 3000,
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' }
+  ]
+};
+
+<MotionRail options={options}>
   {/* items */}
 </MotionRail>
 ```
@@ -57,6 +55,8 @@ Configuration options for the carousel. See [Configuration](/docs/configuration)
 Callback that receives the MotionRail instance for programmatic control.
 
 ```jsx
+const options = {};
+
 function MyCarousel() {
   let carousel;
 
@@ -68,7 +68,7 @@ function MyCarousel() {
     <>
       <MotionRail
         ref={(instance) => carousel = instance}
-        options={{}}
+        options={options}
       >
         <div>Item 1</div>
         <div>Item 2</div>
@@ -87,13 +87,15 @@ function MyCarousel() {
 Callback that receives the container HTMLDivElement.
 
 ```jsx
+const options = {};
+
 function MyCarousel() {
   let container;
 
   return (
     <MotionRail
       divRef={(el) => container = el}
-      options={{}}
+      options={options}
     >
       <div>Item 1</div>
       <div>Item 2</div>
@@ -107,8 +109,10 @@ function MyCarousel() {
 All other props are passed to the root `div` element:
 
 ```jsx
+const options = {};
+
 <MotionRail
-  options={{}}
+  options={options}
   class="my-carousel"
   style={{ "max-width": '1200px' }}
   aria-label="Product carousel"
@@ -145,23 +149,24 @@ function Carousel() {
     carousel?.pause();
   };
 
+  // Define options inside only when using signals (setCurrentState)
+  const options = {
+    autoplay: true,
+    delay: 3000,
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' }
+    ],
+    onChange: setCurrentState
+  };
+
   return (
     <div>
       <MotionRail
         ref={(instance) => carousel = instance}
         divRef={(el) => container = el}
-        options={{
-          autoplay: true,
-          delay: 3000,
-          breakpoints: [
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-            { width: 1024, columns: 3, gap: '20px' }
-          ],
-          onChange: (state) => {
-            setCurrentState(state);
-          }
-        }}
+        options={options}
         class="my-carousel"
       >
         <div>Item 1</div>
@@ -197,6 +202,9 @@ The Solid component automatically calls `update()` when children change:
 import { createSignal, For } from 'solid-js';
 import { MotionRail } from 'motionrail/solid';
 
+// Define options outside to prevent re-renders
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+
 function DynamicCarousel() {
   const [items, setItems] = createSignal(['Item 1', 'Item 2', 'Item 3']);
 
@@ -210,7 +218,7 @@ function DynamicCarousel() {
 
   return (
     <>
-      <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+      <MotionRail options={options}>
         <For each={items()}>
           {(item) => <div>{item}</div>}
         </For>

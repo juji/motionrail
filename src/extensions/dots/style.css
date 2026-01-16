@@ -34,6 +34,7 @@
 
 .motionrail-dot {
   --dot-size: 44px;
+  --dot-font-size: 14px;
   min-width: var(--dot-size);
   min-height: var(--dot-size);
   width: var(--dot-size);
@@ -43,7 +44,7 @@
   background: rgba(255, 255, 255, 0.3);
   color: white;
   cursor: pointer;
-  font-size: 14px;
+  font-size: var(--dot-font-size);
   font-weight: 600;
   display: flex;
   align-items: center;

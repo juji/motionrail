@@ -8,35 +8,39 @@ Extensions are objects that implement lifecycle hooks to interact with the carou
 
 ```ts
 interface MotionRailExtension {
-  onInit?: (state: MotionRailState, instance: MotionRail) => void;
-  onUpdate?: (state: MotionRailState, instance: MotionRail) => void;
-  onDestroy?: () => void;
+  name: string;
+  onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
+  onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
 }
 ```
 
+See [MotionRailExtension](/docs/api/types/motionrail-extension) for complete type documentation.
+
 ## State Object
 
-The state object passed to `onInit` and `onUpdate`:
+The [MotionRailState](/docs/api/types/motionrail-state) object passed to `onInit`, `onUpdate`, and `onDestroy`:
 
 ```ts
 interface MotionRailState {
-  index: number;      // Current slide index
-  itemsCount: number; // Total number of items
-  columns: number;    // Columns per view
-  gap: string;        // Gap between items
-  isPlaying: boolean; // Autoplay status
+  totalItems: number;              // Total number of items in carousel
+  visibleItemIndexes: number[];    // Array of currently visible item indexes
+  isFirstItemVisible: boolean;     // Whether the first item is visible
+  isLastItemVisible: boolean;      // Whether the last item is visible
 }
 ```
 
 ## Lifecycle Hooks
 
-### `onInit(state, instance)`
+Extensions can interact with the carousel through the [MotionRail](/docs/api/class/motionrail) instance methods like `prev()`, `next()`, `scrollToIndex()`, and more.
+
+### `onInit(motionRail, state)`
 
 Called once when the carousel is initialized.
 
 **Parameters:**
-- `state`: Initial carousel state
-- `instance`: MotionRail instance with API methods
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
+- `state`: Initial [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Creating DOM elements
@@ -44,20 +48,20 @@ Called once when the carousel is initialized.
 - Initial configuration
 
 ```js
-onInit(state, instance) {
-  console.log('Carousel initialized with', state.itemsCount, 'items');
+onInit(motionRail, state) {
+  console.log('Carousel initialized with', state.totalItems, 'items');
   // Create UI elements
   // Attach event listeners
 }
 ```
 
-### `onUpdate(state, instance)`
+### `onUpdate(motionRail, state)`
 
 Called whenever the carousel state changes (navigation, resize, etc).
 
 **Parameters:**
-- `state`: Updated carousel state
-- `instance`: MotionRail instance with API methods
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
+- `state`: Updated [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Updating UI based on state
@@ -65,16 +69,20 @@ Called whenever the carousel state changes (navigation, resize, etc).
 - Syncing external elements
 
 ```js
-onUpdate(state, instance) {
-  console.log('Now showing item', state.index);
+onUpdate(motionRail, state) {
+  console.log('Visible items:', state.visibleItemIndexes);
   // Update UI elements
   // Sync with other components
 }
 ```
 
-### `onDestroy()`
+### `onDestroy(motionRail, state)`
 
 Called when the carousel is destroyed.
+
+**Parameters:**
+- `motionRail`: [MotionRail](/docs/api/class/motionrail) instance
+- `state`: Final [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
 - Cleanup event listeners
@@ -82,7 +90,7 @@ Called when the carousel is destroyed.
 - Release resources
 
 ```js
-onDestroy() {
+onDestroy(motionRail, state) {
   // Remove event listeners
   // Clean up DOM
   // Release resources
@@ -91,21 +99,22 @@ onDestroy() {
 
 ## Simple Example
 
-A counter that tracks carousel navigation:
+A counter that tracks visible items:
 
 ```js
 function Counter() {
   let counterElement;
 
   return {
-    onInit(state, instance) {
+    name: 'counter',
+    onInit(motionRail, state) {
       counterElement = document.createElement('div');
-      counterElement.textContent = `Item ${state.index + 1} of ${state.itemsCount}`;
-      instance.container.appendChild(counterElement);
+      counterElement.textContent = `Showing ${state.visibleItemIndexes.length} of ${state.totalItems}`;
+      motionRail.container.appendChild(counterElement);
     },
 
-    onUpdate(state) {
-      counterElement.textContent = `Item ${state.index + 1} of ${state.itemsCount}`;
+    onUpdate(motionRail, state) {
+      counterElement.textContent = `Showing ${state.visibleItemIndexes.length} of ${state.totalItems}`;
     },
 
     onDestroy() {
@@ -129,30 +138,30 @@ function CustomControls() {
   let prevBtn, nextBtn;
 
   return {
-    onInit(state, instance) {
+    name: 'custom-controls',
+    onInit(motionRail, state) {
       // Create buttons
       const container = document.createElement('div');
       container.className = 'custom-controls';
 
       prevBtn = document.createElement('button');
       prevBtn.textContent = 'Previous';
-      prevBtn.onclick = () => instance.prev();
+      prevBtn.onclick = () => motionRail.prev(); // See MotionRail.prev()
 
       nextBtn = document.createElement('button');
       nextBtn.textContent = 'Next';
-      nextBtn.onclick = () => instance.next();
+      nextBtn.onclick = () => motionRail.next(); // See MotionRail.next()
 
       container.append(prevBtn, nextBtn);
-      instance.container.appendChild(container);
+      motionRail.container.appendChild(container);
     },
 
-    onUpdate(state) {
-      // Disable prev on first item
-      prevBtn.disabled = state.index === 0;
+    onUpdate(motionRail, state) {
+      // Disable prev when at start
+      prevBtn.disabled = state.isFirstItemVisible;
       
-      // Disable next on last item
-      const lastIndex = state.itemsCount - state.columns;
-      nextBtn.disabled = state.index >= lastIndex;
+      // Disable next when at end
+      nextBtn.disabled = state.isLastItemVisible;
     },
 
     onDestroy() {
@@ -165,14 +174,15 @@ function CustomControls() {
 
 ## Progress Bar Example
 
-A progress indicator that shows scroll position:
+A progress indicator showing first/last item visibility:
 
 ```js
 function ProgressBar() {
   let progressElement;
 
   return {
-    onInit(state, instance) {
+    name: 'progress-bar',
+    onInit(motionRail, state) {
       progressElement = document.createElement('div');
       progressElement.className = 'carousel-progress';
       
@@ -180,14 +190,16 @@ function ProgressBar() {
       bar.className = 'carousel-progress-bar';
       progressElement.appendChild(bar);
       
-      instance.container.appendChild(progressElement);
+      motionRail.container.appendChild(progressElement);
     },
 
-    onUpdate(state) {
+    onUpdate(motionRail, state) {
       const bar = progressElement.querySelector('.carousel-progress-bar');
-      const totalSlides = state.itemsCount - state.columns + 1;
-      const progress = ((state.index + 1) / totalSlides) * 100;
-      bar.style.width = `${progress}%`;
+      // Calculate progress based on scroll position
+      const scrollPercentage = (motionRail.container.querySelector('.motionrail-container').scrollLeft / 
+        (motionRail.container.querySelector('.motionrail-container').scrollWidth - 
+         motionRail.container.querySelector('.motionrail-container').clientWidth)) * 100;
+      bar.style.width = `${scrollPercentage}%`;
     },
 
     onDestroy() {
@@ -223,12 +235,13 @@ function KeyboardControls() {
   let handleKeydown;
 
   return {
-    onInit(state, instance) {
+    name: 'keyboard-controls',
+    onInit(motionRail, state) {
       handleKeydown = (e) => {
         if (e.key === 'ArrowLeft') {
-          instance.prev();
+          motionRail.prev();
         } else if (e.key === 'ArrowRight') {
-          instance.next();
+          motionRail.next();
         }
       };
 
@@ -244,42 +257,6 @@ function KeyboardControls() {
 }
 ```
 
-## Autoplay Toggle Example
-
-A play/pause button for autoplay control:
-
-```js
-function PlayPauseButton() {
-  let button;
-
-  return {
-    onInit(state, instance) {
-      button = document.createElement('button');
-      button.className = 'play-pause-btn';
-      
-      button.onclick = () => {
-        const currentState = instance.getState();
-        if (currentState.isPlaying) {
-          instance.pause();
-        } else {
-          instance.play();
-        }
-      };
-
-      instance.container.appendChild(button);
-    },
-
-    onUpdate(state) {
-      button.textContent = state.isPlaying ? 'Pause' : 'Play';
-    },
-
-    onDestroy() {
-      button?.remove();
-    }
-  };
-}
-```
-
 ## External Sync Example
 
 Sync carousel with external UI elements:
@@ -289,21 +266,22 @@ function ExternalSync(config) {
   const { thumbnailContainer } = config;
 
   return {
-    onInit(state, instance) {
-      // Create thumbnail buttons
-      for (let i = 0; i < state.itemsCount; i++) {
+    name: 'external-sync',
+    onInit(motionRail, state) {
+      // Create thumbnail buttons for each item
+      for (let i = 0; i < state.totalItems; i++) {
         const btn = document.createElement('button');
         btn.textContent = i + 1;
-        btn.onclick = () => instance.scrollToIndex(i);
+        btn.onclick = () => motionRail.scrollToIndex(i); // See MotionRail.scrollToIndex()
         thumbnailContainer.appendChild(btn);
       }
     },
 
-    onUpdate(state) {
-      // Update active thumbnail
+    onUpdate(motionRail, state) {
+      // Update active thumbnails based on visible items
       const buttons = thumbnailContainer.querySelectorAll('button');
       buttons.forEach((btn, i) => {
-        btn.classList.toggle('active', i === state.index);
+        btn.classList.toggle('active', state.visibleItemIndexes.includes(i));
       });
     },
 
@@ -326,20 +304,23 @@ new MotionRail(element, {
 Full type definitions:
 
 ```ts
-import type { MotionRail, MotionRailState, MotionRailExtension } from 'motionrail';
+import { MotionRail } from 'motionrail';
+import type { MotionRailState, MotionRailExtension } from 'motionrail';
 
 function MyExtension(): MotionRailExtension {
   let element: HTMLElement | null = null;
 
   return {
-    onInit(state: MotionRailState, instance: MotionRail) {
+    name: 'my-extension',
+    onInit(motionRail: MotionRail, state: MotionRailState) {
       element = document.createElement('div');
-      instance.container.appendChild(element);
+      element.textContent = `Total items: ${state.totalItems}`;
+      motionRail.container.appendChild(element);
     },
 
-    onUpdate(state: MotionRailState, instance: MotionRail) {
+    onUpdate(motionRail: MotionRail, state: MotionRailState) {
       if (element) {
-        element.textContent = `Index: ${state.index}`;
+        element.textContent = `Visible: ${state.visibleItemIndexes.join(', ')}`;
       }
     },
 
@@ -357,7 +338,7 @@ function MyExtension(): MotionRailExtension {
 Always clean up in `onDestroy`:
 
 ```js
-onDestroy() {
+onDestroy(motionRail, state) {
   // Remove event listeners
   document.removeEventListener('keydown', handleKeydown);
   
@@ -374,9 +355,9 @@ onDestroy() {
 Check if elements exist before manipulating:
 
 ```js
-onUpdate(state, instance) {
+onUpdate(motionRail, state) {
   if (!element) return;
-  element.textContent = `${state.index}`;
+  element.textContent = `${state.visibleItemIndexes.length} visible`;
 }
 ```
 
@@ -389,7 +370,8 @@ function MyExtension(config = {}) {
   const { enabled = true, className = 'default' } = config;
   
   return {
-    onInit(state, instance) {
+    name: 'my-extension',
+    onInit(motionRail, state) {
       if (!enabled) return;
       // Use config...
     }
@@ -406,7 +388,8 @@ function MyExtension() {
   let listeners = [];
 
   return {
-    onInit(state, instance) {
+    name: 'my-extension',
+    onInit(motionRail, state) {
       const handler = () => { /* ... */ };
       listeners.push(handler);
       document.addEventListener('click', handler);

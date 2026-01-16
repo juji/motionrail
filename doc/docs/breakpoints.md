@@ -1,6 +1,6 @@
 # Breakpoints
 
-Breakpoints allow you to configure how many columns and what gap size to use at different viewport widths, creating a fully responsive carousel.
+Breakpoints allow you to configure how many columns and what gap size to use at different **container widths**, creating a fully responsive carousel.
 
 ## Configuration
 
@@ -12,13 +12,24 @@ interface MotionRailBreakpoint {
 }
 ```
 
+See [MotionRailBreakpoint](/docs/api/types/motionrail-breakpoint) for complete type documentation.
+
 ## How Breakpoints Work
 
 Breakpoints are applied **mobile-first**. Start with your default configuration (no `width` property), then add breakpoints with increasing `width` values.
 
+::: tip ELEMENT WIDTH, NOT SCREEN WIDTH
+The `width` values in breakpoints refer to the **carousel container's width**, not the viewport/screen width. MotionRail uses CSS Container Queries internally, making carousels responsive to their parent container rather than the screen size.
+:::
+
+::: warning
+The examples below assume the carousel container is full-width. If your carousel is constrained within a narrower container, adjust the breakpoint values accordingly.
+:::
+
 ### Basic Example
 
 ```js
+// the following is an example for full-width carousel
 const carousel = new MotionRail(element, {
   breakpoints: [
     { columns: 1, gap: '16px' },                    // Default (mobile)
@@ -35,14 +46,14 @@ const carousel = new MotionRail(element, {
 
 ## Common Patterns
 
-### Variable Columns (4 → 3 → 2 → 1)
+### Variable Columns (1 → 2 → 3 → 4)
 
 ```js
 breakpoints: [
   { columns: 1, gap: '12px' },                    // < 480px
-  { width: 480, columns: 2, gap: '16px' },        // 480px - 768px
-  { width: 768, columns: 3, gap: '20px' },        // 768px - 1024px
-  { width: 1024, columns: 4, gap: '24px' }        // > 1024px
+  { width: 480, columns: 2, gap: '16px' },        // 480px - 767px
+  { width: 768, columns: 3, gap: '20px' },        // 768px - 1023px
+  { width: 1024, columns: 4, gap: '24px' }        // >= 1024px
 ]
 ```
 
@@ -136,10 +147,10 @@ The `gap` property accepts any valid CSS value:
 
 ```js
 breakpoints: [
-  { columns: 2, gap: '16px' },      // Pixels
-  { columns: 2, gap: '1rem' },      // Rem units
-  { columns: 2, gap: '2%' },        // Percentage
-  { columns: 2, gap: '1.5em' }      // Em units
+  { columns: 2, gap: '16px' },                // Pixels
+  { width: 768, columns: 2, gap: '1rem' },    // Rem units
+  { width: 1024, columns: 2, gap: '2%' },     // Percentage
+  { width: 1280, columns: 2, gap: '1.5em' }   // Em units
 ]
 ```
 

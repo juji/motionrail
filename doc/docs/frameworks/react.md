@@ -2,21 +2,18 @@
 
 MotionRail provides a first-class React component with full TypeScript support.
 
-## Installation
-
-```bash
-npm install motionrail react
-```
-
 ## Basic Usage
 
 ```jsx
 import { MotionRail } from 'motionrail/react';
 import 'motionrail/style.css';
 
+// Define options outside to prevent re-renders
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+
 function App() {
   return (
-    <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+    <MotionRail options={options}>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -29,22 +26,22 @@ function App() {
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 
 Configuration options for the carousel. See [Configuration](/docs/configuration) for all available options.
 
 ```jsx
-<MotionRail
-  options={{
-    autoplay: true,
-    delay: 3000,
-    breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '16px' }
-    ]
-  }}
->
+const options = {
+  autoplay: true,
+  delay: 3000,
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' }
+  ]
+};
+
+<MotionRail options={options}>
   {/* items */}
 </MotionRail>
 ```
@@ -59,6 +56,8 @@ Ref to access the MotionRail instance for programmatic control.
 ```jsx
 import { useRef } from 'react';
 
+const options = {};
+
 function MyCarousel() {
   const carouselRef = useRef(null);
 
@@ -68,7 +67,7 @@ function MyCarousel() {
 
   return (
     <>
-      <MotionRail ref={carouselRef} options={{}}>
+      <MotionRail ref={carouselRef} options={options}>
         <div>Item 1</div>
         <div>Item 2</div>
       </MotionRail>
@@ -88,11 +87,13 @@ Ref to access the container HTMLDivElement.
 ```jsx
 import { useRef } from 'react';
 
+const options = {};
+
 function MyCarousel() {
   const containerRef = useRef(null);
 
   return (
-    <MotionRail divRef={containerRef} options={{}}>
+    <MotionRail divRef={containerRef} options={options}>
       <div>Item 1</div>
       <div>Item 2</div>
     </MotionRail>
@@ -105,8 +106,10 @@ function MyCarousel() {
 All other props are passed to the root `div` element:
 
 ```jsx
+const options = {};
+
 <MotionRail
-  options={{}}
+  options={options}
   className="my-carousel"
   style={{ maxWidth: '1200px' }}
   aria-label="Product carousel"
@@ -143,23 +146,24 @@ function Carousel() {
     carouselRef.current?.pause();
   };
 
+  // Define options inside only when using setState (setCurrentState)
+  const options = {
+    autoplay: true,
+    delay: 3000,
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' }
+    ],
+    onChange: setCurrentState
+  };
+
   return (
     <div>
       <MotionRail
         ref={carouselRef}
         divRef={containerRef}
-        options={{
-          autoplay: true,
-          delay: 3000,
-          breakpoints: [
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-            { width: 1024, columns: 3, gap: '20px' }
-          ],
-          onChange: (state) => {
-            setCurrentState(state);
-          }
-        }}
+        options={options}
         className="my-carousel"
       >
         <div>Item 1</div>
@@ -195,6 +199,9 @@ The React component automatically calls `update()` when children change:
 import { useState } from 'react';
 import { MotionRail } from 'motionrail/react';
 
+// Define options outside to prevent re-renders
+const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+
 function DynamicCarousel() {
   const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
 
@@ -208,7 +215,7 @@ function DynamicCarousel() {
 
   return (
     <>
-      <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+      <MotionRail options={options}>
         {items.map((item, index) => (
           <div key={index}>{item}</div>
         ))}

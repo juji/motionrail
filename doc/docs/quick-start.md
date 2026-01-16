@@ -18,7 +18,26 @@ Create the carousel HTML structure with the required data attributes:
     </div>
   </div>
 </div>
+
+<style>
+  #carousel [data-motionrail-grid] > div {
+    background: #f0f0f0;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+    height: 200px; /* YOU set the height, however you want */
+  }
+</style>
 ```
+
+::: tip ABOUT HEIGHT
+**The carousel height is not set by default**, giving you full control over your layout. You can set the height on the carousel container itself, on individual items, or use any CSS approach that fits your design.
+:::
 
 **Structure layers:**
 - `[data-motionrail]` - Wrapper element (receives the ID)
@@ -26,88 +45,74 @@ Create the carousel HTML structure with the required data attributes:
 - `[data-motionrail-grid]` - Grid layout container
 - Direct children - Carousel items (no specific class or attribute required)
 
-### 2. Import Styles
-
-```js
-import 'motionrail/style.css';
-```
-
-### 3. Initialize the Carousel
+### 2. Import Styles & Initialize the Carousel
 
 ```js
 import { MotionRail } from 'motionrail';
+import 'motionrail/style.css';
 
 const carousel = new MotionRail(document.getElementById('carousel'), {
-  breakpoints: [
-    { columns: 1, gap: '16px' },                    // Mobile (default)
-    { width: 768, columns: 2, gap: '16px' },        // Tablet
-    { width: 1024, columns: 3, gap: '20px' }        // Desktop
-  ]
-});
-```
 
-## With Autoplay
-
-```js
-const carousel = new MotionRail(document.getElementById('carousel'), {
+  // set autoplay true for this example
   autoplay: true,
-  delay: 3000,      // Auto-scroll every 3 seconds
-  resumeDelay: 4000, // Resume after 4 seconds of inactivity
+
+  // set the breakpoints
   breakpoints: [
     { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' },
-    { width: 1024, columns: 3, gap: '20px' }
+    { width: 400, columns: 2, gap: '16px' },
+    { width: 550, columns: 3, gap: '20px' }
   ]
 });
 ```
 
-## With Navigation Controls
+<script setup>
+import BasicExample from '../.vitepress/components/BasicExample.vue'
+import ResizableContainer from '../.vitepress/components/ResizableContainer.vue'
+</script>
+
+### Result
+
+**Try it yourself:** Drag the left or right edge to resize the container and see how the carousel responds to different breakpoints.
+
+<ResizableContainer>
+  <BasicExample />
+</ResizableContainer>
+
+## Using UMD (CDN)
+
+If you prefer not to use a build tool, you can use the UMD version via CDN:
 
 ```html
+<link 
+  rel="stylesheet" 
+  href="https://unpkg.com/motionrail@latest/dist/style.css">
+
 <div data-motionrail id="carousel">
   <div data-motionrail-scrollable>
     <div data-motionrail-grid>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
+      <div>Item 4</div>
+      <div>Item 5</div>
     </div>
   </div>
 </div>
 
-<div class="controls">
-  <button id="prev">Previous</button>
-  <button id="next">Next</button>
-</div>
-```
-
-```js
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
-
-const carousel = new MotionRail(document.getElementById('carousel'), {
-  breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
-});
-
-document.getElementById('prev').addEventListener('click', () => carousel.prev());
-document.getElementById('next').addEventListener('click', () => carousel.next());
-```
-
-## Styling Items
-
-```css
-[data-motionrail] {
-  height: 400px; /* Set carousel height */
-}
-
-[data-motionrail-grid] > * {
-  /* Style your carousel items */
-  background: #f0f0f0;
-  border-radius: 8px;
-  padding: 20px;
-}
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(
+    document.getElementById('carousel'), 
+    {
+      autoplay: true,
+      breakpoints: [
+        { columns: 1, gap: '16px' },
+        { width: 400, columns: 2, gap: '16px' },
+        { width: 550, columns: 3, gap: '20px' }
+      ]
+    }
+  );
+</script>
 ```
 
 ## Next Steps

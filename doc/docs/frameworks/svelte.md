@@ -2,12 +2,6 @@
 
 MotionRail provides a Svelte component compatible with both Svelte 4 and Svelte 5 (classic API).
 
-## Installation
-
-```bash
-npm install motionrail svelte
-```
-
 ## Basic Usage
 
 ```svelte
@@ -29,7 +23,7 @@ npm install motionrail svelte
 
 ### `options`
 
-- **Type**: `MotionRailOptions`
+- **Type**: [MotionRailOptions](/docs/api/types/motionrail-options)
 - **Required**: No
 - **Default**: `{}`
 
