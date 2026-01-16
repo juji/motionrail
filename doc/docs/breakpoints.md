@@ -12,6 +12,8 @@ interface MotionRailBreakpoint {
 }
 ```
 
+See [MotionRailBreakpoint](/docs/api/types/motionrail-breakpoint) for complete type documentation.
+
 ## How Breakpoints Work
 
 Breakpoints are applied **mobile-first**. Start with your default configuration (no `width` property), then add breakpoints with increasing `width` values.

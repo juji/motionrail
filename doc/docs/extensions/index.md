@@ -56,6 +56,8 @@ interface MotionRailExtension {
 }
 ```
 
+See [MotionRailExtension](/docs/api/types/motionrail-extension) for complete type documentation.
+
 ### Lifecycle Hooks
 
 #### `onInit(motionRail, state)`
@@ -63,24 +65,24 @@ interface MotionRailExtension {
 Called once when the carousel initializes. Use this to set up DOM elements, event listeners, or initial state.
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
-- `state` - Current carousel state
+- `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
+- `state` - Current [MotionRailState](/docs/api/types/motionrail-state)
 
 #### `onUpdate(motionRail, state)`
 
 Called whenever the carousel state changes (scroll, resize, content update).
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
-- `state` - Updated carousel state
+- `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
+- `state` - Updated [MotionRailState](/docs/api/types/motionrail-state)
 
 #### `onDestroy(motionRail, state)`
 
 Called when the carousel is destroyed. Use this to clean up DOM elements, event listeners, and timers.
 
 **Parameters:**
-- `motionRail` - The MotionRail instance
-- `state` - Final carousel state
+- `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
+- `state` - Final [MotionRailState](/docs/api/types/motionrail-state)
 
 ## State Object
 
@@ -94,6 +96,8 @@ interface MotionRailState {
   isLastItemVisible: boolean;      // Last item is visible
 }
 ```
+
+See [MotionRailState](/docs/api/types/motionrail-state) for complete type documentation.
 
 ## Multiple Extensions
 

@@ -103,7 +103,7 @@ dots.forEach((dot, index) => {
 
 Get the current carousel state.
 
-**Returns:** [`MotionRailState`](/docs/api/types/motionrail-state)
+**Returns:** [MotionRailState](/docs/api/types/motionrail-state)
 
 ```js
 const state = carousel.getState();
@@ -127,7 +127,7 @@ interface MotionRailState {
 
 Get the current carousel configuration options. Returns a copy to prevent external modifications.
 
-**Returns:** [`MotionRailOptions`](/docs/api/types/motionrail-options)
+**Returns:** [MotionRailOptions](/docs/api/types/motionrail-options)
 
 ```js
 const options = carousel.getOptions();
@@ -270,20 +270,6 @@ document.getElementById('add-item').addEventListener('click', () => {
 window.addEventListener('beforeunload', () => {
   carousel.destroy();
 });
-```
-
-## Method Chaining
-
-Methods that don't return a value return `void`, so method chaining is not supported:
-
-```js
-// ❌ This won't work
-carousel.pause().next().play();
-
-// ✅ Do this instead
-carousel.pause();
-carousel.next();
-carousel.play();
 ```
 
 ## Next Steps

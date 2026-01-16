@@ -14,6 +14,8 @@ interface MotionRailOptions {
 }
 ```
 
+See [MotionRailOptions](/docs/api/types/motionrail-options) for complete type documentation.
+
 ## Core Options
 
 ### `autoplay`
@@ -72,7 +74,7 @@ const carousel = new MotionRail(element, {
 
 ### `breakpoints`
 
-- **Type**: `MotionRailBreakpoint[]`
+- **Type**: [MotionRailBreakpoint](/docs/api/types/motionrail-breakpoint)[]
 - **Default**: `[{ columns: 1, gap: "0px" }]`
 
 Array of responsive breakpoint configurations. See [Breakpoints](/docs/breakpoints) for detailed documentation.
@@ -94,7 +96,7 @@ const carousel = new MotionRail(element, {
 - **Type**: `(state: MotionRailState) => void`
 - **Default**: `undefined`
 
-Callback function fired when carousel state changes (on scroll, resize, etc.).
+Callback function fired when carousel state changes (on scroll, resize, etc.). Receives [MotionRailState](/docs/api/types/motionrail-state) object.
 
 ```js
 const carousel = new MotionRail(element, {
@@ -117,9 +119,11 @@ interface MotionRailState {
 }
 ```
 
+See [MotionRailState](/docs/api/types/motionrail-state) for complete type documentation.
+
 ### `extensions`
 
-- **Type**: `MotionRailExtension[]`
+- **Type**: [MotionRailExtension](/docs/api/types/motionrail-extension)[]
 - **Default**: `[]`
 
 Array of extension instances to add functionality. See [Extensions](/docs/extensions/) for more information.

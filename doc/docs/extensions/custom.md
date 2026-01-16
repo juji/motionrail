@@ -15,6 +15,8 @@ interface MotionRailExtension {
 }
 ```
 
+See [MotionRailExtension](/docs/api/types/motionrail-extension) for complete type documentation.
+
 ## State Object
 
 The state object passed to `onInit`, `onUpdate`, and `onDestroy`:

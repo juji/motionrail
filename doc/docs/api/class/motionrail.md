@@ -10,7 +10,7 @@ new MotionRail(element: HTMLElement, options?: MotionRailOptions)
 
 **Parameters:**
 - `element` - The HTML element that wraps the carousel
-- `options` - Optional [`MotionRailOptions`](/docs/api/types/motionrail-options) configuration
+- `options` - Optional [MotionRailOptions](/docs/api/types/motionrail-options) configuration
 
 **Returns:** MotionRail instance with all public methods
 
@@ -165,7 +165,7 @@ Get the current carousel state.
 getState(): MotionRailState
 ```
 
-**Returns:** [`MotionRailState`](/docs/api/types/motionrail-state) object
+**Returns:** [MotionRailState](/docs/api/types/motionrail-state) object
 
 **Example:**
 ```ts
@@ -186,7 +186,7 @@ Get the current carousel configuration options. Returns a copy to prevent extern
 getOptions(): MotionRailOptions
 ```
 
-**Returns:** [`MotionRailOptions`](/docs/api/types/motionrail-options) object
+**Returns:** [MotionRailOptions](/docs/api/types/motionrail-options) object
 
 **Example:**
 ```ts
@@ -308,20 +308,6 @@ document.getElementById('add-item').addEventListener('click', () => {
 window.addEventListener('beforeunload', () => {
   carousel.destroy();
 });
-```
-
-## Method Chaining
-
-Methods that don't return a value return `void`, so method chaining is not supported:
-
-```ts
-// ❌ This won't work
-carousel.pause().next().play();
-
-// ✅ Do this instead
-carousel.pause();
-carousel.next();
-carousel.play();
 ```
 
 ## Next Steps
