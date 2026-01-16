@@ -48,6 +48,28 @@ export default defineConfig({
           { text: 'Logger', link: '/docs/extensions/logger' },
           { text: 'Creating Extensions', link: '/docs/extensions/custom' }
         ]
+      },
+      {
+        text: 'API',
+        items: [
+          {
+            text: 'Class',
+            collapsed: false,
+            items: [
+              { text: 'MotionRail', link: '/docs/api/class/motionrail' }
+            ]
+          },
+          {
+            text: 'Types',
+            collapsed: false,
+            items: [
+              { text: 'MotionRailOptions', link: '/docs/api/types/motionrail-options' },
+              { text: 'MotionRailState', link: '/docs/api/types/motionrail-state' },
+              { text: 'MotionRailBreakpoint', link: '/docs/api/types/motionrail-breakpoint' },
+              { text: 'MotionRailExtension', link: '/docs/api/types/motionrail-extension' }
+            ]
+          }
+        ]
       }
     ],
 
