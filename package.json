@@ -2,6 +2,7 @@
   "name": "motionrail",
   "version": "0.3.1",
   "description": "A lightweight carousel library for modern web applications",
+  "packageManager": "pnpm@10.14.0",
   "keywords": [
     "carousel",
     "slider",
@@ -68,12 +69,14 @@
       "import": "./dist/vue.js"
     },
     "./svelte": {
-      "types": "./dist/svelte.d.ts",
-      "import": "./dist/svelte.js"
+      "types": "./dist/svelte/svelte.d.ts",
+      "svelte": "./dist/svelte/index.js",
+      "import": "./dist/svelte/index.js"
     },
     "./svelte5": {
-      "types": "./dist/svelte5.d.ts",
-      "import": "./dist/svelte5.js"
+      "types": "./dist/svelte5/svelte5.d.ts",
+      "svelte": "./dist/svelte5/index.js",
+      "import": "./dist/svelte5/index.js"
     },
     "./style.css": "./dist/style.css"
   },
@@ -86,11 +89,11 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run build:es && npm run build:svelte && npm run build:svelte5 && npm run build:umd && npm run copy:types",
+    "build": "pnpm -s build:es && pnpm -s build:svelte && pnpm -s build:svelte5 && pnpm -s build:umd && pnpm -s copy:types",
     "build:es": "vite build && tsc",
     "build:svelte": "svelte-package -i src/svelte -o dist/svelte -t false",
     "build:svelte5": "svelte-package -i src/svelte5 -o dist/svelte5 -t false",
-    "build:umd": "npm run build:umd:main && npm run build:umd:arrows && npm run build:umd:dots && npm run build:umd:thumbnails && npm run build:umd:logger",
+    "build:umd": "pnpm -s build:umd:main && pnpm -s build:umd:arrows && pnpm -s build:umd:dots && pnpm -s build:umd:thumbnails && pnpm -s build:umd:logger",
     "build:umd:main": "BUILD_UMD=true ENTRY_PATH=src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
     "build:umd:arrows": "BUILD_UMD=true ENTRY_PATH=src/extensions/arrows/main.ts LIB_NAME=MotionRailArrows FILE_NAME=extensions/arrows.umd vite build",
     "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",

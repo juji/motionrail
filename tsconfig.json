@@ -14,10 +14,8 @@
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
 
-    /* Emit .d.ts files */
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "outDir": "./dist",
+    /* Typecheck only (d.ts emitted by build tooling) */
+    "noEmit": true,
 
     /* Linting */
     "strict": true,
@@ -27,5 +25,12 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "exclude": [
+    "dist",
+    "src/**/*.d.ts",
+    "src/vue/**",
+    "src/svelte/**",
+    "src/svelte5/**"
+  ]
 }
