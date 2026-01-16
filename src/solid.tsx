@@ -1,5 +1,6 @@
 /** @jsxImportSource solid-js */
 import { onMount, onCleanup, createEffect, type JSX, splitProps } from "solid-js";
+import { isServer } from "solid-js/web"
 import { MotionRail as MotionRailClass } from "./motionrail";
 import type { MotionRailOptions } from "./lib/types";
 
@@ -11,6 +12,11 @@ export interface MotionRailProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>
 
 function MotionRailSolid(props: MotionRailProps) {
   const [local, others] = splitProps(props, ['options', 'ref', 'divRef', 'children']);
+  
+  if (isServer) {
+    return <div {...others}>{local.children}</div>;
+  }
+  
   let containerRef: HTMLDivElement | undefined;
   let motionRailInstance: MotionRailClass | null = null;
 

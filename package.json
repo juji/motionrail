@@ -28,52 +28,52 @@
   "types": "./dist/motionrail.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/motionrail.d.ts",
       "import": "./dist/motionrail.js",
-      "require": "./dist/motionrail.umd.cjs",
-      "types": "./dist/motionrail.d.ts"
+      "require": "./dist/motionrail.umd.cjs"
     },
     "./extensions/arrows": {
+      "types": "./dist/extensions/arrows/main.d.ts",
       "import": "./dist/extensions/arrows.js",
-      "require": "./dist/extensions/arrows.umd.cjs",
-      "types": "./dist/extensions/arrows/main.d.ts"
+      "require": "./dist/extensions/arrows.umd.cjs"
     },
     "./extensions/arrows/style.css": "./dist/extensions/arrows/style.css",
     "./extensions/dots": {
+      "types": "./dist/extensions/dots/main.d.ts",
       "import": "./dist/extensions/dots.js",
-      "require": "./dist/extensions/dots.umd.cjs",
-      "types": "./dist/extensions/dots/main.d.ts"
+      "require": "./dist/extensions/dots.umd.cjs"
     },
     "./extensions/dots/style.css": "./dist/extensions/dots/style.css",
     "./extensions/thumbnails": {
+      "types": "./dist/extensions/thumbnails/main.d.ts",
       "import": "./dist/extensions/thumbnails.js",
-      "require": "./dist/extensions/thumbnails.umd.cjs",
-      "types": "./dist/extensions/thumbnails/main.d.ts"
+      "require": "./dist/extensions/thumbnails.umd.cjs"
     },
     "./extensions/thumbnails/style.css": "./dist/extensions/thumbnails/style.css",
     "./extensions/logger": {
+      "types": "./dist/extensions/logger.d.ts",
       "import": "./dist/extensions/logger.js",
-      "require": "./dist/extensions/logger.umd.cjs",
-      "types": "./dist/extensions/logger.d.ts"
+      "require": "./dist/extensions/logger.umd.cjs"
     },
     "./react": {
-      "import": "./dist/react.js",
-      "types": "./dist/react.d.ts"
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
     },
     "./solid": {
-      "import": "./dist/solid.js",
-      "types": "./dist/solid.d.ts"
+      "types": "./dist/solid.d.ts",
+      "import": "./dist/solid.js"
     },
     "./vue": {
-      "import": "./dist/vue.js",
-      "types": "./dist/vue.d.ts"
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
     },
     "./svelte": {
-      "import": "./dist/svelte.js",
-      "types": "./dist/svelte.d.ts"
+      "types": "./dist/svelte.d.ts",
+      "import": "./dist/svelte.js"
     },
     "./svelte5": {
-      "import": "./dist/svelte5.js",
-      "types": "./dist/svelte5.d.ts"
+      "types": "./dist/svelte5.d.ts",
+      "import": "./dist/svelte5.js"
     },
     "./style.css": "./dist/style.css"
   },
