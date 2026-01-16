@@ -8,7 +8,7 @@ import ResizableContainer from './ResizableContainer.vue';
     <div class="container">
       <div class="section-content">
         <h2 class="section-title">Responsive Breakpoints</h2>
-        <p class="section-description">Configure different layouts for different screen sizes. Show 1 slide on mobile, 2 on tablet, 4 on desktop.</p>
+        <p class="section-description">Automatically adjust the number of columns based on screen size. Configure different layouts for different viewport widths.</p>
         <p class="resize-hint">👉 Drag the edges to resize and see breakpoints in action!</p>
       </div>
       <div class="section-demo">
@@ -51,7 +51,10 @@ import ResizableContainer from './ResizableContainer.vue';
 .section-description {
   font-size: 18px;
   line-height: 1.5;
- 
+  color: var(--vp-c-text-2);
+  margin: 0 auto;
+  max-width: 640px;
+}
 
 .resize-hint {
   font-size: 16px;
@@ -60,9 +63,6 @@ import ResizableContainer from './ResizableContainer.vue';
   margin: 12px auto 0;
   max-width: 520px;
   font-weight: 500;
-} color: var(--vp-c-text-2);
-  margin: 0 auto;
-  max-width: 520px;
 }
 
 .section-demo {
