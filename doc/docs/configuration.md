@@ -70,8 +70,6 @@ const carousel = new MotionRail(element, {
 });
 ```
 
-## Advanced Options
-
 ### `breakpoints`
 
 - **Type**: `MotionRailBreakpoint[]`
@@ -88,6 +86,8 @@ const carousel = new MotionRail(element, {
   ]
 });
 ```
+
+## Advanced Options
 
 ### `onChange`
 
