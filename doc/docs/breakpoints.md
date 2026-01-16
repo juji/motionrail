@@ -1,6 +1,6 @@
 # Breakpoints
 
-Breakpoints allow you to configure how many columns and what gap size to use at different container widths, creating a fully responsive carousel.
+Breakpoints allow you to configure how many columns and what gap size to use at different **container widths**, creating a fully responsive carousel.
 
 ## Configuration
 
