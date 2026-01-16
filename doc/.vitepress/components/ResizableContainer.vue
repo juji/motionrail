@@ -13,10 +13,18 @@ const props = defineProps({
 });
 
 const containerRef = ref(null);
+const contentRef = ref(null);
 const width = ref(props.initialWidth);
 const displayWidth = ref('0');
 const isDragging = ref(false);
 const dragSide = ref(null);
+
+const updateDisplayWidth = () => {
+  if (contentRef.value) {
+    const contentWidth = contentRef.value.getBoundingClientRect().width;
+    displayWidth.value = `${Math.round(contentWidth)}px`;
+  }
+};
 
 const startDrag = (e, side) => {
   isDragging.value = true;
@@ -28,7 +36,6 @@ const onDrag = (e) => {
   if (!isDragging.value || !containerRef.value) return;
   
   const rect = containerRef.value.getBoundingClientRect();
-  const paddingTotal = 42; // 21px left + 21px right
   let newWidth;
   
   if (dragSide.value === 'right') {
@@ -48,7 +55,11 @@ const onDrag = (e) => {
   }
   
   width.value = `${newWidth}px`;
-  displayWidth.value = `${Math.round(newWidth - paddingTotal)}px`;
+  
+  // Update display width based on actual content width
+  requestAnimationFrame(() => {
+    updateDisplayWidth();
+  });
 };
 
 const stopDrag = () => {
@@ -60,12 +71,8 @@ onMounted(() => {
   document.addEventListener('mousemove', onDrag);
   document.addEventListener('mouseup', stopDrag);
   
-  // Get initial pixel width
-  if (containerRef.value) {
-    const rect = containerRef.value.getBoundingClientRect();
-    const paddingTotal = 42; // 21px left + 21px right
-    displayWidth.value = `${Math.round(rect.width - paddingTotal)}px`;
-  }
+  // Get initial content width
+  updateDisplayWidth();
 });
 
 onUnmounted(() => {
@@ -85,7 +92,9 @@ onUnmounted(() => {
       <div class="resize-handle left" @mousedown="startDrag($event, 'left')">
         <div class="resize-handle-line"></div>
       </div>
-      <slot />
+      <div ref="contentRef" class="resizeable-content">
+        <slot />
+      </div>
       <div class="resize-handle right" @mousedown="startDrag($event, 'right')">
         <div class="resize-handle-line"></div>
       </div>
@@ -100,6 +109,10 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.resizeable-content{
+  margin: 0 2px;
 }
 
 .resizable-container {
@@ -120,7 +133,7 @@ onUnmounted(() => {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 20px;
+  width: 21px;
   display: flex;
   align-items: center;
   justify-content: center;

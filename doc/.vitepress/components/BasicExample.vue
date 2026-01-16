@@ -12,7 +12,7 @@ onMounted(() => {
       breakpoints: [
         { columns: 1, gap: '16px' },
         { width: 400, columns: 2, gap: '16px' },
-        { width: 600, columns: 3, gap: '20px' }
+        { width: 550, columns: 3, gap: '20px' }
       ]
     });
   }
@@ -37,7 +37,6 @@ onMounted(() => {
 [data-motionrail-grid] > div {
   background: #f0f0f0;
   border-radius: 8px;
-  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;

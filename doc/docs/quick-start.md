@@ -52,11 +52,15 @@ import { MotionRail } from 'motionrail';
 import 'motionrail/style.css';
 
 const carousel = new MotionRail(document.getElementById('carousel'), {
+
+  // set autoplay for this example
   autoplay: true,
+
+  // set the breakpoints
   breakpoints: [
     { columns: 1, gap: '16px' },
     { width: 400, columns: 2, gap: '16px' },
-    { width: 600, columns: 3, gap: '20px' }
+    { width: 550, columns: 3, gap: '20px' }
   ]
 });
 ```
@@ -74,68 +78,38 @@ import ResizableContainer from '../.vitepress/components/ResizableContainer.vue'
   <BasicExample />
 </ResizableContainer>
 
-## With Autoplay
+## Using UMD (CDN)
 
-```js
-const carousel = new MotionRail(document.getElementById('carousel'), {
-  autoplay: true,
-  delay: 3000,      // Auto-scroll every 3 seconds
-  resumeDelay: 4000, // Resume after 4 seconds of inactivity
-  breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' },
-    { width: 1024, columns: 3, gap: '20px' }
-  ]
-});
-```
-
-## With Navigation Controls
+If you prefer not to use a build tool, you can use the UMD version via CDN:
 
 ```html
+<link 
+  rel="stylesheet" 
+  href="https://unpkg.com/motionrail@latest/dist/style.css">
+
 <div data-motionrail id="carousel">
   <div data-motionrail-scrollable>
     <div data-motionrail-grid>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
+      <div>Item 4</div>
+      <div>Item 5</div>
     </div>
   </div>
 </div>
 
-<div class="controls">
-  <button id="prev">Previous</button>
-  <button id="next">Next</button>
-</div>
-```
-
-```js
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
-
-const carousel = new MotionRail(document.getElementById('carousel'), {
-  breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
-});
-
-document.getElementById('prev').addEventListener('click', () => carousel.prev());
-document.getElementById('next').addEventListener('click', () => carousel.next());
-```
-
-## Styling Items
-
-```css
-[data-motionrail] {
-  height: 400px; /* Set carousel height */
-}
-
-[data-motionrail-grid] > * {
-  /* Style your carousel items */
-  background: #f0f0f0;
-  border-radius: 8px;
-  padding: 20px;
-}
+<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script>
+  const carousel = new MotionRail(document.getElementById('carousel'), {
+    autoplay: true,
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 400, columns: 2, gap: '16px' },
+      { width: 550, columns: 3, gap: '20px' }
+    ]
+  });
+</script>
 ```
 
 ## Next Steps
