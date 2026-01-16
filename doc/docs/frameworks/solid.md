@@ -194,6 +194,45 @@ function Carousel() {
 }
 ```
 
+## SSR Support (SolidStart)
+
+When using SSR-enabled frameworks like **SolidStart**, you must use `clientOnly` to prevent server-side rendering issues since MotionRail relies on browser APIs:
+
+```tsx
+// src/routes/index.tsx
+import { clientOnly } from '@solidjs/start';
+
+const ClientOnlyCarousel = clientOnly(() => import('../components/carousel'));
+
+export default function Home() {
+  return <ClientOnlyCarousel />;
+}
+```
+
+```tsx
+// src/components/carousel.tsx
+import { MotionRail } from 'motionrail/solid';
+import 'motionrail/style.css';
+
+const options = { 
+  breakpoints: [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' },
+    { width: 1024, columns: 3, gap: '20px' }
+  ]
+};
+
+export default function Carousel() {
+  return (
+    <MotionRail options={options}>
+      <div>Item 1</div>
+      <div>Item 2</div>
+      <div>Item 3</div>
+    </MotionRail>
+  );
+}
+```
+
 ## Dynamic Children
 
 The Solid component automatically calls `update()` when children change:
