@@ -24,8 +24,12 @@ export default defineConfig({
     !isUMD &&
       dts({
         include: ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
-        exclude: ["src/**/*.svelte"],
+        exclude: ["src/**/*.svelte", "src/**/*.d.ts"],
         rollupTypes: true,
+        outDir: "dist",
+        copyDtsFiles: false,
+        strictOutput: true,
+        logLevel: "silent",
       }),
   ],
   build: {
