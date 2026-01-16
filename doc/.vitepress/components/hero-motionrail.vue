@@ -34,7 +34,6 @@ const options = {
   width: 100%;
   height: 300px;
   background: var(--vp-c-bg-soft);
-  border-radius: 8px;
   overflow: hidden;
 }
 

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import HeroMotionRail from './hero-motionrail.vue';
 import HomeRtlSection from './home-rtl-section.vue';
+import HomeBreakpointsSection from './home-breakpoints-section.vue';
 </script>
 
 <template>
@@ -24,6 +25,7 @@ import HomeRtlSection from './home-rtl-section.vue';
     </div>
 
     <HomeRtlSection />
+    <HomeBreakpointsSection />
   </div>
 </template>
 

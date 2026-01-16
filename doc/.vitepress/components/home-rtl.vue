@@ -1,14 +1,17 @@
 <script setup lang="ts">
 import MotionRail from 'motionrail/vue';
 import { Arrows } from 'motionrail/extensions/arrows';
+import { Thumbnails } from 'motionrail/extensions/thumbnails';
 import 'motionrail/style.css';
 import 'motionrail/extensions/arrows/style.css';
+import 'motionrail/extensions/thumbnails/style.css';
 
 const options = {
   rtl: true,
   autoplay: true,
   extensions: [
     Arrows(),
+    Thumbnails({ thumbnailHeight: 60 })
   ],
 };
 </script>
@@ -25,7 +28,6 @@ const options = {
 .demo-slide {
   width: 100%;
   height: 200px;
-  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -33,7 +35,7 @@ const options = {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 34px;
   font-weight: 700;
   color: white;
 }
