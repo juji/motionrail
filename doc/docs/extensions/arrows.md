@@ -105,57 +105,76 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 
 ## Styling
 
-The extension uses CSS classes you can customize:
+The extension applies the following default styles:
 
 ```css
-/* Arrow buttons */
-.motionrail-arrow {
-  /* Your custom styles */
+.motionrail-arrow[disabled] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.motionrail-arrow-left,
+.motionrail-arrow-right {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10;
+  position: absolute;
+  position-anchor: --motionrail-scrollable;
+  top: anchor(center);
+  translate: 0 -50%;
 }
 
 .motionrail-arrow-left {
-  /* Left arrow specific styles */
+  left: anchor(left);
+  margin-left: 10px;
 }
 
 .motionrail-arrow-right {
-  /* Right arrow specific styles */
+  right: anchor(right);
+  margin-right: 10px;
 }
 
-.motionrail-arrow:disabled {
-  /* Disabled state when loop: false */
+.motionrail-arrow-left:hover,
+.motionrail-arrow-right:hover {
+  background: rgba(0, 0, 0, 0.8);
+  scale: 1.1;
 }
 
-/* Hide arrows when all items visible */
-.motionrail-arrows-hidden {
-  display: none;
+.motionrail-arrow-left:active,
+.motionrail-arrow-right:active {
+  scale: 0.95;
 }
 ```
 
-## Custom Icons
+**Customization Tips:**
+- Override `background` and `color` to match your theme
+- Adjust `width`, `height`, and `border-radius` for different sizes/shapes  
+- Modify `font-size` or use custom `leftIcon`/`rightIcon` options for custom icons
+- Change `margin-left`/`margin-right` for positioning
+- Update `transition` and hover `scale` for different animation effects
 
-### Text Icons
+**Custom Icons:**
 
+Use text symbols:
 ```js
-Arrows({
-  leftIcon: '‹',
-  rightIcon: '›'
-})
+Arrows({ leftIcon: '‹', rightIcon: '›' })
 ```
 
-### SVG Icons
-
+Or SVG icons:
 ```js
 Arrows({
-  leftIcon: `
-    <svg width="24" height="24" viewBox="0 0 24 24">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  `,
-  rightIcon: `
-    <svg width="24" height="24" viewBox="0 0 24 24">
-      <path d="M9 18l6-6-6-6"/>
-    </svg>
-  `
+  leftIcon: '<svg width="24" height="24"><path d="M15 18l-6-6 6-6"/></svg>',
+  rightIcon: '<svg width="24" height="24"><path d="M9 18l6-6-6-6"/></svg>'
 })
 ```
 
