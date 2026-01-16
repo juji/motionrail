@@ -15,6 +15,7 @@ import ResizableContainer from './ResizableContainer.vue';
         <ResizableContainer :min-width="280">
           <HomeBreakpoints />
         </ResizableContainer>
+        <a href="/docs/breakpoints" class="demo-link">Learn more about Breakpoints →</a>
       </div>
     </div>
   </div>
@@ -68,6 +69,21 @@ import ResizableContainer from './ResizableContainer.vue';
 .section-demo {
   max-width: 100%;
   margin: 0 auto;
+}
+
+.demo-link {
+  display: block;
+  text-align: center;
+  margin-top: 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+
+.demo-link:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
 }
 
 @media (min-width: 1024px) {

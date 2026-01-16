@@ -9,8 +9,8 @@ import HomeBreakpointsSection from './home-breakpoints-section.vue';
   <div class="home-layout">
     <HeroSection />
     <HomeExtensionsSection />
-    <HomeRtlSection />
     <HomeBreakpointsSection />
+    <HomeRtlSection />
   </div>
 </template>
 
