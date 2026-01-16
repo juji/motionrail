@@ -199,14 +199,12 @@ function Carousel() {
 When using SSR-enabled frameworks like **SolidStart**, you must use `clientOnly` to prevent server-side rendering issues since MotionRail relies on browser APIs:
 
 ```tsx
-// src/routes/index.tsx
+// src/components/carousel-isomorphic.tsx
 import { clientOnly } from '@solidjs/start';
 
-const ClientOnlyCarousel = clientOnly(() => import('../components/carousel'));
+const ClientOnlyCarousel = clientOnly(() => import('./carousel'));
 
-export default function Home() {
-  return <ClientOnlyCarousel />;
-}
+export default ClientOnlyCarousel;
 ```
 
 ```tsx
