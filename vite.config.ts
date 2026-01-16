@@ -81,6 +81,13 @@ export default defineConfig({
         "vue",
         "svelte",
         "svelte/internal",
+        "svelte/internal/client",
+        "svelte/internal/server",
+        "svelte/store",
+        "svelte/motion",
+        "svelte/transition",
+        "svelte/animate",
+        "svelte/easing",
       ],
       output: {
         assetFileNames: (assetInfo) => {
