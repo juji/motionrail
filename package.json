@@ -80,6 +80,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install:prod": "pnpm install --filter '!./manual/*'",
     "build": "pnpm build:main && pnpm build:libs",
     "build:main": "pnpm --filter main build",
     "build:libs": "pnpm --parallel --filter './extensions/*' --filter './frameworks/*' build",
