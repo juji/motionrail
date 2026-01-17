@@ -132,7 +132,8 @@ export default defineConfig({
             mdPath = mdPath + '.md'
           }
           const txtName = mdPath.replace(/\//g, '-').replace('.md', '.txt')
-          docStructure += `- ${item.text}: /${txtName}\n`
+          const description = item.text
+          docStructure += `- **[${txtName}](./${txtName})** - ${description}\n`
         }
         
         // Handle nested items
@@ -146,7 +147,8 @@ export default defineConfig({
                 mdPath = mdPath + '.md'
               }
               const txtName = mdPath.replace(/\//g, '-').replace('.md', '.txt')
-              docStructure += `- ${subItem.text}: /${txtName}\n`
+              const description = subItem.text
+              docStructure += `- **[${txtName}](./${txtName})** - ${description}\n`
             }
           }
         }
