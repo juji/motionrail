@@ -1,10 +1,12 @@
 import { Title } from '@solidjs/meta';
-import { MotionRail } from 'motionrail/solid';
+import { clientOnly } from '@solidjs/start';
 import { Arrows } from 'motionrail/extensions/arrows';
 import 'motionrail/style.css';
 import 'motionrail/extensions/arrows/style.css';
 import Nav from '~/components/Nav';
 import { For } from 'solid-js';
+
+const MotionRail = clientOnly(() => import('motionrail/solid').then(m => ({ default: m.MotionRail })));
 
 export default function ArrowsPage() {
   return (

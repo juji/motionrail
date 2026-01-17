@@ -1,8 +1,10 @@
 import { Title } from '@solidjs/meta';
-import { MotionRail } from 'motionrail/solid';
+import { clientOnly } from '@solidjs/start';
 import 'motionrail/style.css';
 import Nav from '~/components/Nav';
 import { createSignal, For } from 'solid-js';
+
+const MotionRail = clientOnly(() => import('motionrail/solid').then(m => ({ default: m.MotionRail })));
 
 export default function Home() {
   return (

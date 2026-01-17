@@ -1,9 +1,11 @@
 import { Title } from '@solidjs/meta';
-import { MotionRail } from 'motionrail/solid';
+import { clientOnly } from '@solidjs/start';
 import { Logger } from 'motionrail/extensions/logger';
 import 'motionrail/style.css';
 import Nav from '~/components/Nav';
 import { For } from 'solid-js';
+
+const MotionRail = clientOnly(() => import('motionrail/solid').then(m => ({ default: m.MotionRail })));
 
 export default function LoggerPage() {
   return (

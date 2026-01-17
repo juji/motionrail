@@ -21,7 +21,8 @@ export default function Nav(props: { current: 'main' | 'arrows' | 'dots' | 'logg
         'border-bottom': '1px solid #333',
       }}
     >
-      <div style={{ display: 'flex', gap: '20px', 'justify-content': 'center' }}>
+      <div style={{ display: 'flex', gap: '20px', 'justify-content': 'center', 'align-items': 'center' }}>
+        <span style="color: white; font-weight: 600; font-size: 16px;">SOLID</span>
         {links.map((link) => (
           <A
             href={link.href}
