@@ -67,7 +67,7 @@
     },
     "./qwik": {
       "types": "./frameworks/qwik/dist/main.d.ts",
-      "import": "./frameworks/qwik/dist/qwik.es.js"
+      "import": "./frameworks/qwik/src/lib/main.tsx"
     }
   },
   "files": [

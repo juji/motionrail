@@ -8,11 +8,10 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 export default defineConfig({
-  plugins: [],
-  // plugins: [qwikVite()],
+  plugins: [qwikVite()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/lib/main.tsx'),
+      entry: resolve(__dirname, 'src/lib/index.ts'),
       name: 'MotionRailQwik',
       formats: ['es'],
       fileName: (format) => `qwik.${format}.js`,
