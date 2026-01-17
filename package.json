@@ -36,8 +36,13 @@
     },
     "./react": {
       "types": "./frameworks/react/dist/main.d.ts",
-      "import": "./frameworks/react/dist/main.es.js",
-      "require": "./frameworks/react/dist/main.umd.js"
+      "import": "./frameworks/react/dist/react.es.js",
+      "require": "./frameworks/react/dist/react.umd.js"
+    },
+    "./vue": {
+      "types": "./frameworks/vue/dist/index.d.ts",
+      "import": "./frameworks/vue/dist/vue.es.js",
+      "require": "./frameworks/vue/dist/vue.umd.js"
     }
   },
   "files": [
@@ -45,7 +50,9 @@
     "extensions/logger/dist",
     "extensions/arrows/dist",
     "extensions/dots/dist",
-    "extensions/thumbnails/dist"
+    "extensions/thumbnails/dist",
+    "frameworks/react/dist",
+    "frameworks/vue/dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
