@@ -87,7 +87,8 @@
     "build:rest": "pnpm --parallel --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
     "build:local": "pnpm build:main && pnpm build:libs && pnpm build:rest",
     "build:doc": "pnpm build:main && pnpm build:libs && pnpm --filter doc build",
-    "dev": "pnpm --parallel dev"
+    "dev": "pnpm --parallel dev",
+    "prepare": "husky"
   },
   "keywords": [
     "carousel",
@@ -118,5 +119,8 @@
     "type": "git",
     "url": "https://github.com/juji/motionrail"
   },
-  "packageManager": "pnpm@10.14.0"
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "husky": "^9.1.7"
+  }
 }
