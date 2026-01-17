@@ -4,6 +4,7 @@ import { MotionRail } from 'motionrail/qwik';
 import { Logger } from 'motionrail/extensions/logger';
 import 'motionrail/style.css';
 import Nav from '../../components/Nav';
+import { noSerialize } from '@builder.io/qwik';
 
 export default component$(() => {
   const getGradient = (index: number): string => {
@@ -35,14 +36,14 @@ export default component$(() => {
             Basic Logger (check console)
           </h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
               extensions: [Logger()],
-            }}
+            })}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div

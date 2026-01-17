@@ -36,14 +36,14 @@ export default component$(() => {
             Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
           </h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
-              onChange: noSerialize((state: any) => console.log('Carousel changed:', state)),
-            }}
+              onChange: (state: any) => console.log('Carousel changed:', state),
+            })}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div

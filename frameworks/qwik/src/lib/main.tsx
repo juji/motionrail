@@ -1,4 +1,4 @@
-import { component$, useVisibleTask$, useSignal, Slot, type QwikIntrinsicElements } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useSignal, Slot, type QwikIntrinsicElements, noSerialize, useStore } from "@builder.io/qwik";
 import {
   MotionRail as MotionRailClass,
   type MotionRailOptions,
@@ -13,6 +13,10 @@ export interface MotionRailProps {
 export const MotionRail = component$<MotionRailProps>(({ options, ...divProps }) => {
   const containerRef = useSignal<HTMLDivElement>();
   const motionRailRef = useSignal<MotionRailClass | null>(null);
+  const optionsStore = useStore<{ value: MotionRailOptions | undefined }>({ value: undefined });
+
+  // Set options without tracking
+  optionsStore.value = options;
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ cleanup }) => {
@@ -20,7 +24,7 @@ export const MotionRail = component$<MotionRailProps>(({ options, ...divProps })
 
     motionRailRef.value = new MotionRailClass(
       containerRef.value,
-      options || {}
+      noSerialize(optionsStore.value) || {}
     );
 
     cleanup(() => {
@@ -29,18 +33,6 @@ export const MotionRail = component$<MotionRailProps>(({ options, ...divProps })
         motionRailRef.value = null;
       }
     });
-  });
-
-  // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(({ track }) => {
-    track(() => options);
-    if (motionRailRef.value && containerRef.value) {
-      motionRailRef.value.destroy();
-      motionRailRef.value = new MotionRailClass(
-        containerRef.value,
-        options || {}
-      );
-    }
   });
 
   return (
