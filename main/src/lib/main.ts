@@ -145,9 +145,10 @@ export class MotionRail {
 
       containerQueries += `
       @container ${randomName} ${condition} {
-        [data-motionrail-grid] {
-          grid-template-columns: repeat(${this.state.totalItems}, ${itemWidth});
-          gap: ${gapValue};
+        [data-motionrail] [data-motionrail-scrollable] [data-motionrail-grid] {
+          grid-template-columns: repeat(${this.state.totalItems}, ${itemWidth}) !important;
+          gap: ${gapValue} !important;
+          opacity: 1 !important;
         }
       }
     `;
