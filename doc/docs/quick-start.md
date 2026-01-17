@@ -40,10 +40,12 @@ Create the carousel HTML structure with the required data attributes:
 :::
 
 **Structure layers:**
-- `[data-motionrail]` - Wrapper element
-- `[data-motionrail-scrollable]` - Scrollable container with overflow and snap behavior
-- `[data-motionrail-grid]` - Grid layout container
-- Direct children - Carousel items (no specific class or attribute required)
+```
+[data-motionrail]                    - Wrapper element
+└── [data-motionrail-scrollable]     - Scrollable container with overflow and snap behavior
+    └── [data-motionrail-grid]       - Grid layout container
+        └── Direct children          - Carousel items
+```
 
 ### 2. Import Styles & Initialize the Carousel
 
