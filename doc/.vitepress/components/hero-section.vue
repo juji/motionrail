@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Icon } from '@iconify/vue';
 import HeroMotionRail from './hero-motionrail.vue';
 </script>
 
@@ -14,6 +15,28 @@ import HeroMotionRail from './hero-motionrail.vue';
           <a class="action-button brand" href="/docs">Read The Docs</a>
           <a class="action-button alt" href="https://github.com/juji/motionrail">Github</a>
         </div>
+
+        <div class="frameworks">
+          <a href="/docs/frameworks/react" class="framework-icon" aria-label="React">
+            <Icon icon="skill-icons:react-dark" />
+          </a>
+          <a href="/docs/frameworks/preact" class="framework-icon" aria-label="Preact">
+            <Icon icon="logos:preact" />
+          </a>
+          <a href="/docs/frameworks/solid" class="framework-icon" aria-label="Solid">
+            <Icon icon="logos:solidjs-icon" />
+          </a>
+          <a href="/docs/frameworks/vue" class="framework-icon" aria-label="Vue">
+            <Icon icon="skill-icons:vuejs-dark" />
+          </a>
+          <a href="/docs/frameworks/svelte" class="framework-icon" aria-label="Svelte">
+            <Icon icon="skill-icons:svelte" />
+          </a>
+          <a href="/docs/frameworks/qwik" class="framework-icon" aria-label="Qwik">
+            <Icon icon="devicon:qwik" />
+          </a>
+        </div>
+        
       </div>
       <div class="hero-demo">
         <HeroMotionRail />
@@ -124,6 +147,33 @@ import HeroMotionRail from './hero-motionrail.vue';
   background-color: var(--vp-button-alt-hover-bg);
 }
 
+.frameworks {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.framework-icon {
+  width: 40px;
+  height: 40px;
+  transition: transform 0.25s, opacity 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.framework-icon:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+.framework-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
 @media (min-width: 768px) {
   .hero-section {
     padding: 96px 48px;
@@ -172,6 +222,10 @@ import HeroMotionRail from './hero-motionrail.vue';
   }
 
   .actions {
+    justify-content: flex-start;
+  }
+
+  .frameworks {
     justify-content: flex-start;
   }
 }
