@@ -162,7 +162,7 @@ export default defineConfig({
 MotionRail is a modern carousel library built with CSS Grid and vanilla JavaScript. It provides momentum-based scrolling, snap alignment, responsive breakpoints, and first-class framework integrations.
 
 - Repository: https://github.com/juji/motionrail
-- Documentation: https://motionrail.dev/docs/
+- Documentation: https://motionrail.jujiplay.com
 - License: MIT
 
 ## Documentation Structure
