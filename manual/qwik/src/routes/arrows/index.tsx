@@ -67,7 +67,7 @@ export default component$(() => {
         {/* Auto-hide Arrows */}
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>
-            Auto-hide Arrows (when at start/end)
+            Arrows with Loop Disabled (hide at ends)
           </h2>
           <MotionRail
             options={{
@@ -75,7 +75,7 @@ export default component$(() => {
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
-              extensions: [Arrows({ autoHide: true })],
+              extensions: [Arrows({ loop: false })],
             }}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (

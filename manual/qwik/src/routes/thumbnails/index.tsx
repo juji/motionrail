@@ -75,7 +75,7 @@ export default component$(() => {
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
-              extensions: [Thumbnails({ height: '80px' })],
+              extensions: [Thumbnails({ thumbnailHeight: 80 })],
             }}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
