@@ -12,7 +12,7 @@ A lightweight, smooth carousel library with momentum-based scrolling, snap align
 - ↔️ RTL support built-in
 - 🪶 Zero dependencies, minimal bundle size
 - 🧩 Extension system (arrows, dots, thumbnails)
-- ⚛️ Framework integrations (React, Solid, Vue, Svelte)
+- ⚛️ Framework integrations (React, Preact, Solid, Vue, Svelte, Qwik)
 
 ## Installation
 
