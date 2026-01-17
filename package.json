@@ -60,11 +60,6 @@
       "import": "./frameworks/solid/dist/solid.es.js",
       "require": "./frameworks/solid/dist/solid.umd.js"
     },
-    "./lit": {
-      "types": "./frameworks/lit/dist/main.d.ts",
-      "import": "./frameworks/lit/dist/lit.es.js",
-      "require": "./frameworks/lit/dist/lit.umd.js"
-    },
     "./qwik": {
       "types": "./frameworks/qwik/dist/main.d.ts",
       "import": "./frameworks/qwik/src/lib/main.tsx"
@@ -81,7 +76,6 @@
     "frameworks/svelte/dist",
     "frameworks/preact/dist",
     "frameworks/solid/dist",
-    "frameworks/lit/dist",
     "frameworks/qwik/dist"
   ],
   "scripts": {
@@ -110,7 +104,6 @@
     "svelte",
     "solid",
     "preact",
-    "lit",
     "qwik",
     "typescript",
     "lightweight",
