@@ -62,7 +62,6 @@ export default function DotsPage() {
               extensions: [
                 Dots({
                   showIndex: true,
-                  dotSize: 40,
                 }),
               ],
             }}

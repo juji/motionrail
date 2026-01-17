@@ -28,28 +28,6 @@ Show item index numbers inside each dot.
 Dots({ showIndex: true })
 ```
 
-### `dotSize`
-
-- **Type**: `number`
-- **Default**: `34`
-
-Size of each dot in pixels (controls the clickable area).
-
-```js
-Dots({ dotSize: 36 })
-```
-
-### `fontSize`
-
-- **Type**: `number`
-- **Default**: `12`
-
-Font size in pixels for the index numbers (when `showIndex: true`).
-
-```js
-Dots({ showIndex: true, fontSize: 16 })
-```
-
 ### `log`
 
 - **Type**: `boolean`
@@ -114,6 +92,37 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 - **Accessible**: Proper ARIA labels for screen readers
 
 ## Styling
+
+The Dots extension uses CSS variables for easy customization. You can override these variables to match your design:
+
+```css
+.motionrail-dots {
+  --dot-size: 34px;                      /* Size of each dot */
+  --dot-font-size: 12px;                 /* Font size for index numbers */
+  --dot-bg: rgba(128, 128, 128, 0.3);    /* Dot background */
+  --dot-bg-hover: rgba(128, 128, 128, 0.5); /* Dot hover background */
+  --dot-bg-active: #666;                 /* Active dot background */
+  --dot-bg-active-hover: #555;           /* Active dot hover background */
+  --dot-color: #999;                     /* Text color for index */
+  --dot-color-active: #fff;              /* Active dot text color */
+}
+```
+
+### Example Customization
+
+```css
+/* Larger dots with different colors */
+.motionrail-dots {
+  --dot-size: 40px;
+  --dot-font-size: 14px;
+  --dot-bg: rgba(59, 130, 246, 0.3);
+  --dot-bg-hover: rgba(59, 130, 246, 0.5);
+  --dot-bg-active: #3b82f6;
+  --dot-bg-active-hover: #2563eb;
+  --dot-color: #60a5fa;
+  --dot-color-active: #fff;
+}
+```
 
 View the default styles: [/src/extensions/dots/style.css](https://github.com/juji/motionrail/blob/main/src/extensions/dots/style.css)
 
