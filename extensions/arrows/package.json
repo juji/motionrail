@@ -1,0 +1,32 @@
+{
+  "name": "@motionrail/arrows",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/arrows.umd.js",
+  "module": "./dist/arrows.es.js",
+  "types": "./dist/arrows.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/arrows.d.ts",
+      "import": "./dist/arrows.es.js",
+      "require": "./dist/arrows.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "motionrail": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@motionrail/dots",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/dots.umd.js",
+  "module": "./dist/dots.es.js",
+  "types": "./dist/dots.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/dots.d.ts",
+      "import": "./dist/dots.es.js",
+      "require": "./dist/dots.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "motionrail": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5"
+  }
+}
