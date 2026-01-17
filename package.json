@@ -33,6 +33,11 @@
       "types": "./extensions/thumbnails/dist/thumbnails.d.ts",
       "import": "./extensions/thumbnails/dist/thumbnails.es.js",
       "require": "./extensions/thumbnails/dist/thumbnails.umd.js"
+    },
+    "./react": {
+      "types": "./frameworks/react/dist/main.d.ts",
+      "import": "./frameworks/react/dist/main.es.js",
+      "require": "./frameworks/react/dist/main.umd.js"
     }
   },
   "files": [
