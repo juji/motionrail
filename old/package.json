@@ -1,0 +1,135 @@
+{
+  "name": "motionrail",
+  "version": "0.3.1",
+  "description": "A lightweight carousel library for modern web applications",
+  "packageManager": "pnpm@10.14.0",
+  "keywords": [
+    "carousel",
+    "slider",
+    "slideshow",
+    "swipe",
+    "touch",
+    "drag",
+    "momentum",
+    "snap",
+    "responsive",
+    "breakpoints",
+    "autoplay",
+    "rtl",
+    "react",
+    "vue",
+    "svelte",
+    "solid",
+    "typescript",
+    "lightweight",
+    "zero-dependencies"
+  ],
+  "type": "module",
+  "module": "./dist/motionrail.js",
+  "types": "./dist/motionrail.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/motionrail.d.ts",
+      "import": "./dist/motionrail.js",
+      "require": "./dist/motionrail.umd.cjs"
+    },
+    "./extensions/arrows": {
+      "types": "./dist/extensions/arrows/main.d.ts",
+      "import": "./dist/extensions/arrows.js",
+      "require": "./dist/extensions/arrows.umd.cjs"
+    },
+    "./extensions/arrows/style.css": "./dist/extensions/arrows/style.css",
+    "./extensions/dots": {
+      "types": "./dist/extensions/dots/main.d.ts",
+      "import": "./dist/extensions/dots.js",
+      "require": "./dist/extensions/dots.umd.cjs"
+    },
+    "./extensions/dots/style.css": "./dist/extensions/dots/style.css",
+    "./extensions/thumbnails": {
+      "types": "./dist/extensions/thumbnails/main.d.ts",
+      "import": "./dist/extensions/thumbnails.js",
+      "require": "./dist/extensions/thumbnails.umd.cjs"
+    },
+    "./extensions/thumbnails/style.css": "./dist/extensions/thumbnails/style.css",
+    "./extensions/logger": {
+      "types": "./dist/extensions/logger.d.ts",
+      "import": "./dist/extensions/logger.js",
+      "require": "./dist/extensions/logger.umd.cjs"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "import": "./dist/react.js"
+    },
+    "./solid": {
+      "types": "./dist/solid.d.ts",
+      "import": "./dist/solid.js"
+    },
+    "./vue": {
+      "types": "./dist/vue.d.ts",
+      "import": "./dist/vue.js"
+    },
+    "./svelte": {
+      "types": "./dist/svelte/svelte.d.ts",
+      "svelte": "./dist/svelte/index.js",
+      "import": "./dist/svelte/index.js"
+    },
+    "./svelte5": {
+      "types": "./dist/svelte5/svelte5.d.ts",
+      "svelte": "./dist/svelte5/index.js",
+      "import": "./dist/svelte5/index.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juji/motionrail"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "pnpm -s build:es && pnpm -s build:svelte && pnpm -s build:svelte5 && pnpm -s build:umd && pnpm -s copy:types",
+    "build:es": "vite build && tsc",
+    "build:svelte": "svelte-package -i packages/svelte/src -o dist/svelte -t false",
+    "build:svelte5": "svelte-package -i packages/svelte5/src -o dist/svelte5 -t false",
+    "build:umd": "pnpm -s build:umd:main && pnpm -s build:umd:arrows && pnpm -s build:umd:dots && pnpm -s build:umd:thumbnails && pnpm -s build:umd:logger",
+    "build:umd:main": "BUILD_UMD=true ENTRY_PATH=packages/main/src/motionrail.ts LIB_NAME=MotionRail FILE_NAME=motionrail.umd vite build",
+    "build:umd:arrows": "BUILD_UMD=true ENTRY_PATH=packages/main/src/extensions/arrows/main.ts LIB_NAME=MotionRailArrows FILE_NAME=extensions/arrows.umd vite build",
+    "build:umd:dots": "BUILD_UMD=true ENTRY_PATH=packages/main/src/extensions/dots/main.ts LIB_NAME=MotionRailDots FILE_NAME=extensions/dots.umd vite build",
+    "build:umd:thumbnails": "BUILD_UMD=true ENTRY_PATH=packages/main/src/extensions/thumbnails/main.ts LIB_NAME=MotionRailThumbnails FILE_NAME=extensions/thumbnails.umd vite build",
+    "build:umd:logger": "BUILD_UMD=true ENTRY_PATH=packages/main/src/extensions/logger.ts LIB_NAME=MotionRailLogger FILE_NAME=extensions/logger.umd vite build",
+    "copy:types": "cpr packages/vue/src/vue.d.ts dist/vue.d.ts -o",
+    "preview": "vite preview",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,css,html}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.7",
+    "@sveltejs/vite-plugin-svelte": "^6.2.4",
+    "@types/node": "^25.0.8",
+    "@types/react": "^19.2.8",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "cpr": "^3.0.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5",
+    "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-solid": "^2.11.10"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "peerDependencies": {
+    "react": "^19.2.3",
+    "solid-js": "^1.9.10",
+    "svelte": "^5.19.2",
+    "vue": "^3.5.13"
+  }
+}
