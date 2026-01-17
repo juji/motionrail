@@ -40,9 +40,8 @@
   width: var(--dot-size);
   height: var(--dot-size);
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.5);
-  background: rgba(255, 255, 255, 0.3);
-  color: white;
+  background: rgba(128, 128, 128, 0.3);
+  color: #999;
   cursor: pointer;
   font-size: var(--dot-font-size);
   font-weight: 600;
@@ -51,11 +50,11 @@
   justify-content: center;
   transition: all 0.3s;
   flex-shrink: 0;
+  backdrop-filter: blur(4px);
 }
 
 .motionrail-dot:hover {
-  background: rgba(255, 255, 255, 0.5);
-  border-color: rgba(255, 255, 255, 0.8);
+  background: rgba(128, 128, 128, 0.5);
   scale: 1.1;
 }
 
@@ -64,11 +63,10 @@
 }
 
 .motionrail-dot-active {
-  background: rgba(255, 255, 255, 0.9);
-  border-color: white;
-  color: #000;
+  background: #666;
+  color: #fff;
 }
 
 .motionrail-dot-active:hover {
-  background: white;
+  background: #555;
 }
