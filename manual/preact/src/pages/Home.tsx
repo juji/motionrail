@@ -1,25 +1,10 @@
-import { component$, useSignal } from '@builder.io/qwik';
-import type { DocumentHead } from '@builder.io/qwik-city';
-import { MotionRail } from 'motionrail/qwik';
+import { useState } from 'preact/hooks';
+import { MotionRail } from 'motionrail/preact';
 import 'motionrail/style.css';
 import Nav from '../components/Nav';
 
-export default component$(() => {
-  const items = useSignal([1, 2, 3]);
-
-  const getGradient = (index: number): string => {
-    const gradients = [
-      '#667eea 0%, #764ba2 100%',
-      '#f093fb 0%, #f5576c 100%',
-      '#4facfe 0%, #00f2fe 100%',
-      '#43e97b 0%, #38f9d7 100%',
-      '#fa709a 0%, #fee140 100%',
-      '#30cfd0 0%, #330867 100%',
-      '#a8edea 0%, #fed6e3 100%',
-      '#ff9a9e 0%, #fecfef 100%',
-    ];
-    return gradients[(index - 1) % gradients.length];
-  };
+export default function Home() {
+  const [items, setItems] = useState([1, 2, 3]);
 
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', minHeight: '100vh' }}>
@@ -27,7 +12,7 @@ export default component$(() => {
         <Nav current="main" />
         <h1 style={{ marginBottom: '10px' }}>MotionRail Test Page</h1>
         <p style={{ marginBottom: '30px', color: '#999', fontSize: '14px' }}>
-          Comprehensive test suite for MotionRail Qwik wrapper
+          Comprehensive test suite for MotionRail Preact wrapper
         </p>
 
         {/* Basic Carousel */}
@@ -42,7 +27,7 @@ export default component$(() => {
               { width: 1024, columns: 3, gap: '20px' },
             ]}
             style={{ height: '300px' }}
-            onChange$={(state: any) => console.log('Carousel changed:', state)}
+            onChange={(state) => console.log('Carousel changed:', state)}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
@@ -73,7 +58,7 @@ export default component$(() => {
               { width: 768, columns: 2, gap: '16px' },
               { width: 1024, columns: 3, gap: '20px' },
             ]}
-            autoplay={true}
+            autoPlay={true}
             delay={2500}
             style={{ height: '300px' }}
           >
@@ -109,7 +94,7 @@ export default component$(() => {
             ]}
             style={{ height: '300px' }}
           >
-            {items.value.map((i) => (
+            {items.map((i) => (
               <div
                 key={i}
                 style={{
@@ -129,7 +114,7 @@ export default component$(() => {
           </MotionRail>
           <div style={{ marginTop: '15px', display: 'flex', gap: '10px' }}>
             <button
-              onClick$={() => (items.value = [...items.value, items.value.length + 1])}
+              onClick={() => setItems([...items, items.length + 1])}
               style={{
                 padding: '10px 20px',
                 border: 'none',
@@ -144,7 +129,7 @@ export default component$(() => {
               Add Item
             </button>
             <button
-              onClick$={() => (items.value = items.value.slice(0, -1))}
+              onClick={() => setItems(items.slice(0, -1))}
               style={{
                 padding: '10px 20px',
                 border: 'none',
@@ -190,19 +175,18 @@ export default component$(() => {
       </div>
     </div>
   );
-});
+}
 
-export const head: DocumentHead = {
-  title: 'MotionRail Test Page - Qwik',
-  meta: [
-    {
-      name: 'description',
-      content: 'Comprehensive test suite for MotionRail Qwik wrapper',
-    },
-  ],
-};
-      name: "description",
-      content: "Qwik site description",
-    },
-  ],
-};
+function getGradient(index: number): string {
+  const gradients = [
+    '#667eea 0%, #764ba2 100%',
+    '#f093fb 0%, #f5576c 100%',
+    '#4facfe 0%, #00f2fe 100%',
+    '#43e97b 0%, #38f9d7 100%',
+    '#fa709a 0%, #fee140 100%',
+    '#30cfd0 0%, #330867 100%',
+    '#a8edea 0%, #fed6e3 100%',
+    '#ff9a9e 0%, #fecfef 100%',
+  ];
+  return gradients[(index - 1) % gradients.length];
+}
