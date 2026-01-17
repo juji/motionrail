@@ -1,6 +1,6 @@
 {
   "name": "motionrail",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "",
   "main": "./main/dist/motionrail.umd.js",
   "module": "./main/dist/motionrail.es.js",
