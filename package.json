@@ -109,6 +109,9 @@
     "vue",
     "svelte",
     "solid",
+    "preact",
+    "lit",
+    "qwik",
     "typescript",
     "lightweight",
     "zero-dependencies"
