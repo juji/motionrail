@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
 import HeroMotionRail from './hero-motionrail.vue';
+import pkg from '../../../package.json';
+
+const version = pkg.version;
 </script>
 
 <template>
   <div class="hero-section">
     <div class="container">
       <div class="hero-content">
-        <h1 class="name">MotionRail</h1>
+        <h1 class="name">MotionRail <span class="version">v{{ version }}</span></h1>
         <p class="text">Carousel Library</p>
         <p class="tagline">A lightweight carousel library for modern web applications</p>
         
@@ -78,6 +81,16 @@ import HeroMotionRail from './hero-motionrail.vue';
   font-weight: 700;
   line-height: 1.2;
   background: linear-gradient(315deg, var(--vp-c-brand-1) 25%, var(--vp-c-brand-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.version {
+  font-size: 24px;
+  font-weight: 500;
+  opacity: 0.7;
+  background: var(--vp-c-text-2);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
