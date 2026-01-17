@@ -3,7 +3,7 @@ import { Logger } from 'motionrail/extensions/logger';
 import 'motionrail/style.css';
 import Nav from '../components/Nav';
 
-export default function LoggerPage({ path }: { path?: string }) {
+export default function LoggerPage({ path: _path }: { path?: string }) {
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>

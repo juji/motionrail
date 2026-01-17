@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { MotionRail } from 'motionrail/svelte5';
+  import { MotionRail } from 'motionrail/svelte';
   import { Logger } from 'motionrail/extensions/logger';
   import 'motionrail/style.css';
   import Nav from '$lib/Nav.svelte';

@@ -3,7 +3,7 @@ import { MotionRail } from 'motionrail/preact';
 import 'motionrail/style.css';
 import Nav from '../components/Nav';
 
-export default function Home({ path }: { path?: string }) {
+export default function Home({ path: _path }: { path?: string }) {
   const [items, setItems] = useState([1, 2, 3]);
 
   return (

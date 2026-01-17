@@ -4,7 +4,7 @@ import 'motionrail/style.css';
 import 'motionrail/extensions/arrows/style.css';
 import Nav from '../components/Nav';
 
-export default function ArrowsPage({ path }: { path?: string }) {
+export default function ArrowsPage({ path: _path }: { path?: string }) {
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
