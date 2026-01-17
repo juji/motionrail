@@ -25,12 +25,18 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"],
+  "include": [
+    "packages/main/src",
+    "packages/react/src",
+    "packages/solid/src",
+    "packages/svelte/src",
+    "packages/svelte5/src"
+  ],
   "exclude": [
     "dist",
-    "src/**/*.d.ts",
-    "src/vue/**",
-    "src/svelte/**",
-    "src/svelte5/**"
+    "packages/**/*.d.ts",
+    "packages/vue/**",
+    "packages/svelte/src/index.ts",
+    "packages/svelte5/src/index.ts"
   ]
 }

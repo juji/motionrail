@@ -1,0 +1,5 @@
+{
+  "name": "@motionrail/main",
+  "private": true,
+  "type": "module"
+}

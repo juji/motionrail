@@ -1,0 +1,5 @@
+{
+  "name": "@motionrail/vue",
+  "private": true,
+  "type": "module"
+}
