@@ -35,10 +35,11 @@ export default defineConfig({
         text: 'Framework Integrations',
         items: [
           { text: 'React', link: '/docs/frameworks/react' },
+          { text: 'Preact', link: '/docs/frameworks/preact' },
           { text: 'Solid.js', link: '/docs/frameworks/solid' },
           { text: 'Vue', link: '/docs/frameworks/vue' },
           { text: 'Svelte', link: '/docs/frameworks/svelte' },
-          { text: 'Svelte 5', link: '/docs/frameworks/svelte5' }
+          { text: 'Qwik', link: '/docs/frameworks/qwik' }
         ]
       },
       {
