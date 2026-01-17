@@ -91,7 +91,7 @@
     "build:extensions": "pnpm --filter './extensions/*' build",
     "build:frameworks": "pnpm --filter './frameworks/*' build",
     "build:rest": "pnpm -r --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
-    "dev": "pnpm --filter main dev"
+    "dev": "pnpm --filter './manual/*' dev"
   },
   "keywords": [],
   "author": "jujiyangasli@gmail.com",
