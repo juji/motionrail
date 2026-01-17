@@ -86,7 +86,7 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm --filter main build && pnpm -r --filter '!main' build",
+    "build": "pnpm --filter main build && pnpm --filter './extensions/*' build && pnpm --filter './frameworks/*' build && pnpm -r --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
     "dev": "pnpm --filter main dev"
   },
   "keywords": [],
