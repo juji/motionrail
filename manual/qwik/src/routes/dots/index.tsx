@@ -69,13 +69,13 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Many Pages (20 items)</h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
               extensions: [Dots()],
-            }}
+            })}
           >
             {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => (
               <div

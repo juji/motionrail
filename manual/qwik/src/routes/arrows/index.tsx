@@ -41,7 +41,7 @@ export default component$(() => {
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
-              extensions: [Arrows()],
+              extensions: noSerialize([Arrows()]),
             })}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
@@ -71,13 +71,13 @@ export default component$(() => {
             Arrows with Loop Disabled (hide at ends)
           </h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
               extensions: [Arrows({ loop: false })],
-            }}
+            })}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div

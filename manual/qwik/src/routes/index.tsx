@@ -70,7 +70,7 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Carousel with Autoplay</h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
@@ -78,7 +78,7 @@ export default component$(() => {
               ],
               autoplay: true,
               delay: 2500,
-            }}
+            })}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
@@ -171,12 +171,12 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Edge Case: Single Item</h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
-            }}
+            })}
           >
             <div
               style={{

@@ -71,13 +71,13 @@ export default component$(() => {
             Custom Thumbnail Height (80px)
           </h2>
           <MotionRail
-            options={{
+            options={noSerialize({
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
               extensions: [Thumbnails({ thumbnailHeight: 80 })],
-            }}
+            })}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
