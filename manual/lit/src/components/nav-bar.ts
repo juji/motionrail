@@ -18,6 +18,7 @@ export class NavBar extends LitElement {
     return html`
       <nav>
         <div class="nav-container">
+          <span style="color: white; font-weight: 600; font-size: 16px;">Lit</span>
           ${this.links.map(
             (link) => html`
               <a

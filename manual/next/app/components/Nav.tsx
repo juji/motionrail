@@ -8,7 +8,7 @@ interface NavProps {
 
 export default function Nav({ current }: NavProps) {
   const links = [
-    { href: '/', label: 'Main', key: 'main' },
+    { href: '/', label: 'Main Tests', key: 'main' },
     { href: '/arrows', label: 'Arrows', key: 'arrows' },
     { href: '/dots', label: 'Dots', key: 'dots' },
     { href: '/logger', label: 'Logger', key: 'logger' },
@@ -27,6 +27,7 @@ export default function Nav({ current }: NavProps) {
         borderRadius: '8px',
       }}
     >
+      <span style={{ color: 'white', fontWeight: '600', fontSize: '16px', marginRight: '20px' }}>Next.js</span>
       <strong style={{ color: '#667eea', marginRight: '20px' }}>Tests:</strong>
       {links.map((link) => (
         <Link

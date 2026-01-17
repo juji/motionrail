@@ -26,7 +26,8 @@ export default component$<NavProps>(({ current }) => {
         borderBottom: '1px solid #333',
       }}
     >
-      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', alignItems: 'center' }}>
+        <span style={{ color: 'white', fontWeight: '600', fontSize: '16px' }}>Qwik</span>
         {links.map((link) => (
           <Link
             key={link.key}

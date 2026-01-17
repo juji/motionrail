@@ -23,7 +23,8 @@ export default function Nav({ current }: NavProps) {
         borderBottom: '1px solid #333',
       }}
     >
-      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', alignItems: 'center' }}>
+        <span style={{ color: 'white', fontWeight: '600', fontSize: '16px' }}>Preact</span>
         {links.map((link) => (
           <a
             key={link.key}

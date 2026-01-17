@@ -17,7 +17,8 @@
 <nav
   style="position: sticky; top: 0; z-index: 1000; background: #1a1a1a; padding: 15px 0; margin-bottom: 30px; border-bottom: 1px solid #333;"
 >
-  <div style="display: flex; gap: 20px; justify-content: center;">
+  <div style="display: flex; gap: 20px; justify-content: center; align-items: center;">
+    <span style="color: white; font-weight: 600; font-size: 16px;">SvelteKit</span>
     {#each links as link}
       <a
         href={link.href}
