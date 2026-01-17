@@ -86,7 +86,11 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm --filter main build && pnpm --filter './extensions/*' build && pnpm --filter './frameworks/*' build && pnpm -r --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
+    "build": "pnpm build:main && pnpm build:extensions && pnpm build:frameworks && pnpm build:rest",
+    "build:main": "pnpm --filter main build",
+    "build:extensions": "pnpm --filter './extensions/*' build",
+    "build:frameworks": "pnpm --filter './frameworks/*' build",
+    "build:rest": "pnpm -r --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
     "dev": "pnpm --filter main dev"
   },
   "keywords": [],
