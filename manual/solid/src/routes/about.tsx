@@ -8,3 +8,11 @@ export default function About() {
     </main>
   );
 }
+
+export const css = `
+main {
+  padding: 1rem;
+}
+`;
+
+export const $css = css;
