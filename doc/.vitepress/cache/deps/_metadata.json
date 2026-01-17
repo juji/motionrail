@@ -1,0 +1,32 @@
+{
+  "hash": "d9aa37b7",
+  "configHash": "21b2d29e",
+  "lockfileHash": "104561ac",
+  "browserHash": "fcc87655",
+  "optimized": {
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../../node_modules/.pnpm/@vue+devtools-api@8.0.5/node_modules/@vue/devtools-api/dist/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "fedf0418",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@14.1.0_vue@3.5.26_typescript@5.9.3_/node_modules/@vueuse/core/dist/index.js",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "b2e58fcc",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.5.26_typescript@5.9.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "5d3854ae",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "vue.runtime.esm-bundler-BlmiLIck": {
+      "file": "vue.runtime.esm-bundler-BlmiLIck.js",
+      "isDynamicEntry": false
+    }
+  }
+}

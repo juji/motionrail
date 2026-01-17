@@ -16,9 +16,6 @@ importers:
       motionrail:
         specifier: workspace:*
         version: link:..
-      oxc-minify:
-        specifier: ^0.108.0
-        version: 0.108.0
     devDependencies:
       vitepress:
         specifier: 2.0.0-alpha.15
@@ -3160,6 +3157,7 @@ snapshots:
       '@oxc-minify/binding-win32-arm64-msvc': 0.108.0
       '@oxc-minify/binding-win32-ia32-msvc': 0.108.0
       '@oxc-minify/binding-win32-x64-msvc': 0.108.0
+    optional: true
 
   p-limit@3.1.0:
     dependencies:
