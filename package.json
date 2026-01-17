@@ -111,5 +111,9 @@
   ],
   "author": "jujiyangasli@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juji/motionrail"
+  },
   "packageManager": "pnpm@10.14.0"
 }
