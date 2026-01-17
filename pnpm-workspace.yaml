@@ -2,3 +2,4 @@ packages:
   - 'main'
   - 'extensions/*'
   - 'frameworks/*'
+  - 'doc'
