@@ -28,12 +28,12 @@ export default function DotsPage() {
               ],
               extensions: [Dots()],
             }}
-            style={{ height: '300px' }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -66,12 +66,12 @@ export default function DotsPage() {
                 }),
               ],
             }}
-            style={{ height: '300px' }}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -99,12 +99,12 @@ export default function DotsPage() {
               ],
               extensions: [Dots()],
             }}
-            style={{ height: '300px' }}
           >
             {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -134,10 +134,10 @@ export default function DotsPage() {
               ],
               extensions: [Dots()],
             }}
-            style={{ height: '300px' }}
           >
             <div
               style={{
+                height: '300px',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 display: 'flex',
                 alignItems: 'center',

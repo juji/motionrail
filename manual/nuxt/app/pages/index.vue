@@ -16,18 +16,20 @@
           Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
         </h2>
         <MotionRail
-          :breakpoints="[
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-            { width: 1024, columns: 3, gap: '20px' },
-          ]"
-          style="height: 300px;"
-          @change="(state) => console.log('Carousel changed:', state)"
+          :options="{
+            breakpoints: [
+              { columns: 1, gap: '16px' },
+              { width: 768, columns: 2, gap: '16px' },
+              { width: 1024, columns: 3, gap: '20px' },
+            ],
+            onChange: (state) => console.log('Carousel changed:', state),
+          }"
         >
           <div
             v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]"
             :key="i"
             :style="{
+              height: '300px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
               display: 'flex',
               alignItems: 'center',
@@ -47,19 +49,21 @@
       <section style="margin-bottom: 60px;">
         <h2 style="margin-bottom: 15px; font-size: 18px;">Carousel with Autoplay</h2>
         <MotionRail
-          :breakpoints="[
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-            { width: 1024, columns: 3, gap: '20px' },
-          ]"
-          :autoplay="true"
-          :delay="2500"
-          style="height: 300px;"
+          :options="{
+            breakpoints: [
+              { columns: 1, gap: '16px' },
+              { width: 768, columns: 2, gap: '16px' },
+              { width: 1024, columns: 3, gap: '20px' },
+            ],
+            autoplay: true,
+            delay: 2500,
+          }"
         >
           <div
             v-for="i in [1, 2, 3, 4, 5, 6, 7, 8]"
             :key="i"
             :style="{
+              height: '300px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
               display: 'flex',
               alignItems: 'center',
@@ -81,16 +85,18 @@
           Dynamic Content (Add/Remove Items)
         </h2>
         <MotionRail
-          :breakpoints="[
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-          ]"
-          style="height: 300px;"
+          :options="{
+            breakpoints: [
+              { columns: 1, gap: '16px' },
+              { width: 768, columns: 2, gap: '16px' },
+            ],
+          }"
         >
           <div
             v-for="i in items"
             :key="i"
             :style="{
+              height: '300px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
               display: 'flex',
               alignItems: 'center',
@@ -124,14 +130,16 @@
       <section style="margin-bottom: 60px;">
         <h2 style="margin-bottom: 15px; font-size: 18px;">Edge Case: Single Item</h2>
         <MotionRail
-          :breakpoints="[
-            { columns: 1, gap: '16px' },
-            { width: 768, columns: 2, gap: '16px' },
-          ]"
-          style="height: 300px;"
+          :options="{
+            breakpoints: [
+              { columns: 1, gap: '16px' },
+              { width: 768, columns: 2, gap: '16px' },
+            ],
+          }"
         >
           <div
             :style="{
+              height: '300px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
               display: 'flex',
               alignItems: 'center',

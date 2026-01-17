@@ -36,17 +36,18 @@
     <section style="margin-bottom: 60px;">
       <h2 style="margin-bottom: 15px; font-size: 18px;">Basic Dots</h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-          { width: 1024, columns: 3, gap: '20px' },
-        ]}
-        style="height: 300px;"
-        extensions={[Dots()]}
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' },
+          ],
+          extensions: [Dots()],
+        }}
       >
         {#each [1, 2, 3, 4, 5, 6, 7, 8] as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>
@@ -58,16 +59,17 @@
     <section style="margin-bottom: 60px;">
       <h2 style="margin-bottom: 15px; font-size: 18px;">Many Pages (20 items)</h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-        ]}
-        style="height: 300px;"
-        extensions={[Dots()]}
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+          ],
+          extensions: [Dots()],
+        }}
       >
         {#each Array.from({ length: 20 }, (_, i) => i + 1) as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>

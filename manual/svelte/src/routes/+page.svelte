@@ -38,17 +38,18 @@
         Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
       </h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-          { width: 1024, columns: 3, gap: '20px' },
-        ]}
-        style="height: 300px;"
-        onchange={(state) => console.log('Carousel changed:', state)}
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' },
+          ],
+          onChange: (state) => console.log('Carousel changed:', state),
+        }}
       >
         {#each [1, 2, 3, 4, 5, 6, 7, 8] as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>
@@ -60,18 +61,19 @@
     <section style="margin-bottom: 60px;">
       <h2 style="margin-bottom: 15px; font-size: 18px;">Carousel with Autoplay</h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-          { width: 1024, columns: 3, gap: '20px' },
-        ]}
-        autoplay={true}
-        delay={2500}
-        style="height: 300px;"
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' },
+          ],
+          autoplay: true,
+          delay: 2500,
+        }}
       >
         {#each [1, 2, 3, 4, 5, 6, 7, 8] as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>
@@ -85,15 +87,16 @@
         Dynamic Content (Add/Remove Items)
       </h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-        ]}
-        style="height: 300px;"
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+          ],
+        }}
       >
         {#each items as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>
@@ -119,14 +122,15 @@
     <section style="margin-bottom: 60px;">
       <h2 style="margin-bottom: 15px; font-size: 18px;">Edge Case: Single Item</h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-        ]}
-        style="height: 300px;"
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+          ],
+        }}
       >
         <div
-          style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(1)});"
+          style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(1)});"
         >
           1
         </div>

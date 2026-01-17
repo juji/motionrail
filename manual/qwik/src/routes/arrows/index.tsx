@@ -34,18 +34,20 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Basic Arrows</h2>
           <MotionRail
-            breakpoints={[
-              { columns: 1, gap: '16px' },
-              { width: 768, columns: 2, gap: '16px' },
-              { width: 1024, columns: 3, gap: '20px' },
-            ]}
-            style={{ height: '300px' }}
-            extensions={[Arrows()]}
+            options={{
+              breakpoints: [
+                { columns: 1, gap: '16px' },
+                { width: 768, columns: 2, gap: '16px' },
+                { width: 1024, columns: 3, gap: '20px' },
+              ],
+              extensions: [Arrows()],
+            }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -68,17 +70,19 @@ export default component$(() => {
             Auto-hide Arrows (when at start/end)
           </h2>
           <MotionRail
-            breakpoints={[
-              { columns: 1, gap: '16px' },
-              { width: 768, columns: 2, gap: '16px' },
-            ]}
-            style={{ height: '300px' }}
-            extensions={[Arrows({ autoHide: true })]}
+            options={{
+              breakpoints: [
+                { columns: 1, gap: '16px' },
+                { width: 768, columns: 2, gap: '16px' },
+              ],
+              extensions: [Arrows({ autoHide: true })],
+            }}
           >
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',

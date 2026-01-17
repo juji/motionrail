@@ -30,12 +30,12 @@ export default function Home() {
               ],
               onChange: (state: MotionRailState) => console.log('Carousel changed:', state),
             }}
-            style={{ height: '300px' }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -65,12 +65,12 @@ export default function Home() {
               autoplay: true,
               delay: 2500,
             }}
-            style={{ height: '300px' }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -101,12 +101,12 @@ export default function Home() {
                 { width: 1024, columns: 4, gap: '24px' },
               ],
             }}
-            style={{ height: '300px' }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -136,10 +136,10 @@ export default function Home() {
                 { width: 768, columns: 2, gap: '16px' },
               ],
             }}
-            style={{ height: '300px' }}
           >
             <div
               style={{
+                height: '300px',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                 display: 'flex',
                 alignItems: 'center',
@@ -168,12 +168,12 @@ export default function Home() {
                 { width: 1024, columns: 4, gap: '20px' },
               ],
             }}
-            style={{ height: '300px' }}
           >
             {Array.from({ length: 20 }, (_, i) => i + 1).map((i) => (
               <div
                 key={i}
                 style={{
+                  height: '300px',
                   boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
                   display: 'flex',
                   alignItems: 'center',
@@ -209,12 +209,12 @@ function DynamicCarousel() {
             { width: 768, columns: 2, gap: '16px' },
           ],
         }}
-        style={{ height: '300px' }}
       >
         {items.map((i) => (
           <div
             key={i}
             style={{
+              height: '300px',
               boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
               display: 'flex',
               alignItems: 'center',

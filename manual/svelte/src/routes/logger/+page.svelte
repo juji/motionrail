@@ -37,17 +37,18 @@
         Basic Logger (check console)
       </h2>
       <MotionRail
-        breakpoints={[
-          { columns: 1, gap: '16px' },
-          { width: 768, columns: 2, gap: '16px' },
-          { width: 1024, columns: 3, gap: '20px' },
-        ]}
-        style="height: 300px;"
-        extensions={[Logger()]}
+        options={{
+          breakpoints: [
+            { columns: 1, gap: '16px' },
+            { width: 768, columns: 2, gap: '16px' },
+            { width: 1024, columns: 3, gap: '20px' },
+          ],
+          extensions: [Logger()],
+        }}
       >
         {#each [1, 2, 3, 4, 5, 6, 7, 8] as i}
           <div
-            style="box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
+            style="height: 300px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: bold; color: white; background: linear-gradient(135deg, {getGradient(i)});"
           >
             {i}
           </div>

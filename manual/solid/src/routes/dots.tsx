@@ -21,18 +21,20 @@ export default function DotsPage() {
         <section style={{ 'margin-bottom': '60px' }}>
           <h2 style={{ 'margin-bottom': '15px', 'font-size': '18px' }}>Basic Dots</h2>
           <MotionRail
-            breakpoints={[
-              { columns: 1, gap: '16px' },
-              { width: 768, columns: 2, gap: '16px' },
-              { width: 1024, columns: 3, gap: '20px' },
-            ]}
-            style={{ height: '300px' }}
-            extensions={[Dots()]}
+            options={{
+              breakpoints: [
+                { columns: 1, gap: '16px' },
+                { width: 768, columns: 2, gap: '16px' },
+                { width: 1024, columns: 3, gap: '20px' },
+              ],
+              extensions: [Dots()],
+            }}
           >
             <For each={[1, 2, 3, 4, 5, 6, 7, 8]}>
               {(i) => (
                 <div
                   style={{
+                    height: '300px',
                     'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
                     display: 'flex',
                     'align-items': 'center',
@@ -54,17 +56,19 @@ export default function DotsPage() {
         <section style={{ 'margin-bottom': '60px' }}>
           <h2 style={{ 'margin-bottom': '15px', 'font-size': '18px' }}>Many Pages (20 items)</h2>
           <MotionRail
-            breakpoints={[
-              { columns: 1, gap: '16px' },
-              { width: 768, columns: 2, gap: '16px' },
-            ]}
-            style={{ height: '300px' }}
-            extensions={[Dots()]}
+            options={{
+              breakpoints: [
+                { columns: 1, gap: '16px' },
+                { width: 768, columns: 2, gap: '16px' },
+              ],
+              extensions: [Dots()],
+            }}
           >
             <For each={Array.from({ length: 20 }, (_, i) => i + 1)}>
               {(i) => (
                 <div
                   style={{
+                    height: '300px',
                     'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
                     display: 'flex',
                     'align-items': 'center',

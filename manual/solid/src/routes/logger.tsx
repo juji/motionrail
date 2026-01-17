@@ -22,18 +22,20 @@ export default function LoggerPage() {
             Basic Logger (check console)
           </h2>
           <MotionRail
-            breakpoints={[
-              { columns: 1, gap: '16px' },
-              { width: 768, columns: 2, gap: '16px' },
-              { width: 1024, columns: 3, gap: '20px' },
-            ]}
-            style={{ height: '300px' }}
-            extensions={[Logger()]}
+            options={{
+              breakpoints: [
+                { columns: 1, gap: '16px' },
+                { width: 768, columns: 2, gap: '16px' },
+                { width: 1024, columns: 3, gap: '20px' },
+              ],
+              extensions: [Logger()],
+            }}
           >
             <For each={[1, 2, 3, 4, 5, 6, 7, 8]}>
               {(i) => (
                 <div
                   style={{
+                    height: '300px',
                     'box-shadow': '0 2px 8px rgba(0,0,0,0.1)',
                     display: 'flex',
                     'align-items': 'center',
