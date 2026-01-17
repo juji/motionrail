@@ -44,6 +44,11 @@
       "types": "./frameworks/vue/dist/index.d.ts",
       "import": "./frameworks/vue/dist/vue.es.js",
       "require": "./frameworks/vue/dist/vue.umd.js"
+    },
+    "./svelte": {
+      "types": "./frameworks/svelte/dist/index.d.ts",
+      "svelte": "./frameworks/svelte/dist/index.js",
+      "default": "./frameworks/svelte/dist/index.js"
     }
   },
   "files": [
@@ -53,7 +58,8 @@
     "extensions/dots/dist",
     "extensions/thumbnails/dist",
     "frameworks/react/dist",
-    "frameworks/vue/dist"
+    "frameworks/vue/dist",
+    "frameworks/svelte/dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

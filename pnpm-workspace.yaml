@@ -3,3 +3,5 @@ packages:
   - 'extensions/*'
   - 'frameworks/*'
   - 'doc'
+onlyBuiltDependencies:
+  - esbuild
