@@ -4,7 +4,7 @@
   import 'motionrail/style.css';
   import 'motionrail/extensions/dots/style.css';
   import Nav from '$lib/Nav.svelte';
-sdgsdfgsdf
+sdgsdfgsdfkjlshdfgkljsdfhgjklhdkjflshglkjsdf
   function getGradient(index: number): string {
     const gradients = [
       '#667eea 0%, #764ba2 100%',
