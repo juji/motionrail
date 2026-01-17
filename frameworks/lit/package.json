@@ -1,0 +1,36 @@
+{
+  "name": "@motionrail/lit",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "preview": "vite preview"
+  },
+  "main": "./dist/lit.umd.js",
+  "module": "./dist/lit.es.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/lit.es.js",
+      "require": "./dist/lit.umd.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "motionrail": "workspace:*"
+  },
+  "peerDependencies": {
+    "lit": "^3.0.0"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@7.2.5"
+    }
+  }
+}

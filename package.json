@@ -49,6 +49,25 @@
       "types": "./frameworks/svelte/dist/index.d.ts",
       "svelte": "./frameworks/svelte/dist/index.js",
       "default": "./frameworks/svelte/dist/index.js"
+    },
+    "./preact": {
+      "types": "./frameworks/preact/dist/main.d.ts",
+      "import": "./frameworks/preact/dist/preact.es.js",
+      "require": "./frameworks/preact/dist/preact.umd.js"
+    },
+    "./solid": {
+      "types": "./frameworks/solid/dist/main.d.ts",
+      "import": "./frameworks/solid/dist/solid.es.js",
+      "require": "./frameworks/solid/dist/solid.umd.js"
+    },
+    "./lit": {
+      "types": "./frameworks/lit/dist/main.d.ts",
+      "import": "./frameworks/lit/dist/lit.es.js",
+      "require": "./frameworks/lit/dist/lit.umd.js"
+    },
+    "./qwik": {
+      "types": "./frameworks/qwik/dist/main.d.ts",
+      "import": "./frameworks/qwik/dist/qwik.es.js"
     }
   },
   "files": [
@@ -59,7 +78,11 @@
     "extensions/thumbnails/dist",
     "frameworks/react/dist",
     "frameworks/vue/dist",
-    "frameworks/svelte/dist"
+    "frameworks/svelte/dist",
+    "frameworks/preact/dist",
+    "frameworks/solid/dist",
+    "frameworks/lit/dist",
+    "frameworks/qwik/dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

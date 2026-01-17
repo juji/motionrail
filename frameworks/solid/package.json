@@ -1,0 +1,38 @@
+{
+  "name": "@motionrail/solid",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc --emitDeclarationOnly",
+    "preview": "vite preview"
+  },
+  "main": "./dist/solid.umd.js",
+  "module": "./dist/solid.es.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/solid.es.js",
+      "require": "./dist/solid.umd.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "motionrail": "workspace:*"
+  },
+  "peerDependencies": {
+    "solid-js": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.10.1",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5",
+    "vite-plugin-solid": "^2.11.10"
+  },
+  "pnpm": {
+    "overrides": {
+      "vite": "npm:rolldown-vite@7.2.5"
+    }
+  }
+}
