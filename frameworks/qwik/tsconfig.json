@@ -13,9 +13,7 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "declarationDir": "./dist",
-    "outDir": "./dist",
     "paths": {
       "motionrail": ["../../main/dist/motionrail.d.ts"]
     }

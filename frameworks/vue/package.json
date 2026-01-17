@@ -19,7 +19,8 @@
   "scripts": {
     "dev": "concurrently \"vite build --watch\" \"vue-tsc --project tsconfig.app.json --watch\"",
     "build": "vite build && vue-tsc --project tsconfig.app.json",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "vue-tsc --project tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "motionrail": "workspace:*"

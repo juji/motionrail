@@ -20,7 +20,8 @@
     "dev": "concurrently \"vite build --watch\" \"tsc --project tsconfig.app.json --watch\"",
     "build": "vite build && tsc --project tsconfig.app.json",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "tsc --project tsconfig.app.json --noEmit"
   },
   "dependencies": {
     "motionrail": "workspace:*"

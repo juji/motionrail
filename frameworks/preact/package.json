@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "concurrently \"vite build --watch\" \"tsc --emitDeclarationOnly --watch\"",
     "build": "vite build && tsc --emitDeclarationOnly",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "tsc --noEmit"
   },
   "main": "./dist/preact.umd.js",
   "module": "./dist/preact.es.js",

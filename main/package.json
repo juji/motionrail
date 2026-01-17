@@ -19,7 +19,8 @@
   "scripts": {
     "dev": "concurrently \"vite build --watch\" \"tsc --watch\"",
     "build": "vite build && tsc --emitDeclarationOnly",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "@types/node": "^25.0.9",

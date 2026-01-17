@@ -1,1 +1,6 @@
+pnpm -r run check
+if [ $? -ne 0 ]; then
+	echo "Type/lint check failed. Commit aborted."
+	exit 1
+fi
 pnpm run build:local
