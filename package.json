@@ -80,10 +80,12 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "pnpm build:main && pnpm build:libs && pnpm build:rest",
+    "build": "pnpm build:main && pnpm build:libs",
     "build:main": "pnpm --filter main build",
     "build:libs": "pnpm --parallel --filter './extensions/*' --filter './frameworks/*' build",
     "build:rest": "pnpm --parallel --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
+    "build:local": "pnpm build:main && pnpm build:libs && pnpm build:rest",
+    "build:doc": "pnpm build:main && pnpm build:libs && pnpm --filter doc build",
     "dev": "pnpm --parallel dev"
   },
   "keywords": [
