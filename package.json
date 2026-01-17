@@ -15,11 +15,32 @@
       "types": "./extensions/logger/dist/logger.d.ts",
       "import": "./extensions/logger/dist/logger.es.js",
       "require": "./extensions/logger/dist/logger.umd.js"
+    },
+    "./extensions/arrows/style.css": "./extensions/arrows/dist/style.css",
+    "./extensions/arrows": {
+      "types": "./extensions/arrows/dist/arrows.d.ts",
+      "import": "./extensions/arrows/dist/arrows.es.js",
+      "require": "./extensions/arrows/dist/arrows.umd.js"
+    },
+    "./extensions/dots/style.css": "./extensions/dots/dist/style.css",
+    "./extensions/dots": {
+      "types": "./extensions/dots/dist/dots.d.ts",
+      "import": "./extensions/dots/dist/dots.es.js",
+      "require": "./extensions/dots/dist/dots.umd.js"
+    },
+    "./extensions/thumbnails/style.css": "./extensions/thumbnails/dist/style.css",
+    "./extensions/thumbnails": {
+      "types": "./extensions/thumbnails/dist/thumbnails.d.ts",
+      "import": "./extensions/thumbnails/dist/thumbnails.es.js",
+      "require": "./extensions/thumbnails/dist/thumbnails.umd.js"
     }
   },
   "files": [
     "main/dist",
-    "extensions/logger/dist"
+    "extensions/logger/dist",
+    "extensions/arrows/dist",
+    "extensions/dots/dist",
+    "extensions/thumbnails/dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
