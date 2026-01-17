@@ -1,0 +1,38 @@
+[data-motionrail-scrollable]::-webkit-scrollbar {
+  display: none;
+}
+
+[data-motionrail] {
+  position: relative;
+
+  [data-motionrail-scrollable] {
+    overflow: hidden;
+    position: relative;
+
+    @supports (container-type: inline-size) {
+      container-type: inline-size;
+    }
+    @supports (anchor-name: --motionrail-scrollable) {
+      anchor-name: --motionrail-scrollable;
+    }
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    [data-motionrail-grid] {
+      display: grid;
+      grid-auto-flow: column;
+
+      & > * {
+        pointer-events: none;
+        scroll-snap-align: start;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "hash": "7e67a8b4",
+  "configHash": "d6e2dcfd",
+  "lockfileHash": "5f6f9679",
+  "browserHash": "9b1bb983",
+  "optimized": {
+    "@iconify/vue": {
+      "src": "../../../../node_modules/.pnpm/@iconify+vue@4.3.0_vue@3.5.26_typescript@5.9.3_/node_modules/@iconify/vue/dist/iconify.mjs",
+      "file": "@iconify_vue.js",
+      "fileHash": "760f4fc4",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../../node_modules/.pnpm/@vue+devtools-api@8.0.5/node_modules/@vue/devtools-api/dist/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "6275fc49",
+      "needsInterop": false
+    },
+    "vitepress > @vueuse/core": {
+      "src": "../../../../node_modules/.pnpm/@vueuse+core@14.1.0_vue@3.5.26_typescript@5.9.3_/node_modules/@vueuse/core/dist/index.js",
+      "file": "vitepress___@vueuse_core.js",
+      "fileHash": "3b060ff4",
+      "needsInterop": false
+    },
+    "vue": {
+      "src": "../../../../node_modules/.pnpm/vue@3.5.26_typescript@5.9.3/node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "324e369d",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "vue.runtime.esm-bundler-BlmiLIck": {
+      "file": "vue.runtime.esm-bundler-BlmiLIck.js",
+      "isDynamicEntry": false
+    }
+  }
+}

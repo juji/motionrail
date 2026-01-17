@@ -1,0 +1,16 @@
+# VitePress cache
+.vitepress/cache
+
+# VitePress build output
+.vitepress/dist
+
+.vitepress/.temp
+
+# Node modules
+node_modules
+
+# macOS
+.DS_Store
+
+# Local environment files
+*.local

@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+
+    /* Typecheck only (d.ts emitted by build tooling) */
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "erasableSyntaxOnly": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
+  },
+  "include": [
+    "packages/main/src",
+    "packages/react/src",
+    "packages/solid/src",
+    "packages/svelte/src",
+    "packages/svelte5/src"
+  ],
+  "exclude": [
+    "dist",
+    "packages/**/*.d.ts",
+    "packages/vue/**",
+    "packages/svelte/src/index.ts",
+    "packages/svelte5/src/index.ts"
+  ]
+}

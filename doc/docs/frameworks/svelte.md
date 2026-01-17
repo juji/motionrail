@@ -285,21 +285,8 @@ Returns the container HTMLDivElement.
 
 **Svelte integration**: 2.21 kB (gzipped: 0.94 kB)
 
-## Svelte 5
-
-For Svelte 5 with runes syntax, use the dedicated Svelte 5 integration:
-
-```svelte
-<script>
-  import { MotionRail } from 'motionrail/svelte5';
-</script>
-```
-
-See [Svelte 5](/docs/frameworks/svelte5) for more details.
-
 ## Next Steps
 
-- [Svelte 5 Integration](/docs/frameworks/svelte5) - Use with Svelte 5 runes
 - [Configuration](/docs/configuration) - All configuration options
 - [API Methods](/docs/api) - Programmatic control
 - [Extensions](/docs/extensions/) - Add more functionality

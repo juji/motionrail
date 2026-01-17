@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arrow Extension Demo - MotionRail</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 40px;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #000;
+        color: #eaeaea;
+      }
+
+      .test-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+      }
+
+      .description {
+        margin-bottom: 30px;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .carousel-wrapper {
+        margin-bottom: 60px;
+      }
+
+      .carousel-wrapper h2 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+
+      [data-motionrail] {
+        width: 100%;
+        height: 300px;
+        position: relative;
+      }
+
+      [data-motionrail-scrollable] {
+        width: 100%;
+        height: 100%;
+      }
+
+      .motion-rail-item {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: white;
+        scroll-snap-align: start;
+      }
+
+      .motion-rail-item:nth-child(1) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .motion-rail-item:nth-child(2) {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+      .motion-rail-item:nth-child(3) {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+      .motion-rail-item:nth-child(4) {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      }
+      .motion-rail-item:nth-child(5) {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      }
+      .motion-rail-item:nth-child(6) {
+        background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+      }
+      .motion-rail-item:nth-child(7) {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      }
+      .motion-rail-item:nth-child(8) {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      }
+
+      .note {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+
+      .note strong {
+        color: #667eea;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <nav style="position: sticky; top: 0; z-index: 1000; margin-bottom: 30px; padding: 15px; background: #1a1a1a; border-radius: 8px;">
+        <strong style="color: #667eea; margin-right: 20px;">Tests:</strong>
+        <a href="../index.html" style="color: #999; margin-right: 15px;">Main</a>
+        <a href="arrows.html" style="color: #fff; margin-right: 15px; text-decoration: underline;">Arrows</a>
+        <a href="dots.html" style="color: #999; margin-right: 15px;">Dots</a>
+        <a href="logger.html" style="color: #999; margin-right: 15px;">Logger</a>
+        <a href="thumbnails.html" style="color: #999;">Thumbnails</a>
+      </nav>
+      <h1>Arrow Extension Demo</h1>
+      <p class="description">
+        The Arrow Extension automatically adds navigation arrows to your
+        carousel. Click the arrows to navigate between slides.
+      </p>
+
+      <div class="note">
+        <strong>💡 Tip:</strong> Arrow positions are controlled by the
+        extension's CSS. Customize the styling in
+        <code>src/extensions/arrows/style.css</code>.
+      </div>
+
+      <!-- Basic Carousel with Arrows -->
+      <div class="carousel-wrapper">
+        <h2>Basic Carousel with Arrow Navigation</h2>
+        <div data-motionrail id="carousel1">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RTL Carousel with Arrows -->
+      <div class="carousel-wrapper" dir="rtl">
+        <h2>RTL Carousel (Direction Reversed)</h2>
+        <div data-motionrail id="carousel2">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Autoplay Carousel with Arrows -->
+      <div class="carousel-wrapper">
+        <h2>Autoplay with Arrows (Arrows pause autoplay)</h2>
+        <div data-motionrail id="carousel3">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Variable Columns with Arrows -->
+      <div class="carousel-wrapper">
+        <h2>Responsive Columns (4 → 3 → 2 → 1)</h2>
+        <div data-motionrail id="carousel4">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+              <div class="motion-rail-item">9</div>
+              <div class="motion-rail-item">10</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: Single Item -->
+      <div class="carousel-wrapper">
+        <h2>
+          Edge Case: Single Item (Arrows should be visible but may not navigate)
+        </h2>
+        <div data-motionrail id="carousel5">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: Two Items -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Two Items</h2>
+        <div data-motionrail id="carousel6">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: Empty Carousel -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Empty Carousel (Arrows visible but non-functional)</h2>
+        <div data-motionrail id="carousel7">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <!-- No items -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: Many Items -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Many Items (20 Items)</h2>
+        <div data-motionrail id="carousel8">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+              <div class="motion-rail-item">9</div>
+              <div class="motion-rail-item">10</div>
+              <div class="motion-rail-item">11</div>
+              <div class="motion-rail-item">12</div>
+              <div class="motion-rail-item">13</div>
+              <div class="motion-rail-item">14</div>
+              <div class="motion-rail-item">15</div>
+              <div class="motion-rail-item">16</div>
+              <div class="motion-rail-item">17</div>
+              <div class="motion-rail-item">18</div>
+              <div class="motion-rail-item">19</div>
+              <div class="motion-rail-item">20</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: Dynamic Content -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Dynamic Content (Add/Remove Items)</h2>
+        <div data-motionrail id="carousel9">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid id="carousel9-grid">
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="controls"
+          style="margin-top: 15px; display: flex; gap: 10px"
+        >
+          <button
+            onclick="addItem()"
+            style="
+              padding: 10px 20px;
+              border: none;
+              border-radius: 6px;
+              background: #667eea;
+              color: white;
+              cursor: pointer;
+            "
+          >
+            Add Item
+          </button>
+          <button
+            onclick="removeItem()"
+            style="
+              padding: 10px 20px;
+              border: none;
+              border-radius: 6px;
+              background: #667eea;
+              color: white;
+              cursor: pointer;
+            "
+          >
+            Remove Item
+          </button>
+        </div>
+      </div>
+
+      <!-- Edge Case: Initially Hidden -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: Initially Hidden (Show to test)</h2>
+        <div data-motionrail id="carousel10" style="display: none">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+            </div>
+          </div>
+        </div>
+        <button
+          onclick="
+            document.getElementById('carousel10').style.display = 'block'
+          "
+          style="
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            background: #667eea;
+            color: white;
+            cursor: pointer;
+          "
+        >
+          Show Carousel
+        </button>
+      </div>
+
+      <!-- Edge Case: Fewer Items Than Columns -->
+      <div class="carousel-wrapper">
+        <h2>Edge Case: 3 Items, 4 Columns (Fewer Items Than Columns)</h2>
+        <div data-motionrail id="carousel11">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge Case: No Loop (Arrows Disabled at Edges) -->
+      <div class="carousel-wrapper">
+        <h2>No Loop Mode (Arrows disabled at start/end)</h2>
+        <div data-motionrail id="carousel12">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          <strong>ℹ️ Notice:</strong> The left arrow is disabled at the start,
+          and the right arrow becomes disabled when you reach the end.
+        </div>
+      </div>
+
+      <!-- Edge Case: Custom Arrow Icons -->
+      <div class="carousel-wrapper">
+        <h2>Custom Arrow Icons (Text-based)</h2>
+        <div data-motionrail id="carousel13">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { MotionRail } from 'motionrail';
+      import { Arrows } from 'motionrail/extensions/arrows';
+      import 'motionrail/style.css';
+      import 'motionrail/extensions/arrows/style.css';
+
+      // Carousel 1: Basic with Arrows
+      window.carousel1 = new MotionRail(document.getElementById("carousel1"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+          { width: 1024, columns: 3, gap: "20px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 2: RTL with Arrows
+      window.carousel2 = new MotionRail(document.getElementById("carousel2"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+          { width: 1024, columns: 3, gap: "20px" },
+        ],
+        autoplay: false,
+        rtl: true,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 3: Autoplay with Arrows
+      window.carousel3 = new MotionRail(document.getElementById("carousel3"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+          { width: 1024, columns: 3, gap: "20px" },
+        ],
+        autoplay: true,
+        delay: 2500,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 4: Variable columns with Arrows
+      window.carousel4 = new MotionRail(document.getElementById("carousel4"), {
+        breakpoints: [
+          { columns: 1, gap: "12px" },
+          { width: 480, columns: 2, gap: "16px" },
+          { width: 768, columns: 3, gap: "20px" },
+          { width: 1024, columns: 4, gap: "24px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 5: Single item
+      window.carousel5 = new MotionRail(document.getElementById("carousel5"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 6: Two items
+      window.carousel6 = new MotionRail(document.getElementById("carousel6"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 7: Empty carousel
+      window.carousel7 = new MotionRail(document.getElementById("carousel7"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows({ log: true })],
+      });
+
+      // Carousel 8: Many items
+      window.carousel8 = new MotionRail(document.getElementById("carousel8"), {
+        breakpoints: [
+          { columns: 2, gap: "16px" },
+          { width: 768, columns: 3, gap: "16px" },
+          { width: 1024, columns: 4, gap: "20px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      // Carousel 9: Dynamic content
+      window.carousel9 = new MotionRail(document.getElementById("carousel9"), {
+        breakpoints: [
+          { columns: 1, gap: "16px" },
+          { width: 768, columns: 2, gap: "16px" },
+        ],
+        autoplay: false,
+        extensions: [Arrows()],
+      });
+
+      let itemCounter = 4;
+      window.addItem = function () {
+        const grid = document.getElementById("carousel9-grid");
+        const newItem = document.createElement("div");
+        newItem.className = "motion-rail-item";
+        newItem.textContent = itemCounter++;
+        grid.appendChild(newItem);
+        carousel9.update();
+      };
+
+      window.removeItem = function () {
+        const grid = document.getElementById("carousel9-grid");
+        if (grid.children.length > 0) {
+          grid.removeChild(grid.lastChild);
+          carousel9.update();
+        }
+      };
+
+      // Carousel 10: Initially hidden
+      window.carousel10 = new MotionRail(
+        document.getElementById("carousel10"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+          ],
+          autoplay: false,
+          extensions: [Arrows()],
+        },
+      );
+
+      // Carousel 11: Fewer items than columns
+      window.carousel11 = new MotionRail(
+        document.getElementById("carousel11"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "12px" },
+            { width: 480, columns: 2, gap: "16px" },
+            { width: 768, columns: 3, gap: "20px" },
+            { width: 1024, columns: 4, gap: "24px" },
+          ],
+          autoplay: false,
+          extensions: [Arrows()],
+        },
+      );
+
+      // Carousel 12: No loop mode (arrows disabled at edges)
+      window.carousel12 = new MotionRail(
+        document.getElementById("carousel12"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          autoplay: false,
+          extensions: [Arrows({ loop: false })],
+        },
+      );
+
+      // Carousel 13: Custom arrow icons
+      window.carousel13 = new MotionRail(
+        document.getElementById("carousel13"),
+        {
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          autoplay: false,
+          extensions: [Arrows({ leftIcon: "◀", rightIcon: "▶" })],
+        },
+      );
+    </script>
+  </body>
+</html>

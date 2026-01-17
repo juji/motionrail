@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thumbnails Extension Demo</title>
+    <style>
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        padding: 20px;
+        background: #0f172a;
+        color: white;
+      }
+      .carousel-wrapper {
+        margin-bottom: 60px;
+      }
+      h2 {
+        margin-bottom: 20px;
+      }
+      .motion-rail-item {
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: white;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        overflow: hidden;
+      }
+      .motion-rail-item:nth-child(2n) {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+      .motion-rail-item:nth-child(3n) {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+      .motion-rail-item:nth-child(4n) {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      }
+      .motion-rail-item:nth-child(5n) {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      }
+      .motion-rail-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <nav style="position: sticky; top: 0; z-index: 1000; margin-bottom: 30px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
+      <strong style="color: #667eea; margin-right: 20px;">Tests:</strong>
+      <a href="../index.html" style="color: #999; margin-right: 15px;">Main</a>
+      <a href="arrows.html" style="color: #999; margin-right: 15px;">Arrows</a>
+      <a href="dots.html" style="color: #999; margin-right: 15px;">Dots</a>
+      <a href="logger.html" style="color: #999; margin-right: 15px;">Logger</a>
+      <a href="thumbnails.html" style="color: #fff; margin-right: 15px; text-decoration: underline;">Thumbnails</a>
+    </nav>
+    <h1>Thumbnails Extension Demo</h1>
+
+    <div class="carousel-wrapper">
+      <h2>1. Basic Thumbnails</h2>
+      <div data-motionrail id="carousel1">
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/seed/demo1/800/400" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/seed/demo2/800/400" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/seed/demo3/800/400" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/seed/demo4/800/400" />
+            </div>
+            <div class="motion-rail-item">
+              <img src="https://picsum.photos/seed/demo5/800/400" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-wrapper">
+      <h2>2. Large Thumbnails (120px)</h2>
+      <div data-motionrail id="carousel2">
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-wrapper">
+      <h2>3. Small Thumbnails (60px)</h2>
+      <div data-motionrail id="carousel3">
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="carousel-wrapper">
+      <h2>4. Many Items (20 items)</h2>
+      <div data-motionrail id="carousel4">
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            <div class="motion-rail-item">1</div>
+            <div class="motion-rail-item">2</div>
+            <div class="motion-rail-item">3</div>
+            <div class="motion-rail-item">4</div>
+            <div class="motion-rail-item">5</div>
+            <div class="motion-rail-item">6</div>
+            <div class="motion-rail-item">7</div>
+            <div class="motion-rail-item">8</div>
+            <div class="motion-rail-item">9</div>
+            <div class="motion-rail-item">10</div>
+            <div class="motion-rail-item">11</div>
+            <div class="motion-rail-item">12</div>
+            <div class="motion-rail-item">13</div>
+            <div class="motion-rail-item">14</div>
+            <div class="motion-rail-item">15</div>
+            <div class="motion-rail-item">16</div>
+            <div class="motion-rail-item">17</div>
+            <div class="motion-rail-item">18</div>
+            <div class="motion-rail-item">19</div>
+            <div class="motion-rail-item">20</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { MotionRail } from 'motionrail';
+      import { Thumbnails } from 'motionrail/extensions/thumbnails';
+      import 'motionrail/style.css';
+      import 'motionrail/extensions/thumbnails/style.css';
+
+      window.carousel1 = new MotionRail(document.getElementById("carousel1"), {
+        extensions: [Thumbnails()],
+      });
+
+      window.carousel2 = new MotionRail(document.getElementById("carousel2"), {
+        extensions: [Thumbnails({ thumbnailWidth: 120, thumbnailHeight: 120 })],
+      });
+
+      window.carousel3 = new MotionRail(document.getElementById("carousel3"), {
+        extensions: [Thumbnails({ thumbnailWidth: 60, thumbnailHeight: 60 })],
+      });
+
+      window.carousel4 = new MotionRail(document.getElementById("carousel4"), {
+        extensions: [Thumbnails()],
+      });
+    </script>
+  </body>
+</html>

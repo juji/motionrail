@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dots Extension Demo - MotionRail</title>
+    <link rel="stylesheet" href="../../src/style.css" />
+    <link rel="stylesheet" href="../../src/extensions/dots/style.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 40px;
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: #000;
+        color: #eaeaea;
+      }
+
+      .test-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        margin-bottom: 10px;
+      }
+
+      .description {
+        margin-bottom: 30px;
+        color: #999;
+        font-size: 14px;
+      }
+
+      .carousel-wrapper {
+        margin-bottom: 60px;
+      }
+
+      .carousel-wrapper h2 {
+        margin-bottom: 15px;
+        font-size: 18px;
+      }
+
+      [data-motionrail] {
+        width: 100%;
+        position: relative;
+      }
+
+      [data-motionrail-scrollable] {
+        width: 100%;
+        height: 300px;
+      }
+
+      .motion-rail-item {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 48px;
+        font-weight: bold;
+        color: white;
+        scroll-snap-align: start;
+      }
+
+      .motion-rail-item:nth-child(1) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      }
+      .motion-rail-item:nth-child(2) {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+      .motion-rail-item:nth-child(3) {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+      .motion-rail-item:nth-child(4) {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+      }
+      .motion-rail-item:nth-child(5) {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+      }
+      .motion-rail-item:nth-child(6) {
+        background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+      }
+      .motion-rail-item:nth-child(7) {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      }
+      .motion-rail-item:nth-child(8) {
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+      }
+      .motion-rail-item:nth-child(9) {
+        background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+      }
+      .motion-rail-item:nth-child(10) {
+        background: linear-gradient(135deg, #fdcbf1 0%, #e6dee9 100%);
+      }
+
+      .note {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 20px;
+        font-size: 13px;
+      }
+
+      .note code {
+        background: #2a2a2a;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="test-container">
+      <h1>Dots Extension Demo</h1>
+      <p class="description">
+        Navigation dots for carousel items. Click dots to jump to specific
+        items.
+      </p>
+
+      <!-- Basic Carousel -->
+      <div class="carousel-wrapper">
+        <h2>1. Basic Carousel (5 items, 3 columns)</h2>
+        <div data-motionrail id="carousel-1">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          Basic dots without index numbers. Active dots are highlighted in
+          white.
+        </div>
+      </div>
+
+      <!-- With Index Numbers -->
+      <div class="carousel-wrapper">
+        <h2>2. Dots with Index Numbers</h2>
+        <div data-motionrail id="carousel-2">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          Dots display 1-based index numbers using
+          <code>showIndex: true</code>
+        </div>
+      </div>
+
+      <!-- Many Items (Scrollable Dots) -->
+      <div class="carousel-wrapper">
+        <h2>3. Many Items (20 items, 2 columns) - Scrollable Dots</h2>
+        <div data-motionrail id="carousel-3">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+              <div class="motion-rail-item">7</div>
+              <div class="motion-rail-item">8</div>
+              <div class="motion-rail-item">9</div>
+              <div class="motion-rail-item">10</div>
+              <div class="motion-rail-item">11</div>
+              <div class="motion-rail-item">12</div>
+              <div class="motion-rail-item">13</div>
+              <div class="motion-rail-item">14</div>
+              <div class="motion-rail-item">15</div>
+              <div class="motion-rail-item">16</div>
+              <div class="motion-rail-item">17</div>
+              <div class="motion-rail-item">18</div>
+              <div class="motion-rail-item">19</div>
+              <div class="motion-rail-item">20</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          When dots exceed container width, they become horizontally scrollable.
+          Index numbers help identify items.
+        </div>
+      </div>
+
+      <!-- Single Item -->
+      <div class="carousel-wrapper">
+        <h2>4. Single Item</h2>
+        <div data-motionrail id="carousel-4">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Single item carousel shows one active dot.</div>
+      </div>
+
+      <!-- Two Items -->
+      <div class="carousel-wrapper">
+        <h2>5. Two Items (1 column)</h2>
+        <div data-motionrail id="carousel-5">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Two item carousel with navigation dots.</div>
+      </div>
+
+      <!-- RTL Mode -->
+      <div class="carousel-wrapper">
+        <h2>6. RTL Mode (4 items, 2 columns)</h2>
+        <div data-motionrail id="carousel-6">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">Dots work with RTL carousels.</div>
+      </div>
+
+      <!-- Responsive Columns -->
+      <div class="carousel-wrapper">
+        <h2>7. Responsive Columns (6 items)</h2>
+        <div data-motionrail id="carousel-7">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+              <div class="motion-rail-item">6</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          Resize window to see active dots change as visible items adjust (1→2→3
+          columns).
+        </div>
+      </div>
+
+      <!-- Autoplay -->
+      <div class="carousel-wrapper">
+        <h2>8. Autoplay with Dots (5 items, 2 columns)</h2>
+        <div data-motionrail id="carousel-8">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+              <div class="motion-rail-item">4</div>
+              <div class="motion-rail-item">5</div>
+            </div>
+          </div>
+        </div>
+        <div class="note">
+          Autoplay carousel with dots. Watch active dots change automatically.
+        </div>
+      </div>
+
+      <!-- Empty Carousel -->
+      <div class="carousel-wrapper">
+        <h2>9. Empty Carousel</h2>
+        <div data-motionrail id="carousel-9">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid></div>
+          </div>
+        </div>
+        <div class="note">
+          Empty carousel - dots are hidden when no items exist.
+        </div>
+      </div>
+
+      <!-- Dynamic Content -->
+      <div class="carousel-wrapper">
+        <h2>10. Dynamic Content (Add/Remove Items)</h2>
+        <div data-motionrail id="carousel-10">
+          <div data-motionrail-scrollable>
+            <div data-motionrail-grid>
+              <div class="motion-rail-item">1</div>
+              <div class="motion-rail-item">2</div>
+              <div class="motion-rail-item">3</div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 15px">
+          <button
+            id="add-item"
+            style="
+              padding: 10px 20px;
+              background: #667eea;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+              margin-right: 10px;
+            "
+          >
+            Add Item
+          </button>
+          <button
+            id="remove-item"
+            style="
+              padding: 10px 20px;
+              background: #f5576c;
+              color: white;
+              border: none;
+              border-radius: 5px;
+              cursor: pointer;
+            "
+          >
+            Remove Item
+          </button>
+        </div>
+        <div class="note">
+          Dots are automatically updated when items are added or removed using
+          <code>carousel.update()</code>
+        </div>
+      </div>
+    </div>
+
+    <script type="module">
+      import { MotionRail } from "../../dist/motionrail.js";
+      import { Dots } from "../../src/extensions/dots/main.ts";
+
+      // 1. Basic Carousel
+      new MotionRail(document.getElementById("carousel-1"), {
+        breakpoints: [{ columns: 3, gap: "16px" }],
+        extensions: [Dots()],
+      });
+
+      // 2. With Index Numbers
+      new MotionRail(document.getElementById("carousel-2"), {
+        breakpoints: [{ columns: 3, gap: "16px" }],
+        extensions: [Dots({ showIndex: true })],
+      });
+
+      // 3. Many Items (Scrollable Dots)
+      new MotionRail(document.getElementById("carousel-3"), {
+        breakpoints: [{ columns: 2, gap: "16px" }],
+        extensions: [Dots({ showIndex: true })],
+      });
+
+      // 4. Single Item
+      new MotionRail(document.getElementById("carousel-4"), {
+        breakpoints: [{ columns: 1, gap: "16px" }],
+        extensions: [Dots()],
+      });
+
+      // 5. Two Items
+      new MotionRail(document.getElementById("carousel-5"), {
+        breakpoints: [{ columns: 1, gap: "16px" }],
+        extensions: [Dots({ showIndex: true })],
+      });
+
+      // 6. RTL Mode
+      new MotionRail(document.getElementById("carousel-6"), {
+        rtl: true,
+        breakpoints: [{ columns: 2, gap: "16px" }],
+        extensions: [Dots()],
+      });
+
+      // 7. Responsive Columns
+      new MotionRail(document.getElementById("carousel-7"), {
+        breakpoints: [
+          { columns: 1, gap: "12px" },
+          { width: 768, columns: 2, gap: "16px" },
+          { width: 1024, columns: 3, gap: "20px" },
+        ],
+        extensions: [Dots({ showIndex: true })],
+      });
+
+      // 8. Autoplay
+      new MotionRail(document.getElementById("carousel-8"), {
+        autoplay: true,
+        delay: 2000,
+        breakpoints: [{ columns: 2, gap: "16px" }],
+        extensions: [Dots()],
+      });
+
+      // 9. Empty Carousel
+      new MotionRail(document.getElementById("carousel-9"), {
+        breakpoints: [{ columns: 1, gap: "16px" }],
+        extensions: [Dots()],
+      });
+
+      // 10. Dynamic Content
+      const carousel10 = new MotionRail(
+        document.getElementById("carousel-10"),
+        {
+          breakpoints: [{ columns: 2, gap: "16px" }],
+          extensions: [Dots({ showIndex: true })],
+        },
+      );
+
+      let itemCounter = 4;
+      document.getElementById("add-item").addEventListener("click", () => {
+        const grid = document.querySelector(
+          "#carousel-10 [data-motionrail-grid]",
+        );
+        const newItem = document.createElement("div");
+        newItem.className = "motion-rail-item";
+        newItem.textContent = itemCounter++;
+        grid.appendChild(newItem);
+        carousel10.update();
+      });
+
+      document.getElementById("remove-item").addEventListener("click", () => {
+        const grid = document.querySelector(
+          "#carousel-10 [data-motionrail-grid]",
+        );
+        if (grid.children.length > 0) {
+          grid.removeChild(grid.lastChild);
+          carousel10.update();
+        }
+      });
+    </script>
+  </body>
+</html>

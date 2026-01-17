@@ -1,0 +1,31 @@
+{
+  "name": "logger",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/logger.umd.js",
+  "module": "./dist/logger.es.js",
+  "types": "./dist/logger.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/logger.d.ts",
+      "import": "./dist/logger.es.js",
+      "require": "./dist/logger.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "concurrently \"vite build --watch\" \"tsc --watch\"",
+    "build": "vite build && tsc",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "concurrently": "^9.2.1",
+    "motionrail": "workspace:*",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5"
+  }
+}
