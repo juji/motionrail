@@ -66,7 +66,7 @@
             { columns: 1, gap: '16px' },
             { width: 768, columns: 2, gap: '16px' },
           ],
-          extensions: [Arrows({ autoHide: true })],
+          extensions: [Arrows({ loop: false })],
         }}
       >
         {#each [1, 2, 3, 4, 5, 6] as i}
