@@ -10,10 +10,16 @@
       "types": "./main/dist/motionrail.d.ts",
       "import": "./main/dist/motionrail.es.js",
       "require": "./main/dist/motionrail.umd.js"
+    },
+    "./extensions/logger": {
+      "types": "./extensions/logger/dist/logger.d.ts",
+      "import": "./extensions/logger/dist/logger.es.js",
+      "require": "./extensions/logger/dist/logger.umd.js"
     }
   },
   "files": [
-    "main/dist"
+    "main/dist",
+    "extensions/logger/dist"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
