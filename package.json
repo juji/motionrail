@@ -88,7 +88,7 @@
     "build:local": "pnpm build:main && pnpm build:libs && pnpm build:rest",
     "build:doc": "pnpm build:main && pnpm build:libs && pnpm --filter doc build",
     "dev": "pnpm --parallel dev",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "keywords": [
     "carousel",
