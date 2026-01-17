@@ -31,4 +31,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
       - run: pnpm run build
-      - run: npm publish --access public
+      - run: pnpm publish --access public
