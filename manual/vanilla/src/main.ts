@@ -1,24 +1,57 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { MotionRail } from 'motionrail';
+import 'motionrail/style.css';
+import './style.css';
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
+const app = document.querySelector<HTMLDivElement>('#app')!;
+
+app.innerHTML = `
   <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+    <h1>MotionRail Vanilla JS Demo</h1>
+    
+    <div class="demo-section">
+      <h2>Basic Carousel</h2>
+      <div id="carousel" data-motionrail>
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            ${Array.from({ length: 10 }, (_, i) => `
+              <div class="slide">
+                <h3>Slide ${i + 1}</h3>
+                <p>This is slide number ${i + 1}</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+    <div class="demo-section">
+      <h2>With Arrows Extension</h2>
+      <div id="carousel-arrows" data-motionrail>
+        <div data-motionrail-scrollable>
+          <div data-motionrail-grid>
+            ${Array.from({ length: 10 }, (_, i) => `
+              <div class="slide">
+                <h3>Slide ${i + 1}</h3>
+                <p>With navigation arrows</p>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
+// Initialize basic carousel
+const carousel = document.querySelector('#carousel')!;
+new MotionRail(carousel, {
+  slidesPerView: 3,
+  gap: 20,
+});
+
+// Initialize carousel with arrows
+const carouselArrows = document.querySelector('#carousel-arrows')!;
+new MotionRail(carouselArrows, {
+  slidesPerView: 3,
+  gap: 20,
+});
