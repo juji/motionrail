@@ -36,7 +36,7 @@ Create the carousel HTML structure with the required data attributes:
 ```
 
 ::: tip ABOUT HEIGHT
-**The carousel height is not set by default**, giving you full control over your layout. You can set the height on the carousel container itself, on individual items, or use any CSS approach that fits your design.
+**The carousel height is not set by default**, giving you full control over your layout. You can set the height on individual items, or use any CSS approach that fits your design.
 :::
 
 **Structure layers:**
