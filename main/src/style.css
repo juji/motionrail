@@ -8,8 +8,12 @@
   [data-motionrail-scrollable] {
     overflow: hidden;
     position: relative;
-    container-type: inline-size;
-    anchor-name: --motionrail-scrollable;
+    @supports (container-type: inline-size) {
+      container-type: inline-size;
+    }
+    @supports (anchor-name: --motionrail-scrollable) {
+      anchor-name: --motionrail-scrollable;
+    }
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Firefox */
