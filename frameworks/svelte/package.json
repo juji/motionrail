@@ -30,13 +30,13 @@
 		}
 	},
 	"dependencies": {
+		"@sveltejs/adapter-cloudflare": "^7.2.5",
 		"motionrail": "workspace:*"
 	},
 	"peerDependencies": {
 		"svelte": "^5.0.0"
 	},
 	"devDependencies": {
-		"concurrently": "^9.2.1",
 		"@eslint/compat": "^1.4.0",
 		"@eslint/js": "^9.39.1",
 		"@sveltejs/adapter-auto": "^7.0.0",
@@ -44,6 +44,7 @@
 		"@sveltejs/package": "^2.5.7",
 		"@sveltejs/vite-plugin-svelte": "^6.2.1",
 		"@types/node": "^22",
+		"concurrently": "^9.2.1",
 		"eslint": "^9.39.1",
 		"eslint-config-prettier": "^10.1.8",
 		"eslint-plugin-svelte": "^3.13.1",
