@@ -1,6 +1,12 @@
 .motionrail-dots {
   --dot-size: 34px;
   --dot-font-size: 12px;
+  --dot-bg: rgba(128, 128, 128, 0.3);
+  --dot-bg-hover: rgba(128, 128, 128, 0.5);
+  --dot-bg-active: #666;
+  --dot-bg-active-hover: #555;
+  --dot-color: #999;
+  --dot-color-active: #fff;
   display: flex;
   gap: 8px;
   padding: 8px 12px;
@@ -40,8 +46,8 @@
   width: var(--dot-size);
   height: var(--dot-size);
   border-radius: 50%;
-  background: rgba(128, 128, 128, 0.3);
-  color: #999;
+  background: var(--dot-bg);
+  color: var(--dot-color);
   cursor: pointer;
   font-size: var(--dot-font-size);
   font-weight: 600;
@@ -54,7 +60,7 @@
 }
 
 .motionrail-dot:hover {
-  background: rgba(128, 128, 128, 0.5);
+  background: var(--dot-bg-hover);
   scale: 1.1;
 }
 
@@ -63,10 +69,10 @@
 }
 
 .motionrail-dot-active {
-  background: #666;
-  color: #fff;
+  background: var(--dot-bg-active);
+  color: var(--dot-color-active);
 }
 
 .motionrail-dot-active:hover {
-  background: #555;
+  background: var(--dot-bg-active-hover);
 }
