@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
+    "dev": "vite build --watch",
     "build": "vite build && vue-tsc --project tsconfig.app.json",
     "preview": "vite preview"
   },
