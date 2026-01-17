@@ -81,7 +81,7 @@ export default defineConfig({
       const links: Array<{ text: string; link: string }> = []
       for (const item of items) {
         if (item.link) {
-          links.push({ text: item.text, link: item.link })
+          links.push({ text: item.text!, link: item.link })
         }
         if (item.items) {
           links.push(...extractLinks(item.items))
