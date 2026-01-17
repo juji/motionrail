@@ -88,9 +88,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "pnpm build:main && pnpm build:libs && pnpm build:rest",
     "build:main": "pnpm --filter main build",
-    "build:libs": "pnpm --filter './extensions/*' --filter './frameworks/*' build",
-    "build:rest": "pnpm -r --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
-    "dev": "pnpm --filter './manual/*' dev"
+    "build:libs": "pnpm --parallel --filter './extensions/*' --filter './frameworks/*' build",
+    "build:rest": "pnpm --parallel --filter '!main' --filter '!./extensions/*' --filter '!./frameworks/*' build",
+    "dev": "pnpm --parallel --filter './manual/*' dev"
   },
   "keywords": [
     "carousel",

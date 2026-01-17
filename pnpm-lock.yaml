@@ -347,6 +347,22 @@ importers:
         specifier: npm:rolldown-vite@7.2.5
         version: rolldown-vite@7.2.5(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(less@4.5.1)(sass@1.97.2)(stylus@0.62.0)(terser@5.46.0)(yaml@2.8.2)
 
+  manual/lit:
+    dependencies:
+      lit:
+        specifier: ^3.3.1
+        version: 3.3.2
+      motionrail:
+        specifier: workspace:*
+        version: link:../..
+    devDependencies:
+      typescript:
+        specifier: ~5.9.3
+        version: 5.9.3
+      vite:
+        specifier: npm:rolldown-vite@7.2.5
+        version: rolldown-vite@7.2.5(@types/node@25.0.9)(esbuild@0.25.12)(jiti@2.6.1)(less@4.5.1)(sass@1.97.2)(stylus@0.62.0)(terser@5.46.0)(yaml@2.8.2)
+
   manual/next:
     dependencies:
       motionrail:
