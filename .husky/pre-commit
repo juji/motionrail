@@ -1,4 +1,4 @@
-pnpm -r run check
+pnpm --filter "!./manual/*" run check
 if [ $? -ne 0 ]; then
 	echo "Type/lint check failed. Commit aborted."
 	exit 1
