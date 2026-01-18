@@ -8,11 +8,11 @@ pnpm i && pnpm run dev
 Ports:
 
 - doc: 3000
-- manual/next: 3001
-- manual/nuxt: 3002
-- manual/preact: 3003
-- manual/qwik: 3004
-- manual/solid: 3005
-- manual/svelte: 3006
-- manual/vanilla: 3007
+- dev/next: 3001
+- dev/nuxt: 3002
+- dev/preact: 3003
+- dev/qwik: 3004
+- dev/solid: 3005
+- dev/svelte: 3006
+- dev/vanilla: 3007
 
