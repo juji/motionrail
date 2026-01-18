@@ -79,16 +79,10 @@
   },
   "files": [
     "main/dist",
-    "extensions/logger/dist",
-    "extensions/arrows/dist",
-    "extensions/dots/dist",
-    "extensions/thumbnails/dist",
-    "frameworks/react/dist",
-    "frameworks/vue/dist",
-    "frameworks/svelte/dist",
-    "frameworks/preact/dist",
-    "frameworks/solid/dist",
-    "frameworks/qwik/dist"
+    "extensions/*/dist",
+    "frameworks/*/dist",
+    "frameworks/qwik/lib-types",
+    "frameworks/qwik/lib"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
