@@ -56,9 +56,20 @@
       "require": "./frameworks/preact/dist/preact.umd.js"
     },
     "./solid": {
-      "types": "./frameworks/solid/dist/main.d.ts",
-      "import": "./frameworks/solid/dist/solid.es.js",
-      "require": "./frameworks/solid/dist/solid.umd.js"
+      "solid": {
+        "development": "./frameworks/solid/dist/dev.jsx",
+        "import": "./frameworks/solid/dist/index.jsx"
+      },
+      "development": {
+        "import": {
+          "types": "./frameworks/solid/dist/index.d.ts",
+          "default": "./frameworks/solid/dist/dev.js"
+        }
+      },
+      "import": {
+        "types": "./frameworks/solid/dist/index.d.ts",
+        "default": "./frameworks/solid/dist/index.js"
+      }
     },
     "./qwik": {
       "types": "./frameworks/qwik/dist/main.d.ts",

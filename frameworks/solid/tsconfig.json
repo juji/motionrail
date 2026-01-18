@@ -1,25 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "lib": ["ES2020", "DOM"],
-    "jsx": "preserve",
-    "jsxImportSource": "solid-js",
+    "strict": true,
+    "target": "ESNext",
     "module": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "paths": {
-      "motionrail": ["../../main/dist/motionrail.d.ts"]
-    },
-    "skipLibCheck": true,
-    "strict": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "declarationDir": "./dist",
-    "outDir": "./dist",
     "esModuleInterop": true,
+    "noEmit": true,
+    "isolatedModules": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true
+    "noUncheckedIndexedAccess": true,
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "types": [],
+    "baseUrl": "."
   },
-  "include": ["src/lib/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules", "dist", "./dev"]
 }
