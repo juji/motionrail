@@ -1,46 +1,58 @@
 {
-  "name": "@motionrail/qwik",
+  "name": "my-qwik-library-name",
   "version": "0.0.1",
-  "description": "MotionRail wrapper for Qwik",
-  "type": "module",
-  "scripts": {
-    "dev": "concurrently \"vite build --watch\" \"tsc --emitDeclarationOnly --watch\"",
-    "build": "vite build && tsc --emitDeclarationOnly",
-    "preview": "vite preview",
-    "check": "tsc --noEmit"
-  },
-  "main": "./dist/qwik.umd.js",
-  "module": "./dist/qwik.es.js",
-  "types": "./dist/main.d.ts",
+  "description": "Create a Qwik library",
+  "main": "./lib/index.qwik.mjs",
+  "qwik": "./lib/index.qwik.mjs",
+  "types": "./lib-types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/main.d.ts",
-      "import": "./dist/qwik.es.js",
-      "require": "./dist/qwik.umd.js"
+      "types": "./lib-types/index.d.ts",
+      "import": "./lib/index.qwik.mjs",
+      "require": "./lib/index.qwik.cjs"
     }
   },
-  "files": ["dist"],
-  "dependencies": {
-    "motionrail": "workspace:*"
+  "files": [
+    "lib",
+    "lib-types"
+  ],
+  "engines": {
+    "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
-  "peerDependencies": {
-    "@builder.io/qwik": "^1.0.0"
+  "private": false,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "qwik build",
+    "build.lib": "vite build --mode lib",
+    "build.types": "tsc --emitDeclarationOnly",
+    "dev": "vite --mode ssr",
+    "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
+    "fmt": "prettier --write .",
+    "fmt.check": "prettier --check .",
+    "lint": "eslint \"src/**/*.ts*\"",
+    "release": "np",
+    "start": "vite --open --mode ssr",
+    "test": "echo \"No test specified\" && exit 0",
+    "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "^1.18.0",
-    "@builder.io/qwik-city": "^1.18.0",
+    "@builder.io/qwik": "1.18.0",
     "@eslint/js": "latest",
     "@types/node": "20.19.0",
-    "concurrently": "^9.2.1",
     "eslint": "9.32.0",
-    "eslint-plugin-qwik": "^1.18.0",
+    "eslint-plugin-qwik": "1.18.0",
     "globals": "16.4.0",
+    "np": "^8.0.4",
     "prettier": "3.6.2",
     "typescript": "5.4.5",
     "typescript-eslint": "8.38.0",
-    "typescript-plugin-css-modules": "latest",
     "undici": "*",
     "vite": "7.2.6",
     "vite-tsconfig-paths": "^4.2.1"
+  },
+  "dependencies": {
+    "build": "^0.1.4",
+    "motionrail": "workspace:*"
   }
 }

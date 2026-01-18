@@ -72,8 +72,9 @@
       }
     },
     "./qwik": {
-      "types": "./frameworks/qwik/dist/main.d.ts",
-      "import": "./frameworks/qwik/src/lib/main.tsx"
+      "types": "./frameworks/qwik/lib-types/index.d.ts",
+      "import": "./frameworks/qwik/lib/index.qwik.mjs",
+      "require": "./frameworks/qwik/lib/index.qwik.cjs"
     }
   },
   "files": [

@@ -1,31 +1,35 @@
 import { defineConfig } from "vite";
+import pkg from "./package.json";
 import { qwikVite } from "@builder.io/qwik/optimizer";
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
+import tsconfigPaths from "vite-tsconfig-paths";
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const { dependencies = {}, peerDependencies = {} } = pkg as any;
+const makeRegex = (dep) => new RegExp(`^${dep}(/.*)?$`);
+const excludeAll = (obj) => Object.keys(obj).map(makeRegex);
 
-export default defineConfig({
-  plugins: [qwikVite()],
-  build: {
-    lib: {
-      entry: resolve(__dirname, 'src/lib/index.ts'),
-      name: 'MotionRailQwik',
-      formats: ['es'],
-      fileName: (format) => `qwik.${format}.js`,
-    },
-    rollupOptions: {
-      external: ['@builder.io/qwik', '@builder.io/qwik-city', '@qwik-city-plan', '@qwik-city-sw-register', 'motionrail'],
-      output: {
-        globals: {
-          '@builder.io/qwik': 'Qwik',
-          motionrail: 'MotionRail',
+export default defineConfig(() => {
+  return {
+    build: {
+      target: "es2020",
+      lib: {
+        entry: "./src/index.ts",
+        formats: ["es", "cjs"],
+        fileName: (format, entryName) =>
+          `${entryName}.qwik.${format === "es" ? "mjs" : "cjs"}`,
+      },
+      rollupOptions: {
+        output: {
+          preserveModules: true,
+          preserveModulesRoot: "src",
         },
+        // externalize deps that shouldn't be bundled into the library
+        external: [
+          /^node:.*/,
+          ...excludeAll(dependencies),
+          ...excludeAll(peerDependencies),
+        ],
       },
     },
-    sourcemap: true,
-    emptyOutDir: true,
-  },
+    plugins: [qwikVite(), tsconfigPaths({ root: "." })],
+  };
 });
