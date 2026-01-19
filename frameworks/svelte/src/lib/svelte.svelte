@@ -53,7 +53,7 @@
 </script>
 
 <div bind:this={containerRef} data-motionrail {...$$restProps}>
-  <div data-motionrail-scrollable>
+  <div data-motionrail-scrollable style={options?.containerName ? `container-name: ${options.containerName};` : undefined}>
     <div data-motionrail-grid>
       <slot />
     </div>

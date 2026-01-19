@@ -38,9 +38,13 @@ function MotionRailSolid(props: MotionRailProps) {
     }
   });
 
+  // Extract options and rest props
+  const { options, children, ...restProps } = props;
+  // Compute style for scrollable div
+  const scrollableStyle = options?.containerName ? { containerName: options.containerName } : undefined;
   return (
-    <div ref={containerRef} data-motionrail {...props}>
-      <div data-motionrail-scrollable>
+    <div ref={containerRef} data-motionrail {...restProps}>
+      <div data-motionrail-scrollable style={scrollableStyle}>
         <div data-motionrail-grid>{resolved()}</div>
       </div>
     </div>

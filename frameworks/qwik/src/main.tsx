@@ -34,9 +34,11 @@ export const MotionRail = component$<MotionRailProps & QwikIntrinsicElements['di
     });
   });
 
+  // Compute style for scrollable div
+  const scrollableStyle = options?.containerName ? { containerName: options.containerName } : undefined;
   return (
     <div ref={containerRef} data-motionrail {...divProps}>
-      <div data-motionrail-scrollable>
+      <div data-motionrail-scrollable style={scrollableStyle}>
         <div data-motionrail-grid>
           <Slot />
         </div>

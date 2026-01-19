@@ -36,9 +36,11 @@ function MotionRailPreact({ options, ...divProps }: MotionRailProps) {
     }
   }, [children]);
 
+  // Compute style for scrollable div
+  const scrollableStyle = options?.containerName ? { containerName: options.containerName } : undefined;
   return (
     <div ref={containerRef} data-motionrail {...restDivProps}>
-      <div data-motionrail-scrollable>
+      <div data-motionrail-scrollable style={scrollableStyle}>
         <div data-motionrail-grid>{children}</div>
       </div>
     </div>
