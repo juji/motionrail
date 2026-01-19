@@ -2,6 +2,51 @@
 
 MotionRail provides a first-class Preact component with full TypeScript support.
 
+## FOUC-Free Styling Example
+
+```tsx
+import { useState } from "preact/hooks";
+import { MotionRail } from "motionrail/preact";
+import { MotionRail as MotionRailClass } from "motionrail";
+import "motionrail/style.css";
+import Nav from "../components/Nav";
+
+export default function Home() {
+  // FOUC-safe container query setup for the first carousel
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+    breakpoints: [
+      { columns: 1, gap: "16px" },
+      { width: 768, columns: 2, gap: "16px" },
+      { width: 1024, columns: 3, gap: "20px" },
+    ],
+    totalItems: 8,
+  });
+
+  return (
+    <section>
+      {/* FOUC prevention: inject containerQueries in a <style> tag */}
+      {containerName && containerQueries && (
+        <style data-motionrail-style={containerName}>{containerQueries}</style>
+      )}
+      <MotionRail
+        options={{
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          containerName,
+        }}
+      >
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div key={i}>{/* ...carousel item content... */}</div>
+        ))}
+      </MotionRail>
+    </section>
+  );
+}
+```
+
 ## Basic Usage
 
 ```jsx

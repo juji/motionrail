@@ -111,11 +111,14 @@ export class MotionRail {
     return `motion-rail-${Math.random().toString(36).substring(2, 11)}`;
   }
 
-  static getBreakPoints(
-    breakpoints: MotionRailBreakpoint[],
-    totalItems: number,
-    containerName?: string,
-  ) {
+  static getBreakPoints(props: {
+    breakpoints: MotionRailBreakpoint[];
+    totalItems: number;
+    containerName?: string;
+  }) {
+    const { breakpoints, totalItems } = props;
+    let { containerName } = props;
+
     containerName = containerName || this.randomContainerName();
     // Find the smallest width for base case max-width
     const withWidth = breakpoints.filter((bp) => bp.width);
@@ -179,11 +182,11 @@ export class MotionRail {
       styleElement.setAttribute("data-motionrail-style", this.containerName);
     }
 
-    const { containerQueries } = MotionRail.getBreakPoints(
-      this.breakpoints,
-      this.state.totalItems,
-      this.containerName,
-    );
+    const { containerQueries } = MotionRail.getBreakPoints({
+      breakpoints: this.breakpoints,
+      totalItems: this.state.totalItems,
+      containerName: this.containerName,
+    });
 
     styleElement.textContent = containerQueries;
     if (!this.styleTag) {

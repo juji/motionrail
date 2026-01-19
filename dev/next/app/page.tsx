@@ -6,14 +6,14 @@ import { getGradient } from "./get-gradient";
 import { DynamicCarousel } from "./dynamic-carousel";
 
 export default function Home() {
-  const { containerName, containerQueries } = MotionRailClass.getBreakPoints(
-    [
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+    breakpoints: [
       { columns: 1, gap: "16px" },
       { width: 768, columns: 2, gap: "16px" },
       { width: 1024, columns: 3, gap: "20px" },
     ],
-    8,
-  );
+    totalItems: 8,
+  });
 
   return (
     <div

@@ -2,6 +2,52 @@
 
 MotionRail provides a first-class Solid.js component with full TypeScript support.
 
+## FOUC-Free Styling Example
+
+```tsx
+import { Style } from "@solidjs/meta";
+import { clientOnly } from "@solidjs/start";
+import { MotionRail as MotionRailClass } from "motionrail";
+import "motionrail/style.css";
+
+const MotionRail = clientOnly(() =>
+  import("motionrail/solid").then((m) => ({ default: m.MotionRail })),
+);
+
+// FOUC-safe container query setup for the first carousel
+const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+    { width: 1024, columns: 3, gap: "20px" },
+  ],
+  totalItems: 8,
+});
+
+export default function Home() {
+  return (
+    <section>
+      {/* FOUC prevention: container query style in head, generated dynamically */}
+      <Style data-motionrail-style={containerName}>{containerQueries}</Style>
+      <MotionRail
+        options={{
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          containerName,
+        }}
+      >
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div>{/* ...carousel item content... */}</div>
+        ))}
+      </MotionRail>
+    </section>
+  );
+}
+```
+
 ## Basic Usage
 
 ```jsx

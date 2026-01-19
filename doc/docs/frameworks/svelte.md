@@ -2,6 +2,46 @@
 
 MotionRail provides a Svelte component compatible with both Svelte 4 and Svelte 5 (classic API).
 
+## FOUC-Free Styling Example
+
+```svelte
+<script lang="ts">
+  import { MotionRail } from 'motionrail/svelte';
+  import { MotionRail as MotionRailClass } from 'motionrail';
+  import 'motionrail/style.css';
+
+  // FOUC-safe container query setup for the first carousel
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' },
+    ],
+    totalItems: 8,
+  });
+</script>
+
+<svelte:head>
+  <!-- FOUC prevention: inject containerQueries in a <style> tag in head -->
+  {@html `<style data-motionrail-style="${containerName}">${containerQueries}</style>`}
+</svelte:head>
+
+<MotionRail
+  options={{
+    breakpoints: [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' },
+    ],
+    containerName,
+  }}
+>
+  {#each [1,2,3,4,5,6,7,8] as i}
+    <div>{/* ...carousel item content... */}</div>
+  {/each}
+</MotionRail>
+```
+
 ## Basic Usage
 
 ```svelte

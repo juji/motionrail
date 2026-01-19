@@ -192,14 +192,14 @@ import { useHead } from "#imports";
 const items = ref([1, 2, 3]);
 
 // FOUC-safe container query setup for the first carousel
-const { containerName, containerQueries } = MotionRailClass.getBreakPoints(
-  [
+const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+  breakpoints: [
     { columns: 1, gap: "16px" },
     { width: 768, columns: 2, gap: "16px" },
     { width: 1024, columns: 3, gap: "20px" },
   ],
-  8,
-);
+  totalItems: 8,
+});
 
 useHead({
   style: [

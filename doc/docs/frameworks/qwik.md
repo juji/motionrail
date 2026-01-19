@@ -2,6 +2,48 @@
 
 MotionRail provides a first-class Qwik component with full TypeScript support and optimized for Qwik's resumability.
 
+## FOUC-Free Styling Example
+
+```tsx
+import { component$ } from "@builder.io/qwik";
+import { MotionRail } from "motionrail/qwik";
+import { MotionRail as MotionRailClass } from "motionrail";
+import "motionrail/style.css";
+
+export default component$(() => {
+  // FOUC-safe container query setup for the first carousel
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
+    breakpoints: [
+      { columns: 1, gap: "16px" },
+      { width: 768, columns: 2, gap: "16px" },
+      { width: 1024, columns: 3, gap: "20px" },
+    ],
+    totalItems: 8,
+  });
+
+  return (
+    <section>
+      {/* FOUC prevention: inject containerQueries in a <style> tag */}
+      <style data-motionrail-style={containerName}>{containerQueries}</style>
+      <MotionRail
+        options={{
+          breakpoints: [
+            { columns: 1, gap: "16px" },
+            { width: 768, columns: 2, gap: "16px" },
+            { width: 1024, columns: 3, gap: "20px" },
+          ],
+          containerName,
+        }}
+      >
+        {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+          <div key={i}>{/* ...carousel item content... */}</div>
+        ))}
+      </MotionRail>
+    </section>
+  );
+});
+```
+
 ## Basic Usage
 
 ```tsx
