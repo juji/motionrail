@@ -1,13 +1,7 @@
-import {
-  component$,
-  useVisibleTask$,
-  useSignal,
-  Slot,
-  noSerialize,
-} from "@builder.io/qwik";
-import type { QRL, QwikIntrinsicElements } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useSignal, Slot } from "@builder.io/qwik";
+import type { QwikIntrinsicElements } from "@builder.io/qwik";
 import { MotionRail as MotionRailClass } from "motionrail";
-import type { MotionRailState, MotionRailOptions } from "motionrail";
+import type { MotionRailOptions } from "motionrail";
 
 export interface MotionRailProps {
   options?: MotionRailOptions;
@@ -23,8 +17,6 @@ export const MotionRail = component$<
 
   const containerRef = useSignal<HTMLDivElement>();
   const motionRailRef = useSignal<MotionRailClass | null>(null);
-
-  // eslint-disable-next-line qwik/no-use-visible-task
 
   useVisibleTask$(({ cleanup }) => {
     if (!containerRef.value) return;
