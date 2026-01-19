@@ -29,6 +29,7 @@
     "dev": "concurrently \"vite build --watch --mode lib\" \"tsc --emitDeclarationOnly --watch\"",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
+    "format": "prettier --write .",
     "fmt.check": "prettier --check .",
     "lint": "eslint \"src/**/*.ts*\"",
     "release": "np",

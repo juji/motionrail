@@ -6,7 +6,8 @@
     "dev": "concurrently \"vite build --watch\" \"tsc --emitDeclarationOnly --watch\"",
     "build": "vite build && tsc --emitDeclarationOnly",
     "preview": "vite preview",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
   },
   "main": "./dist/preact.umd.js",
   "module": "./dist/preact.es.js",
@@ -32,6 +33,7 @@
     "@types/node": "^24.10.1",
     "concurrently": "^9.2.1",
     "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "vite": "npm:rolldown-vite@7.2.5",
+    "prettier": "^3.8.0"
   }
 }

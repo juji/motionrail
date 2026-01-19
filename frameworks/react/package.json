@@ -21,7 +21,8 @@
     "build": "vite build && tsc --project tsconfig.app.json",
     "lint": "eslint .",
     "preview": "vite preview",
-    "check": "tsc --project tsconfig.app.json --noEmit"
+    "check": "tsc --project tsconfig.app.json --noEmit",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "motionrail": "workspace:*"
@@ -46,6 +47,7 @@
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "vite": "npm:rolldown-vite@7.2.5",
+    "prettier": "^3.8.0"
   }
 }
