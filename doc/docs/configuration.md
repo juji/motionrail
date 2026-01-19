@@ -11,6 +11,7 @@ interface MotionRailOptions {
   breakpoints?: MotionRailBreakpoint[];
   onChange?: (state: MotionRailState) => void;
   extensions?: MotionRailExtension[];
+  containerName?: string;
 }
 ```
 

@@ -13,6 +13,7 @@ type MotionRailOptions = {
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
   extensions?: MotionRailExtension[];
+  containerName?: string;
 };
 ```
 
