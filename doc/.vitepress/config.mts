@@ -16,6 +16,7 @@ const sidebar: DefaultTheme.SidebarItem[] = [
     text: "Core Concepts",
     items: [
       { text: "Configuration", link: "/docs/configuration" },
+      { text: "SSR & FOUC-Free Styling", link: "/docs/ssr-configuration" },
       { text: "Breakpoints", link: "/docs/breakpoints" },
       { text: "RTL Support", link: "/docs/rtl" },
       { text: "API Methods", link: "/docs/api" },
