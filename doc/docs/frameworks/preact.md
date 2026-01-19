@@ -5,11 +5,9 @@ MotionRail provides a first-class Preact component with full TypeScript support.
 ## FOUC-Free Styling Example
 
 ```tsx
-import { useState } from "preact/hooks";
 import { MotionRail } from "motionrail/preact";
 import { MotionRail as MotionRailClass } from "motionrail";
 import "motionrail/style.css";
-import Nav from "../components/Nav";
 
 export default function Home() {
   // FOUC-safe container query setup for the first carousel

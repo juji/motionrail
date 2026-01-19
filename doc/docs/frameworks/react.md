@@ -8,8 +8,6 @@ MotionRail provides a first-class React component with full TypeScript support.
 import { MotionRail } from "motionrail/react";
 import { MotionRail as MotionRailClass } from "motionrail";
 import "motionrail/style.css";
-import Nav from "./components/Nav";
-import { getGradient } from "./get-gradient";
 
 export default function Home() {
   // FOUC-safe container query setup for the first carousel
