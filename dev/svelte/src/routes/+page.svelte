@@ -33,6 +33,7 @@
 
 <svelte:head>
   <title>MotionRail Test Page - SvelteKit</title>
+  {@html `<style data-motionrail-style="${containerName}">${containerQueries}</style>`}
 </svelte:head>
 
 
@@ -49,7 +50,6 @@
       <h2 style="margin-bottom: 15px; font-size: 18px;">
         Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
       </h2>
-      {@html `<style data-motionrail-style="${containerName}">${containerQueries}</style>`}
       <MotionRail
         options={{
           breakpoints: [
