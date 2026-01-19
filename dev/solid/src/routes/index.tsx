@@ -1,15 +1,30 @@
 import { Title } from '@solidjs/meta';
+import { Style } from '@solidjs/meta';
 import { clientOnly } from '@solidjs/start';
+import { MotionRail as MotionRailClass } from 'motionrail';
 import 'motionrail/style.css';
 import Nav from '~/components/Nav';
 import { createSignal, For } from 'solid-js';
 
+
 const MotionRail = clientOnly(() => import('motionrail/solid').then(m => ({ default: m.MotionRail })));
+
+// Generate containerName and containerQueries for FOUC prevention (same as React)
+const { containerName, containerQueries } = MotionRailClass.getBreakPoints(
+  [
+    { columns: 1, gap: '16px' },
+    { width: 768, columns: 2, gap: '16px' },
+    { width: 1024, columns: 3, gap: '20px' },
+  ],
+  8
+);
 
 export default function Home() {
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', 'min-height': '100vh' }}>
       <Title>MotionRail Test Page - SolidStart</Title>
+      {/* FOUC prevention: container query style in head, generated dynamically */}
+      <Style data-motionrail-style={containerName}>{containerQueries}</Style>
       <div style={{ 'max-width': '1200px', margin: '0 auto' }}>
         <Nav current="main" />
         <h1 style={{ 'margin-bottom': '10px' }}>MotionRail Test Page</h1>
@@ -29,6 +44,7 @@ export default function Home() {
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
+              containerName,
               onChange: (state: any) => console.log('Carousel changed:', state),
             }}
           >
