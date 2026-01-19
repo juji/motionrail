@@ -1,6 +1,6 @@
 # Logger Extension
 
-Debug extension for logging carousel state and events.
+Development extension that logs all carousel state changes, lifecycle events, and configuration to the console for easy debugging, inspection, and extension development. Can also be used as a replacement for the onChange parameter for more advanced state tracking and side effects.
 
 ## Usage
 
