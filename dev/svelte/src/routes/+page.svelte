@@ -33,6 +33,8 @@
 
 <svelte:head>
   <title>MotionRail Test Page - SvelteKit</title>
+
+  <!-- Preventing FOUC -->
   {@html `<style data-motionrail-style="${containerName}">${containerQueries}</style>`}
 </svelte:head>
 
