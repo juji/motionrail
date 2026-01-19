@@ -160,6 +160,24 @@ import { Arrows } from "motionrail/extensions/arrows";
 import "motionrail/style.css";
 import "motionrail/extensions/arrows/style.css";
 
+// FOUC prevention: generate containerName and containerQueries for SSR
+const { containerName, containerQueries } = MotionRail.getBreakPoints({
+  breakpoints: [
+    { columns: 1, gap: "12px" },
+    { width: 480, columns: 2, gap: "16px" },
+    { width: 768, columns: 3, gap: "20px" },
+    { width: 1024, columns: 4, gap: "24px" },
+  ],
+  totalItems: 8,
+  containerName: "my-carousel-container",
+});
+
+// Inject containerQueries into <head> for SSR/FOUC-free styling
+const styleTag = document.createElement("style");
+styleTag.setAttribute("data-motionrail-style", containerName);
+styleTag.textContent = containerQueries;
+document.head.appendChild(styleTag);
+
 const carousel = new MotionRail(document.getElementById("carousel"), {
   autoplay: true,
   rtl: false,
@@ -171,6 +189,7 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
     { width: 768, columns: 3, gap: "20px" },
     { width: 1024, columns: 4, gap: "24px" },
   ],
+  containerName,
   onChange: (state) => {
     console.log("State updated:", state);
   },
