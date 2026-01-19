@@ -1,21 +1,22 @@
-import { component$, useVisibleTask$, useSignal, Slot, noSerialize, useStore } from "@builder.io/qwik";
-import type { QwikIntrinsicElements } from "@builder.io/qwik";
+import { component$, useVisibleTask$, useSignal, Slot, noSerialize } from "@builder.io/qwik";
+import type { QRL, QwikIntrinsicElements } from "@builder.io/qwik";
 import {
   MotionRail as MotionRailClass,
   type MotionRailOptions,
 } from "motionrail";
 
 export interface MotionRailProps {
-  options?: MotionRailOptions;
+  options?: MotionRailOptions
 }
-// asdf
-export const MotionRail = component$<MotionRailProps & QwikIntrinsicElements['div']>(({ options, ...divProps }) => {
+
+export const MotionRail = component$<MotionRailProps & QwikIntrinsicElements['div']>((props) => {
+
+
+  const { options, ...divProps } = props;
+  if(options && options.onChange) options.onChange = noSerialize(options.onChange as QRL<(state: any) => void>);
+
   const containerRef = useSignal<HTMLDivElement>();
   const motionRailRef = useSignal<MotionRailClass | null>(null);
-  const optionsStore = useStore<{ value: MotionRailOptions | undefined }>({ value: undefined });
-
-  // Set options without tracking
-  optionsStore.value = options;
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ cleanup }) => {
@@ -23,7 +24,7 @@ export const MotionRail = component$<MotionRailProps & QwikIntrinsicElements['di
 
     motionRailRef.value = new MotionRailClass(
       containerRef.value,
-      noSerialize(optionsStore.value) || {}
+      options || {}
     );
 
     cleanup(() => {

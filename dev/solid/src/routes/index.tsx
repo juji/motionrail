@@ -23,8 +23,6 @@ export default function Home() {
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', 'min-height': '100vh' }}>
       <Title>MotionRail Test Page - SolidStart</Title>
-      {/* FOUC prevention: container query style in head, generated dynamically */}
-      <Style data-motionrail-style={containerName}>{containerQueries}</Style>
       <div style={{ 'max-width': '1200px', margin: '0 auto' }}>
         <Nav current="main" />
         <h1 style={{ 'margin-bottom': '10px' }}>MotionRail Test Page</h1>
@@ -37,6 +35,8 @@ export default function Home() {
           <h2 style={{ 'margin-bottom': '15px', 'font-size': '18px' }}>
             Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
           </h2>
+          {/* FOUC prevention: container query style in head, generated dynamically */}
+          <Style data-motionrail-style={containerName}>{containerQueries}</Style>
           <MotionRail
             options={{
               breakpoints: [

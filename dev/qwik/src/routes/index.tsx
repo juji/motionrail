@@ -1,6 +1,7 @@
 import { component$, useSignal, noSerialize } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { MotionRail } from 'motionrail/qwik';
+import { MotionRail as MotionRailClass } from 'motionrail';
 import 'motionrail/style.css';
 import Nav from '../components/Nav';
 
@@ -21,6 +22,16 @@ export default component$(() => {
     return gradients[(index - 1) % gradients.length];
   };
 
+  // Generate containerName and containerQueries for FOUC prevention (same as React)
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints(
+    [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' },
+    ],
+    8
+  );
+
   return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
@@ -35,15 +46,17 @@ export default component$(() => {
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>
             Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
           </h2>
+          <style data-motionrail-style={containerName}>{containerQueries}</style>
           <MotionRail
-            options={noSerialize({
+            options={{
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
-              onChange: (state: any) => console.log('Carousel changed:', state),
-            })}
+              onChange: noSerialize((state: any) => console.log('Carousel changed:', state)),
+              containerName
+            }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
@@ -70,7 +83,7 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Carousel with Autoplay</h2>
           <MotionRail
-            options={noSerialize({
+            options={{
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
@@ -78,7 +91,7 @@ export default component$(() => {
               ],
               autoplay: true,
               delay: 2500,
-            })}
+            }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
               <div
@@ -111,6 +124,7 @@ export default component$(() => {
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
+                { width: 1024, columns: 3, gap: '20px' },
               ],
             }}
           >
@@ -171,12 +185,12 @@ export default component$(() => {
         <section style={{ marginBottom: '60px' }}>
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>Edge Case: Single Item</h2>
           <MotionRail
-            options={noSerialize({
+            options={{
               breakpoints: [
                 { columns: 1, gap: '16px' },
                 { width: 768, columns: 2, gap: '16px' },
               ],
-            })}
+            }}
           >
             <div
               style={{
