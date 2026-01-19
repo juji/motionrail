@@ -173,10 +173,9 @@ const { containerName, containerQueries } = MotionRail.getBreakPoints({
 });
 
 // Inject containerQueries into <head> for SSR/FOUC-free styling
-const styleTag = document.createElement("style");
-styleTag.setAttribute("data-motionrail-style", containerName);
-styleTag.textContent = containerQueries;
-document.head.appendChild(styleTag);
+// for true FOUC prevention, use SSR to inject:
+// <style data-motionrail-style="${containerName}">${containerQueries}</style>
+// See the Framework Integrations guide for real SSR examples
 
 const carousel = new MotionRail(document.getElementById("carousel"), {
   autoplay: true,
