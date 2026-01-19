@@ -133,6 +133,6 @@
     "lint-staged": "^15.2.2"
   },
   "lint-staged": {
-    "**/*.{js,ts,tsx,jsx,css,scss,md,json,html,vue,svelte}": "prettier --write"
+    "**/*.{js,ts,tsx,jsx,css,scss,md,json,html,vue}": "prettier --write"
   }
 }

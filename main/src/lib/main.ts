@@ -46,6 +46,9 @@ export class MotionRail {
   private intersectionObserver: IntersectionObserver | null = null;
   private containerName: string = "";
   private styleTag: HTMLStyleElement | null = null;
+  private static defautlBreakpoints: MotionRailBreakpoint[] = [
+    { columns: 1, gap: "0px" },
+  ];
 
   private state: MotionRailState = {
     totalItems: 0,
@@ -57,7 +60,7 @@ export class MotionRail {
   constructor(element: HTMLElement, options: MotionRailOptions) {
     this.autoplay = options.autoplay || false;
     this.rtl = options.rtl || false;
-    this.breakpoints = options.breakpoints || [{ columns: 1, gap: "0px" }];
+    this.breakpoints = options.breakpoints || MotionRail.defautlBreakpoints;
     this.element = element;
     this.extensions = options.extensions || [];
     this.containerName = options.containerName || "";
@@ -116,10 +119,14 @@ export class MotionRail {
     totalItems: number;
     containerName?: string;
   }) {
-    const { breakpoints, totalItems } = props;
-    let { containerName } = props;
+    const { totalItems } = props;
+    let { containerName, breakpoints } = props;
 
     containerName = containerName || this.randomContainerName();
+    breakpoints = breakpoints.length
+      ? breakpoints
+      : MotionRail.defautlBreakpoints;
+
     // Find the smallest width for base case max-width
     const withWidth = breakpoints.filter((bp) => bp.width);
     const smallestWidth =

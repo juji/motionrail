@@ -9,6 +9,7 @@ MotionRail provides a first-class Vue 3 component (SFC) with full TypeScript sup
 import { MotionRail } from "motionrail/vue";
 import { MotionRail as MotionRailClass } from "motionrail";
 import "motionrail/style.css";
+import { useHead } from "#imports";
 
 // FOUC-safe container query setup for the first carousel
 const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
@@ -19,14 +20,22 @@ const { containerName, containerQueries } = MotionRailClass.getBreakPoints({
   ],
   totalItems: 8,
 });
+
+// SSR/FOUC prevention: inject containerQueries in the head
+useHead({
+  style: [
+    containerName && containerQueries
+      ? {
+          key: containerName,
+          innerHTML: containerQueries,
+          "data-motionrail-style": containerName,
+        }
+      : undefined,
+  ].filter(Boolean),
+});
 </script>
 
 <template>
-  <!-- FOUC prevention: inject containerQueries in a <style> tag (see Nuxt useHead for SSR) -->
-  <style
-    :data-motionrail-style="containerName"
-    v-html="containerQueries"
-  ></style>
   <MotionRail
     :options="{
       breakpoints: [
