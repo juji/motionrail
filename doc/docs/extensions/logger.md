@@ -10,7 +10,22 @@ import { Logger } from "motionrail/extensions/logger";
 import "motionrail/style.css";
 
 const carousel = new MotionRail(element, {
-  extensions: [Logger()],
+  extensions: [
+    Logger({
+      // Optional hooks
+      onInit: (carousel, state) => {
+        // custom logic on init
+      },
+      onUpdate: (carousel, state) => {
+        // custom logic on update
+      },
+      onDestroy: (carousel, state) => {
+        // custom logic on destroy
+      },
+      // Control console output (default: true)
+      outputToConsole: true,
+    }),
+  ],
 });
 ```
 
@@ -23,11 +38,25 @@ The Logger extension is a development tool that logs carousel state and lifecycl
 - **Extension development**: Watching the lifecycle flow
 - **Testing**: Verifying behavior changes
 
-## What It Logs
+## API
 
-### Lifecycle Events
+```ts
+Logger(options?: {
+  onInit?: (carousel, state) => void;
+  onUpdate?: (carousel, state) => void;
+  onDestroy?: (carousel, state) => void;
+  outputToConsole?: boolean; // default: true
+}): MotionRailExtension
+```
 
-The logger outputs messages for all extension lifecycle hooks:
+- **onInit**: Called after MotionRail initializes (after logging)
+- **onUpdate**: Called after each state update (after logging)
+- **onDestroy**: Called after MotionRail is destroyed (after logging)
+- **outputToConsole**: Set to false to silence all logger output
+
+### What It Logs
+
+If `outputToConsole` is true, the logger outputs messages for all extension lifecycle hooks:
 
 - `onInit`: When the carousel is initialized
 - `onUpdate`: When the carousel state updates
@@ -81,7 +110,14 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
     { minWidth: "0px", columns: 1 },
     { minWidth: "768px", columns: 2 },
   ],
-  extensions: [Logger()],
+  extensions: [
+    Logger({
+      outputToConsole: true,
+      onUpdate: (carousel, state) => {
+        // custom update logic
+      },
+    }),
+  ],
 });
 ```
 
@@ -107,7 +143,7 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
       { minWidth: "0px", columns: 1 },
       { minWidth: "768px", columns: 2 },
     ],
-    extensions: [MotionRailLogger()],
+    extensions: [MotionRail.Logger()],
   });
 </script>
 ```
@@ -127,7 +163,7 @@ Perfect for development when you need to:
 
 **Remove the logger in production** to avoid console clutter:
 
-```js
+````js
 const extensions = [];
 
 // Only add logger in development
@@ -138,7 +174,10 @@ if (import.meta.env.DEV) {
 const carousel = new MotionRail(element, {
   extensions,
 });
-```
+// Or, silence output in production:
+const carousel = new MotionRail(element, {
+  extensions: [Logger({ outputToConsole: import.meta.env.DEV })],
+});
 
 ## Conditional Loading
 
@@ -149,7 +188,7 @@ const carousel = new MotionRail(element, {
     Boolean,
   ),
 });
-```
+````
 
 ## With Multiple Extensions
 
@@ -162,7 +201,7 @@ const carousel = new MotionRail(element, {
   extensions: [
     Arrows(),
     Dots(),
-    Logger(), // Logs events from all extensions
+    Logger({ outputToConsole: true }), // Logs events from all extensions
   ],
 });
 ```
