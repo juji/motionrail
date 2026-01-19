@@ -33,9 +33,12 @@ MotionRail was built to provide a modern, performant carousel experience without
 
 MotionRail works in all modern browsers:
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
+- Chrome (142+)
+- Edge (142+)
+- Firefox (145+)
+- Safari (18.6+)
+- Samsung Internet (28+)
+- Opera (124+)
 - Modern mobile browsers
 
 Requires support for:
