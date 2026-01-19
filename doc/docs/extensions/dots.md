@@ -80,7 +80,7 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
       { columns: 1, gap: "16px" },
       { width: 768, columns: 2, gap: "16px" },
     ],
-    extensions: [MotionRailDots({ showIndex: true })],
+    extensions: [MotionRail.Dots({ showIndex: true })],
   });
 </script>
 ```

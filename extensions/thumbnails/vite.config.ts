@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/thumbnails.ts"),
-      name: "MotionRailThumbnails",
+      name: "MotionRail",
       formats: ["es", "umd"],
       fileName: (format) => `thumbnails.${format}.js`,
     },

@@ -91,7 +91,7 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
   const carousel = new MotionRail(document.getElementById("carousel"), {
     breakpoints: [{ columns: 1, gap: "16px" }],
     extensions: [
-      MotionRailThumbnails({
+      MotionRail.Thumbnails({
         thumbnailWidth: 100,
         thumbnailHeight: 100,
       }),

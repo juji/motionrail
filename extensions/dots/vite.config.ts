@@ -10,7 +10,7 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "src/dots.ts"),
-      name: "MotionRailDots",
+      name: "MotionRail",
       formats: ["es", "umd"],
       fileName: (format) => `dots.${format}.js`,
     },

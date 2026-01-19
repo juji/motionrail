@@ -115,7 +115,7 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
       { width: 1024, columns: 3, gap: "20px" },
     ],
     extensions: [
-      MotionRailArrows({
+      MotionRail.Arrows({
         loop: true,
         leftIcon: "←",
         rightIcon: "→",
