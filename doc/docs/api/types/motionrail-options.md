@@ -118,6 +118,36 @@ const carousel = new MotionRail(element, {
 });
 ```
 
+---
+
+### `containerName`
+
+Unique CSS container name for scoping container queries and styles to a specific carousel instance. This prevents style leakage and enables FOUC-free (Flash of Unstyled Content) rendering, especially with SSR. If not provided, a random name is generated automatically.
+
+- **Type:** `string`
+- **Default:** Randomly generated
+
+```ts
+const { containerName, containerQueries } = MotionRail.getBreakPoints({
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+    { width: 1024, columns: 3, gap: "32px" },
+  ],
+  totalItems: 8,
+  containerName: "my-carousel-container",
+});
+
+const carousel = new MotionRail(element, {
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+    { width: 1024, columns: 3, gap: "32px" },
+  ],
+  containerName: "my-carousel-container",
+});
+```
+
 See [MotionRailBreakpoint](/docs/api/types/motionrail-breakpoint) and [Breakpoints Guide](/docs/breakpoints).
 
 ---

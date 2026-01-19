@@ -124,19 +124,31 @@ interface MotionRailState {
 
 See [MotionRailState](/docs/api/types/motionrail-state) for complete type documentation.
 
-### `extensions`
+### `containerName`
 
-- **Type**: [MotionRailExtension](/docs/api/types/motionrail-extension)[]
-- **Default**: `[]`
+Unique CSS container name for scoping container queries and styles to a specific carousel instance. This prevents style leakage and enables FOUC-free (Flash of Unstyled Content) rendering, especially with SSR. If not provided, a random name is generated automatically.
 
-Array of extension instances to add functionality. See [Extensions](/docs/extensions/) for more information.
+- **Type**: `string`
+- **Default**: Randomly generated
 
 ```js
-import { Arrows } from "motionrail/extensions/arrows";
-import { Dots } from "motionrail/extensions/dots";
+const { containerName, containerQueries } = MotionRail.getBreakPoints({
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+    { width: 1024, columns: 3, gap: "32px" },
+  ],
+  totalItems: 8,
+  containerName: "my-carousel-container",
+});
 
 const carousel = new MotionRail(element, {
-  extensions: [Arrows({ loop: true }), Dots({ showIndex: true })],
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+    { width: 1024, columns: 3, gap: "32px" },
+  ],
+  containerName: "my-carousel-container",
 });
 ```
 
