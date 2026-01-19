@@ -1,5 +1,6 @@
 import { onMount, onCleanup, createEffect, children as resolveChildren, type JSX } from 'solid-js'
-import { MotionRail as MotionRailClass, type MotionRailOptions } from 'motionrail'
+import { MotionRail as MotionRailClass } from 'motionrail'
+import type { MotionRailOptions } from 'motionrail'
 
 export interface MotionRailProps extends JSX.HTMLAttributes<HTMLDivElement> {
   options?: MotionRailOptions
