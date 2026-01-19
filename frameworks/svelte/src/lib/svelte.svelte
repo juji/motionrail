@@ -17,8 +17,6 @@
   onMount(() => {
     if (!containerRef) return;
 
-    console.log('Initializing MotionRail Svelte component with options:', options);
-
     motionRailInstance = new MotionRailClass(containerRef, options);
 
     const gridElement = containerRef.querySelector('[data-motionrail-grid]');
