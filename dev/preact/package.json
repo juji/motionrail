@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 3003",
     "build": "tsc -b && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "motionrail": "workspace:*",
@@ -17,6 +18,7 @@
     "@preact/preset-vite": "^2.10.2",
     "@types/node": "^24.10.1",
     "typescript": "~5.9.3",
-    "vite": "npm:rolldown-vite@7.2.5"
+    "vite": "npm:rolldown-vite@7.2.5",
+    "prettier": "^3.8.0"
   }
 }
