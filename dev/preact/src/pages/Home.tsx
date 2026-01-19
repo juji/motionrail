@@ -1,12 +1,22 @@
+
 import { useState } from 'preact/hooks';
 import { MotionRail } from 'motionrail/preact';
+import { MotionRail as MotionRailClass } from 'motionrail';
 import 'motionrail/style.css';
 import Nav from '../components/Nav';
 
-export default function Home({ path: _path }: { path?: string }) {
-  const [items, setItems] = useState([1, 2, 3]);
 
-  return (
+  export default function Home({ path: _path }: { path?: string }) {
+    const [items, setItems] = useState([1, 2, 3]);
+
+    // FOUC-safe container query setup for the first carousel
+    const { containerName, containerQueries } = MotionRailClass.getBreakPoints([
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' },
+    ], 8);
+
+    return (
     <div style={{ padding: '40px', background: '#000', color: '#eaeaea', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <Nav current="main" />
@@ -20,6 +30,9 @@ export default function Home({ path: _path }: { path?: string }) {
           <h2 style={{ marginBottom: '15px', fontSize: '18px' }}>
             Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
           </h2>
+          {containerName && containerQueries && (
+            <style data-motionrail-style={containerName}>{containerQueries}</style>
+          )}
           <MotionRail
             options={{
               breakpoints: [
@@ -27,7 +40,8 @@ export default function Home({ path: _path }: { path?: string }) {
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
-              onChange: (state) => console.log('Carousel changed:', state),
+              containerName,
+              // onChange: (state) => console.log('Carousel changed:', state),
             }}
           >
             {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
