@@ -13,7 +13,7 @@ import HomeExtensions from "./home-extensions.vue";
           <a href="/docs/extensions/dots">Dots</a> for pagination indicators,
           <a href="/docs/extensions/thumbnails">Thumbnails</a> for preview
           navigation, and <a href="/docs/extensions/logger">Logger</a> for
-          debugging and event tracking.
+          debugging.
         </p>
       </div>
       <div class="section-demo">
