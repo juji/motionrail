@@ -2,15 +2,14 @@
 
 MotionRail provides a first-class Solid.js component with full TypeScript support.
 
-
 ## Basic Usage
 
 ```jsx
-import { MotionRail } from 'motionrail/solid';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail/solid";
+import "motionrail/style.css";
 
 // Define options outside to prevent re-renders
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 
 function App() {
   return (
@@ -37,14 +36,12 @@ const options = {
   autoplay: true,
   delay: 3000,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+  ],
 };
 
-<MotionRail options={options}>
-  {/* items */}
-</MotionRail>
+<MotionRail options={options}>{/* items */}</MotionRail>;
 ```
 
 ### `ref`
@@ -66,10 +63,7 @@ function MyCarousel() {
 
   return (
     <>
-      <MotionRail
-        ref={(instance) => carousel = instance}
-        options={options}
-      >
+      <MotionRail ref={(instance) => (carousel = instance)} options={options}>
         <div>Item 1</div>
         <div>Item 2</div>
       </MotionRail>
@@ -93,10 +87,7 @@ function MyCarousel() {
   let container;
 
   return (
-    <MotionRail
-      divRef={(el) => container = el}
-      options={options}
-    >
+    <MotionRail divRef={(el) => (container = el)} options={options}>
       <div>Item 1</div>
       <div>Item 2</div>
     </MotionRail>
@@ -114,19 +105,19 @@ const options = {};
 <MotionRail
   options={options}
   class="my-carousel"
-  style={{ "max-width": '1200px' }}
+  style={{ "max-width": "1200px" }}
   aria-label="Product carousel"
 >
   {/* items */}
-</MotionRail>
+</MotionRail>;
 ```
 
 ## Complete Example
 
 ```jsx
-import { createSignal } from 'solid-js';
-import { MotionRail } from 'motionrail/solid';
-import 'motionrail/style.css';
+import { createSignal } from "solid-js";
+import { MotionRail } from "motionrail/solid";
+import "motionrail/style.css";
 
 function Carousel() {
   let carousel;
@@ -154,18 +145,18 @@ function Carousel() {
     autoplay: true,
     delay: 3000,
     breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '16px' },
-      { width: 1024, columns: 3, gap: '20px' }
+      { columns: 1, gap: "16px" },
+      { width: 768, columns: 2, gap: "16px" },
+      { width: 1024, columns: 3, gap: "20px" },
     ],
-    onChange: setCurrentState
+    onChange: setCurrentState,
   };
 
   return (
     <div>
       <MotionRail
-        ref={(instance) => carousel = instance}
-        divRef={(el) => container = el}
+        ref={(instance) => (carousel = instance)}
+        divRef={(el) => (container = el)}
         options={options}
         class="my-carousel"
       >
@@ -185,7 +176,7 @@ function Carousel() {
 
       {currentState() && (
         <div class="state-info">
-          <p>Visible items: {currentState().visibleItemIndexes.join(', ')}</p>
+          <p>Visible items: {currentState().visibleItemIndexes.join(", ")}</p>
           <p>Total items: {currentState().totalItems}</p>
         </div>
       )}
@@ -199,19 +190,19 @@ function Carousel() {
 When using SSR-enabled frameworks like **SolidStart**, you must use `clientOnly` to prevent server-side rendering issues since MotionRail relies on browser APIs:
 
 ```tsx
-import { clientOnly } from '@solidjs/start';
-import 'motionrail/style.css';
+import { clientOnly } from "@solidjs/start";
+import "motionrail/style.css";
 
-const MotionRail = clientOnly(() => 
-  import('motionrail/solid').then(m => ({ default: m.MotionRail }))
+const MotionRail = clientOnly(() =>
+  import("motionrail/solid").then((m) => ({ default: m.MotionRail })),
 );
 
-const options = { 
+const options = {
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' },
-    { width: 1024, columns: 3, gap: '20px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+    { width: 1024, columns: 3, gap: "20px" },
+  ],
 };
 
 export default function Home() {
@@ -230,14 +221,14 @@ export default function Home() {
 The Solid component automatically calls `update()` when children change:
 
 ```jsx
-import { createSignal, For } from 'solid-js';
-import { MotionRail } from 'motionrail/solid';
+import { createSignal, For } from "solid-js";
+import { MotionRail } from "motionrail/solid";
 
 // Define options outside to prevent re-renders
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 
 function DynamicCarousel() {
-  const [items, setItems] = createSignal(['Item 1', 'Item 2', 'Item 3']);
+  const [items, setItems] = createSignal(["Item 1", "Item 2", "Item 3"]);
 
   const addItem = () => {
     setItems([...items(), `Item ${items().length + 1}`]);
@@ -250,9 +241,7 @@ function DynamicCarousel() {
   return (
     <>
       <MotionRail options={options}>
-        <For each={items()}>
-          {(item) => <div>{item}</div>}
-        </For>
+        <For each={items()}>{(item) => <div>{item}</div>}</For>
       </MotionRail>
 
       <button onClick={addItem}>Add Item</button>
@@ -267,26 +256,25 @@ function DynamicCarousel() {
 Full TypeScript support is included:
 
 ```tsx
-import { createSignal } from 'solid-js';
-import { MotionRail } from 'motionrail/solid';
-import type { MotionRailOptions, MotionRailState } from 'motionrail';
+import { createSignal } from "solid-js";
+import { MotionRail } from "motionrail/solid";
+import type { MotionRailOptions, MotionRailState } from "motionrail";
 
 function TypedCarousel() {
-  let carousel: InstanceType<typeof import('motionrail').MotionRail> | undefined;
-  
+  let carousel:
+    | InstanceType<typeof import("motionrail").MotionRail>
+    | undefined;
+
   const options: MotionRailOptions = {
     autoplay: true,
-    breakpoints: [{ columns: 3, gap: '20px' }],
+    breakpoints: [{ columns: 3, gap: "20px" }],
     onChange: (state: MotionRailState) => {
       console.log(state);
-    }
+    },
   };
 
   return (
-    <MotionRail
-      ref={(instance) => carousel = instance}
-      options={options}
-    >
+    <MotionRail ref={(instance) => (carousel = instance)} options={options}>
       <div>Item 1</div>
       <div>Item 2</div>
     </MotionRail>

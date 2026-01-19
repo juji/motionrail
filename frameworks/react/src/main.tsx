@@ -12,7 +12,12 @@ export interface MotionRailProps extends React.HTMLAttributes<HTMLDivElement> {
   options?: MotionRailOptions;
 }
 
-function MotionRailReact({ options, ref, divRef, ...divProps }: MotionRailProps) {
+function MotionRailReact({
+  options,
+  ref,
+  divRef,
+  ...divProps
+}: MotionRailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const motionRailRef = useRef<MotionRailClass | null>(null);
   const { children, ...restDivProps } = divProps || {};
@@ -46,13 +51,18 @@ function MotionRailReact({ options, ref, divRef, ...divProps }: MotionRailProps)
     }
   }, [children]);
 
-  return (<>
-    <div ref={containerRef} data-motionrail {...restDivProps}>
-      <div data-motionrail-scrollable style={{ containerName: options?.containerName }}>
-        <div data-motionrail-grid>{children}</div>
+  return (
+    <>
+      <div ref={containerRef} data-motionrail {...restDivProps}>
+        <div
+          data-motionrail-scrollable
+          style={{ containerName: options?.containerName }}
+        >
+          <div data-motionrail-grid>{children}</div>
+        </div>
       </div>
-    </div>
-  </>);
+    </>
+  );
 }
 
 export { MotionRailReact as MotionRail };

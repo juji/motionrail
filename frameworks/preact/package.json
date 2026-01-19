@@ -18,7 +18,9 @@
       "require": "./dist/preact.umd.js"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "motionrail": "workspace:*"
   },

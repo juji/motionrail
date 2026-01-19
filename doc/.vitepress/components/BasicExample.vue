@@ -1,7 +1,7 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
+import { onMounted, ref } from "vue";
+import { MotionRail } from "motionrail";
+import "motionrail/style.css";
 
 const carouselRef = ref(null);
 
@@ -10,17 +10,17 @@ onMounted(() => {
     new MotionRail(carouselRef.value, {
       autoplay: true,
       breakpoints: [
-        { columns: 1, gap: '16px' },
-        { width: 400, columns: 2, gap: '16px' },
-        { width: 550, columns: 3, gap: '20px' }
-      ]
+        { columns: 1, gap: "16px" },
+        { width: 400, columns: 2, gap: "16px" },
+        { width: 550, columns: 3, gap: "20px" },
+      ],
     });
   }
 });
 </script>
 
 <template>
-  <div ref="carouselRef" data-motionrail id="carousel" style="margin: 20px 0;">
+  <div ref="carouselRef" data-motionrail id="carousel" style="margin: 20px 0">
     <div data-motionrail-scrollable>
       <div data-motionrail-grid>
         <div>Item 1</div>

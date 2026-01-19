@@ -5,11 +5,11 @@ MotionRail provides a first-class Preact component with full TypeScript support.
 ## Basic Usage
 
 ```jsx
-import { MotionRail } from 'motionrail/preact';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail/preact";
+import "motionrail/style.css";
 
 // Define options outside to prevent re-renders
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 
 function App() {
   return (
@@ -36,14 +36,12 @@ const options = {
   autoplay: true,
   delay: 3000,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+  ],
 };
 
-<MotionRail options={options}>
-  {/* items */}
-</MotionRail>
+<MotionRail options={options}>{/* items */}</MotionRail>;
 ```
 
 ### Other Props
@@ -56,11 +54,11 @@ const options = {};
 <MotionRail
   options={options}
   className="my-carousel"
-  style={{ maxWidth: '1200px' }}
+  style={{ maxWidth: "1200px" }}
   aria-label="Product carousel"
 >
   {/* items */}
-</MotionRail>
+</MotionRail>;
 ```
 
 ::: warning
@@ -70,9 +68,9 @@ Unlike React, Preact does not expose refs to access the MotionRail instance. If 
 ## Complete Example
 
 ```jsx
-import { useState } from 'preact/hooks';
-import { MotionRail } from 'motionrail/preact';
-import 'motionrail/style.css';
+import { useState } from "preact/hooks";
+import { MotionRail } from "motionrail/preact";
+import "motionrail/style.css";
 
 function Carousel() {
   const [currentState, setCurrentState] = useState(null);
@@ -81,11 +79,11 @@ function Carousel() {
     autoplay: true,
     delay: 3000,
     breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '16px' },
-      { width: 1024, columns: 3, gap: '20px' }
+      { columns: 1, gap: "16px" },
+      { width: 768, columns: 2, gap: "16px" },
+      { width: 1024, columns: 3, gap: "20px" },
     ],
-    onChange: setCurrentState
+    onChange: setCurrentState,
   };
 
   return (
@@ -100,7 +98,7 @@ function Carousel() {
 
       {currentState && (
         <div className="state-info">
-          <p>Visible items: {currentState.visibleItemIndexes.join(', ')}</p>
+          <p>Visible items: {currentState.visibleItemIndexes.join(", ")}</p>
           <p>Total items: {currentState.totalItems}</p>
         </div>
       )}
@@ -114,14 +112,14 @@ function Carousel() {
 The Preact component automatically calls `update()` when children change:
 
 ```jsx
-import { useState } from 'preact/hooks';
-import { MotionRail } from 'motionrail/preact';
+import { useState } from "preact/hooks";
+import { MotionRail } from "motionrail/preact";
 
 // Define options outside to prevent re-renders
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 
 function DynamicCarousel() {
-  const [items, setItems] = useState(['Item 1', 'Item 2', 'Item 3']);
+  const [items, setItems] = useState(["Item 1", "Item 2", "Item 3"]);
 
   const addItem = () => {
     setItems([...items, `Item ${items.length + 1}`]);
@@ -151,16 +149,16 @@ function DynamicCarousel() {
 Full TypeScript support is included:
 
 ```tsx
-import { MotionRail } from 'motionrail/preact';
-import type { MotionRailOptions, MotionRailState } from 'motionrail';
+import { MotionRail } from "motionrail/preact";
+import type { MotionRailOptions, MotionRailState } from "motionrail";
 
 function TypedCarousel() {
   const options: MotionRailOptions = {
     autoplay: true,
-    breakpoints: [{ columns: 3, gap: '20px' }],
+    breakpoints: [{ columns: 3, gap: "20px" }],
     onChange: (state: MotionRailState) => {
       console.log(state);
-    }
+    },
   };
 
   return (

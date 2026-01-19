@@ -5,13 +5,13 @@ Add thumbnail navigation to your carousel.
 ## Usage
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Thumbnails } from 'motionrail/extensions/thumbnails';
-import 'motionrail/style.css';
-import 'motionrail/extensions/thumbnails/style.css';
+import { MotionRail } from "motionrail";
+import { Thumbnails } from "motionrail/extensions/thumbnails";
+import "motionrail/style.css";
+import "motionrail/extensions/thumbnails/style.css";
 
 const carousel = new MotionRail(element, {
-  extensions: [Thumbnails()]
+  extensions: [Thumbnails()],
 });
 ```
 
@@ -25,7 +25,7 @@ const carousel = new MotionRail(element, {
 Width of each thumbnail in pixels.
 
 ```js
-Thumbnails({ thumbnailWidth: 120 })
+Thumbnails({ thumbnailWidth: 120 });
 ```
 
 ### `thumbnailHeight`
@@ -36,7 +36,7 @@ Thumbnails({ thumbnailWidth: 120 })
 Height of each thumbnail in pixels.
 
 ```js
-Thumbnails({ thumbnailHeight: 120 })
+Thumbnails({ thumbnailHeight: 120 });
 ```
 
 ### `log`
@@ -47,35 +47,39 @@ Thumbnails({ thumbnailHeight: 120 })
 Enable console logging for debugging.
 
 ```js
-Thumbnails({ log: true })
+Thumbnails({ log: true });
 ```
 
 ## Complete Example
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Thumbnails } from 'motionrail/extensions/thumbnails';
-import 'motionrail/style.css';
-import 'motionrail/extensions/thumbnails/style.css';
+import { MotionRail } from "motionrail";
+import { Thumbnails } from "motionrail/extensions/thumbnails";
+import "motionrail/style.css";
+import "motionrail/extensions/thumbnails/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
-  breakpoints: [
-    { columns: 1, gap: '16px' }
-  ],
+const carousel = new MotionRail(document.getElementById("carousel"), {
+  breakpoints: [{ columns: 1, gap: "16px" }],
   extensions: [
     Thumbnails({
       thumbnailWidth: 100,
-      thumbnailHeight: 100
-    })
-  ]
+      thumbnailHeight: 100,
+    }),
+  ],
 });
 ```
 
 ### UMD (CDN)
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
-<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails/style.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/style.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails/style.css"
+/>
 
 <div data-motionrail id="carousel">
   <!-- carousel items -->
@@ -84,16 +88,14 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 <script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
 <script src="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails.umd.cjs"></script>
 <script>
-  const carousel = new MotionRail(document.getElementById('carousel'), {
-    breakpoints: [
-      { columns: 1, gap: '16px' }
-    ],
+  const carousel = new MotionRail(document.getElementById("carousel"), {
+    breakpoints: [{ columns: 1, gap: "16px" }],
     extensions: [
       MotionRailThumbnails({
         thumbnailWidth: 100,
-        thumbnailHeight: 100
-      })
-    ]
+        thumbnailHeight: 100,
+      }),
+    ],
   });
 </script>
 ```

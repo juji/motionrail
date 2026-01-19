@@ -5,13 +5,13 @@ Add pagination dots indicator to your carousel.
 ## Usage
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Dots } from 'motionrail/extensions/dots';
-import 'motionrail/style.css';
-import 'motionrail/extensions/dots/style.css';
+import { MotionRail } from "motionrail";
+import { Dots } from "motionrail/extensions/dots";
+import "motionrail/style.css";
+import "motionrail/extensions/dots/style.css";
 
 const carousel = new MotionRail(element, {
-  extensions: [Dots()]
+  extensions: [Dots()],
 });
 ```
 
@@ -25,7 +25,7 @@ const carousel = new MotionRail(element, {
 Show item index numbers inside each dot.
 
 ```js
-Dots({ showIndex: true })
+Dots({ showIndex: true });
 ```
 
 ### `log`
@@ -36,33 +36,37 @@ Dots({ showIndex: true })
 Enable console logging for debugging.
 
 ```js
-Dots({ log: true })
+Dots({ log: true });
 ```
 
 ## Complete Example
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Dots } from 'motionrail/extensions/dots';
-import 'motionrail/style.css';
-import 'motionrail/extensions/dots/style.css';
+import { MotionRail } from "motionrail";
+import { Dots } from "motionrail/extensions/dots";
+import "motionrail/style.css";
+import "motionrail/extensions/dots/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const carousel = new MotionRail(document.getElementById("carousel"), {
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
   ],
-  extensions: [
-    Dots({ showIndex: true })
-  ]
+  extensions: [Dots({ showIndex: true })],
 });
 ```
 
 ### UMD (CDN)
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
-<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/extensions/dots/style.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/style.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/extensions/dots/style.css"
+/>
 
 <div data-motionrail id="carousel">
   <!-- carousel items -->
@@ -71,14 +75,12 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 <script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
 <script src="https://unpkg.com/motionrail@latest/dist/extensions/dots.umd.cjs"></script>
 <script>
-  const carousel = new MotionRail(document.getElementById('carousel'), {
+  const carousel = new MotionRail(document.getElementById("carousel"), {
     breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '16px' }
+      { columns: 1, gap: "16px" },
+      { width: 768, columns: 2, gap: "16px" },
     ],
-    extensions: [
-      MotionRailDots({ showIndex: true })
-    ]
+    extensions: [MotionRailDots({ showIndex: true })],
   });
 </script>
 ```
@@ -97,14 +99,14 @@ The Dots extension uses CSS variables for easy customization. You can override t
 
 ```css
 .motionrail-dots {
-  --dot-size: 34px;                      /* Size of each dot */
-  --dot-font-size: 12px;                 /* Font size for index numbers */
-  --dot-bg: rgba(128, 128, 128, 0.3);    /* Dot background */
+  --dot-size: 34px; /* Size of each dot */
+  --dot-font-size: 12px; /* Font size for index numbers */
+  --dot-bg: rgba(128, 128, 128, 0.3); /* Dot background */
   --dot-bg-hover: rgba(128, 128, 128, 0.5); /* Dot hover background */
-  --dot-bg-active: #666;                 /* Active dot background */
-  --dot-bg-active-hover: #555;           /* Active dot hover background */
-  --dot-color: #999;                     /* Text color for index */
-  --dot-color-active: #fff;              /* Active dot text color */
+  --dot-bg-active: #666; /* Active dot background */
+  --dot-bg-active-hover: #555; /* Active dot hover background */
+  --dot-color: #999; /* Text color for index */
+  --dot-color-active: #fff; /* Active dot text color */
 }
 ```
 
@@ -137,7 +139,7 @@ View the default styles: [/src/extensions/dots/style.css](https://github.com/juj
 ## With Index Numbers
 
 ```js
-Dots({ showIndex: true })
+Dots({ showIndex: true });
 ```
 
 The index is displayed inside each dot (1-based for users).

@@ -111,13 +111,27 @@
   </head>
   <body>
     <div class="test-container">
-      <nav style="position: sticky; top: 0; z-index: 1000; margin-bottom: 30px; padding: 15px; background: #1a1a1a; border-radius: 8px;">
-        <strong style="color: #667eea; margin-right: 20px;">Tests:</strong>
-        <a href="../index.html" style="color: #999; margin-right: 15px;">Main</a>
-        <a href="arrows.html" style="color: #999; margin-right: 15px;">Arrows</a>
-        <a href="dots.html" style="color: #fff; margin-right: 15px; text-decoration: underline;">Dots</a>
-        <a href="logger.html" style="color: #999; margin-right: 15px;">Logger</a>
-        <a href="thumbnails.html" style="color: #999;">Thumbnails</a>
+      <nav
+        style="
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          margin-bottom: 30px;
+          padding: 15px;
+          background: #1a1a1a;
+          border-radius: 8px;
+        "
+      >
+        <strong style="color: #667eea; margin-right: 20px">Tests:</strong>
+        <a href="../index.html" style="color: #999; margin-right: 15px">Main</a>
+        <a href="arrows.html" style="color: #999; margin-right: 15px">Arrows</a>
+        <a
+          href="dots.html"
+          style="color: #fff; margin-right: 15px; text-decoration: underline"
+          >Dots</a
+        >
+        <a href="logger.html" style="color: #999; margin-right: 15px">Logger</a>
+        <a href="thumbnails.html" style="color: #999">Thumbnails</a>
       </nav>
       <h1>Dots Extension Demo</h1>
       <p class="description">
@@ -345,10 +359,10 @@
     </div>
 
     <script type="module">
-      import { MotionRail } from 'motionrail';
-      import { Dots } from 'motionrail/extensions/dots';
-      import 'motionrail/style.css';
-      import 'motionrail/extensions/dots/style.css';
+      import { MotionRail } from "motionrail";
+      import { Dots } from "motionrail/extensions/dots";
+      import "motionrail/style.css";
+      import "motionrail/extensions/dots/style.css";
 
       // 1. Basic Carousel
       new MotionRail(document.getElementById("carousel-1"), {

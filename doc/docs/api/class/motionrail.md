@@ -9,27 +9,26 @@ new MotionRail(element: HTMLElement, options?: MotionRailOptions)
 ```
 
 **Parameters:**
+
 - `element` - The HTML element that wraps the carousel
 - `options` - Optional [MotionRailOptions](/docs/api/types/motionrail-options) configuration
 
 **Returns:** MotionRail instance with all public methods
 
 **Example:**
-```ts
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
 
-const carousel = new MotionRail(
-  document.getElementById('carousel'),
-  {
-    autoplay: true,
-    delay: 3000,
-    breakpoints: [
-      { columns: 1, gap: '16px' },
-      { width: 768, columns: 2, gap: '24px' }
-    ]
-  }
-);
+```ts
+import { MotionRail } from "motionrail";
+import "motionrail/style.css";
+
+const carousel = new MotionRail(document.getElementById("carousel"), {
+  autoplay: true,
+  delay: 3000,
+  breakpoints: [
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+  ],
+});
 ```
 
 ## Properties
@@ -42,8 +41,8 @@ The root HTML element that wraps the carousel.
 - **Readonly:** Yes (enforced in TypeScript only)
 
 ```ts
-const carousel = new MotionRail(document.getElementById('carousel'));
-console.log(carousel.element);  // <div id="carousel">...</div>
+const carousel = new MotionRail(document.getElementById("carousel"));
+console.log(carousel.element); // <div id="carousel">...</div>
 ```
 
 ::: warning
@@ -60,8 +59,8 @@ The scrollable container element (the element with `data-motionrail-scrollable` 
 - **Readonly:** Yes (enforced in TypeScript only)
 
 ```ts
-const carousel = new MotionRail(document.getElementById('carousel'));
-console.log(carousel.scrollable);  // <div data-motionrail-scrollable>...</div>
+const carousel = new MotionRail(document.getElementById("carousel"));
+console.log(carousel.scrollable); // <div data-motionrail-scrollable>...</div>
 
 // You can read scroll position
 console.log(carousel.scrollable.scrollLeft);
@@ -84,6 +83,7 @@ play(): void
 ```
 
 **Example:**
+
 ```ts
 carousel.play();
 ```
@@ -103,6 +103,7 @@ pause(): void
 ```
 
 **Example:**
+
 ```ts
 carousel.pause();
 ```
@@ -118,6 +119,7 @@ next(): void
 ```
 
 **Example:**
+
 ```ts
 carousel.next();
 ```
@@ -133,6 +135,7 @@ prev(): void
 ```
 
 **Example:**
+
 ```ts
 carousel.prev();
 ```
@@ -148,11 +151,13 @@ scrollToIndex(index: number): void
 ```
 
 **Parameters:**
+
 - `index` - Zero-based index of the item to scroll to
 
 **Example:**
+
 ```ts
-carousel.scrollToIndex(2);  // Scroll to the third item
+carousel.scrollToIndex(2); // Scroll to the third item
 ```
 
 ### State & Information
@@ -168,12 +173,13 @@ getState(): MotionRailState
 **Returns:** [MotionRailState](/docs/api/types/motionrail-state) object
 
 **Example:**
+
 ```ts
 const state = carousel.getState();
-console.log(state.visibleItemIndexes);  // [0, 1, 2]
-console.log(state.totalItems);          // 10
-console.log(state.isFirstItemVisible);  // true
-console.log(state.isLastItemVisible);   // false
+console.log(state.visibleItemIndexes); // [0, 1, 2]
+console.log(state.totalItems); // 10
+console.log(state.isFirstItemVisible); // true
+console.log(state.isLastItemVisible); // false
 ```
 
 ---
@@ -189,10 +195,11 @@ getOptions(): MotionRailOptions
 **Returns:** [MotionRailOptions](/docs/api/types/motionrail-options) object
 
 **Example:**
+
 ```ts
 const options = carousel.getOptions();
-console.log(options.autoplay);      // false
-console.log(options.breakpoints);   // [{ columns: 1, gap: '16px' }, ...]
+console.log(options.autoplay); // false
+console.log(options.breakpoints); // [{ columns: 1, gap: '16px' }, ...]
 ```
 
 ### Content Management
@@ -206,6 +213,7 @@ update(): void
 ```
 
 This method:
+
 - Recounts total items
 - Recaches snap points
 - Re-observes edge items with IntersectionObserver
@@ -213,11 +221,12 @@ This method:
 - Triggers onChange callback with updated state
 
 **Example:**
+
 ```ts
 // Add items to the DOM
-const grid = document.querySelector('[data-motionrail-grid]');
-const newItem = document.createElement('div');
-newItem.textContent = 'New Item';
+const grid = document.querySelector("[data-motionrail-grid]");
+const newItem = document.createElement("div");
+newItem.textContent = "New Item";
 grid.appendChild(newItem);
 
 // Update carousel to recognize new items
@@ -239,6 +248,7 @@ destroy(): void
 ```
 
 **Example:**
+
 ```ts
 // Component unmount/cleanup
 function cleanup() {
@@ -252,60 +262,60 @@ function cleanup() {
 ## Complete Example
 
 ```ts
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail";
+import "motionrail/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const carousel = new MotionRail(document.getElementById("carousel"), {
   autoplay: true,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
   ],
   onChange: (state) => {
-    console.log('Visible items:', state.visibleItemIndexes);
-  }
+    console.log("Visible items:", state.visibleItemIndexes);
+  },
 });
 
 // Playback controls
-document.getElementById('play').addEventListener('click', () => {
+document.getElementById("play").addEventListener("click", () => {
   carousel.play();
 });
 
-document.getElementById('pause').addEventListener('click', () => {
+document.getElementById("pause").addEventListener("click", () => {
   carousel.pause();
 });
 
 // Navigation
-document.getElementById('prev').addEventListener('click', () => {
+document.getElementById("prev").addEventListener("click", () => {
   carousel.prev();
 });
 
-document.getElementById('next').addEventListener('click', () => {
+document.getElementById("next").addEventListener("click", () => {
   carousel.next();
 });
 
 // Jump to specific item
-document.querySelectorAll('.jump-button').forEach((btn, index) => {
-  btn.addEventListener('click', () => {
+document.querySelectorAll(".jump-button").forEach((btn, index) => {
+  btn.addEventListener("click", () => {
     carousel.scrollToIndex(index);
   });
 });
 
 // Get current state
 const state = carousel.getState();
-console.log('Current state:', state);
+console.log("Current state:", state);
 
 // Dynamic content
-document.getElementById('add-item').addEventListener('click', () => {
-  const grid = document.querySelector('[data-motionrail-grid]');
-  const newItem = document.createElement('div');
-  newItem.textContent = 'New Item';
+document.getElementById("add-item").addEventListener("click", () => {
+  const grid = document.querySelector("[data-motionrail-grid]");
+  const newItem = document.createElement("div");
+  newItem.textContent = "New Item";
   grid.appendChild(newItem);
   carousel.update();
 });
 
 // Cleanup on page unload
-window.addEventListener('beforeunload', () => {
+window.addEventListener("beforeunload", () => {
   carousel.destroy();
 });
 ```

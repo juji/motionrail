@@ -19,12 +19,14 @@ export default defineConfig({
       output: {
         globals: {
           motionrail: "MotionRail",
-        },        assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) {
-            return 'style.css';
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith(".css")) {
+            return "style.css";
           }
-          return '[name].[ext]';
-        },      },
+          return "[name].[ext]";
+        },
+      },
     },
     sourcemap: true,
     emptyOutDir: true,

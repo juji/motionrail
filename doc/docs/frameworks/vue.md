@@ -2,15 +2,14 @@
 
 MotionRail provides a first-class Vue 3 component (SFC) with full TypeScript support.
 
-
 ## Basic Usage
 
 ```vue
 <script setup>
-import { MotionRail } from 'motionrail/vue';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail/vue";
+import "motionrail/style.css";
 
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 </script>
 
 <template>
@@ -38,9 +37,9 @@ const options = {
   autoplay: true,
   delay: 3000,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+  ],
 };
 </script>
 
@@ -57,8 +56,8 @@ Use template refs to access the MotionRail instance and container:
 
 ```vue
 <script setup>
-import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import { ref } from "vue";
+import { MotionRail } from "motionrail/vue";
 
 const carouselRef = ref(null);
 
@@ -93,14 +92,14 @@ The component exposes two properties via `defineExpose`:
 
 ```vue
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from "vue";
 
 const carouselRef = ref(null);
 
 onMounted(() => {
   // Access the MotionRail instance
   console.log(carouselRef.value.instance);
-  
+
   // Access the container element
   console.log(carouselRef.value.container);
 });
@@ -117,9 +116,9 @@ onMounted(() => {
 
 ```vue
 <script setup>
-import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
-import 'motionrail/style.css';
+import { ref } from "vue";
+import { MotionRail } from "motionrail/vue";
+import "motionrail/style.css";
 
 const carouselRef = ref(null);
 const currentState = ref(null);
@@ -128,13 +127,13 @@ const options = {
   autoplay: true,
   delay: 3000,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' },
-    { width: 1024, columns: 3, gap: '20px' }
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+    { width: 1024, columns: 3, gap: "20px" },
   ],
   onChange: (state) => {
     currentState.value = state;
-  }
+  },
 };
 
 const handleNext = () => {
@@ -156,11 +155,7 @@ const handlePause = () => {
 
 <template>
   <div>
-    <MotionRail
-      ref="carouselRef"
-      :options="options"
-      class="my-carousel"
-    >
+    <MotionRail ref="carouselRef" :options="options" class="my-carousel">
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -176,7 +171,7 @@ const handlePause = () => {
     </div>
 
     <div v-if="currentState" class="state-info">
-      <p>Visible items: {{ currentState.visibleItemIndexes.join(', ') }}</p>
+      <p>Visible items: {{ currentState.visibleItemIndexes.join(", ") }}</p>
       <p>Total items: {{ currentState.totalItems }}</p>
     </div>
   </div>
@@ -189,12 +184,12 @@ The Vue component automatically calls `update()` when slot content changes:
 
 ```vue
 <script setup>
-import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
+import { ref } from "vue";
+import { MotionRail } from "motionrail/vue";
 
-const items = ref(['Item 1', 'Item 2', 'Item 3']);
+const items = ref(["Item 1", "Item 2", "Item 3"]);
 // Define options in script setup to avoid inline object creation
-const options = { breakpoints: [{ columns: 3, gap: '20px' }] };
+const options = { breakpoints: [{ columns: 3, gap: "20px" }] };
 
 const addItem = () => {
   items.value.push(`Item ${items.value.length + 1}`);
@@ -225,19 +220,21 @@ Full TypeScript support with `<script setup lang="ts">`:
 
 ```vue
 <script setup lang="ts">
-import { ref } from 'vue';
-import { MotionRail } from 'motionrail/vue';
-import type { MotionRailOptions, MotionRailState } from 'motionrail';
+import { ref } from "vue";
+import { MotionRail } from "motionrail/vue";
+import type { MotionRailOptions, MotionRailState } from "motionrail";
 
-const carouselRef = ref<{ instance: any; container: HTMLDivElement } | null>(null);
+const carouselRef = ref<{ instance: any; container: HTMLDivElement } | null>(
+  null,
+);
 const currentState = ref<MotionRailState | null>(null);
 
 const options: MotionRailOptions = {
   autoplay: true,
-  breakpoints: [{ columns: 3, gap: '20px' }],
+  breakpoints: [{ columns: 3, gap: "20px" }],
   onChange: (state: MotionRailState) => {
     currentState.value = state;
-  }
+  },
 };
 
 const handleNext = (): void => {

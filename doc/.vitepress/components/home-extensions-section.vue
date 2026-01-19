@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import HomeExtensions from './home-extensions.vue';
+import HomeExtensions from "./home-extensions.vue";
 </script>
 
 <template>
@@ -7,7 +7,14 @@ import HomeExtensions from './home-extensions.vue';
     <div class="container">
       <div class="section-content">
         <h2 class="section-title">Powerful Extensions</h2>
-        <p class="section-description">Extend functionality with built-in extensions: <a href="/docs/extensions/arrows">Arrows</a> for navigation controls, <a href="/docs/extensions/dots">Dots</a> for pagination indicators, <a href="/docs/extensions/thumbnails">Thumbnails</a> for preview navigation, and <a href="/docs/extensions/logger">Logger</a> for debugging and event tracking.</p>
+        <p class="section-description">
+          Extend functionality with built-in extensions:
+          <a href="/docs/extensions/arrows">Arrows</a> for navigation controls,
+          <a href="/docs/extensions/dots">Dots</a> for pagination indicators,
+          <a href="/docs/extensions/thumbnails">Thumbnails</a> for preview
+          navigation, and <a href="/docs/extensions/logger">Logger</a> for
+          debugging and event tracking.
+        </p>
       </div>
       <div class="section-demo">
         <HomeExtensions />

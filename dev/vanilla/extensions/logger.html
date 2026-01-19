@@ -130,13 +130,27 @@
   </head>
   <body>
     <div class="test-container">
-      <nav style="position: sticky; top: 0; z-index: 1000; margin-bottom: 30px; padding: 15px; background: #1a1a1a; border-radius: 8px;">
-        <strong style="color: #667eea; margin-right: 20px;">Tests:</strong>
-        <a href="../index.html" style="color: #999; margin-right: 15px;">Main</a>
-        <a href="arrows.html" style="color: #999; margin-right: 15px;">Arrows</a>
-        <a href="dots.html" style="color: #999; margin-right: 15px;">Dots</a>
-        <a href="logger.html" style="color: #fff; margin-right: 15px; text-decoration: underline;">Logger</a>
-        <a href="thumbnails.html" style="color: #999;">Thumbnails</a>
+      <nav
+        style="
+          position: sticky;
+          top: 0;
+          z-index: 1000;
+          margin-bottom: 30px;
+          padding: 15px;
+          background: #1a1a1a;
+          border-radius: 8px;
+        "
+      >
+        <strong style="color: #667eea; margin-right: 20px">Tests:</strong>
+        <a href="../index.html" style="color: #999; margin-right: 15px">Main</a>
+        <a href="arrows.html" style="color: #999; margin-right: 15px">Arrows</a>
+        <a href="dots.html" style="color: #999; margin-right: 15px">Dots</a>
+        <a
+          href="logger.html"
+          style="color: #fff; margin-right: 15px; text-decoration: underline"
+          >Logger</a
+        >
+        <a href="thumbnails.html" style="color: #999">Thumbnails</a>
       </nav>
       <h1>Logger Extension Demo</h1>
       <p class="description">
@@ -219,9 +233,9 @@
     </div>
 
     <script type="module">
-      import { MotionRail } from 'motionrail';
-      import { Logger } from 'motionrail/extensions/logger';
-      import 'motionrail/style.css';
+      import { MotionRail } from "motionrail";
+      import { Logger } from "motionrail/extensions/logger";
+      import "motionrail/style.css";
 
       console.log("=== Logger Extension Demo Started ===");
       console.log("Watch for [LoggerExtension] messages below:");

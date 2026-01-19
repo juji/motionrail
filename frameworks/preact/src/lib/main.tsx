@@ -5,7 +5,10 @@ import {
   type MotionRailOptions,
 } from "motionrail";
 
-export interface MotionRailProps extends Omit<JSX.HTMLAttributes<HTMLDivElement>, 'ref'> {
+export interface MotionRailProps extends Omit<
+  JSX.HTMLAttributes<HTMLDivElement>,
+  "ref"
+> {
   options?: MotionRailOptions;
 }
 
@@ -37,7 +40,9 @@ function MotionRailPreact({ options, ...divProps }: MotionRailProps) {
   }, [children]);
 
   // Compute style for scrollable div
-  const scrollableStyle = options?.containerName ? { containerName: options.containerName } : undefined;
+  const scrollableStyle = options?.containerName
+    ? { containerName: options.containerName }
+    : undefined;
   return (
     <div ref={containerRef} data-motionrail {...restDivProps}>
       <div data-motionrail-scrollable style={scrollableStyle}>

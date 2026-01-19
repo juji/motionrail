@@ -13,7 +13,7 @@ type MotionRailOptions = {
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
   extensions?: MotionRailExtension[];
-}
+};
 ```
 
 ## Properties
@@ -27,7 +27,7 @@ Enable automatic scrolling through items.
 
 ```ts
 const carousel = new MotionRail(element, {
-  autoplay: true
+  autoplay: true,
 });
 ```
 
@@ -43,7 +43,7 @@ Milliseconds to wait before resuming autoplay after user interaction.
 ```ts
 const carousel = new MotionRail(element, {
   autoplay: true,
-  resumeDelay: 5000  // Wait 5 seconds before resuming
+  resumeDelay: 5000, // Wait 5 seconds before resuming
 });
 ```
 
@@ -59,7 +59,7 @@ Milliseconds between autoplay scrolls.
 ```ts
 const carousel = new MotionRail(element, {
   autoplay: true,
-  delay: 4000  // Scroll every 4 seconds
+  delay: 4000, // Scroll every 4 seconds
 });
 ```
 
@@ -74,7 +74,7 @@ Enable right-to-left scrolling mode.
 
 ```ts
 const carousel = new MotionRail(element, {
-  rtl: true
+  rtl: true,
 });
 ```
 
@@ -90,11 +90,11 @@ Callback function triggered when carousel state changes.
 ```ts
 const carousel = new MotionRail(element, {
   onChange: (state) => {
-    console.log('Visible items:', state.visibleItemIndexes);
-    console.log('Total items:', state.totalItems);
-    console.log('First visible:', state.isFirstItemVisible);
-    console.log('Last visible:', state.isLastItemVisible);
-  }
+    console.log("Visible items:", state.visibleItemIndexes);
+    console.log("Total items:", state.totalItems);
+    console.log("First visible:", state.isFirstItemVisible);
+    console.log("Last visible:", state.isLastItemVisible);
+  },
 });
 ```
 
@@ -110,10 +110,10 @@ Responsive breakpoint configurations.
 ```ts
 const carousel = new MotionRail(element, {
   breakpoints: [
-    { columns: 1, gap: '16px' },              // Base: 1 column
-    { width: 768, columns: 2, gap: '24px' },  // >= 768px: 2 columns
-    { width: 1024, columns: 3, gap: '32px' }  // >= 1024px: 3 columns
-  ]
+    { columns: 1, gap: "16px" }, // Base: 1 column
+    { width: 768, columns: 2, gap: "24px" }, // >= 768px: 2 columns
+    { width: 1024, columns: 3, gap: "32px" }, // >= 1024px: 3 columns
+  ],
 });
 ```
 
@@ -129,11 +129,11 @@ Extension plugins to add functionality.
 - **Default:** `undefined`
 
 ```ts
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Dots } from 'motionrail/extensions/dots';
+import { Arrows } from "motionrail/extensions/arrows";
+import { Dots } from "motionrail/extensions/dots";
 
 const carousel = new MotionRail(element, {
-  extensions: [Arrows(), Dots()]
+  extensions: [Arrows(), Dots()],
 });
 ```
 
@@ -142,30 +142,27 @@ See [MotionRailExtension](/docs/api/types/motionrail-extension) and [Extensions]
 ## Complete Example
 
 ```ts
-import { MotionRail } from 'motionrail';
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Dots } from 'motionrail/extensions/dots';
-import 'motionrail/style.css';
-import 'motionrail/extensions/arrows/style.css';
-import 'motionrail/extensions/dots/style.css';
+import { MotionRail } from "motionrail";
+import { Arrows } from "motionrail/extensions/arrows";
+import { Dots } from "motionrail/extensions/dots";
+import "motionrail/style.css";
+import "motionrail/extensions/arrows/style.css";
+import "motionrail/extensions/dots/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const carousel = new MotionRail(document.getElementById("carousel"), {
   autoplay: true,
   delay: 4000,
   resumeDelay: 5000,
   rtl: false,
   onChange: (state) => {
-    console.log('State changed:', state);
+    console.log("State changed:", state);
   },
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '24px' },
-    { width: 1024, columns: 3, gap: '32px' }
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "24px" },
+    { width: 1024, columns: 3, gap: "32px" },
   ],
-  extensions: [
-    Arrows(),
-    Dots({ dotSize: 48 })
-  ]
+  extensions: [Arrows(), Dots({ dotSize: 48 })],
 });
 ```
 

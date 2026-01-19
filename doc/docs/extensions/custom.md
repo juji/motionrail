@@ -23,10 +23,10 @@ The [MotionRailState](/docs/api/types/motionrail-state) object passed to `onInit
 
 ```ts
 interface MotionRailState {
-  totalItems: number;              // Total number of items in carousel
-  visibleItemIndexes: number[];    // Array of currently visible item indexes
-  isFirstItemVisible: boolean;     // Whether the first item is visible
-  isLastItemVisible: boolean;      // Whether the last item is visible
+  totalItems: number; // Total number of items in carousel
+  visibleItemIndexes: number[]; // Array of currently visible item indexes
+  isFirstItemVisible: boolean; // Whether the first item is visible
+  isLastItemVisible: boolean; // Whether the last item is visible
 }
 ```
 
@@ -39,10 +39,12 @@ Extensions can interact with the carousel through the [MotionRail](/docs/api/cla
 Called once when the carousel is initialized.
 
 **Parameters:**
+
 - `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
 - `state`: Initial [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
+
 - Creating DOM elements
 - Setting up event listeners
 - Initial configuration
@@ -60,10 +62,12 @@ onInit(motionRail, state) {
 Called whenever the carousel state changes (navigation, resize, etc).
 
 **Parameters:**
+
 - `motionRail`: [MotionRail](/docs/api/class/motionrail) instance with API methods
 - `state`: Updated [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
+
 - Updating UI based on state
 - Responding to navigation
 - Syncing external elements
@@ -81,10 +85,12 @@ onUpdate(motionRail, state) {
 Called when the carousel is destroyed.
 
 **Parameters:**
+
 - `motionRail`: [MotionRail](/docs/api/class/motionrail) instance
 - `state`: Final [MotionRailState](/docs/api/types/motionrail-state)
 
 **Use for:**
+
 - Cleanup event listeners
 - Remove DOM elements
 - Release resources
@@ -106,9 +112,9 @@ function Counter() {
   let counterElement;
 
   return {
-    name: 'counter',
+    name: "counter",
     onInit(motionRail, state) {
-      counterElement = document.createElement('div');
+      counterElement = document.createElement("div");
       counterElement.textContent = `Showing ${state.visibleItemIndexes.length} of ${state.totalItems}`;
       motionRail.container.appendChild(counterElement);
     },
@@ -119,13 +125,13 @@ function Counter() {
 
     onDestroy() {
       counterElement?.remove();
-    }
+    },
   };
 }
 
 // Usage
 new MotionRail(element, {
-  extensions: [Counter()]
+  extensions: [Counter()],
 });
 ```
 
@@ -138,18 +144,18 @@ function CustomControls() {
   let prevBtn, nextBtn;
 
   return {
-    name: 'custom-controls',
+    name: "custom-controls",
     onInit(motionRail, state) {
       // Create buttons
-      const container = document.createElement('div');
-      container.className = 'custom-controls';
+      const container = document.createElement("div");
+      container.className = "custom-controls";
 
-      prevBtn = document.createElement('button');
-      prevBtn.textContent = 'Previous';
+      prevBtn = document.createElement("button");
+      prevBtn.textContent = "Previous";
       prevBtn.onclick = () => motionRail.prev(); // See MotionRail.prev()
 
-      nextBtn = document.createElement('button');
-      nextBtn.textContent = 'Next';
+      nextBtn = document.createElement("button");
+      nextBtn.textContent = "Next";
       nextBtn.onclick = () => motionRail.next(); // See MotionRail.next()
 
       container.append(prevBtn, nextBtn);
@@ -159,7 +165,7 @@ function CustomControls() {
     onUpdate(motionRail, state) {
       // Disable prev when at start
       prevBtn.disabled = state.isFirstItemVisible;
-      
+
       // Disable next when at end
       nextBtn.disabled = state.isLastItemVisible;
     },
@@ -167,7 +173,7 @@ function CustomControls() {
     onDestroy() {
       prevBtn?.remove();
       nextBtn?.remove();
-    }
+    },
   };
 }
 ```
@@ -181,30 +187,35 @@ function ProgressBar() {
   let progressElement;
 
   return {
-    name: 'progress-bar',
+    name: "progress-bar",
     onInit(motionRail, state) {
-      progressElement = document.createElement('div');
-      progressElement.className = 'carousel-progress';
-      
-      const bar = document.createElement('div');
-      bar.className = 'carousel-progress-bar';
+      progressElement = document.createElement("div");
+      progressElement.className = "carousel-progress";
+
+      const bar = document.createElement("div");
+      bar.className = "carousel-progress-bar";
       progressElement.appendChild(bar);
-      
+
       motionRail.container.appendChild(progressElement);
     },
 
     onUpdate(motionRail, state) {
-      const bar = progressElement.querySelector('.carousel-progress-bar');
+      const bar = progressElement.querySelector(".carousel-progress-bar");
       // Calculate progress based on scroll position
-      const scrollPercentage = (motionRail.container.querySelector('.motionrail-container').scrollLeft / 
-        (motionRail.container.querySelector('.motionrail-container').scrollWidth - 
-         motionRail.container.querySelector('.motionrail-container').clientWidth)) * 100;
+      const scrollPercentage =
+        (motionRail.container.querySelector(".motionrail-container")
+          .scrollLeft /
+          (motionRail.container.querySelector(".motionrail-container")
+            .scrollWidth -
+            motionRail.container.querySelector(".motionrail-container")
+              .clientWidth)) *
+        100;
       bar.style.width = `${scrollPercentage}%`;
     },
 
     onDestroy() {
       progressElement?.remove();
-    }
+    },
   };
 }
 ```
@@ -235,24 +246,24 @@ function KeyboardControls() {
   let handleKeydown;
 
   return {
-    name: 'keyboard-controls',
+    name: "keyboard-controls",
     onInit(motionRail, state) {
       handleKeydown = (e) => {
-        if (e.key === 'ArrowLeft') {
+        if (e.key === "ArrowLeft") {
           motionRail.prev();
-        } else if (e.key === 'ArrowRight') {
+        } else if (e.key === "ArrowRight") {
           motionRail.next();
         }
       };
 
-      document.addEventListener('keydown', handleKeydown);
+      document.addEventListener("keydown", handleKeydown);
     },
 
     onDestroy() {
       if (handleKeydown) {
-        document.removeEventListener('keydown', handleKeydown);
+        document.removeEventListener("keydown", handleKeydown);
       }
-    }
+    },
   };
 }
 ```
@@ -266,11 +277,11 @@ function ExternalSync(config) {
   const { thumbnailContainer } = config;
 
   return {
-    name: 'external-sync',
+    name: "external-sync",
     onInit(motionRail, state) {
       // Create thumbnail buttons for each item
       for (let i = 0; i < state.totalItems; i++) {
-        const btn = document.createElement('button');
+        const btn = document.createElement("button");
         btn.textContent = i + 1;
         btn.onclick = () => motionRail.scrollToIndex(i); // See MotionRail.scrollToIndex()
         thumbnailContainer.appendChild(btn);
@@ -279,23 +290,23 @@ function ExternalSync(config) {
 
     onUpdate(motionRail, state) {
       // Update active thumbnails based on visible items
-      const buttons = thumbnailContainer.querySelectorAll('button');
+      const buttons = thumbnailContainer.querySelectorAll("button");
       buttons.forEach((btn, i) => {
-        btn.classList.toggle('active', state.visibleItemIndexes.includes(i));
+        btn.classList.toggle("active", state.visibleItemIndexes.includes(i));
       });
     },
 
     onDestroy() {
-      thumbnailContainer.innerHTML = '';
-    }
+      thumbnailContainer.innerHTML = "";
+    },
   };
 }
 
 // Usage
-const thumbnailContainer = document.getElementById('thumbnails');
+const thumbnailContainer = document.getElementById("thumbnails");
 
 new MotionRail(element, {
-  extensions: [ExternalSync({ thumbnailContainer })]
+  extensions: [ExternalSync({ thumbnailContainer })],
 });
 ```
 
@@ -304,29 +315,29 @@ new MotionRail(element, {
 Full type definitions:
 
 ```ts
-import { MotionRail } from 'motionrail';
-import type { MotionRailState, MotionRailExtension } from 'motionrail';
+import { MotionRail } from "motionrail";
+import type { MotionRailState, MotionRailExtension } from "motionrail";
 
 function MyExtension(): MotionRailExtension {
   let element: HTMLElement | null = null;
 
   return {
-    name: 'my-extension',
+    name: "my-extension",
     onInit(motionRail: MotionRail, state: MotionRailState) {
-      element = document.createElement('div');
+      element = document.createElement("div");
       element.textContent = `Total items: ${state.totalItems}`;
       motionRail.container.appendChild(element);
     },
 
     onUpdate(motionRail: MotionRail, state: MotionRailState) {
       if (element) {
-        element.textContent = `Visible: ${state.visibleItemIndexes.join(', ')}`;
+        element.textContent = `Visible: ${state.visibleItemIndexes.join(", ")}`;
       }
     },
 
     onDestroy() {
       element?.remove();
-    }
+    },
   };
 }
 ```
@@ -341,10 +352,10 @@ Always clean up in `onDestroy`:
 onDestroy(motionRail, state) {
   // Remove event listeners
   document.removeEventListener('keydown', handleKeydown);
-  
+
   // Remove DOM elements
   element?.remove();
-  
+
   // Clear references
   element = null;
 }
@@ -367,14 +378,14 @@ Make extensions configurable:
 
 ```js
 function MyExtension(config = {}) {
-  const { enabled = true, className = 'default' } = config;
-  
+  const { enabled = true, className = "default" } = config;
+
   return {
-    name: 'my-extension',
+    name: "my-extension",
     onInit(motionRail, state) {
       if (!enabled) return;
       // Use config...
-    }
+    },
   };
 }
 ```
@@ -388,19 +399,21 @@ function MyExtension() {
   let listeners = [];
 
   return {
-    name: 'my-extension',
+    name: "my-extension",
     onInit(motionRail, state) {
-      const handler = () => { /* ... */ };
+      const handler = () => {
+        /* ... */
+      };
       listeners.push(handler);
-      document.addEventListener('click', handler);
+      document.addEventListener("click", handler);
     },
 
     onDestroy() {
-      listeners.forEach(handler => {
-        document.removeEventListener('click', handler);
+      listeners.forEach((handler) => {
+        document.removeEventListener("click", handler);
       });
       listeners = [];
-    }
+    },
   };
 }
 ```

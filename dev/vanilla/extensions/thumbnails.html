@@ -51,13 +51,27 @@
     </style>
   </head>
   <body>
-    <nav style="position: sticky; top: 0; z-index: 1000; margin-bottom: 30px; padding: 20px; background: #1a1a1a; border-radius: 8px;">
-      <strong style="color: #667eea; margin-right: 20px;">Tests:</strong>
-      <a href="../index.html" style="color: #999; margin-right: 15px;">Main</a>
-      <a href="arrows.html" style="color: #999; margin-right: 15px;">Arrows</a>
-      <a href="dots.html" style="color: #999; margin-right: 15px;">Dots</a>
-      <a href="logger.html" style="color: #999; margin-right: 15px;">Logger</a>
-      <a href="thumbnails.html" style="color: #fff; margin-right: 15px; text-decoration: underline;">Thumbnails</a>
+    <nav
+      style="
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: #1a1a1a;
+        border-radius: 8px;
+      "
+    >
+      <strong style="color: #667eea; margin-right: 20px">Tests:</strong>
+      <a href="../index.html" style="color: #999; margin-right: 15px">Main</a>
+      <a href="arrows.html" style="color: #999; margin-right: 15px">Arrows</a>
+      <a href="dots.html" style="color: #999; margin-right: 15px">Dots</a>
+      <a href="logger.html" style="color: #999; margin-right: 15px">Logger</a>
+      <a
+        href="thumbnails.html"
+        style="color: #fff; margin-right: 15px; text-decoration: underline"
+        >Thumbnails</a
+      >
     </nav>
     <h1>Thumbnails Extension Demo</h1>
 
@@ -147,10 +161,10 @@
     </div>
 
     <script type="module">
-      import { MotionRail } from 'motionrail';
-      import { Thumbnails } from 'motionrail/extensions/thumbnails';
-      import 'motionrail/style.css';
-      import 'motionrail/extensions/thumbnails/style.css';
+      import { MotionRail } from "motionrail";
+      import { Thumbnails } from "motionrail/extensions/thumbnails";
+      import "motionrail/style.css";
+      import "motionrail/extensions/thumbnails/style.css";
 
       window.carousel1 = new MotionRail(document.getElementById("carousel1"), {
         extensions: [Thumbnails()],

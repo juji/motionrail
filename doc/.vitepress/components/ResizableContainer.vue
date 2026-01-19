@@ -1,21 +1,21 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from "vue";
 
 const props = defineProps({
   initialWidth: {
     type: String,
-    default: '100%'
+    default: "100%",
   },
   minWidth: {
     type: Number,
-    default: 300
-  }
+    default: 300,
+  },
 });
 
 const containerRef = ref(null);
 const contentRef = ref(null);
 const width = ref(props.initialWidth);
-const displayWidth = ref('0');
+const displayWidth = ref("0");
 const isDragging = ref(false);
 const dragSide = ref(null);
 
@@ -34,28 +34,28 @@ const startDrag = (e, side) => {
 
 const onDrag = (e) => {
   if (!isDragging.value || !containerRef.value) return;
-  
+
   const rect = containerRef.value.getBoundingClientRect();
   let newWidth;
-  
-  if (dragSide.value === 'right') {
+
+  if (dragSide.value === "right") {
     newWidth = e.clientX - rect.left;
   } else {
     newWidth = rect.right - e.clientX;
   }
-  
+
   if (newWidth < props.minWidth) {
     newWidth = props.minWidth;
   }
-  
+
   // Get parent width to respect max-width constraint
   const parentWidth = containerRef.value.parentElement?.offsetWidth || Infinity;
   if (newWidth > parentWidth) {
     newWidth = parentWidth;
   }
-  
+
   width.value = `${newWidth}px`;
-  
+
   // Update display width based on actual content width
   requestAnimationFrame(() => {
     updateDisplayWidth();
@@ -68,24 +68,24 @@ const stopDrag = () => {
 };
 
 onMounted(() => {
-  document.addEventListener('mousemove', onDrag);
-  document.addEventListener('mouseup', stopDrag);
-  
+  document.addEventListener("mousemove", onDrag);
+  document.addEventListener("mouseup", stopDrag);
+
   // Get initial content width
   updateDisplayWidth();
 });
 
 onUnmounted(() => {
-  document.removeEventListener('mousemove', onDrag);
-  document.removeEventListener('mouseup', stopDrag);
+  document.removeEventListener("mousemove", onDrag);
+  document.removeEventListener("mouseup", stopDrag);
 });
 </script>
 
 <template>
   <div class="resizable-wrapper">
-    <div 
-      ref="containerRef" 
-      class="resizable-container" 
+    <div
+      ref="containerRef"
+      class="resizable-container"
       :style="{ width }"
       :class="{ dragging: isDragging }"
     >
@@ -111,13 +111,13 @@ onUnmounted(() => {
   align-items: center;
 }
 
-.resizeable-content{
+.resizeable-content {
   margin: 0 2px;
 }
 
 .resizable-container {
   position: relative;
-  border: 2px dashed rgb(200 200 200 / 0.4 );
+  border: 2px dashed rgb(200 200 200 / 0.4);
   border-radius: 8px;
   padding: 0 21px;
   transition: border-color 0.2s;

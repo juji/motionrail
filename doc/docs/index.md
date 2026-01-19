@@ -39,6 +39,7 @@ MotionRail works in all modern browsers:
 - Modern mobile browsers
 
 Requires support for:
+
 - CSS Grid
 - Pointer Events API
 - Container Queries

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { Icon } from '@iconify/vue';
-import HeroMotionRail from './hero-motionrail.vue';
-import pkg from '../../../package.json';
+import { Icon } from "@iconify/vue";
+import HeroMotionRail from "./hero-motionrail.vue";
+import pkg from "../../../package.json";
 
 const version = pkg.version;
 </script>
@@ -10,36 +10,65 @@ const version = pkg.version;
   <div class="hero-section">
     <div class="container">
       <div class="hero-content">
-        <h1 class="name">MotionRail <span class="version">v{{ version }}</span></h1>
+        <h1 class="name">
+          MotionRail <span class="version">v{{ version }}</span>
+        </h1>
         <p class="text">Carousel Library</p>
-        <p class="tagline">A lightweight carousel library for modern web applications</p>
-        
+        <p class="tagline">
+          A lightweight carousel library for modern web applications
+        </p>
+
         <div class="actions">
           <a class="action-button brand" href="/docs">Read The Docs</a>
-          <a class="action-button alt" href="https://github.com/juji/motionrail">Github</a>
+          <a class="action-button alt" href="https://github.com/juji/motionrail"
+            >Github</a
+          >
         </div>
 
         <div class="frameworks">
-          <a href="/docs/frameworks/react" class="framework-icon" aria-label="React">
+          <a
+            href="/docs/frameworks/react"
+            class="framework-icon"
+            aria-label="React"
+          >
             <Icon icon="skill-icons:react-dark" />
           </a>
-          <a href="/docs/frameworks/preact" class="framework-icon" aria-label="Preact">
+          <a
+            href="/docs/frameworks/preact"
+            class="framework-icon"
+            aria-label="Preact"
+          >
             <Icon icon="logos:preact" />
           </a>
-          <a href="/docs/frameworks/solid" class="framework-icon" aria-label="Solid">
+          <a
+            href="/docs/frameworks/solid"
+            class="framework-icon"
+            aria-label="Solid"
+          >
             <Icon icon="logos:solidjs-icon" />
           </a>
-          <a href="/docs/frameworks/vue" class="framework-icon" aria-label="Vue">
+          <a
+            href="/docs/frameworks/vue"
+            class="framework-icon"
+            aria-label="Vue"
+          >
             <Icon icon="skill-icons:vuejs-dark" />
           </a>
-          <a href="/docs/frameworks/svelte" class="framework-icon" aria-label="Svelte">
+          <a
+            href="/docs/frameworks/svelte"
+            class="framework-icon"
+            aria-label="Svelte"
+          >
             <Icon icon="skill-icons:svelte" />
           </a>
-          <a href="/docs/frameworks/qwik" class="framework-icon" aria-label="Qwik">
+          <a
+            href="/docs/frameworks/qwik"
+            class="framework-icon"
+            aria-label="Qwik"
+          >
             <Icon icon="devicon:qwik" />
           </a>
         </div>
-        
       </div>
       <div class="hero-demo">
         <HeroMotionRail />
@@ -64,7 +93,8 @@ const version = pkg.version;
   gap: 8px;
   order: 2;
 
-  p, h1 {
+  p,
+  h1 {
     margin: 0;
   }
 }
@@ -80,7 +110,11 @@ const version = pkg.version;
   font-size: 48px;
   font-weight: 700;
   line-height: 1.2;
-  background: linear-gradient(315deg, var(--vp-c-brand-1) 25%, var(--vp-c-brand-2));
+  background: linear-gradient(
+    315deg,
+    var(--vp-c-brand-1) 25%,
+    var(--vp-c-brand-2)
+  );
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -128,7 +162,10 @@ const version = pkg.version;
   text-align: center;
   font-weight: 600;
   white-space: nowrap;
-  transition: color 0.25s, border-color 0.25s, background-color 0.25s;
+  transition:
+    color 0.25s,
+    border-color 0.25s,
+    background-color 0.25s;
   padding: 0 20px;
   line-height: 38px;
   font-size: 14px;
@@ -171,7 +208,9 @@ const version = pkg.version;
 .framework-icon {
   width: 40px;
   height: 40px;
-  transition: transform 0.25s, opacity 0.25s;
+  transition:
+    transform 0.25s,
+    opacity 0.25s;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -207,8 +246,7 @@ const version = pkg.version;
 }
 
 @media screen and (min-width: 1024px) {
-
-  .container{
+  .container {
     grid-template-columns: 1fr 1fr;
   }
 

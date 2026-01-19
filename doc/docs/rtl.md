@@ -8,13 +8,14 @@ Enable RTL mode by setting the `rtl` option to `true`:
 
 ```ts
 const carousel = new MotionRail(container, {
-  rtl: true
+  rtl: true,
 });
 ```
 
 ## How RTL Works
 
 When RTL mode is enabled:
+
 - The carousel scrolls from right to left instead of left to right
 - Navigation arrows are reversed (right arrow goes to previous, left arrow goes to next)
 - Thumbnails and dots order is reversed
@@ -39,18 +40,17 @@ import HomeRtl from '../.vitepress/components/home-rtl.vue';
 ```vue {7,14}
 <script setup lang="ts">
 // ... other imports
-import { MotionRail } from 'motionrail/vue';
-
+import { MotionRail } from "motionrail/vue";
 
 const options = {
   rtl: true,
-  // ... other options 
+  // ... other options
 };
 </script>
 
 <template>
   <!-- dont't forget the dir="rtl" attribute -->
-  <div dir="rtl"> 
+  <div dir="rtl">
     <MotionRail :options="options">
       <div class="demo-slide centered slide-1">1</div>
       <div class="demo-slide centered slide-2">2</div>
@@ -73,18 +73,17 @@ Don't forget to add the `dir="rtl"` attribute to the container element (or a par
 ### React
 
 ```tsx {7,14}
-import { MotionRail } from 'motionrail/react';
-import { Arrows } from 'motionrail/extensions/arrows';
-import 'motionrail/style.css';
-import 'motionrail/extensions/arrows/style.css';
+import { MotionRail } from "motionrail/react";
+import { Arrows } from "motionrail/extensions/arrows";
+import "motionrail/style.css";
+import "motionrail/extensions/arrows/style.css";
 
 const options = {
   rtl: true,
-  extensions: [Arrows()]
+  extensions: [Arrows()],
 };
 
 function RTLCarousel() {
-
   return (
     <div dir="rtl">
       <MotionRail options={options}>
@@ -100,18 +99,19 @@ function RTLCarousel() {
 ### Vanilla JavaScript
 
 ```js {9}
-import { MotionRail } from 'motionrail';
-import { Arrows } from 'motionrail/extensions/arrows';
-import 'motionrail/style.css';
-import 'motionrail/extensions/arrows/style.css';
+import { MotionRail } from "motionrail";
+import { Arrows } from "motionrail/extensions/arrows";
+import "motionrail/style.css";
+import "motionrail/extensions/arrows/style.css";
 
-const container = document.querySelector('.carousel-container');
+const container = document.querySelector(".carousel-container");
 
 const carousel = new MotionRail(container, {
   rtl: true,
-  extensions: [Arrows()]
+  extensions: [Arrows()],
 });
 ```
+
 ```html {1}
 <div data-motionrail class="carousel-container" dir="rtl">
   <div data-motionrail-scrollable>

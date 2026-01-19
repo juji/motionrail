@@ -1,1 +1,1 @@
-export { MotionRail } from './main';
+export { MotionRail } from "./main";

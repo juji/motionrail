@@ -13,14 +13,14 @@
     "allowImportingTsExtensions": false,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
-    
+
     /* Declaration files */
     "rootDir": "./src",
     "declaration": true,
     "emitDeclarationOnly": true,
     "declarationDir": "./dist",
     "outDir": "./dist",
-    
+
     "jsx": "react-jsx",
 
     /* Linting */

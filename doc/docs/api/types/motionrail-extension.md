@@ -10,7 +10,7 @@ type MotionRailExtension = {
   onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
   onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
   onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
-}
+};
 ```
 
 ## Properties
@@ -24,7 +24,7 @@ Unique identifier for the extension.
 
 ```ts
 const customExtension: MotionRailExtension = {
-  name: 'custom-logger'
+  name: "custom-logger",
 };
 ```
 
@@ -38,15 +38,16 @@ Called once when the carousel is initialized.
 - **Optional:** Yes
 
 **Parameters:**
+
 - `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
 - `state` - Current [MotionRailState](/docs/api/types/motionrail-state)
 
 ```ts
 const customExtension: MotionRailExtension = {
-  name: 'init-tracker',
+  name: "init-tracker",
   onInit: (motionRail, state) => {
-    console.log('Carousel initialized with', state.totalItems, 'items');
-  }
+    console.log("Carousel initialized with", state.totalItems, "items");
+  },
 };
 ```
 
@@ -60,15 +61,16 @@ Called whenever the carousel state updates (scroll, resize, content changes).
 - **Optional:** Yes
 
 **Parameters:**
+
 - `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
 - `state` - Updated [MotionRailState](/docs/api/types/motionrail-state)
 
 ```ts
 const customExtension: MotionRailExtension = {
-  name: 'scroll-tracker',
+  name: "scroll-tracker",
   onUpdate: (motionRail, state) => {
-    console.log('Visible items:', state.visibleItemIndexes);
-  }
+    console.log("Visible items:", state.visibleItemIndexes);
+  },
 };
 ```
 
@@ -82,15 +84,16 @@ Called when the carousel is destroyed for cleanup.
 - **Optional:** Yes
 
 **Parameters:**
+
 - `motionRail` - The [MotionRail](/docs/api/class/motionrail) instance
 - `state` - Final [MotionRailState](/docs/api/types/motionrail-state)
 
 ```ts
 const customExtension: MotionRailExtension = {
-  name: 'cleanup-tracker',
+  name: "cleanup-tracker",
   onDestroy: (motionRail, state) => {
-    console.log('Carousel destroyed');
-  }
+    console.log("Carousel destroyed");
+  },
 };
 ```
 
@@ -104,16 +107,16 @@ Extensions follow this lifecycle:
 
 ```ts
 const lifecycleExtension: MotionRailExtension = {
-  name: 'lifecycle-demo',
+  name: "lifecycle-demo",
   onInit: (motionRail, state) => {
-    console.log('1. Init');
+    console.log("1. Init");
   },
   onUpdate: (motionRail, state) => {
-    console.log('2. Update (called on scroll, resize, etc.)');
+    console.log("2. Update (called on scroll, resize, etc.)");
   },
   onDestroy: (motionRail, state) => {
-    console.log('3. Destroy');
-  }
+    console.log("3. Destroy");
+  },
 };
 ```
 
@@ -122,31 +125,23 @@ const lifecycleExtension: MotionRailExtension = {
 ### Adding Extensions
 
 ```ts
-import { MotionRail } from 'motionrail';
+import { MotionRail } from "motionrail";
 
 const carousel = new MotionRail(element, {
-  extensions: [
-    customExtension1,
-    customExtension2
-  ]
+  extensions: [customExtension1, customExtension2],
 });
 ```
 
 ### Built-in Extensions
 
 ```ts
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Dots } from 'motionrail/extensions/dots';
-import { Thumbnails } from 'motionrail/extensions/thumbnails';
-import { Logger } from 'motionrail/extensions/logger';
+import { Arrows } from "motionrail/extensions/arrows";
+import { Dots } from "motionrail/extensions/dots";
+import { Thumbnails } from "motionrail/extensions/thumbnails";
+import { Logger } from "motionrail/extensions/logger";
 
 const carousel = new MotionRail(element, {
-  extensions: [
-    Arrows(),
-    Dots({ dotSize: 48 }),
-    Thumbnails(),
-    Logger()
-  ]
+  extensions: [Arrows(), Dots({ dotSize: 48 }), Thumbnails(), Logger()],
 });
 ```
 
@@ -158,16 +153,16 @@ See [Extensions Overview](/docs/extensions/) for built-in extensions.
 
 ```ts
 const logger: MotionRailExtension = {
-  name: 'simple-logger',
+  name: "simple-logger",
   onInit: (motionRail, state) => {
-    console.log('Initialized');
+    console.log("Initialized");
   },
   onUpdate: (motionRail, state) => {
-    console.log('State updated:', state);
+    console.log("State updated:", state);
   },
   onDestroy: (motionRail, state) => {
-    console.log('Destroyed');
-  }
+    console.log("Destroyed");
+  },
 };
 ```
 
@@ -175,14 +170,14 @@ const logger: MotionRailExtension = {
 
 ```ts
 const counter: MotionRailExtension = {
-  name: 'counter',
+  name: "counter",
   onUpdate: (motionRail, state) => {
-    const counterEl = document.querySelector('.counter');
+    const counterEl = document.querySelector(".counter");
     if (counterEl) {
       const current = state.visibleItemIndexes[0] + 1;
       counterEl.textContent = `${current} / ${state.totalItems}`;
     }
-  }
+  },
 };
 ```
 
@@ -190,21 +185,21 @@ const counter: MotionRailExtension = {
 
 ```ts
 const customControls: MotionRailExtension = {
-  name: 'custom-controls',
+  name: "custom-controls",
   onInit: (motionRail, state) => {
-    const prevBtn = document.querySelector('.my-prev');
-    const nextBtn = document.querySelector('.my-next');
-    
-    prevBtn?.addEventListener('click', () => motionRail.prev());
-    nextBtn?.addEventListener('click', () => motionRail.next());
+    const prevBtn = document.querySelector(".my-prev");
+    const nextBtn = document.querySelector(".my-next");
+
+    prevBtn?.addEventListener("click", () => motionRail.prev());
+    nextBtn?.addEventListener("click", () => motionRail.next());
   },
   onUpdate: (motionRail, state) => {
-    const prevBtn = document.querySelector('.my-prev') as HTMLButtonElement;
-    const nextBtn = document.querySelector('.my-next') as HTMLButtonElement;
-    
+    const prevBtn = document.querySelector(".my-prev") as HTMLButtonElement;
+    const nextBtn = document.querySelector(".my-next") as HTMLButtonElement;
+
     if (prevBtn) prevBtn.disabled = state.isFirstItemVisible;
     if (nextBtn) nextBtn.disabled = state.isLastItemVisible;
-  }
+  },
 };
 ```
 
@@ -212,27 +207,30 @@ const customControls: MotionRailExtension = {
 
 ```ts
 const progressBar: MotionRailExtension = {
-  name: 'progress-bar',
+  name: "progress-bar",
   onInit: (motionRail, state) => {
     const container = motionRail.getOptions();
-    const progressEl = document.createElement('div');
-    progressEl.className = 'progress-bar';
-    progressEl.style.cssText = 'height: 4px; background: #ccc; position: relative;';
-    
-    const bar = document.createElement('div');
-    bar.className = 'progress-bar-fill';
-    bar.style.cssText = 'height: 100%; background: #007bff; width: 0; transition: width 0.3s;';
-    
+    const progressEl = document.createElement("div");
+    progressEl.className = "progress-bar";
+    progressEl.style.cssText =
+      "height: 4px; background: #ccc; position: relative;";
+
+    const bar = document.createElement("div");
+    bar.className = "progress-bar-fill";
+    bar.style.cssText =
+      "height: 100%; background: #007bff; width: 0; transition: width 0.3s;";
+
     progressEl.appendChild(bar);
     // Insert progress bar before carousel
   },
   onUpdate: (motionRail, state) => {
-    const bar = document.querySelector('.progress-bar-fill') as HTMLElement;
+    const bar = document.querySelector(".progress-bar-fill") as HTMLElement;
     if (bar && state.totalItems > 0) {
-      const progress = ((state.visibleItemIndexes[0] + 1) / state.totalItems) * 100;
+      const progress =
+        ((state.visibleItemIndexes[0] + 1) / state.totalItems) * 100;
       bar.style.width = `${progress}%`;
     }
-  }
+  },
 };
 ```
 
@@ -240,24 +238,24 @@ const progressBar: MotionRailExtension = {
 
 ```ts
 const keyboardNav: MotionRailExtension = {
-  name: 'keyboard-navigation',
+  name: "keyboard-navigation",
   onInit: (motionRail, state) => {
     const handleKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') motionRail.prev();
-      if (e.key === 'ArrowRight') motionRail.next();
+      if (e.key === "ArrowLeft") motionRail.prev();
+      if (e.key === "ArrowRight") motionRail.next();
     };
-    
-    document.addEventListener('keydown', handleKeydown);
-    
+
+    document.addEventListener("keydown", handleKeydown);
+
     // Store for cleanup
     (motionRail as any)._keyboardHandler = handleKeydown;
   },
   onDestroy: (motionRail, state) => {
     const handler = (motionRail as any)._keyboardHandler;
     if (handler) {
-      document.removeEventListener('keydown', handler);
+      document.removeEventListener("keydown", handler);
     }
-  }
+  },
 };
 ```
 
@@ -265,13 +263,15 @@ const keyboardNav: MotionRailExtension = {
 
 ```ts
 const stateSync: MotionRailExtension = {
-  name: 'state-sync',
+  name: "state-sync",
   onUpdate: (motionRail, state) => {
     // Sync to external state management (Redux, Vuex, etc.)
-    window.dispatchEvent(new CustomEvent('carousel-state-change', {
-      detail: state
-    }));
-  }
+    window.dispatchEvent(
+      new CustomEvent("carousel-state-change", {
+        detail: state,
+      }),
+    );
+  },
 };
 ```
 
@@ -280,16 +280,16 @@ const stateSync: MotionRailExtension = {
 Full TypeScript support with type checking:
 
 ```ts
-import { MotionRail } from 'motionrail';
-import type { MotionRailExtension, MotionRailState } from 'motionrail';
+import { MotionRail } from "motionrail";
+import type { MotionRailExtension, MotionRailState } from "motionrail";
 
 const typedExtension: MotionRailExtension = {
-  name: 'typed-extension',
+  name: "typed-extension",
   onInit: (motionRail: MotionRail, state: MotionRailState) => {
     // Full type checking and autocomplete
     console.log(state.totalItems);
     motionRail.play();
-  }
+  },
 };
 ```
 

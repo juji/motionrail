@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import HomeBreakpoints from './home-breakpoints.vue';
-import ResizableContainer from './ResizableContainer.vue';
+import HomeBreakpoints from "./home-breakpoints.vue";
+import ResizableContainer from "./ResizableContainer.vue";
 </script>
 
 <template>
@@ -8,14 +8,21 @@ import ResizableContainer from './ResizableContainer.vue';
     <div class="container">
       <div class="section-content">
         <h2 class="section-title">Responsive Breakpoints</h2>
-        <p class="section-description">Automatically adjust the number of columns based on screen size. Configure different layouts for different viewport widths.</p>
-        <p class="resize-hint">👉 Drag the edges to resize and see breakpoints in action!</p>
+        <p class="section-description">
+          Automatically adjust the number of columns based on screen size.
+          Configure different layouts for different viewport widths.
+        </p>
+        <p class="resize-hint">
+          👉 Drag the edges to resize and see breakpoints in action!
+        </p>
       </div>
       <div class="section-demo">
         <ResizableContainer :min-width="280">
           <HomeBreakpoints />
         </ResizableContainer>
-        <a href="/docs/breakpoints" class="demo-link">Learn more about Breakpoints →</a>
+        <a href="/docs/breakpoints" class="demo-link"
+          >Learn more about Breakpoints →</a
+        >
       </div>
     </div>
   </div>

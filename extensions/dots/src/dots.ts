@@ -8,10 +8,7 @@ export function Dots(par?: {
 }): MotionRailExtension {
   let dotsContainer: HTMLDivElement | null = null;
   const dots: HTMLButtonElement[] = [];
-  const {
-    showIndex = false,
-    log = false,
-  } = par || {};
+  const { showIndex = false, log = false } = par || {};
 
   return {
     name: "DotsExtension",

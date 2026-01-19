@@ -5,12 +5,12 @@ Debug extension for logging carousel state and events.
 ## Usage
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Logger } from 'motionrail/extensions/logger';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail";
+import { Logger } from "motionrail/extensions/logger";
+import "motionrail/style.css";
 
 const carousel = new MotionRail(element, {
-  extensions: [Logger()]
+  extensions: [Logger()],
 });
 ```
 
@@ -70,25 +70,28 @@ Each update logs the current state:
 ## Complete Example
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Logger } from 'motionrail/extensions/logger';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail";
+import { Logger } from "motionrail/extensions/logger";
+import "motionrail/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const carousel = new MotionRail(document.getElementById("carousel"), {
   autoplay: true,
   delay: 3000,
   breakpoints: [
-    { minWidth: '0px', columns: 1 },
-    { minWidth: '768px', columns: 2 }
+    { minWidth: "0px", columns: 1 },
+    { minWidth: "768px", columns: 2 },
   ],
-  extensions: [Logger()]
+  extensions: [Logger()],
 });
 ```
 
 ### UMD (CDN)
 
 ```html
-<link rel="stylesheet" href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/style.css"
+/>
 
 <div data-motionrail id="carousel">
   <!-- carousel items -->
@@ -97,14 +100,14 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 <script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
 <script src="https://unpkg.com/motionrail@latest/dist/extensions/logger.umd.cjs"></script>
 <script>
-  const carousel = new MotionRail(document.getElementById('carousel'), {
+  const carousel = new MotionRail(document.getElementById("carousel"), {
     autoplay: true,
     delay: 3000,
     breakpoints: [
-      { minWidth: '0px', columns: 1 },
-      { minWidth: '768px', columns: 2 }
+      { minWidth: "0px", columns: 1 },
+      { minWidth: "768px", columns: 2 },
     ],
-    extensions: [MotionRailLogger()]
+    extensions: [MotionRailLogger()],
   });
 </script>
 ```
@@ -114,6 +117,7 @@ const carousel = new MotionRail(document.getElementById('carousel'), {
 ### Development
 
 Perfect for development when you need to:
+
 - Verify event timing
 - Debug state changes
 - Understand carousel behavior
@@ -132,7 +136,7 @@ if (import.meta.env.DEV) {
 }
 
 const carousel = new MotionRail(element, {
-  extensions
+  extensions,
 });
 ```
 
@@ -141,36 +145,36 @@ const carousel = new MotionRail(element, {
 ```js
 // Only in development
 const carousel = new MotionRail(element, {
-  extensions: [
-    process.env.NODE_ENV === 'development' && Logger()
-  ].filter(Boolean)
+  extensions: [process.env.NODE_ENV === "development" && Logger()].filter(
+    Boolean,
+  ),
 });
 ```
 
 ## With Multiple Extensions
 
 ```js
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Dots } from 'motionrail/extensions/dots';
-import { Logger } from 'motionrail/extensions/logger';
+import { Arrows } from "motionrail/extensions/arrows";
+import { Dots } from "motionrail/extensions/dots";
+import { Logger } from "motionrail/extensions/logger";
 
 const carousel = new MotionRail(element, {
   extensions: [
     Arrows(),
     Dots(),
-    Logger() // Logs events from all extensions
-  ]
+    Logger(), // Logs events from all extensions
+  ],
 });
 ```
 
 ## TypeScript
 
 ```ts
-import { MotionRail } from 'motionrail';
-import { Logger } from 'motionrail/extensions/logger';
+import { MotionRail } from "motionrail";
+import { Logger } from "motionrail/extensions/logger";
 
 const carousel = new MotionRail(element, {
-  extensions: [Logger()]
+  extensions: [Logger()],
 });
 ```
 

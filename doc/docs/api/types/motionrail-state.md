@@ -10,7 +10,7 @@ type MotionRailState = {
   visibleItemIndexes: number[];
   isFirstItemVisible: boolean;
   isLastItemVisible: boolean;
-}
+};
 ```
 
 ## Properties
@@ -23,7 +23,7 @@ Total number of items in the carousel.
 
 ```ts
 const state = carousel.getState();
-console.log(state.totalItems);  // 10
+console.log(state.totalItems); // 10
 ```
 
 ---
@@ -36,7 +36,7 @@ Array of currently visible item indexes (0-based).
 
 ```ts
 const state = carousel.getState();
-console.log(state.visibleItemIndexes);  // [0, 1, 2]
+console.log(state.visibleItemIndexes); // [0, 1, 2]
 ```
 
 This array updates as the user scrolls and items enter/exit the viewport.
@@ -51,10 +51,10 @@ Whether the first item is currently visible.
 
 ```ts
 const state = carousel.getState();
-console.log(state.isFirstItemVisible);  // true
+console.log(state.isFirstItemVisible); // true
 
 // Use for disabling "previous" button
-const prevButton = document.querySelector('.prev-button');
+const prevButton = document.querySelector(".prev-button");
 prevButton.disabled = state.isFirstItemVisible;
 ```
 
@@ -68,10 +68,10 @@ Whether the last item is currently visible.
 
 ```ts
 const state = carousel.getState();
-console.log(state.isLastItemVisible);  // false
+console.log(state.isLastItemVisible); // false
 
 // Use for disabling "next" button
-const nextButton = document.querySelector('.next-button');
+const nextButton = document.querySelector(".next-button");
 nextButton.disabled = state.isLastItemVisible;
 ```
 
@@ -99,11 +99,11 @@ Use the `onChange` option to receive state updates:
 ```ts
 const carousel = new MotionRail(element, {
   onChange: (state) => {
-    console.log('Total:', state.totalItems);
-    console.log('Visible:', state.visibleItemIndexes);
-    console.log('At start:', state.isFirstItemVisible);
-    console.log('At end:', state.isLastItemVisible);
-  }
+    console.log("Total:", state.totalItems);
+    console.log("Visible:", state.visibleItemIndexes);
+    console.log("At start:", state.isFirstItemVisible);
+    console.log("At end:", state.isLastItemVisible);
+  },
 });
 ```
 
@@ -112,43 +112,43 @@ const carousel = new MotionRail(element, {
 ### Disable Navigation at Boundaries
 
 ```ts
-const prevButton = document.querySelector('.prev');
-const nextButton = document.querySelector('.next');
+const prevButton = document.querySelector(".prev");
+const nextButton = document.querySelector(".next");
 
 const carousel = new MotionRail(element, {
   onChange: (state) => {
     prevButton.disabled = state.isFirstItemVisible;
     nextButton.disabled = state.isLastItemVisible;
-  }
+  },
 });
 ```
 
 ### Update Pagination Counter
 
 ```ts
-const counter = document.querySelector('.counter');
+const counter = document.querySelector(".counter");
 
 const carousel = new MotionRail(element, {
   onChange: (state) => {
     const currentPage = state.visibleItemIndexes[0] + 1;
     counter.textContent = `${currentPage} / ${state.totalItems}`;
-  }
+  },
 });
 ```
 
 ### Custom Dot Indicators
 
 ```ts
-const dotsContainer = document.querySelector('.dots');
+const dotsContainer = document.querySelector(".dots");
 
 const carousel = new MotionRail(element, {
   onChange: (state) => {
     // Update active dot based on first visible item
     const firstVisibleIndex = state.visibleItemIndexes[0];
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-      dot.classList.toggle('active', index === firstVisibleIndex);
+    document.querySelectorAll(".dot").forEach((dot, index) => {
+      dot.classList.toggle("active", index === firstVisibleIndex);
     });
-  }
+  },
 });
 ```
 
@@ -162,7 +162,7 @@ const carousel = new MotionRail(element, {
     if (state.isLastItemVisible) {
       carousel.pause();
     }
-  }
+  },
 });
 ```
 

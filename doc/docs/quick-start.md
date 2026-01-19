@@ -40,6 +40,7 @@ Create the carousel HTML structure with the required data attributes:
 :::
 
 **Structure layers:**
+
 ```
 [data-motionrail]                    - Wrapper element
 └── [data-motionrail-scrollable]     - Scrollable container with overflow and snap behavior
@@ -50,21 +51,20 @@ Create the carousel HTML structure with the required data attributes:
 ### 2. Import Styles & Initialize the Carousel
 
 ```js
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail";
+import "motionrail/style.css";
 
-const element = document.getElementById('carousel')
+const element = document.getElementById("carousel");
 const carousel = new MotionRail(element, {
-
   // set autoplay true for this example
   autoplay: true,
 
   // set the breakpoints
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 400, columns: 2, gap: '16px' },
-    { width: 550, columns: 3, gap: '20px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 400, columns: 2, gap: "16px" },
+    { width: 550, columns: 3, gap: "20px" },
+  ],
 });
 ```
 
@@ -86,9 +86,10 @@ import ResizableContainer from '../.vitepress/components/ResizableContainer.vue'
 If you prefer not to use a build tool, you can use the UMD version via CDN:
 
 ```html
-<link 
-  rel="stylesheet" 
-  href="https://unpkg.com/motionrail@latest/dist/style.css">
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/dist/style.css"
+/>
 
 <div data-motionrail id="carousel">
   <div data-motionrail-scrollable>
@@ -104,17 +105,14 @@ If you prefer not to use a build tool, you can use the UMD version via CDN:
 
 <script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
 <script>
-  const carousel = new MotionRail(
-    document.getElementById('carousel'), 
-    {
-      autoplay: true,
-      breakpoints: [
-        { columns: 1, gap: '16px' },
-        { width: 400, columns: 2, gap: '16px' },
-        { width: 550, columns: 3, gap: '20px' }
-      ]
-    }
-  );
+  const carousel = new MotionRail(document.getElementById("carousel"), {
+    autoplay: true,
+    breakpoints: [
+      { columns: 1, gap: "16px" },
+      { width: 400, columns: 2, gap: "16px" },
+      { width: 550, columns: 3, gap: "20px" },
+    ],
+  });
 </script>
 ```
 

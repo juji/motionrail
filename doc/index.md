@@ -7,4 +7,3 @@ import HomeLayout from './.vitepress/components/home-layout.vue'
 </script>
 
 <HomeLayout />
-
