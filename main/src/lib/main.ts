@@ -71,11 +71,12 @@ export class MotionRail {
       );
     }
     this.scrollable = container;
-    if(this.containerName){
+    if (this.containerName) {
       this.scrollable.style.containerName = this.containerName;
-      this.styleTag = document.querySelector(`style[data-motionrail-style="${this.containerName}"]`);
+      this.styleTag = document.querySelector(
+        `style[data-motionrail-style="${this.containerName}"]`,
+      );
     }
-
 
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
@@ -110,10 +111,10 @@ export class MotionRail {
     return `motion-rail-${Math.random().toString(36).substring(2, 11)}`;
   }
 
-  static getBreakPoints( 
+  static getBreakPoints(
     breakpoints: MotionRailBreakpoint[],
     totalItems: number,
-    containerName?: string
+    containerName?: string,
   ) {
     containerName = containerName || this.randomContainerName();
     // Find the smallest width for base case max-width
@@ -123,7 +124,7 @@ export class MotionRail {
         ? Math.min(...withWidth.map((bp) => bp.width!))
         : null;
 
-    let containerQueries = "";    
+    let containerQueries = "";
     breakpoints.forEach((bp) => {
       const columns = bp.columns || 1;
       const gapValue = bp.gap || "0px";
@@ -153,13 +154,12 @@ export class MotionRail {
     return {
       containerName,
       containerQueries,
-    }
+    };
   }
 
   private setBreakPoints() {
-
     // give random css-safe container-name
-    if(!this.containerName){
+    if (!this.containerName) {
       let randomName = "";
       if (!this.scrollable.style.containerName) {
         randomName = MotionRail.randomContainerName();
@@ -172,21 +172,21 @@ export class MotionRail {
 
     // setup container query
     let styleElement;
-    if(this.styleTag){
+    if (this.styleTag) {
       styleElement = this.styleTag;
-    }else{
+    } else {
       styleElement = document.createElement("style");
       styleElement.setAttribute("data-motionrail-style", this.containerName);
     }
 
-    const { containerQueries, } = MotionRail.getBreakPoints(
+    const { containerQueries } = MotionRail.getBreakPoints(
       this.breakpoints,
       this.state.totalItems,
-      this.containerName
+      this.containerName,
     );
 
     styleElement.textContent = containerQueries;
-    if(!this.styleTag){
+    if (!this.styleTag) {
       this.styleTag = styleElement;
       document.head.appendChild(styleElement);
     }

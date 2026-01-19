@@ -1,8 +1,8 @@
 export { MotionRail } from "./lib/main";
-export type { 
-  MotionRailOptions, 
-  MotionRailState, 
-  MotionRailBreakpoint, 
-  MotionRailExtension 
+export type {
+  MotionRailOptions,
+  MotionRailState,
+  MotionRailBreakpoint,
+  MotionRailExtension,
 } from "./lib/types";
-import './style.css'
+import "./style.css";

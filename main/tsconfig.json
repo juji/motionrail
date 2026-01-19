@@ -12,7 +12,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    
+
     /* Declaration files */
     "declaration": true,
     "emitDeclarationOnly": true,

@@ -21,10 +21,10 @@ export default defineConfig({
         // Global variables for UMD build
         globals: {},
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) {
-            return 'style.css';
+          if (assetInfo.name?.endsWith(".css")) {
+            return "style.css";
           }
-          return '[name].[ext]';
+          return "[name].[ext]";
         },
       },
     },

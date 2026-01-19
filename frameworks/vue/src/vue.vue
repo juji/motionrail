@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref, watch, useSlots, computed } from "vue";
+import {
+  onMounted,
+  onBeforeUnmount,
+  ref,
+  watch,
+  useSlots,
+  computed,
+} from "vue";
 import { MotionRail as MotionRailClass } from "motionrail";
 import type { MotionRailOptions } from "motionrail";
 
@@ -18,7 +25,6 @@ const emit = defineEmits<{
 const slots = useSlots();
 const containerRef = ref<HTMLDivElement | null>(null);
 const motionRailInstance = ref<MotionRailClass | null>(null);
-
 
 onMounted(() => {
   if (!containerRef.value) return;
