@@ -6,10 +6,8 @@ import {
   noSerialize,
 } from "@builder.io/qwik";
 import type { QRL, QwikIntrinsicElements } from "@builder.io/qwik";
-import {
-  MotionRail as MotionRailClass,
-  type MotionRailOptions,
-} from "motionrail";
+import { MotionRail as MotionRailClass } from "motionrail";
+import type { MotionRailState, MotionRailOptions } from "motionrail";
 
 export interface MotionRailProps {
   options?: MotionRailOptions;
@@ -19,21 +17,22 @@ export const MotionRail = component$<
   MotionRailProps & QwikIntrinsicElements["div"]
 >((props) => {
   const { options, ...divProps } = props;
-  if (options && options.onChange)
-    options.onChange = noSerialize(
-      options.onChange as QRL<(state: any) => void>,
-    );
+
+  // Separate onChange from options to avoid serialization issues
+  const { onChange, ...restOptions } = options || {};
 
   const containerRef = useSignal<HTMLDivElement>();
   const motionRailRef = useSignal<MotionRailClass | null>(null);
 
   // eslint-disable-next-line qwik/no-use-visible-task
+
   useVisibleTask$(({ cleanup }) => {
     if (!containerRef.value) return;
-    motionRailRef.value = new MotionRailClass(
-      containerRef.value,
-      options || {},
-    );
+    motionRailRef.value = new MotionRailClass(containerRef.value, restOptions);
+    // Assign onChange handler directly to the instance (not serialized)
+    if (onChange && motionRailRef.value) {
+      motionRailRef.value.setOnChange(onChange);
+    }
 
     cleanup(() => {
       if (motionRailRef.value) {
