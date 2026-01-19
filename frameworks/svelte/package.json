@@ -2,7 +2,7 @@
 	"name": "@motionrail/svelte",
 	"version": "0.0.1",
 	"scripts": {
-		"dev": "vite build --watch",
+		"dev": "concurrently \"svelte-kit dev\" \"svelte-package --watch\"",
 		"build": "vite build && npm run prepack",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",

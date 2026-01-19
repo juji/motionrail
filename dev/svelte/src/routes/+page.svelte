@@ -1,9 +1,20 @@
 <script lang="ts">
   import { MotionRail } from 'motionrail/svelte';
+  import { MotionRail as MotionRailClass } from 'motionrail';
   import 'motionrail/style.css';
   import Nav from '$lib/Nav.svelte';
 
   let items = $state([1, 2, 3]);
+
+  // Generate containerName and containerQueries for FOUC prevention (same as React)
+  const { containerName, containerQueries } = MotionRailClass.getBreakPoints(
+    [
+      { columns: 1, gap: '16px' },
+      { width: 768, columns: 2, gap: '16px' },
+      { width: 1024, columns: 3, gap: '20px' },
+    ],
+    8
+  );
 
   function getGradient(index: number): string {
     const gradients = [
@@ -24,19 +35,21 @@
   <title>MotionRail Test Page - SvelteKit</title>
 </svelte:head>
 
-<div style="padding: 40px; background: #000; color: #eaeaea; min-height: 100vh;">
+
+<div style="padding: 40px; background: #000; color: #eaeaea; min-height: 100vh;" class="asdf">
   <div style="max-width: 1200px; margin: 0 auto;">
     <Nav current="main" />
     <h1 style="margin-bottom: 10px;">MotionRail Test Page</h1>
     <p style="margin-bottom: 30px; color: #999; font-size: 14px;">
       Comprehensive test suite for MotionRail Svelte 5 wrapper
     </p>
-
+    
     <!-- Basic Carousel -->
     <section style="margin-bottom: 60px;">
       <h2 style="margin-bottom: 15px; font-size: 18px;">
         Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
       </h2>
+      {@html `<style data-motionrail-style="${containerName}">${containerQueries}</style>`}
       <MotionRail
         options={{
           breakpoints: [
@@ -44,7 +57,8 @@
             { width: 768, columns: 2, gap: '16px' },
             { width: 1024, columns: 3, gap: '20px' },
           ],
-          onChange: (state) => console.log('Carousel changed:', state),
+          containerName,
+          // onChange: (state) => console.log('Carousel changed:', state),
         }}
       >
         {#each [1, 2, 3, 4, 5, 6, 7, 8] as i}
