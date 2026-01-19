@@ -21,7 +21,6 @@ export const MotionRail = component$<MotionRailProps & QwikIntrinsicElements['di
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ cleanup }) => {
     if (!containerRef.value) return;
-
     motionRailRef.value = new MotionRailClass(
       containerRef.value,
       options || {}

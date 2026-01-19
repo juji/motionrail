@@ -1,4 +1,4 @@
-import { component$, useSignal, noSerialize } from '@builder.io/qwik';
+import { component$, useSignal, noSerialize, $ } from '@builder.io/qwik';
 import type { DocumentHead } from '@builder.io/qwik-city';
 import { MotionRail } from 'motionrail/qwik';
 import { MotionRail as MotionRailClass } from 'motionrail';
@@ -54,7 +54,7 @@ export default component$(() => {
                 { width: 768, columns: 2, gap: '16px' },
                 { width: 1024, columns: 3, gap: '20px' },
               ],
-              onChange: noSerialize((state: any) => console.log('Carousel changed:', state)),
+              // onChange: $((state: any) => console.log('Carousel changed:', state)),
               containerName
             }}
           >
