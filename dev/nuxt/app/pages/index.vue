@@ -10,7 +10,7 @@
         Comprehensive test suite for MotionRail Vue wrapper
       </p>
 
-      <!-- Basic Carousel -->
+      <!-- Basic Carousel (FOUC-safe) -->
       <section style="margin-bottom: 60px;">
         <h2 style="margin-bottom: 15px; font-size: 18px;">
           Basic Carousel (3 columns on desktop, 2 on tablet, 1 on mobile)
@@ -22,7 +22,8 @@
               { width: 768, columns: 2, gap: '16px' },
               { width: 1024, columns: 3, gap: '20px' },
             ],
-            onChange: (state) => console.log('Carousel changed:', state),
+            containerName,
+            // onChange: (state) => console.log('Carousel changed:', state),
           }"
         >
           <div
@@ -160,9 +161,30 @@
 
 <script setup lang="ts">
 import { MotionRail } from 'motionrail/vue';
+import { MotionRail as MotionRailClass } from 'motionrail';
 import 'motionrail/style.css';
+import { useHead } from '#imports';
 
 const items = ref([1, 2, 3]);
+
+// FOUC-safe container query setup for the first carousel
+const { containerName, containerQueries } = MotionRailClass.getBreakPoints([
+  { columns: 1, gap: '16px' },
+  { width: 768, columns: 2, gap: '16px' },
+  { width: 1024, columns: 3, gap: '20px' },
+], 8);
+
+useHead({
+  style: [
+    containerName && containerQueries
+      ? {
+          key: containerName,
+          innerHTML: containerQueries,
+          'data-motionrail-style': containerName,
+        }
+      : undefined,
+  ].filter(Boolean),
+});
 
 function getGradient(index: number): string {
   const gradients = [
@@ -175,6 +197,6 @@ function getGradient(index: number): string {
     '#a8edea 0%, #fed6e3 100%',
     '#ff9a9e 0%, #fecfef 100%',
   ];
-  return gradients[(index - 1) % gradients.length];
+  return gradients[(index - 1) % gradients.length] as string;
 }
 </script>
