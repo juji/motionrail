@@ -489,6 +489,10 @@ export class MotionRail {
     this.scrollToLogical(this.snapPoints[targetIndex], "smooth");
   }
 
+  setOnChange(callback: (state: MotionRailState) => void) {
+    this.onChange = callback;
+  }
+
   play() {
     this.autoPlayIntervalId = window.setInterval(() => {
       this.scrollByPage(1);
