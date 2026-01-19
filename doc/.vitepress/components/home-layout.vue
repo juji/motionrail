@@ -12,11 +12,25 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
     <HomeBreakpointsSection />
     <HomeRtlSection />
   </div>
+  <footer>
+    <div>
+      © 2024 Juji
+      <a
+        href="https://jujiyangsli.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        >jujiyangsli.com</a
+      >
+    </div>
+  </footer>
 </template>
 
 <style scoped>
 .home-layout {
   padding: 0;
   margin: 0;
+}
+footer {
+  text-align: center;
 }
 </style>
