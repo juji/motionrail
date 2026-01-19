@@ -46,13 +46,13 @@ function MotionRailReact({ options, ref, divRef, ...divProps }: MotionRailProps)
     }
   }, [children]);
 
-  return (
+  return (<>
     <div ref={containerRef} data-motionrail {...restDivProps}>
-      <div data-motionrail-scrollable>
+      <div data-motionrail-scrollable style={{ containerName: options?.containerName }}>
         <div data-motionrail-grid>{children}</div>
       </div>
     </div>
-  );
+  </>);
 }
 
 export { MotionRailReact as MotionRail };

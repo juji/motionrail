@@ -44,6 +44,8 @@ export class MotionRail {
   private snapPoints: number[] = [];
   private resizeObserver: ResizeObserver | null = null;
   private intersectionObserver: IntersectionObserver | null = null;
+  private containerName: string = "";
+  private styleTag: HTMLStyleElement | null = null;
 
   private state: MotionRailState = {
     totalItems: 0,
@@ -58,6 +60,7 @@ export class MotionRail {
     this.breakpoints = options.breakpoints || [{ columns: 1, gap: "0px" }];
     this.element = element;
     this.extensions = options.extensions || [];
+    this.containerName = options.containerName || "";
 
     const container = this.element.querySelector(
       "[data-motionrail-scrollable]",
@@ -68,6 +71,11 @@ export class MotionRail {
       );
     }
     this.scrollable = container;
+    if(this.containerName){
+      this.scrollable.style.containerName = this.containerName;
+      this.styleTag = document.querySelector(`style[data-motionrail-style="${this.containerName}"]`);
+    }
+
 
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
@@ -98,37 +106,25 @@ export class MotionRail {
   // UTILITY METHODS
   // ============================================================================
 
-  private randomContainerName(): string {
+  private static randomContainerName(): string {
     return `motion-rail-${Math.random().toString(36).substring(2, 11)}`;
   }
 
-  private setBreakPoints() {
-    const motionRailContainer = this.element.querySelector(
-      "[data-motionrail-scrollable]",
-    ) as HTMLElement;
-    if (!motionRailContainer) return;
-
-    // give random css-safe container-name
-    let randomName = "";
-    if (!motionRailContainer.style.containerName) {
-      randomName = this.randomContainerName();
-      motionRailContainer.style.containerName = randomName;
-    } else {
-      randomName = motionRailContainer.style.containerName;
-    }
-
-    // setup container query
-    const styleElement = document.createElement("style");
-    let containerQueries = "";
-
+  static getBreakPoints( 
+    breakpoints: MotionRailBreakpoint[],
+    totalItems: number,
+    containerName?: string
+  ) {
+    containerName = containerName || this.randomContainerName();
     // Find the smallest width for base case max-width
-    const withWidth = this.breakpoints.filter((bp) => bp.width);
+    const withWidth = breakpoints.filter((bp) => bp.width);
     const smallestWidth =
       withWidth.length > 0
         ? Math.min(...withWidth.map((bp) => bp.width!))
         : null;
 
-    this.breakpoints.forEach((bp) => {
+    let containerQueries = "";    
+    breakpoints.forEach((bp) => {
       const columns = bp.columns || 1;
       const gapValue = bp.gap || "0px";
       const itemWidth = `calc((100cqw - (${columns - 1} * ${gapValue})) / ${columns})`;
@@ -144,19 +140,56 @@ export class MotionRail {
       }
 
       containerQueries += `
-      @container ${randomName} ${condition} {
+      @container ${containerName} ${condition} {
         [data-motionrail] [data-motionrail-scrollable] [data-motionrail-grid] {
-          grid-template-columns: repeat(${this.state.totalItems}, ${itemWidth}) !important;
+          grid-template-columns: repeat(${totalItems}, ${itemWidth}) !important;
           gap: ${gapValue} !important;
           opacity: 1 !important;
         }
       }
     `;
     });
-    styleElement.textContent = containerQueries;
-    document.head.appendChild(styleElement);
 
-    return styleElement;
+    return {
+      containerName,
+      containerQueries,
+    }
+  }
+
+  private setBreakPoints() {
+
+    // give random css-safe container-name
+    if(!this.containerName){
+      let randomName = "";
+      if (!this.scrollable.style.containerName) {
+        randomName = MotionRail.randomContainerName();
+        this.scrollable.style.containerName = randomName;
+      } else {
+        randomName = this.scrollable.style.containerName;
+      }
+      this.containerName = randomName;
+    }
+
+    // setup container query
+    let styleElement;
+    if(this.styleTag){
+      styleElement = this.styleTag;
+    }else{
+      styleElement = document.createElement("style");
+      styleElement.setAttribute("data-motionrail-style", this.containerName);
+    }
+
+    const { containerQueries, } = MotionRail.getBreakPoints(
+      this.breakpoints,
+      this.state.totalItems,
+      this.containerName
+    );
+
+    styleElement.textContent = containerQueries;
+    if(!this.styleTag){
+      this.styleTag = styleElement;
+      document.head.appendChild(styleElement);
+    }
   }
 
   // ============================================================================
