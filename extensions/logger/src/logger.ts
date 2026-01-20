@@ -1,17 +1,19 @@
 import { MotionRail } from "motionrail";
 import type { MotionRailExtension, MotionRailState } from "motionrail";
 
-export function Logger({
-  onInit,
-  onUpdate,
-  onDestroy,
-  outputToConsole = true,
-}: {
+export function Logger(par?: {
   onInit?: (motionRail: MotionRail, state: MotionRailState) => void;
   onUpdate?: (motionRail: MotionRail, state: MotionRailState) => void;
   onDestroy?: (motionRail: MotionRail, state: MotionRailState) => void;
   outputToConsole?: boolean;
 }): MotionRailExtension {
+  const {
+    onInit,
+    onUpdate,
+    onDestroy,
+    outputToConsole = true,
+  } = par || { outputToConsole: true };
+
   return {
     name: "LoggerExtension",
     onInit(motionRail: MotionRail, state: MotionRailState) {
