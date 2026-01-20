@@ -88,7 +88,7 @@ If you prefer not to use a build tool, you can use the UMD version via CDN:
 ```html
 <link
   rel="stylesheet"
-  href="https://unpkg.com/motionrail@latest/dist/style.css"
+  href="https://unpkg.com/motionrail@latest/main/dist/style.css"
 />
 
 <div data-motionrail id="carousel">
@@ -103,7 +103,7 @@ If you prefer not to use a build tool, you can use the UMD version via CDN:
   </div>
 </div>
 
-<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/main/dist/motionrail.umd.js"></script>
 <script>
   const carousel = new MotionRail(document.getElementById("carousel"), {
     autoplay: true,

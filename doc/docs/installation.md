@@ -35,8 +35,11 @@ You can also use MotionRail via CDN:
 </script>
 
 <!-- UMD (for older browsers) -->
-<script src="https://unpkg.com/motionrail/dist/motionrail.umd.cjs"></script>
-<link rel="stylesheet" href="https://unpkg.com/motionrail/dist/style.css" />
+<script src="https://unpkg.com/motionrail@latest/main/dist/motionrail.umd.js"></script>
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/motionrail@latest/main/dist/style.css"
+/>
 ```
 
 ## Next Steps

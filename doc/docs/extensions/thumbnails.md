@@ -74,19 +74,19 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
 ```html
 <link
   rel="stylesheet"
-  href="https://unpkg.com/motionrail@latest/dist/style.css"
+  href="https://unpkg.com/motionrail@latest/main/dist/style.css"
 />
 <link
   rel="stylesheet"
-  href="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails/style.css"
+  href="https://unpkg.com/motionrail@latest/extensions/thumbnails/dist/style.css"
 />
 
 <div data-motionrail id="carousel">
   <!-- carousel items -->
 </div>
 
-<script src="https://unpkg.com/motionrail@latest/dist/motionrail.umd.cjs"></script>
-<script src="https://unpkg.com/motionrail@latest/dist/extensions/thumbnails.umd.cjs"></script>
+<script src="https://unpkg.com/motionrail@latest/main/dist/motionrail.umd.js"></script>
+<script src="https://unpkg.com/motionrail@latest/extensions/thumbnails/dist/thumbnails.umd.js"></script>
 <script>
   const carousel = new MotionRail(document.getElementById("carousel"), {
     breakpoints: [{ columns: 1, gap: "16px" }],
