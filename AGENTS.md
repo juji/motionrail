@@ -49,6 +49,13 @@
   - `git commit -m "feat: add user authentication\n\n- Implement login form\n- Add JWT token handling\n- Update user model"`
   - This will result in a single-line commit message with literal `\n` characters, not a true multi-line message.
 
+### On Failed Commit
+
+- Check the error message from the terminal output to understand the cause (e.g., merge conflict, pre-commit hook failure, or invalid message format).
+- Address the issue: resolve conflicts if any, fix hooks, or correct the commit message.
+- After fixing, retry the commit command.
+- If unsure, use git status or git log to verify the repository state.
+
 ## Avoiding Untruthfulness
 
 - **NEVER state something as fact without verifying it first**.
