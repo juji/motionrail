@@ -1,4 +1,4 @@
-import { component$, useSignal, noSerialize, $ } from "@builder.io/qwik";
+import { component$, useSignal } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { MotionRail } from "motionrail/qwik";
 import { MotionRail as MotionRailClass } from "motionrail";

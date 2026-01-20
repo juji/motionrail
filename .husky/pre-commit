@@ -4,4 +4,4 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 pnpx lint-staged
-# pnpm run build:local
+pnpm run build:local
