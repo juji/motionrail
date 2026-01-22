@@ -9,8 +9,8 @@ import ResizableContainer from "./ResizableContainer.vue";
       <div class="section-content">
         <h2 class="section-title">Responsive Breakpoints</h2>
         <p class="section-description">
-          Automatically adjust the number of columns based on screen size.
-          Configure different layouts for different viewport widths.
+          Automatically adjust the number of columns based on container size.
+          Configure different layouts for different container widths.
         </p>
         <p class="resize-hint">
           👉 Drag the edges to resize and see breakpoints in action!
