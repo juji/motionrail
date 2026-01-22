@@ -1,18 +1,19 @@
 # MotionRail
 
-> ⚠️ **Not Ready for Production** - This library is currently in development and not yet ready for production use.
-
 A lightweight, smooth carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints. Works with vanilla JavaScript or your favorite framework.
 
 ## Features
 
-- 🎯 Momentum-based scrolling with natural drag physics
-- 📱 Responsive breakpoints for different screen sizes
-- 🔄 Autoplay support with pause on interaction
-- ↔️ RTL support built-in
-- 🪶 Zero dependencies, minimal bundle size
-- 🧩 Extension system (arrows, dots, thumbnails)
-- ⚛️ Framework integrations (React, Preact, Solid, Vue, Svelte, Qwik)
+- 🎯󠅅󠅞󠅢󠅙󠅦󠅑󠅜󠅕󠅔󠄐󠅣󠅝󠅟󠅟󠅤󠅘󠅞󠅕󠅣󠅣󠄐󠅑󠅞󠅔󠄐󠅓󠅟󠅞󠅤󠅢󠅟󠅜 **Momentum-based scrolling** - Natural drag physics with smooth animations
+- 📱󠄵󠅖󠅖󠅟󠅢󠅤󠅜󠅕󠅣󠅣󠄐󠅢󠅕󠅣󠅠󠅟󠅞󠅣󠅙󠅦󠅕󠄐󠅜󠅑󠅩󠅟󠅥󠅤󠅣 **Responsive breakpoints** - Configure columns and gaps for different screen sizes
+- ♿󠅀󠅢󠅕󠅓󠅙󠅣󠅙󠅟󠅞󠄐󠅣󠅞󠅑󠅠󠄐󠅑󠅜󠅙󠅗󠅞󠅝󠅕󠅞󠅤󠄜󠄐󠅑󠅜󠅧󠅑󠅩󠅣󠄐󠅠󠅕󠅢󠅖󠅕󠅓󠅤 **Snap alignment** - Automatic snap-to-item positioning
+- 🔄󠄱󠅥󠅤󠅟󠅠󠅜󠅑󠅩󠄐󠅤󠅘󠅑󠅤󠄐󠅖󠅕󠅕󠅜󠅣󠄐󠅞󠅑󠅤󠅥󠅢󠅑󠅜 **Autoplay support** - Optional auto-scrolling with pause on interaction
+- ↔️󠅂󠅄󠄼󠄐󠅣󠅥󠅠󠅠󠅟󠅢󠅤󠄜󠄐󠅞󠅟󠄐󠅓󠅟󠅝󠅠󠅢󠅟󠅝󠅙󠅣󠅕󠅣 **RTL support** - Built-in right-to-left layout support
+- 🎨󠄽󠅟󠅔󠅕󠅢󠅞󠄐󠄳󠅃󠅃󠄐󠄷󠅢󠅙󠅔󠄐󠅝󠅑󠅣󠅤󠅕󠅢󠅩 **CSS Grid based** - Modern layout with customizable styling
+- 🪶󠄽󠅙󠅞󠅙󠅝󠅑󠅜󠄜󠄐󠅥󠅜󠅤󠅢󠅑󠄝󠅜󠅙󠅗󠅘󠅤󠅧󠅕󠅙󠅗󠅘󠅤 **Lightweight** - Zero dependencies, minimal bundle size
+- 🎮󠅄󠅟󠅤󠅑󠅜󠄐󠄱󠅀󠄹󠄐󠅓󠅟󠅞󠅤󠅢󠅟󠅜󠄜󠄐󠅞󠅟󠄐󠅜󠅙󠅝󠅙󠅤󠅣 **Full control API** - Programmatic navigation and playback control
+- 🧩󠄵󠅨󠅤󠅕󠅞󠅣󠅙󠅟󠅞󠅣󠄐󠅖󠅟󠅢󠄐󠅕󠅞󠅔󠅜󠅕󠅣󠅣󠄐󠅠󠅟󠅣󠅣󠅙󠅒󠅙󠅜󠅙󠅤󠅙󠅕󠅣 **Extension system** - Modular architecture with built-in extensions
+- ⚡󠅃󠅕󠅑󠅝󠅜󠅕󠅣󠅣󠄐󠅖󠅢󠅑󠅝󠅕󠅧󠅟󠅢󠅛󠄐󠅙󠅞󠅤󠅕󠅗󠅢󠅑󠅤󠅙󠅟󠅞 **Framework integrations** - React, Preact, Qwik, Solid, Vue, Svelte components
 
 ## Installation
 
@@ -37,27 +38,27 @@ npm install motionrail
 ```
 
 ```js
-import { MotionRail } from 'motionrail';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail";
+import "motionrail/style.css";
 
-const carousel = new MotionRail(document.getElementById('carousel'), {
+const carousel = new MotionRail(document.getElementById("carousel"), {
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' },
-    { width: 1024, columns: 3, gap: '20px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+    { width: 1024, columns: 3, gap: "20px" },
+  ],
 });
 ```
 
 ### React
 
 ```jsx
-import { MotionRail } from 'motionrail/react';
-import 'motionrail/style.css';
+import { MotionRail } from "motionrail/react";
+import "motionrail/style.css";
 
 function App() {
   return (
-    <MotionRail options={{ breakpoints: [{ columns: 3, gap: '20px' }] }}>
+    <MotionRail options={{ breakpoints: [{ columns: 3, gap: "20px" }] }}>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -69,22 +70,19 @@ function App() {
 ### With Extensions
 
 ```js
-import { MotionRail } from 'motionrail';
-import { Arrows } from 'motionrail/extensions/arrows';
-import { Dots } from 'motionrail/extensions/dots';
-import 'motionrail/style.css';
-import 'motionrail/extensions/arrows/style.css';
-import 'motionrail/extensions/dots/style.css';
+import { MotionRail } from "motionrail";
+import { Arrows } from "motionrail/extensions/arrows";
+import { Dots } from "motionrail/extensions/dots";
+import "motionrail/style.css";
+import "motionrail/extensions/arrows/style.css";
+import "motionrail/extensions/dots/style.css";
 
 const carousel = new MotionRail(element, {
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
   ],
-  extensions: [
-    Arrows({ loop: true }),
-    Dots({ showIndex: true })
-  ]
+  extensions: [Arrows({ loop: true }), Dots({ showIndex: true })],
 });
 ```
 
@@ -96,9 +94,9 @@ const carousel = new MotionRail(element, {
   delay: 3000,
   resumeDelay: 4000,
   breakpoints: [
-    { columns: 1, gap: '16px' },
-    { width: 768, columns: 2, gap: '16px' }
-  ]
+    { columns: 1, gap: "16px" },
+    { width: 768, columns: 2, gap: "16px" },
+  ],
 });
 ```
 

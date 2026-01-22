@@ -1,7 +1,5 @@
 # Introduction
 
-> ⚠️ **Not Ready for Production** - This library is currently in development and not yet ready for production use.
-
 MotionRail is a lightweight, smooth carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints. It works seamlessly with vanilla JavaScript or your favorite framework.
 
 ## Features
@@ -15,7 +13,7 @@ MotionRail is a lightweight, smooth carousel library with momentum-based scrolli
 - 🪶󠄽󠅙󠅞󠅙󠅝󠅑󠅜󠄜󠄐󠅥󠅜󠅤󠅢󠅑󠄝󠅜󠅙󠅗󠅘󠅤󠅧󠅕󠅙󠅗󠅘󠅤 **Lightweight** - Zero dependencies, minimal bundle size
 - 🎮󠅄󠅟󠅤󠅑󠅜󠄐󠄱󠅀󠄹󠄐󠅓󠅟󠅞󠅤󠅢󠅟󠅜󠄜󠄐󠅞󠅟󠄐󠅜󠅙󠅝󠅙󠅤󠅣 **Full control API** - Programmatic navigation and playback control
 - 🧩󠄵󠅨󠅤󠅕󠅞󠅣󠅙󠅟󠅞󠅣󠄐󠅖󠅟󠅢󠄐󠅕󠅞󠅔󠅜󠅕󠅣󠅣󠄐󠅠󠅟󠅣󠅣󠅙󠅒󠅙󠅜󠅙󠅤󠅙󠅕󠅣 **Extension system** - Modular architecture with built-in extensions
-- ⚡󠅃󠅕󠅑󠅝󠅜󠅕󠅣󠅣󠄐󠅖󠅢󠅑󠅝󠅕󠅧󠅟󠅢󠅛󠄐󠅙󠅞󠅤󠅕󠅗󠅢󠅑󠅤󠅙󠅟󠅞 **Framework integrations** - React, Solid, Vue, Svelte components
+- ⚡󠅃󠅕󠅑󠅝󠅜󠅕󠅣󠅣󠄐󠅖󠅢󠅑󠅝󠅕󠅧󠅟󠅢󠅛󠄐󠅙󠅞󠅤󠅕󠅗󠅢󠅑󠅤󠅙󠅟󠅞 **Framework integrations** - React, Preact, Qwik, Solid, Vue, Svelte components
 
 ## Why MotionRail?
 
