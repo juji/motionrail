@@ -16,10 +16,22 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
     <div>
       © 2024 Juji
       <a
-        href="https://jujiyangsli.com"
+        href="https://jujiyangasli.com"
         target="_blank"
         rel="noopener noreferrer"
-        >jujiyangsli.com</a
+        >jujiyangasli.com</a
+      >
+    </div>
+    <div>
+      Built with
+      <a href="https://vitepress.dev/" target="_blank" rel="noopener noreferrer"
+        >VitePress</a
+      >
+    </div>
+    <div>
+      Images by
+      <a href="https://picsum.photos/" target="_blank" rel="noopener noreferrer"
+        >Picsum</a
       >
     </div>
   </footer>
