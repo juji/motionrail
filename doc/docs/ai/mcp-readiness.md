@@ -54,4 +54,4 @@ MotionRail implements agent discovery standards:
 
 - [`llms.txt`](/llms.txt) — Overview and links to individual documentation sections
 - [`llms-full.txt`](/llms-full.txt) — Complete documentation in a single file
-- `Accept: text/markdown` — Request any documentation page as markdown
+- `Accept: text/markdown` — Request any documentation page as markdown (production only; requires Cloudflare Pages middleware)
