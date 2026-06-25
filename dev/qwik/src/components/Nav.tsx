@@ -2,7 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 
 interface NavProps {
-  current: "main" | "arrows" | "dots" | "logger" | "thumbnails";
+  current: "main" | "arrows" | "dots" | "logger" | "thumbnails" | "vistaview";
 }
 
 export default component$<NavProps>(({ current }) => {
@@ -12,6 +12,7 @@ export default component$<NavProps>(({ current }) => {
     { href: "/dots", label: "Dots", key: "dots" },
     { href: "/logger", label: "Logger", key: "logger" },
     { href: "/thumbnails", label: "Thumbnails", key: "thumbnails" },
+    { href: "/vistaview", label: "VistaView", key: "vistaview" },
   ];
 
   return (

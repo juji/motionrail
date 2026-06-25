@@ -1,0 +1,36 @@
+{
+  "name": "@motionrail/vistaview",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/vistaview.umd.js",
+  "module": "./dist/vistaview.es.js",
+  "types": "./dist/vistaview.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/vistaview.d.ts",
+      "import": "./dist/vistaview.es.js",
+      "require": "./dist/vistaview.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "concurrently \"vite build --watch\" \"tsc --watch\"",
+    "build": "vite build && tsc",
+    "preview": "vite preview",
+    "check": "tsc --noEmit",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "concurrently": "^9.2.1",
+    "motionrail": "workspace:*",
+    "typescript": "~5.9.3",
+    "vite": "npm:rolldown-vite@7.2.5",
+    "prettier": "^3.8.0"
+  },
+  "peerDependencies": {
+    "vistaview": "^2.0.0"
+  }
+}

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "motionrail": "workspace:*",
+    "vistaview": "^2.0.0",
     "preact": "^10.27.2",
     "preact-router": "^4.1.2"
   },

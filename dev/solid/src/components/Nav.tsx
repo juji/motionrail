@@ -1,7 +1,7 @@
 import { A } from "@solidjs/router";
 
 export default function Nav(props: {
-  current: "main" | "arrows" | "dots" | "logger" | "thumbnails";
+  current: "main" | "arrows" | "dots" | "logger" | "thumbnails" | "vistaview";
 }) {
   const links = [
     { href: "/", label: "Main Tests", key: "main" },
@@ -9,6 +9,7 @@ export default function Nav(props: {
     { href: "/dots", label: "Dots", key: "dots" },
     { href: "/logger", label: "Logger", key: "logger" },
     { href: "/thumbnails", label: "Thumbnails", key: "thumbnails" },
+    { href: "/vistaview", label: "VistaView", key: "vistaview" },
   ];
 
   return (

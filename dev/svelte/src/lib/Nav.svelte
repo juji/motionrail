@@ -1,6 +1,6 @@
 <script lang="ts">
   interface Props {
-    current: 'main' | 'arrows' | 'dots' | 'logger' | 'thumbnails';
+    current: 'main' | 'arrows' | 'dots' | 'logger' | 'thumbnails' | 'vistaview';
   }
 
   let { current }: Props = $props();
@@ -11,6 +11,7 @@
     { href: '/dots', label: 'Dots', key: 'dots' },
     { href: '/logger', label: 'Logger', key: 'logger' },
     { href: '/thumbnails', label: 'Thumbnails', key: 'thumbnails' },
+    { href: '/vistaview', label: 'VistaView', key: 'vistaview' },
   ];
 </script>
 

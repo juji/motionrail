@@ -15,6 +15,7 @@
     "prettier": "^3.8.0"
   },
   "dependencies": {
-    "motionrail": "workspace:*"
+    "motionrail": "workspace:*",
+    "vistaview": "^2.0.0"
   }
 }

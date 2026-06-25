@@ -41,11 +41,11 @@ extensions/vistaview/
 └── .gitignore
 ```
 
-- [ ] `extensions/vistaview/package.json`
-- [ ] `extensions/vistaview/src/vistaview.ts`
-- [ ] `extensions/vistaview/vite.config.ts`
-- [ ] `extensions/vistaview/tsconfig.json`
-- [ ] `extensions/vistaview/.gitignore`
+- [x] `extensions/vistaview/package.json`
+- [x] `extensions/vistaview/src/vistaview.ts`
+- [x] `extensions/vistaview/vite.config.ts`
+- [x] `extensions/vistaview/tsconfig.json`
+- [x] `extensions/vistaview/.gitignore`
 
 ### 2. Extension Logic
 
@@ -57,7 +57,7 @@ In `vistaview.ts`:
 - On cleanup (destroy): destroy VistaView instance
 - Keep in sync: if carousel items change (reset), reinitialize VistaView
 
-- [ ] Write extension logic in `extensions/vistaview/src/vistaview.ts`
+- [x] Write extension logic in `extensions/vistaview/src/vistaview.ts`
 
 ### 3. Package Entry
 
@@ -71,7 +71,7 @@ Add to root `package.json` exports:
 }
 ```
 
-- [ ] Update root `package.json` exports
+- [x] Update root `package.json` exports
 
 ### 4. Dev Examples
 
@@ -79,21 +79,21 @@ Add a `vistaview` page to each dev example directory, following the same pattern
 
 | Dev example | File                                           |     |
 | ----------- | ---------------------------------------------- | --- |
-| vanilla     | `dev/vanilla/extensions/vistaview.html`        | [ ] |
-| next        | `dev/next/app/vistaview/page.tsx`              | [ ] |
-| nuxt        | `dev/nuxt/app/pages/vistaview.vue`             | [ ] |
-| preact      | `dev/preact/src/pages/Vistaview.tsx`           | [ ] |
-| qwik        | `dev/qwik/src/routes/vistaview/index.tsx`      | [ ] |
-| solid       | `dev/solid/src/routes/vistaview.tsx`           | [ ] |
-| svelte      | `dev/svelte/src/routes/vistaview/+page.svelte` | [ ] |
+| vanilla     | `dev/vanilla/extensions/vistaview.html`        | [x] |
+| next        | `dev/next/app/vistaview/page.tsx`              | [x] |
+| nuxt        | `dev/nuxt/app/pages/vistaview.vue`             | [x] |
+| preact      | `dev/preact/src/pages/Vistaview.tsx`           | [x] |
+| qwik        | `dev/qwik/src/routes/vistaview/index.tsx`      | [x] |
+| solid       | `dev/solid/src/routes/vistaview.tsx`           | [x] |
+| svelte      | `dev/svelte/src/routes/vistaview/+page.svelte` | [x] |
 
 Each example imports `vistaview` as a dev dependency and wires it as an extension.
 
-- [ ] Add `vistaview` to each dev example's `package.json` devDependencies
+- [x] Add `vistaview` to each dev example's `package.json` devDependencies
 
 ### 5. Docs
 
-- [ ] Add `doc/docs/extensions/vistaview.md` with usage examples
+- [x] Add `doc/docs/extensions/vistaview.md` with usage examples
 
 ## Dependencies
 

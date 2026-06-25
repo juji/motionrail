@@ -1,5 +1,5 @@
 interface NavProps {
-  current: "main" | "arrows" | "dots" | "logger" | "thumbnails";
+  current: "main" | "arrows" | "dots" | "logger" | "thumbnails" | "vistaview";
 }
 
 export default function Nav({ current }: NavProps) {
@@ -9,6 +9,7 @@ export default function Nav({ current }: NavProps) {
     { href: "/dots", label: "Dots", key: "dots" },
     { href: "/logger", label: "Logger", key: "logger" },
     { href: "/thumbnails", label: "Thumbnails", key: "thumbnails" },
+    { href: "/vistaview", label: "VistaView", key: "vistaview" },
   ];
 
   return (
