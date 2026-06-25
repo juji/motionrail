@@ -73,6 +73,9 @@ const version = pkg.version;
         <div class="agent-links">
           <a class="action-button alt" href="/llms.txt">llms.txt</a>
           <a class="action-button alt" href="/llms-full.txt">llms-full.txt</a>
+          <a class="action-button alt" href="/docs/ai/mcp-readiness"
+            >MCP Readiness</a
+          >
         </div>
       </div>
       <div class="hero-demo">
@@ -231,6 +234,14 @@ const version = pkg.version;
   height: 100%;
 }
 
+.agent-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  justify-content: center;
+}
+
 @media (min-width: 768px) {
   .hero-section {
     padding: 96px 48px;
@@ -285,13 +296,5 @@ const version = pkg.version;
   .agent-links {
     justify-content: flex-start;
   }
-}
-
-.agent-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  margin-top: 32px;
-  justify-content: center;
 }
 </style>
