@@ -276,9 +276,6 @@ importers:
       '@types/turndown':
         specifier: ^5.0.6
         version: 5.0.6
-      esbuild:
-        specifier: ^0.25.0
-        version: 0.25.12
       prettier:
         specifier: ^3.8.0
         version: 3.8.0
