@@ -29,8 +29,3 @@ curl -H "Accept: text/markdown" https://motionrail.jujiplay.com/docs/quick-start
 - AI agents consuming documentation for context
 - Integrating documentation into training pipelines
 - Getting a plain-text version of any page
-
-## Notes
-
-- Only works in production (Cloudflare Pages)
-- Local `vitepress dev` does not run the middleware
