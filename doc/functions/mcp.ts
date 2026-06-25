@@ -109,7 +109,7 @@ async function getPackageInfo() {
 
 async function getBuildStatus() {
   const res = await fetch(
-    "https://api.github.com/repos/juji/motionrail/actions/runs?per_page=1&status=completed",
+    "https://api.github.com/repos/juji/motionrail/actions/runs?per_page=1",
   );
   if (!res.ok) throw new Error("Failed to fetch build status");
   const data = await res.json();
