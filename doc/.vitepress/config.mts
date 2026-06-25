@@ -78,6 +78,11 @@ const sidebar: DefaultTheme.SidebarItem[] = [
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  vite: {
+    ssr: {
+      noExternal: ["vistaview"],
+    },
+  },
   title: "MotionRail",
   description:
     "A lightweight carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints",

@@ -16,10 +16,11 @@
   "packageManager": "pnpm@10.14.0",
   "devDependencies": {
     "@iconify/vue": "^4.1.2",
-    "vitepress": "2.0.0-alpha.15",
-    "prettier": "^3.8.0"
+    "prettier": "^3.8.0",
+    "vitepress": "2.0.0-alpha.15"
   },
   "dependencies": {
-    "motionrail": "workspace:*"
+    "motionrail": "workspace:*",
+    "vistaview": "^2.0.6"
   }
 }
