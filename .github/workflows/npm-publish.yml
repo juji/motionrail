@@ -14,7 +14,23 @@ permissions:
   contents: read
 
 jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    outputs:
+      local: ${{ steps.check.outputs.local }}
+      published: ${{ steps.check.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: check
+        run: |
+          LOCAL=$(node -p "require('./main/package.json').version")
+          PUBLISHED=$(npm view motionrail version 2>/dev/null || echo "none")
+          echo "local=$LOCAL" >> $GITHUB_OUTPUT
+          echo "published=$PUBLISHED" >> $GITHUB_OUTPUT
+
   publish-npm:
+    needs: check-version
+    if: needs.check-version.outputs.local != needs.check-version.outputs.published
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -27,7 +43,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
           cache: "pnpm"
       - run: pnpm install --frozen-lockfile
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_READ_TOKEN }}
       - run: pnpm run build
       - run: pnpm publish --access public --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
