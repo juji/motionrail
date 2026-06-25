@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@builder.io/qwik": "1.18.0",
-    "@eslint/js": "latest",
+    "@eslint/js": "^9.39.1",
     "@types/node": "20.19.0",
     "concurrently": "^9.2.1",
     "eslint": "9.32.0",
