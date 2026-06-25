@@ -5,12 +5,12 @@ const turndown = new TurndownService({
   codeBlockStyle: "fenced",
 });
 
-function extractContent(html: string): string {
-  const idx = html.indexOf('class="vp-doc"');
-  if (idx === -1) return html;
+function extractDiv(html: string, marker: string): string | null {
+  const idx = html.indexOf(marker);
+  if (idx === -1) return null;
 
   const tagStart = html.lastIndexOf("<div", idx);
-  if (tagStart === -1) return html;
+  if (tagStart === -1) return null;
 
   const tagEnd = html.indexOf(">", idx) + 1;
   let depth = 1;
@@ -42,6 +42,10 @@ function extractContent(html: string): string {
   }
 
   return html.slice(tagEnd, i - 6);
+}
+
+function extractContent(html: string): string {
+  return extractDiv(html, "vp-doc") ?? extractDiv(html, "VPContent") ?? html;
 }
 
 export async function onRequest(context: {
