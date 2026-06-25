@@ -1,0 +1,8 @@
+/.well-known/mcp/server-card.json
+  Link: <https://motionrail.jujiplay.com/mcp>; rel="service-doc"
+
+/.well-known/api-catalog
+  Link: <https://motionrail.jujiplay.com/.well-known/api-catalog>; rel="describedby"
+
+/*
+  Link: <https://motionrail.jujiplay.com/.well-known/api-catalog>; rel="api-catalog"

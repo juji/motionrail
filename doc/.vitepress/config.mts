@@ -236,6 +236,34 @@ const carousel = new MotionRail('.carousel', {
       }
     }
     fs.writeFileSync(path.join(outDir, "llms-full.txt"), parts.join("\n\n---\n\n") + "\n");
+
+    // Generate sitemap.xml
+    const urlset: string[] = [];
+    const walkDir = (dir: string) => {
+      for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          walkDir(fullPath);
+        } else if (entry.name.endsWith(".html") && entry.name !== "404.html") {
+          let relPath = path.relative(outDir, fullPath).replace(/\\/g, "/");
+          if (relPath === "index.html") {
+            urlset.push("https://motionrail.jujiplay.com/");
+          } else if (relPath.endsWith("/index.html")) {
+            urlset.push(`https://motionrail.jujiplay.com/${relPath.slice(0, -10)}`);
+          } else {
+            urlset.push(`https://motionrail.jujiplay.com/${relPath.slice(0, -5)}`);
+          }
+        }
+      }
+    };
+    walkDir(outDir);
+    urlset.sort();
+    const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlset.map((loc) => `  <url><loc>${loc}</loc></url>`).join("\n")}
+</urlset>
+`;
+    fs.writeFileSync(path.join(outDir, "sitemap.xml"), sitemap);
   },
 
   themeConfig: {

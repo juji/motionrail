@@ -1,0 +1,27 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://motionrail.jujiplay.com",
+      "links": [
+        {
+          "href": "https://motionrail.jujiplay.com/mcp",
+          "rel": "service-doc",
+          "type": "application/json",
+          "title": "MotionRail MCP Server"
+        },
+        {
+          "href": "https://github.com/juji/motionrail",
+          "rel": "repository",
+          "type": "text/html",
+          "title": "MotionRail GitHub Repository"
+        },
+        {
+          "href": "https://www.npmjs.com/package/motionrail",
+          "rel": "alternate",
+          "type": "text/html",
+          "title": "MotionRail on npm"
+        }
+      ]
+    }
+  ]
+}

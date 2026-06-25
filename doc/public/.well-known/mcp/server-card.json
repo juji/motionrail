@@ -1,0 +1,21 @@
+{
+  "name": "MotionRail",
+  "description": "A lightweight carousel library with momentum-based scrolling, snap alignment, and responsive breakpoints",
+  "url": "https://motionrail.jujiplay.com/mcp",
+  "repository": "https://github.com/juji/motionrail",
+  "license": "MIT",
+  "tools": [
+    {
+      "name": "get_package_info",
+      "description": "Get MotionRail package information from npm"
+    },
+    {
+      "name": "get_build_status",
+      "description": "Get the latest build status from GitHub Actions"
+    },
+    {
+      "name": "search_docs",
+      "description": "Search MotionRail documentation"
+    }
+  ]
+}
