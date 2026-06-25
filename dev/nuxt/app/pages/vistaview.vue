@@ -44,6 +44,7 @@
 import { MotionRail } from "motionrail/vue";
 import { VistaViewLightbox } from "motionrail/extensions/vistaview";
 import "motionrail/style.css";
+import "vistaview/style.css";
 
 const images = [
   {

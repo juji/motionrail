@@ -12,17 +12,20 @@ npm install motionrail vistaview
 
 ## Usage
 
+Import the extension and VistaView's CSS:
+
 ```js
 import { MotionRail } from "motionrail";
 import { VistaViewLightbox } from "motionrail/extensions/vistaview";
 import "motionrail/style.css";
+import "vistaview/style.css";
 
 const carousel = new MotionRail(element, {
   extensions: [VistaViewLightbox()],
 });
 ```
 
-Your carousel items should use `<a>` tags wrapping `<img>` tags so VistaView can extract the full-size image URLs:
+Each grid item should contain an `<a>` wrapping an `<img>` so VistaView can extract the full-size image URL from the anchor's `href`:
 
 ```html
 <div data-motionrail>
@@ -43,7 +46,7 @@ Your carousel items should use `<a>` tags wrapping `<img>` tags so VistaView can
 </div>
 ```
 
-Clicking a carousel item opens the lightbox at that image. Navigate with arrow keys, swipe gestures, or on-screen controls.
+Clicking a carousel item opens the lightbox at that image. Navigate with arrow keys, swipe gestures, or on-screen controls. After closing, clicking again re-opens the lightbox.
 
 ## Options
 
@@ -83,6 +86,7 @@ VistaViewLightbox({
 import { MotionRail } from "motionrail";
 import { VistaViewLightbox } from "motionrail/extensions/vistaview";
 import "motionrail/style.css";
+import "vistaview/style.css";
 
 const carousel = new MotionRail(document.getElementById("carousel"), {
   breakpoints: [
@@ -105,9 +109,9 @@ const carousel = new MotionRail(document.getElementById("carousel"), {
 
 ## How It Works
 
-On init, the extension attaches click listeners to each carousel item. On click, it collects all image sources from the carousel (using `<a href>` for full-size URLs) and creates a VistaView instance. The lightbox opens at the clicked index.
+On init, the extension caches pointer start position on `pointerdown`. On `pointerup`, it compares the start and end position — if within 5px (a click, not a swipe), it finds which grid item's bounding box contains the pointer and opens a VistaView instance at that index.
 
-If the lightbox is already open, clicking a different item navigates to it without recreating the instance.
+The extension bypasses DOM event targeting entirely, working around MotionRail's `pointer-events: none` on grid items.
 
 ## Next Steps
 

@@ -3,6 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { MotionRail } from "motionrail/qwik";
 import { VistaViewLightbox } from "motionrail/extensions/vistaview";
 import "motionrail/style.css";
+import "vistaview/style.css";
 import Nav from "../../components/Nav";
 import { noSerialize } from "@builder.io/qwik";
 

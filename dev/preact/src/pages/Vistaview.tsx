@@ -1,6 +1,7 @@
 import { MotionRail } from "motionrail/preact";
 import { VistaViewLightbox } from "motionrail/extensions/vistaview";
 import "motionrail/style.css";
+import "vistaview/style.css";
 import Nav from "../components/Nav";
 
 const images = [

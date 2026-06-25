@@ -11,7 +11,10 @@ export function VistaViewLightbox(par?: {
     par || {};
 
   let vistaInstance: VistaInterface | null = null;
-  let clickHandler: ((e: Event) => void) | null = null;
+  let pointerDownHandler: ((e: Event) => void) | null = null;
+  let pointerUpHandler: ((e: Event) => void) | null = null;
+  let startX = 0;
+  let startY = 0;
 
   function getImageConfigs(motionRail: MotionRail) {
     const items = motionRail.element.querySelectorAll(selector);
@@ -28,42 +31,74 @@ export function VistaViewLightbox(par?: {
     });
   }
 
+  function openVistaView(index: number, motionRail: MotionRail) {
+    if (vistaInstance) {
+      vistaInstance.open(index);
+      return;
+    }
+
+    const instance = vistaView({
+      elements: getImageConfigs(motionRail),
+      ...vistaViewOptions,
+    });
+
+    vistaInstance = instance!;
+    instance!.open(index);
+  }
+
   return {
     name: "VistaViewExtension",
     onInit(motionRail: MotionRail) {
-      clickHandler = (e: Event) => {
-        const target = e.currentTarget as HTMLElement;
-        const items = motionRail.element.querySelectorAll(selector);
-        const index = Array.from(items).indexOf(target);
-        if (index === -1) return;
-
-        if (vistaInstance) {
-          vistaInstance.view(index);
-          return;
-        }
-
-        const instance = vistaView({
-          elements: getImageConfigs(motionRail),
-          ...vistaViewOptions,
-        });
-
-        vistaInstance = instance!;
-        instance!.open(index);
+      pointerDownHandler = (e: Event) => {
+        const pe = e as PointerEvent;
+        startX = pe.clientX;
+        startY = pe.clientY;
       };
 
-      motionRail.element
-        .querySelectorAll(selector)
-        .forEach((item) => item.addEventListener("click", clickHandler!));
+      pointerUpHandler = (e: Event) => {
+        const pe = e as PointerEvent;
+        const dx = Math.abs(pe.clientX - startX);
+        const dy = Math.abs(pe.clientY - startY);
+
+        if (dx > 5 || dy > 5) return;
+
+        const items = motionRail.element.querySelectorAll(selector);
+        for (let i = 0; i < items.length; i++) {
+          const rect = items[i].getBoundingClientRect();
+          if (
+            pe.clientX >= rect.left &&
+            pe.clientX <= rect.right &&
+            pe.clientY >= rect.top &&
+            pe.clientY <= rect.bottom
+          ) {
+            openVistaView(i, motionRail);
+            return;
+          }
+        }
+      };
+
+      motionRail.element.addEventListener(
+        "pointerdown",
+        pointerDownHandler,
+        true,
+      );
+      document.addEventListener("pointerup", pointerUpHandler);
     },
     onDestroy(motionRail: MotionRail) {
-      if (clickHandler) {
-        motionRail.element
-          .querySelectorAll(selector)
-          .forEach((item) => item.removeEventListener("click", clickHandler!));
+      if (pointerDownHandler) {
+        motionRail.element.removeEventListener(
+          "pointerdown",
+          pointerDownHandler,
+          true,
+        );
+      }
+      if (pointerUpHandler) {
+        document.removeEventListener("pointerup", pointerUpHandler);
       }
       vistaInstance?.destroy();
       vistaInstance = null;
-      clickHandler = null;
+      pointerDownHandler = null;
+      pointerUpHandler = null;
     },
   };
 }

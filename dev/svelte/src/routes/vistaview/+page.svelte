@@ -2,6 +2,7 @@
   import { MotionRail } from 'motionrail/svelte';
   import { VistaViewLightbox } from 'motionrail/extensions/vistaview';
   import 'motionrail/style.css';
+  import 'vistaview/style.css';
   import Nav from '$lib/Nav.svelte';
 
   const images = [
