@@ -25,21 +25,31 @@ const carousel = new MotionRail(element, {
 });
 ```
 
-Each grid item should contain an `<a>` wrapping an `<img>` so VistaView can extract the full-size image URL from the anchor's `href`:
+The extension finds image sources by looking for an `<a>` or `<img>` inside each grid item (any nesting depth). If an `<a>` is found, its `href` is used as the full-size source. Otherwise the `<img>`'s `src` is used.
 
 ```html
 <div data-motionrail>
   <div data-motionrail-scrollable>
     <div data-motionrail-grid>
+      <!-- a > img (recommended for separate full-size and thumb) -->
       <div>
         <a href="photo-full.jpg">
           <img src="photo-thumb.jpg" alt="Photo 1" />
         </a>
       </div>
+      <!-- img only -->
       <div>
-        <a href="photo-full2.jpg">
-          <img src="photo-thumb2.jpg" alt="Photo 2" />
-        </a>
+        <img src="photo.jpg" alt="Photo 2" />
+      </div>
+      <!-- any nesting depth works -->
+      <div>
+        <div>
+          <a href="photo-full3.jpg">
+            <picture>
+              <img src="photo-thumb3.jpg" alt="Photo 3" />
+            </picture>
+          </a>
+        </div>
       </div>
     </div>
   </div>
