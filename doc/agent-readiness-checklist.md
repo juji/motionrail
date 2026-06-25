@@ -9,7 +9,7 @@
 
 ## 2. Content Accessibility
 
-- [x] Markdown for Agents — `scripts/middleware.ts` bundled to `functions/_middleware.js` via esbuild
+- [x] Markdown for Agents — `functions/_middleware.ts` (Cloudflare Pages native TypeScript middleware)
 - [x] `llms.txt` — generated in `buildEnd` hook
 - [x] `llms-full.txt` — generated in `buildEnd` hook
 
@@ -33,6 +33,6 @@
 
 ## Build Pipeline
 
-- [x] `doc/package.json` — added `esbuild`, `turndown`, `@types/turndown`
+- [x] `doc/package.json` — added `turndown`, `@types/turndown`
 - [x] `doc/scripts/middleware.ts` — source for Markdown for Agents middleware
 - [x] `doc/.gitignore` — added `functions/*.js`

@@ -9,18 +9,13 @@ const turndown = new TurndownService({
 export async function onRequest(context: {
   request: Request;
   next: () => Promise<Response>;
-  env: Record<string, string>;
 }): Promise<Response> {
-  const { request, next } = context;
-  const accept = request.headers.get("Accept") || "";
-
+  const accept = context.request.headers.get("Accept") || "";
   if (!accept.includes("text/markdown")) {
-    return next();
+    return context.next();
   }
 
-  const url = new URL(request.url);
-
-  // Rewrite /docs/foo to /docs/foo.html for the static file
+  const url = new URL(context.request.url);
   let htmlPath = url.pathname;
   if (htmlPath.endsWith("/")) {
     htmlPath += "index.html";
@@ -28,12 +23,11 @@ export async function onRequest(context: {
     htmlPath += ".html";
   }
 
-  // Reconstruct the full URL for the static page
   const pageUrl = `${url.protocol}//${url.host}${htmlPath}`;
   const response = await fetch(pageUrl);
 
   if (!response.ok) {
-    return next();
+    return context.next();
   }
 
   const html = await response.text();
