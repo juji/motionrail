@@ -40,6 +40,7 @@ const sidebar: DefaultTheme.SidebarItem[] = [
       { text: "Arrows", link: "/docs/extensions/arrows" },
       { text: "Dots", link: "/docs/extensions/dots" },
       { text: "Thumbnails", link: "/docs/extensions/thumbnails" },
+      { text: "VistaView", link: "/docs/extensions/vistaview" },
       { text: "Logger", link: "/docs/extensions/logger" },
       { text: "Creating Extensions", link: "/docs/extensions/custom" },
     ],
