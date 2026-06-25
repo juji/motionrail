@@ -91,6 +91,10 @@ const sidebar: DefaultTheme.SidebarItem[] = [
         text: "MCP Readiness",
         link: "/docs/ai/mcp-readiness",
       },
+      {
+        text: "Markdown for Agents",
+        link: "/docs/ai/markdown-for-agents",
+      },
     ],
   },
 ];
