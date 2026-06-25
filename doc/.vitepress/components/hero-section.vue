@@ -69,6 +69,11 @@ const version = pkg.version;
             <Icon icon="devicon:qwik" />
           </a>
         </div>
+
+        <div class="agent-links">
+          <a class="action-button alt" href="/llms.txt">llms.txt</a>
+          <a class="action-button alt" href="/llms-full.txt">llms-full.txt</a>
+        </div>
       </div>
       <div class="hero-demo">
         <HeroMotionRail />
@@ -276,8 +281,17 @@ const version = pkg.version;
     justify-content: flex-start;
   }
 
-  .frameworks {
+  .frameworks,
+  .agent-links {
     justify-content: flex-start;
   }
+}
+
+.agent-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+  justify-content: center;
 }
 </style>
