@@ -87,6 +87,10 @@ const sidebar: DefaultTheme.SidebarItem[] = [
         link: "/llms-full.txt",
         target: "_blank",
       },
+      {
+        text: "MCP Readiness",
+        link: "/docs/ai/mcp-readiness",
+      },
     ],
   },
 ];
