@@ -10,6 +10,7 @@
 ## 2. Content Accessibility
 
 - [x] Markdown for Agents — `functions/_middleware.ts` (Cloudflare Pages native TypeScript middleware)
+- [x] MCP Server — `functions/mcp.ts` (3 tools: `get_package_info`, `get_build_status`, `search_docs`)
 - [x] `llms.txt` — generated in `buildEnd` hook
 - [x] `llms-full.txt` — generated in `buildEnd` hook
 

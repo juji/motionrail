@@ -9,9 +9,6 @@
 # Node modules
 node_modules
 
-# Generated Pages Functions
-functions/*.js
-
 # macOS
 .DS_Store
 

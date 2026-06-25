@@ -13,11 +13,11 @@ Implement all isitagentready.com checks for motionrail.jujiplay.com.
 
 ## 2. Content Accessibility
 
-| Check               | Action                                                                                                           | Files                                                                          |
-| ------------------- | ---------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| Markdown for Agents | Pages Function middleware — intercept `Accept: text/markdown`, extract content, convert to markdown via turndown | `doc/functions/_middleware.ts` (Cloudflare Pages native TypeScript middleware) |
-| llms.txt            | Already generated in `buildEnd` hook                                                                             | `.vitepress/dist/llms.txt`                                                     |
-| llms-full.txt       | Add to `buildEnd` hook — concatenate all doc markdown                                                            | `.vitepress/dist/llms-full.txt`                                                |
+| Check               | Action                                                                                                           | Files                                                                      |
+| ------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Markdown for Agents | Pages Function middleware — intercept `Accept: text/markdown`, extract content, convert to markdown via turndown | `functions/_middleware.ts` (Cloudflare Pages native TypeScript middleware) |
+| llms.txt            | Already generated in `buildEnd` hook                                                                             | `.vitepress/dist/llms.txt`                                                 |
+| llms-full.txt       | Add to `buildEnd` hook — concatenate all doc markdown                                                            | `.vitepress/dist/llms-full.txt`                                            |
 
 ## 3. Bot Access Control
 
@@ -55,11 +55,10 @@ doc/
 │       │   └── index.json
 │       └── mcp/
 │           └── server-card.json
-├── functions/
-│   ├── _middleware.ts                    (source: Markdown for Agents Pages Function)
-│   └── mcp.ts                           (MCP server)
-├── scripts/
-      │   └── _middleware.ts                    (Cloudflare Pages native middleware)
+
+functions/
+├── _middleware.ts                    (Cloudflare Pages native middleware)
+└── mcp.ts                           (MCP server)
 ```
 
 ## Build Pipeline Changes
@@ -82,7 +81,7 @@ doc/
 
 ### doc/.gitignore
 
-Add `functions/*.js` to ignore generated Pages Functions (`.ts` files committed instead).
+Remove `functions/*.js` (functions moved to repo root as `.ts` files).
 
 ### doc/.vitepress/config.mts
 
@@ -102,4 +101,4 @@ Same pattern as vistaview. Changes needed:
 - Build command: `pnpm build` (from `doc/` directory)
 - Build output: `.vitepress/dist/`
 - Root directory: `doc/`
-- Functions: auto-detected from `doc/functions/`
+- Functions: `functions/` at repo root
