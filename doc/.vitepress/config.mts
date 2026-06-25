@@ -46,21 +46,6 @@ const sidebar: DefaultTheme.SidebarItem[] = [
     ],
   },
   {
-    text: "AI Integration",
-    items: [
-      {
-        text: "llms.txt",
-        link: "/llms.txt",
-        target: "_blank",
-      },
-      {
-        text: "llms-full.txt",
-        link: "/llms-full.txt",
-        target: "_blank",
-      },
-    ],
-  },
-  {
     text: "API",
     items: [
       {
@@ -86,6 +71,21 @@ const sidebar: DefaultTheme.SidebarItem[] = [
             link: "/docs/api/types/motionrail-extension",
           },
         ],
+      },
+    ],
+  },
+  {
+    text: "AI Integration",
+    items: [
+      {
+        text: "llms.txt",
+        link: "/llms.txt",
+        target: "_blank",
+      },
+      {
+        text: "llms-full.txt",
+        link: "/llms-full.txt",
+        target: "_blank",
       },
     ],
   },
