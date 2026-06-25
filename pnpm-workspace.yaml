@@ -4,5 +4,6 @@ packages:
   - 'frameworks/*'
   - 'doc'
   - 'dev/*'
+  - 'functions'
 onlyBuiltDependencies:
   - esbuild
