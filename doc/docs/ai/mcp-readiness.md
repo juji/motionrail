@@ -54,4 +54,17 @@ MotionRail implements agent discovery standards:
 
 - [`llms.txt`](/llms.txt) — Overview and links to individual documentation sections
 - [`llms-full.txt`](/llms-full.txt) — Complete documentation in a single file
-- `Accept: text/markdown` — Request any documentation page as markdown
+
+## Markdown for Agents
+
+Any documentation page can be requested as markdown by sending an `Accept: text/markdown` header. This is handled by a Cloudflare Pages middleware that converts the HTML to markdown on-the-fly.
+
+```bash
+curl -H "Accept: text/markdown" https://motionrail.jujiplay.com/docs/installation
+```
+
+```bash
+curl -H "Accept: text/markdown" https://motionrail.jujiplay.com/docs/api/class/motionrail
+```
+
+Useful for AI agents that prefer consuming documentation as plain text rather than HTML for easier context extraction.
