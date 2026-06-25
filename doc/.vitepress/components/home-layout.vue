@@ -13,25 +13,34 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
     <HomeRtlSection />
   </div>
   <footer>
-    <div>
-      © 2024 Juji
+    <div class="footer-inner">
+      <span>© 2024 Juji</span>
+      <span class="footer-sep">·</span>
       <a
         href="https://jujiyangasli.com"
         target="_blank"
         rel="noopener noreferrer"
         >jujiyangasli.com</a
       >
-    </div>
-    <div>
-      Built with
-      <a href="https://vitepress.dev/" target="_blank" rel="noopener noreferrer"
-        >VitePress</a
+      <span class="footer-sep">·</span>
+      <span
+        >Built with
+        <a
+          href="https://vitepress.dev/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >VitePress</a
+        ></span
       >
-    </div>
-    <div>
-      Images by
-      <a href="https://picsum.photos/" target="_blank" rel="noopener noreferrer"
-        >Picsum</a
+      <span class="footer-sep">·</span>
+      <span
+        >Images by
+        <a
+          href="https://picsum.photos/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Picsum</a
+        ></span
       >
     </div>
   </footer>
@@ -43,6 +52,31 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
   margin: 0;
 }
 footer {
+  padding: 32px 48px;
+  border-top: 1px solid var(--vp-c-divider);
   text-align: center;
+}
+.footer-inner {
+  max-width: 1152px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--vp-c-text-2);
+}
+.footer-inner a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  font-weight: 500;
+}
+.footer-inner a:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+}
+.footer-sep {
+  color: var(--vp-c-divider);
 }
 </style>
