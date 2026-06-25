@@ -100,6 +100,26 @@ const carousel = new MotionRail(element, {
 });
 ```
 
+## Recent Updates
+
+- **Docs site AI readiness** — llms.txt, llms-full.txt, MCP server, sitemap, robots.txt, `.well-known` discovery, Markdown-for-Agents middleware
+- **AI Integration docs** — MCP Readiness and Markdown for Agents pages
+- **Search** — VitePress local search enabled on docs site
+- **Qwik fix** — pinned `@eslint/js` to resolve build incompatibility
+- **Homepage redesign** — improved footer, agent discoverability links in hero
+
+## AI Discovery
+
+- [llms.txt](https://motionrail.jujiplay.com/llms.txt) — concise AI-friendly summary
+- [llms-full.txt](https://motionrail.jujiplay.com/llms-full.txt) — full documentation for AI consumption
+- `POST /mcp` — MCP server endpoint
+
+  | Tool               | Description                      |
+  | ------------------ | -------------------------------- |
+  | `get_package_info` | Get package metadata and version |
+  | `get_build_status` | Check CI build status            |
+  | `search_docs`      | Search MotionRail documentation  |
+
 ## Documentation
 
 For complete documentation, API reference, and examples:
