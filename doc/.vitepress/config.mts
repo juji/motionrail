@@ -113,13 +113,11 @@ export default defineConfig({
     for (const { link } of allLinks) {
       if (!link || link === "/docs/") continue;
 
-      // Handle directory index pages (ending with /)
-      let mdPath = link.replace("/docs/", "");
+      let mdPath = link.replace("/docs/", "") || "index";
       if (mdPath.endsWith("/")) {
-        mdPath = mdPath + "index.md";
-      } else {
-        mdPath = mdPath + ".md";
+        mdPath = mdPath + "index";
       }
+      mdPath = mdPath + ".md";
 
       const txtName = mdPath.replace(/\//g, "-").replace(".md", ".txt");
 
@@ -142,12 +140,11 @@ export default defineConfig({
 
       for (const item of section.items) {
         if (item.link && item.link !== "/docs/") {
-          let mdPath = item.link.replace("/docs/", "");
+          let mdPath = item.link.replace("/docs/", "") || "index";
           if (mdPath.endsWith("/")) {
-            mdPath = mdPath + "index.md";
-          } else {
-            mdPath = mdPath + ".md";
+            mdPath = mdPath + "index";
           }
+          mdPath = mdPath + ".md";
           const txtName = mdPath.replace(/\//g, "-").replace(".md", ".txt");
           const description = item.text;
           docStructure += `- **[${txtName}](./${txtName})** - ${description}\n`;
@@ -157,12 +154,11 @@ export default defineConfig({
         if (item.items) {
           for (const subItem of item.items) {
             if (subItem.link) {
-              let mdPath = subItem.link.replace("/docs/", "");
+              let mdPath = subItem.link.replace("/docs/", "") || "index";
               if (mdPath.endsWith("/")) {
-                mdPath = mdPath + "index.md";
-              } else {
-                mdPath = mdPath + ".md";
+                mdPath = mdPath + "index";
               }
+              mdPath = mdPath + ".md";
               const txtName = mdPath.replace(/\//g, "-").replace(".md", ".txt");
               const description = subItem.text;
               docStructure += `- **[${txtName}](./${txtName})** - ${description}\n`;
@@ -218,6 +214,28 @@ const carousel = new MotionRail('.carousel', {
 `;
 
     fs.writeFileSync(path.join(outDir, "llms.txt"), llmsTxt);
+
+    // Generate llms-full.txt — concatenate all doc markdown
+    const parts: string[] = [];
+    for (const { text, link } of allLinks) {
+      if (!link) continue;
+
+      let mdPath = link.replace("/docs/", "") || "index";
+      if (mdPath.endsWith("/")) {
+        mdPath = mdPath + "index";
+      }
+      mdPath = mdPath + ".md";
+
+      const srcPath = path.join(docsDir, mdPath);
+      if (fs.existsSync(srcPath)) {
+        let content = fs.readFileSync(srcPath, "utf-8");
+        if (!content.startsWith("# ")) {
+          content = `# ${text}\n\n${content}`;
+        }
+        parts.push(content);
+      }
+    }
+    fs.writeFileSync(path.join(outDir, "llms-full.txt"), parts.join("\n\n---\n\n") + "\n");
   },
 
   themeConfig: {
