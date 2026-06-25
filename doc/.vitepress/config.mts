@@ -300,6 +300,10 @@ ${urlset.map((loc) => `  <url><loc>${loc}</loc></url>`).join("\n")}
 
     sidebar,
 
+    search: {
+      provider: "local",
+    },
+
     socialLinks: [
       { icon: "github", link: "https://github.com/juji/motionrail" },
     ],
