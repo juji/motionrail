@@ -83,7 +83,7 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
 
   <footer>
     <div class="footer-inner">
-      <span>© 2024 Juji</span>
+      <span>© 2026 Juji</span>
       <span class="footer-sep">·</span>
       <a
         href="https://jujiyangasli.com"
