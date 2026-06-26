@@ -115,7 +115,13 @@ import HomeVistaview from "./home-vistaview.vue";
 .vistaview-subsection {
   max-width: 1152px;
   margin: 0 auto;
-  padding: 64px 48px 0;
+  padding: 64px 24px 0;
+}
+
+@media (min-width: 768px) {
+  .vistaview-subsection {
+    padding: 64px 48px 0;
+  }
 }
 
 .subsection-title {
