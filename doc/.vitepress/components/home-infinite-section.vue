@@ -22,8 +22,15 @@ import HomeInfinite from "./home-infinite.vue";
 
 <style scoped>
 .infinite-section {
-  padding: 96px 48px;
+  padding: 96px 24px;
   padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .infinite-section {
+    padding: 96px 48px;
+    padding-top: 0;
+  }
 }
 
 .container {

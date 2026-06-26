@@ -21,8 +21,15 @@ import HomeRtl from "./home-rtl.vue";
 
 <style scoped>
 .rtl-section {
-  padding: 96px 48px;
+  padding: 96px 24px;
   padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .rtl-section {
+    padding: 96px 48px;
+    padding-top: 0;
+  }
 }
 
 .container {

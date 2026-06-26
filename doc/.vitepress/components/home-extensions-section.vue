@@ -51,7 +51,13 @@ import HomeVistaview from "./home-vistaview.vue";
 
 <style scoped>
 .extensions-section {
-  padding: 96px 48px;
+  padding: 96px 24px;
+}
+
+@media (min-width: 768px) {
+  .extensions-section {
+    padding: 96px 48px;
+  }
 }
 
 .container {
