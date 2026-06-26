@@ -90,9 +90,8 @@ Drag deceleration in px/ms². Lower values let the carousel slide farther on a f
 - **Default:** `0.007`
 
 ```ts
-const carousel = new MotionRail(element, {
-  friction: 0.003, // slides farther
-});
+new MotionRail(el, { friction: 0.003 }); // slides farther
+new MotionRail(el, { friction: 0.01 }); // stops sooner
 ```
 
 ---
