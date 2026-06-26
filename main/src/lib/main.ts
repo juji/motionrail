@@ -375,16 +375,16 @@ export class MotionRail {
     this.scrollable.style.userSelect = "";
 
     const velocityMagnitude = Math.abs(this.velocity);
-    const baseTime = 100;
-    const maxTime = 200;
-    const momentumTime = Math.min(
-      baseTime + Math.sqrt(velocityMagnitude) * 50,
-      maxTime,
+    const baseScale = 100;
+    const maxScale = 200;
+    const distanceScale = Math.min(
+      baseScale + Math.sqrt(velocityMagnitude) * 50,
+      maxScale,
     );
-    const momentum = -this.velocity * momentumTime;
+    const throwDistance = -this.velocity * distanceScale;
 
     const currentLogicalScroll = this.getLogicalScroll();
-    const targetLogicalScroll = currentLogicalScroll + momentum;
+    const targetLogicalScroll = currentLogicalScroll + throwDistance;
 
     if (this.cancelScroll) {
       this.cancelScroll();
@@ -406,7 +406,7 @@ export class MotionRail {
     // Create a wrapper that animates in logical space
     this.cancelScroll = this.animateLogicalScroll(
       snapPoint,
-      momentumTime,
+      distanceScale,
       onScrollEnd,
     );
     this.velocity = 0;
