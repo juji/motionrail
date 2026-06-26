@@ -403,7 +403,27 @@ export class MotionRail {
     });
     this.scrollable.addEventListener("pointerup", this.handlePointerUp);
     this.scrollable.addEventListener("pointerleave", this.handlePointerUp);
+    this.scrollable.addEventListener("pointercancel", this.handlePointerCancel);
+    this.scrollable.addEventListener("touchstart", this.handleTouchStart, {
+      passive: false,
+    });
   }
+
+  private handleTouchStart = (e: TouchEvent) => {
+    e.preventDefault();
+    // touch will generate pointer events; preventDefault stops native scroll
+  };
+
+  private handlePointerCancel = (e: PointerEvent) => {
+    if (e.pointerId !== this.pointerId) return;
+    this.scrollable.releasePointerCapture(e.pointerId);
+    this.pointerId = null;
+    this.isDragging = false;
+    this.scrollable.style.userSelect = "";
+    this.scrollable.style.touchAction = "";
+    this.scrollable.style.scrollSnapType = "x mandatory";
+    this.velocity = 0;
+  };
 
   private handlePointerDown = (e: PointerEvent) => {
     if (this.pointerId !== null) return;
@@ -417,6 +437,7 @@ export class MotionRail {
     this.lastPointerTime = e.timeStamp;
     this.velocity = 0;
 
+    this.scrollable.style.touchAction = "none";
     this.scrollable.style.userSelect = "none";
     this.scrollable.style.scrollSnapType = "none";
     this.pause();
@@ -451,6 +472,7 @@ export class MotionRail {
     this.isDragging = false;
 
     this.scrollable.style.userSelect = "";
+    this.scrollable.style.touchAction = "";
 
     // kinematic throw: d = |v| * t_stop / 2 = v² / (2 * friction)
     const friction = 0.007; // px/ms² — lower = slides farther
@@ -739,5 +761,10 @@ export class MotionRail {
     this.scrollable.removeEventListener("pointermove", this.handlePointerMove);
     this.scrollable.removeEventListener("pointerup", this.handlePointerUp);
     this.scrollable.removeEventListener("pointerleave", this.handlePointerUp);
+    this.scrollable.removeEventListener(
+      "pointercancel",
+      this.handlePointerCancel,
+    );
+    this.scrollable.removeEventListener("touchstart", this.handleTouchStart);
   }
 }
