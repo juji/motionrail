@@ -73,6 +73,11 @@ const version = pkg.version;
         <div class="agent-links">
           <a class="action-button alt" href="/llms.txt">llms.txt</a>
           <a class="action-button alt" href="/llms-full.txt">llms-full.txt</a>
+          <a
+            class="action-button alt"
+            href="https://context7.com/llmstxt/motionrail_jujiplay_llms-full_txt"
+            >Context 7</a
+          >
           <a class="action-button alt" href="/docs/ai/mcp-readiness"
             >MCP Readiness</a
           >

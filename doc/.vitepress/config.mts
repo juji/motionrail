@@ -88,6 +88,11 @@ const sidebar: DefaultTheme.SidebarItem[] = [
         target: "_blank",
       },
       {
+        text: "Context 7",
+        link: "https://context7.com/llmstxt/motionrail_jujiplay_llms-full_txt",
+        target: "_blank",
+      },
+      {
         text: "MCP Readiness",
         link: "/docs/ai/mcp-readiness",
       },
