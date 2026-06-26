@@ -50,11 +50,17 @@ import HomeInfinite from "./home-infinite.vue";
 }
 
 .section-description {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--vp-c-text-2);
   margin: 0 auto;
   max-width: 420px;
+}
+
+@media (min-width: 768px) {
+  .section-description {
+    font-size: 18px;
+  }
 }
 
 .section-description code {
