@@ -10,6 +10,7 @@ type MotionRailOptions = {
   resumeDelay?: number;
   delay?: number;
   rtl?: boolean;
+  friction?: number;
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
   extensions?: MotionRailExtension[];
@@ -76,6 +77,21 @@ Enable right-to-left scrolling mode.
 ```ts
 const carousel = new MotionRail(element, {
   rtl: true,
+});
+```
+
+---
+
+### `friction`
+
+Drag deceleration in px/ms². Lower values let the carousel slide farther on a flick.
+
+- **Type:** `number`
+- **Default:** `0.007`
+
+```ts
+const carousel = new MotionRail(element, {
+  friction: 0.003, // slides farther
 });
 ```
 

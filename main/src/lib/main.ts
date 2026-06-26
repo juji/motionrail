@@ -47,6 +47,7 @@ export class MotionRail {
   private containerName: string = "";
   private styleTag: HTMLStyleElement | null = null;
   private infinite: boolean = false;
+  private friction: number = 0.007;
   private cloneCountPerSide: number = 0;
   private static defautlBreakpoints: MotionRailBreakpoint[] = [
     { columns: 1, gap: "0px" },
@@ -87,6 +88,7 @@ export class MotionRail {
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
     this.infinite = options.infinite || false;
+    this.friction = options.friction ?? 0.007;
     this.state.totalItems = this.element.querySelectorAll(
       "[data-motionrail-grid] > *",
     ).length;
@@ -475,10 +477,9 @@ export class MotionRail {
     this.scrollable.style.touchAction = "";
 
     // kinematic throw: d = |v| * t_stop / 2 = v² / (2 * friction)
-    const friction = 0.007; // px/ms² — lower = slides farther
-    const stopTime = Math.abs(this.velocity) / friction;
+    const stopTime = Math.abs(this.velocity) / this.friction;
     const throwDistance =
-      (-0.5 * this.velocity * Math.abs(this.velocity)) / friction;
+      (-0.5 * this.velocity * Math.abs(this.velocity)) / this.friction;
 
     const currentLogicalScroll = this.getLogicalScroll();
     const targetLogicalScroll = currentLogicalScroll + throwDistance;

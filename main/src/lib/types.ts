@@ -19,6 +19,7 @@ export type MotionRailOptions = {
   delay?: number;
   rtl?: boolean;
   infinite?: boolean;
+  friction?: number;
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
   extensions?: MotionRailExtension[];
