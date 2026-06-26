@@ -62,7 +62,7 @@
 - Always use tools to check file contents, configurations, or code before making claims.
 - If you're unsure about something, explicitly say "let me check" and use the appropriate tool.
 - Do NOT make assumptions and present them as truth, especially in:
-  - File contents (check with `read_file` first)
+  - File contents (check with first)
   - Configuration settings (verify before stating)
   - Code implementation (read the actual code)
   - Git status or tracked files (use `git status` or other git commands)

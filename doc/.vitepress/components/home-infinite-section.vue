@@ -1,32 +1,33 @@
 <script setup lang="ts">
-import HomeRtl from "./home-rtl.vue";
+import HomeInfinite from "./home-infinite.vue";
 </script>
 
 <template>
-  <div class="rtl-section">
+  <div class="infinite-section">
     <div class="container">
       <div class="section-content">
-        <h2 class="section-title">RTL Support</h2>
+        <h2 class="section-title">Infinite Scroll</h2>
         <p class="section-description">
-          Built-in <a href="/docs/rtl">right-to-left language support</a> for
-          Arabic, Hebrew, and other RTL languages.
+          Enable seamless looping with <code>infinite: true</code>. Swipe past
+          the last item and it wraps back to the first — no jumps, no flicker.
+          Works with drag, touch, autoplay, and arrow navigation.
         </p>
       </div>
-      <div class="section-demo" dir="rtl">
-        <HomeRtl />
+      <div class="section-demo">
+        <HomeInfinite />
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.rtl-section {
+.infinite-section {
   padding: 96px 24px;
   padding-top: 0;
 }
 
 @media (min-width: 768px) {
-  .rtl-section {
+  .infinite-section {
     padding: 96px 48px;
     padding-top: 0;
   }
@@ -69,15 +70,12 @@ import HomeRtl from "./home-rtl.vue";
   }
 }
 
-.section-description a {
+.section-description code {
+  font-size: 15px;
   color: var(--vp-c-brand-1);
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.section-description a:hover {
-  color: var(--vp-c-brand-2);
-  text-decoration: underline;
+  background: var(--vp-c-default-soft);
+  padding: 2px 6px;
+  border-radius: 4px;
 }
 
 .section-demo {

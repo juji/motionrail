@@ -30,8 +30,15 @@ import ResizableContainer from "./ResizableContainer.vue";
 
 <style scoped>
 .breakpoints-section {
-  padding: 96px 48px;
-  padding-top: 0px;
+  padding: 96px 24px;
+  padding-top: 0;
+}
+
+@media (min-width: 768px) {
+  .breakpoints-section {
+    padding: 96px 48px;
+    padding-top: 0;
+  }
 }
 
 .container {
@@ -58,11 +65,17 @@ import ResizableContainer from "./ResizableContainer.vue";
 }
 
 .section-description {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--vp-c-text-2);
   margin: 0 auto;
   max-width: 640px;
+}
+
+@media (min-width: 768px) {
+  .section-description {
+    font-size: 18px;
+  }
 }
 
 .resize-hint {

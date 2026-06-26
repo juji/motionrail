@@ -30,7 +30,9 @@ import HomeVistaview from "./home-vistaview.vue";
           <p class="section-description">
             Open any carousel image in a full-screen lightbox with zoom, swipe,
             and keyboard navigation. Powered by the
-            <a href="https://vistaview.jujiplay.com" target="_blank">VistaView</a>
+            <a href="https://vistaview.jujiplay.com" target="_blank"
+              >VistaView</a
+            >
             library.
           </p>
         </div>
@@ -49,7 +51,13 @@ import HomeVistaview from "./home-vistaview.vue";
 
 <style scoped>
 .extensions-section {
-  padding: 96px 48px;
+  padding: 96px 24px;
+}
+
+@media (min-width: 768px) {
+  .extensions-section {
+    padding: 96px 48px;
+  }
 }
 
 .container {
@@ -76,10 +84,16 @@ import HomeVistaview from "./home-vistaview.vue";
 }
 
 .section-description {
-  font-size: 18px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--vp-c-text-2);
   margin: 0;
+}
+
+@media (min-width: 768px) {
+  .section-description {
+    font-size: 18px;
+  }
 }
 
 .section-description a {
@@ -101,7 +115,13 @@ import HomeVistaview from "./home-vistaview.vue";
 .vistaview-subsection {
   max-width: 1152px;
   margin: 0 auto;
-  padding: 64px 48px 0;
+  padding: 64px 24px 0;
+}
+
+@media (min-width: 768px) {
+  .vistaview-subsection {
+    padding: 64px 48px 0;
+  }
 }
 
 .subsection-title {

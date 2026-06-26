@@ -46,6 +46,8 @@ export class MotionRail {
   private intersectionObserver: IntersectionObserver | null = null;
   private containerName: string = "";
   private styleTag: HTMLStyleElement | null = null;
+  private infinite: boolean = false;
+  private cloneCountPerSide: number = 0;
   private static defautlBreakpoints: MotionRailBreakpoint[] = [
     { columns: 1, gap: "0px" },
   ];
@@ -84,9 +86,15 @@ export class MotionRail {
     this.delay = options.delay || 3000;
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
+    this.infinite = options.infinite || false;
     this.state.totalItems = this.element.querySelectorAll(
       "[data-motionrail-grid] > *",
     ).length;
+
+    if (this.infinite) {
+      this.cloneCountPerSide = this.computeCloneCount();
+      this.buildClones();
+    }
 
     this.setBreakPoints();
 
@@ -94,6 +102,14 @@ export class MotionRail {
 
     this.attachPointerEvents();
     this.cacheSnapPoints();
+
+    if (
+      this.infinite &&
+      this.snapPoints[this.cloneCountPerSide] !== undefined
+    ) {
+      this.setLogicalScroll(this.snapPoints[this.cloneCountPerSide]);
+    }
+
     this.observeResize();
     this.observeEdgeItems();
     if (this.autoplay) this.play();
@@ -191,7 +207,7 @@ export class MotionRail {
 
     const { containerQueries } = MotionRail.getBreakPoints({
       breakpoints: this.breakpoints,
-      totalItems: this.state.totalItems,
+      totalItems: this.state.totalItems + 2 * this.cloneCountPerSide,
       containerName: this.containerName,
     });
 
@@ -234,7 +250,9 @@ export class MotionRail {
   private observeEdgeItems() {
     if (typeof IntersectionObserver === "undefined") return;
 
-    const items = this.element.querySelectorAll("[data-motionrail-grid] > *");
+    const items = this.element.querySelectorAll(
+      "[data-motionrail-grid] > *:not([data-motionrail-clone])",
+    );
     if (items.length === 0) return;
 
     const firstItem = items[0];
@@ -303,6 +321,66 @@ export class MotionRail {
     });
   }
 
+  private computeCloneCount(): number {
+    const maxColumns = Math.max(
+      ...this.breakpoints.map((bp) => bp.columns || 1),
+    );
+    return Math.max(maxColumns * 2, 3);
+  }
+
+  private buildClones() {
+    const grid = this.element.querySelector(
+      "[data-motionrail-grid]",
+    ) as HTMLElement;
+    const realItems = Array.from(
+      grid.querySelectorAll(":scope > *:not([data-motionrail-clone])"),
+    ) as HTMLElement[];
+    const N = this.cloneCountPerSide;
+    if (realItems.length < N) return;
+
+    grid
+      .querySelectorAll("[data-motionrail-clone]")
+      .forEach((el) => el.remove());
+
+    const before = document.createDocumentFragment();
+    for (let i = realItems.length - N; i < realItems.length; i++) {
+      const clone = realItems[i].cloneNode(true) as HTMLElement;
+      clone.setAttribute("data-motionrail-clone", "");
+      clone.setAttribute("aria-hidden", "true");
+      before.appendChild(clone);
+    }
+    grid.insertBefore(before, grid.firstChild);
+
+    for (let i = 0; i < N; i++) {
+      const clone = realItems[i].cloneNode(true) as HTMLElement;
+      clone.setAttribute("data-motionrail-clone", "");
+      clone.setAttribute("aria-hidden", "true");
+      grid.appendChild(clone);
+    }
+  }
+
+  private teleportFromIndex(si: number) {
+    const N = this.cloneCountPerSide;
+    const R = this.state.totalItems;
+    if (si < N) {
+      this.setLogicalScroll(this.snapPoints[si + R]);
+    } else if (si >= N + R) {
+      this.setLogicalScroll(this.snapPoints[si - R]);
+    }
+  }
+
+  private scrollToSnap(snapIndex: number) {
+    const snapPoint = this.snapPoints[snapIndex];
+    if (snapPoint === undefined) return;
+    if (this.cancelScroll) this.cancelScroll();
+    this.scrollable.style.scrollSnapType = "none";
+    this.cancelScroll = this.animateLogicalScroll(snapPoint, 300, () => {
+      if (this.infinite) this.teleportFromIndex(snapIndex);
+      this.scrollable.style.scrollSnapType = "x mandatory";
+      this.cancelScroll = null;
+    });
+  }
+
   private findNearestSnapPoint(logicalScroll: number): number {
     let nearestPoint = 0;
     let minDistance = Infinity;
@@ -319,10 +397,10 @@ export class MotionRail {
   }
 
   private attachPointerEvents() {
-    // only on pointer: fine
-    if (!window.matchMedia("(pointer: fine)").matches) return;
     this.scrollable.addEventListener("pointerdown", this.handlePointerDown);
-    this.scrollable.addEventListener("pointermove", this.handlePointerMove);
+    this.scrollable.addEventListener("pointermove", this.handlePointerMove, {
+      passive: false,
+    });
     this.scrollable.addEventListener("pointerup", this.handlePointerUp);
     this.scrollable.addEventListener("pointerleave", this.handlePointerUp);
   }
@@ -375,24 +453,26 @@ export class MotionRail {
     this.scrollable.style.userSelect = "";
 
     const velocityMagnitude = Math.abs(this.velocity);
-    const baseTime = 100;
-    const maxTime = 200;
-    const momentumTime = Math.min(
-      baseTime + Math.sqrt(velocityMagnitude) * 50,
-      maxTime,
+    const baseScale = 100;
+    const maxScale = 200;
+    const distanceScale = Math.min(
+      baseScale + Math.sqrt(velocityMagnitude) * 50,
+      maxScale,
     );
-    const momentum = -this.velocity * momentumTime;
+    const throwDistance = -this.velocity * distanceScale;
 
     const currentLogicalScroll = this.getLogicalScroll();
-    const targetLogicalScroll = currentLogicalScroll + momentum;
+    const targetLogicalScroll = currentLogicalScroll + throwDistance;
 
     if (this.cancelScroll) {
       this.cancelScroll();
     }
 
     const snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
+    const snapIndex = this.snapPoints.indexOf(snapPoint);
 
     const onScrollEnd = () => {
+      if (this.infinite && snapIndex >= 0) this.teleportFromIndex(snapIndex);
       this.scrollable.style.scrollSnapType = "x mandatory";
       this.cancelScroll = null;
       if (this.autoplay) {
@@ -406,7 +486,7 @@ export class MotionRail {
     // Create a wrapper that animates in logical space
     this.cancelScroll = this.animateLogicalScroll(
       snapPoint,
-      momentumTime,
+      distanceScale,
       onScrollEnd,
     );
     this.velocity = 0;
@@ -448,12 +528,27 @@ export class MotionRail {
   private scrollByPage(direction: 1 | -1) {
     if (this.state.visibleItemIndexes.length === 0) return;
 
-    let targetIndex: number;
     const firstVisibleIndex = this.state.visibleItemIndexes[0];
     const lastVisibleIndex =
       this.state.visibleItemIndexes[this.state.visibleItemIndexes.length - 1];
     const visibleCount = this.state.visibleItemIndexes.length;
 
+    if (this.infinite) {
+      const N = this.cloneCountPerSide;
+      const R = this.state.totalItems;
+      let targetSnapIndex: number;
+      if (direction === 1) {
+        targetSnapIndex = N + lastVisibleIndex + 1;
+        if (targetSnapIndex >= N + R) targetSnapIndex = N + R;
+      } else {
+        targetSnapIndex = N + firstVisibleIndex - visibleCount;
+        if (targetSnapIndex < N) targetSnapIndex = N - 1;
+      }
+      this.scrollToSnap(targetSnapIndex);
+      return;
+    }
+
+    let targetIndex: number;
     if (direction === 1) {
       // Going forward: skip all visible items, go to the next one
       targetIndex = lastVisibleIndex + 1;
@@ -530,8 +625,9 @@ export class MotionRail {
 
   scrollToIndex(index: number) {
     this.pause();
-    if (index >= 0 && index < this.snapPoints.length) {
-      this.scrollToLogical(this.snapPoints[index], "smooth");
+    const snapIndex = this.infinite ? this.cloneCountPerSide + index : index;
+    if (snapIndex >= 0 && snapIndex < this.snapPoints.length) {
+      this.scrollToLogical(this.snapPoints[snapIndex], "smooth");
     }
   }
 
@@ -559,10 +655,26 @@ export class MotionRail {
       this.intersectionObserver = null;
     }
 
-    // Update total items count
+    // Remove clones before recounting
+    if (this.infinite) {
+      const grid = this.element.querySelector("[data-motionrail-grid]");
+      if (grid) {
+        grid
+          .querySelectorAll("[data-motionrail-clone]")
+          .forEach((el) => el.remove());
+      }
+    }
+
+    // Update total items count (real items only)
     this.state.totalItems = this.element.querySelectorAll(
       "[data-motionrail-grid] > *",
     ).length;
+
+    // Rebuild clones
+    if (this.infinite) {
+      this.cloneCountPerSide = this.computeCloneCount();
+      this.buildClones();
+    }
 
     // Reset visible items state
     this.state.visibleItemIndexes = [];
@@ -583,6 +695,15 @@ export class MotionRail {
   }
 
   destroy() {
+    if (this.infinite) {
+      const grid = this.element.querySelector("[data-motionrail-grid]");
+      if (grid) {
+        grid
+          .querySelectorAll("[data-motionrail-clone]")
+          .forEach((el) => el.remove());
+      }
+    }
+
     const state = this.getState();
     this.extensions.forEach((ext) => {
       if (ext.onDestroy) {
