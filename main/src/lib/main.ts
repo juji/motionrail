@@ -378,7 +378,6 @@ export class MotionRail {
     this.scrollable.style.scrollSnapType = "none";
     this.cancelScroll = this.animateLogicalScroll(snapPoint, 300, () => {
       if (this.infinite) this.teleportFromIndex(snapIndex);
-      this.scrollable.style.scrollSnapType = "x mandatory";
       this.cancelScroll = null;
     });
   }
@@ -423,7 +422,6 @@ export class MotionRail {
     this.isDragging = false;
     this.scrollable.style.userSelect = "";
     this.scrollable.style.touchAction = "";
-    this.scrollable.style.scrollSnapType = "x mandatory";
     this.velocity = 0;
   };
 
@@ -477,7 +475,7 @@ export class MotionRail {
     this.scrollable.style.touchAction = "";
 
     // kinematic throw: d = |v| * t_stop / 2 = v² / (2 * friction)
-    const stopTime = Math.abs(this.velocity) / this.friction;
+    const stopTime = Math.max(Math.abs(this.velocity) / this.friction, 200);
     const throwDistance =
       (-0.5 * this.velocity * Math.abs(this.velocity)) / this.friction;
 
@@ -493,7 +491,6 @@ export class MotionRail {
 
     const onScrollEnd = () => {
       if (this.infinite && snapIndex >= 0) this.teleportFromIndex(snapIndex);
-      this.scrollable.style.scrollSnapType = "x mandatory";
       this.cancelScroll = null;
       if (this.autoplay) {
         this.autoPlayTimeoutId = window.setTimeout(() => {

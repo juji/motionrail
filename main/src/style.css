@@ -16,7 +16,6 @@
       anchor-name: --motionrail-scrollable;
     }
     overflow-x: scroll;
-    scroll-snap-type: x mandatory;
     scrollbar-width: none; /* Firefox */
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     touch-action: pan-y;
