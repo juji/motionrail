@@ -88,7 +88,7 @@ export class MotionRail {
     this.resumeDelay = options.resumeDelay || 4000;
     this.onChange = options.onChange;
     this.infinite = options.infinite || false;
-    this.friction = options.friction ?? 0.007;
+    this.friction = options.friction ?? this.friction;
     this.state.totalItems = this.element.querySelectorAll(
       "[data-motionrail-grid] > *",
     ).length;
@@ -474,13 +474,7 @@ export class MotionRail {
     this.scrollable.style.userSelect = "";
     this.scrollable.style.touchAction = "";
 
-    // kinematic throw: d = |v| * t_stop / 2 = v² / (2 * friction)
-    const stopTime = Math.max(Math.abs(this.velocity) / this.friction, 200);
-    const throwDistance =
-      (-0.5 * this.velocity * Math.abs(this.velocity)) / this.friction;
-
     const currentLogicalScroll = this.getLogicalScroll();
-    const targetLogicalScroll = currentLogicalScroll + throwDistance;
     const currentSnapPoint = this.findNearestSnapPoint(currentLogicalScroll);
     const currentSnapIndex = this.snapPoints.indexOf(currentSnapPoint);
 
@@ -488,22 +482,31 @@ export class MotionRail {
       this.cancelScroll();
     }
 
-    let snapPoint: number;
-    let snapIndex: number;
+    // kinematic throw: d = v² / (2 * friction)
+    const throwDistance =
+      (-0.5 * this.velocity * Math.abs(this.velocity)) / this.friction;
 
-    // direction-biased snap: any flick above threshold advances one slide
-    // avoids requiring throw to cross midpoint between snap points
-    if (Math.abs(this.velocity) > 0.005) {
+    // find target snap from throw distance; if it lands at current snap
+    // but there's velocity, advance one slide in flick direction
+    let snapPoint = this.findNearestSnapPoint(
+      currentLogicalScroll + throwDistance,
+    );
+    let snapIndex = this.snapPoints.indexOf(snapPoint);
+
+    if (snapIndex === currentSnapIndex && Math.abs(this.velocity) > 0.005) {
       const dir = throwDistance > 0 ? 1 : -1;
       snapIndex = Math.max(
         0,
         Math.min(currentSnapIndex + dir, this.snapPoints.length - 1),
       );
       snapPoint = this.snapPoints[snapIndex];
-    } else {
-      snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
-      snapIndex = this.snapPoints.indexOf(snapPoint);
     }
+
+    // scale duration to actual distance so friction controls skip count, not speed
+    const animDistance = Math.abs(snapPoint - currentLogicalScroll);
+    const stopTime = Math.abs(this.velocity) / this.friction;
+    const distance = Math.abs(throwDistance) || 1;
+    const duration = Math.min((stopTime * animDistance) / distance, 600);
 
     const onScrollEnd = () => {
       if (this.infinite && snapIndex >= 0) this.teleportFromIndex(snapIndex);
@@ -518,7 +521,7 @@ export class MotionRail {
 
     this.cancelScroll = this.animateLogicalScroll(
       snapPoint,
-      stopTime,
+      duration,
       onScrollEnd,
     );
     this.velocity = 0;
