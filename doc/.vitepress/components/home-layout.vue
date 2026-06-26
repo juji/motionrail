@@ -20,8 +20,8 @@ import HomeBreakpointsSection from "./home-breakpoints-section.vue";
       <div class="section-content">
         <h2 class="section-title">Bundle Size</h2>
         <p class="section-description">
-          Lightweight across the board. The core is under 15 kB gzipped, and
-          every extension stays under 2 kB.
+          Lightweight across the board. The core is under 15 kB, and every
+          extension stays under 2 kB.
         </p>
       </div>
       <div class="section-demo">
