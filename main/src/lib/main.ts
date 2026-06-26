@@ -452,14 +452,11 @@ export class MotionRail {
 
     this.scrollable.style.userSelect = "";
 
-    const velocityMagnitude = Math.abs(this.velocity);
-    const baseScale = 100;
-    const maxScale = 200;
-    const distanceScale = Math.min(
-      baseScale + Math.sqrt(velocityMagnitude) * 50,
-      maxScale,
-    );
-    const throwDistance = -this.velocity * distanceScale;
+    // kinematic throw: d = |v| * t_stop / 2 = v² / (2 * friction)
+    const friction = 0.007; // px/ms² — lower = slides farther
+    const stopTime = Math.abs(this.velocity) / friction;
+    const throwDistance =
+      (-0.5 * this.velocity * Math.abs(this.velocity)) / friction;
 
     const currentLogicalScroll = this.getLogicalScroll();
     const targetLogicalScroll = currentLogicalScroll + throwDistance;
@@ -483,10 +480,9 @@ export class MotionRail {
       }
     };
 
-    // Create a wrapper that animates in logical space
     this.cancelScroll = this.animateLogicalScroll(
       snapPoint,
-      distanceScale,
+      stopTime,
       onScrollEnd,
     );
     this.velocity = 0;
@@ -506,7 +502,10 @@ export class MotionRail {
 
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
+
+      // ease-out-quad — gentle, subtle
+      const eased = progress * (2 - progress);
+
       const currentLogical =
         startLogical + (targetLogical - startLogical) * eased;
 
