@@ -458,7 +458,7 @@ export class MotionRail {
     const deltaTime = e.timeStamp - this.lastPointerTime;
     if (deltaTime > 0) {
       const pointerDelta = e.clientX - this.lastPointerX;
-      this.velocity = pointerDelta / deltaTime;
+      this.velocity = (1.7 * pointerDelta) / deltaTime;
       this.lastPointerX = e.clientX;
       this.lastPointerTime = e.timeStamp;
     }
