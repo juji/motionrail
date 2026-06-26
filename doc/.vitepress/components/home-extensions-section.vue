@@ -108,7 +108,7 @@ import HomeVistaview from "./home-vistaview.vue";
 }
 
 .section-demo {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
