@@ -458,7 +458,7 @@ export class MotionRail {
     const deltaTime = e.timeStamp - this.lastPointerTime;
     if (deltaTime > 0) {
       const pointerDelta = e.clientX - this.lastPointerX;
-      this.velocity = (1.7 * pointerDelta) / deltaTime;
+      this.velocity = pointerDelta / deltaTime;
       this.lastPointerX = e.clientX;
       this.lastPointerTime = e.timeStamp;
     }
@@ -481,13 +481,29 @@ export class MotionRail {
 
     const currentLogicalScroll = this.getLogicalScroll();
     const targetLogicalScroll = currentLogicalScroll + throwDistance;
+    const currentSnapPoint = this.findNearestSnapPoint(currentLogicalScroll);
+    const currentSnapIndex = this.snapPoints.indexOf(currentSnapPoint);
 
     if (this.cancelScroll) {
       this.cancelScroll();
     }
 
-    const snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
-    const snapIndex = this.snapPoints.indexOf(snapPoint);
+    let snapPoint: number;
+    let snapIndex: number;
+
+    // direction-biased snap: any flick above threshold advances one slide
+    // avoids requiring throw to cross midpoint between snap points
+    if (Math.abs(this.velocity) > 0.005) {
+      const dir = throwDistance > 0 ? 1 : -1;
+      snapIndex = Math.max(
+        0,
+        Math.min(currentSnapIndex + dir, this.snapPoints.length - 1),
+      );
+      snapPoint = this.snapPoints[snapIndex];
+    } else {
+      snapPoint = this.findNearestSnapPoint(targetLogicalScroll);
+      snapIndex = this.snapPoints.indexOf(snapPoint);
+    }
 
     const onScrollEnd = () => {
       if (this.infinite && snapIndex >= 0) this.teleportFromIndex(snapIndex);
