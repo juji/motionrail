@@ -18,6 +18,7 @@ export type MotionRailOptions = {
   resumeDelay?: number;
   delay?: number;
   rtl?: boolean;
+  infinite?: boolean;
   onChange?: (state: MotionRailState) => void;
   breakpoints?: MotionRailBreakpoint[];
   extensions?: MotionRailExtension[];
